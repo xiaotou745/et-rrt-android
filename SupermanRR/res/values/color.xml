@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <color name="layout_bg_color">#f3f3f3</color>
+    
+    <color name="text_color_light">#999999</color>
+    <color name="text_color_nor">#404040</color>
+    <color name="text_contract_status_fail">#dd3b21</color>
+    <color name="text_contract_status_pending">#d3a71c</color>
+    <color name="text_contract_status_success">#609d31</color>
+    <color name="pink_colour">#dcdee0</color>
+    <color name="background_tab_pressed">#6633B5E5</color>
+    <color name="font_color_red">#fe599a</color>
+    <color name="division_line">#e5e5e5</color>
+    <color name="title_blue">#70cdf4</color><!-- 38b0de -->
+    <color name="blue">#0090ce</color>
+    <color name="blue_pre">#006faf</color>
+    <color name="green">#89c997</color>
+    <color name="green_pre">#7bb788</color>
+    <color name="red">#ff0000</color>
+    <color name="red_pre">#d90303</color>
+    <color name="grey">#66000000</color>
+    <color name="contract_status_fail">#ffc5bd</color>
+    <color name="contract_status_pending">#ffefbd</color>
+    <color name="contract_status_success">#c7f0a7</color>
+    <color name="space_background">#ECECEC</color>
+    <color name="text_color_green">#609d31</color>
+    <color name="text_color_red">#dd3b21</color>
+    <color name="text_color_grey">#a3a3a3</color>
+    <color name="grayFromSetting">#55000000</color>
+    <color name="TextColorGray">#FF505050</color>
+    <color name="app_bg">#f2f2f2</color>
+    <color name="gray">#e8e8e8</color>
+    <color name="white">#ffffff</color>  
+</resources>

@@ -1,0 +1,55 @@
+package com.renrentui.util;
+
+/**
+ * api接口名称
+ * 
+ * @author llp
+ * 
+ */
+public enum ApiNames {
+	/**
+	 * java后台接口名称
+	 */
+	获取手机验证码("userc/sendcode"), 
+	用户注册("userc/signup"), 
+	用户登录("userc/signin"), 
+	忘记密码("userc/forgotpwd"), 
+	修改密码("userc/modifypwd"), 
+	修改用户信息("userc/modifyuserc"), 
+	获取所有未领取任务("task/getnewtasklist"), 
+	获取所有已领取任务("task/getmyreceivedtasklist"), 
+	获取所有已提交的任务("task/getsubmittedtasklist"), 
+	获取任务详细信息("task/taskdetail"), 
+	领取任务("task/gettask"), 
+	放弃任务("task/canceltask"), 
+	提交任务("task/submittask"), 
+	获取用户信息("userc/getuserc"), 
+	版本检查更新("common/versioncheck"),
+	申请提现("userc/withdraw");
+	/**
+	 * PHP接口名称
+	 */
+	// 获取手机验证码("User/SendValidateCode"),
+	// 用户注册("User/SignUp"),
+	// 用户登录("User/SignIn"),
+	// 忘记密码("User/ForgetPwd"),
+	// 修改密码("User/ModifyPwd"),
+	// 获取所有未领取任务("TaskManage/GetNewTaskList"),
+	// 获取所有已领取任务("TaskManage/GetMyReceivedTaskList"),
+	// 获取所有已提交的任务("TaskManage/GetSubmittedTaskList"),
+	// 获取任务详细信息("TaskManage/GetTaskDetail"),
+	// 领取任务("TaskManage/ReceiveTask"),
+	// 放弃任务("TaskManage/GiveUpTask"),
+	// 提交任务("TaskManage/SubmitTask"),
+	// 获取用户收入信息("User/MyIncome"),
+	// 申请提现("User/Withdraw");
+	private final String value;
+
+	ApiNames(String value) {
+		this.value = value;
+	}
+
+	public String getValue() {
+		return value;
+	}
+}
