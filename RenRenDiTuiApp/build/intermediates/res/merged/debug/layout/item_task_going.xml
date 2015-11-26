@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/item_task_main_bg"
+    android:paddingBottom="@dimen/_8dp" >
+
+    <ImageView
+        android:id="@+id/icon_pusher"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/pusher_logo" />
+
+    <TextView
+        android:id="@+id/tv_pusher_taskName"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_6dp"
+        android:layout_marginTop="@dimen/_15dp"
+        android:layout_toRightOf="@id/icon_pusher"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="#333333"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_taskGeneralInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_pusher_taskName"
+        android:layout_marginLeft="@dimen/_10dp"
+        android:layout_marginRight="@dimen/_15dp"
+        android:layout_marginTop="@dimen/_8dp"
+        android:layout_toLeftOf="@+id/ll_amount"
+        android:layout_toRightOf="@id/icon_pusher"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="#77000000"
+        android:textSize="@dimen/_10sp" />
+
+    <LinearLayout
+        android:id="@+id/ll_amount"
+        android:layout_width="93dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_taskGeneralInfo"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="12dp"
+        android:gravity="right|bottom"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥"
+            android:textColor="#f7585d"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tv_Amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#f7585d"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/次"
+            android:textColor="#f7585d"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/icon_pusher"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="10dp"
+        android:background="#e5e5e5" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/v"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="7dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_surplus" />
+
+            <TextView
+                android:id="@+id/tv_AvailableCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="#333333"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_surplus_time" />
+
+            <TextView
+                android:id="@+id/tv_zhifufangshi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="#333333"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout><!-- From: file:/D:/StudioProjectsWorkSpace/renrenditui_androidApp/RenRenDiTuiApp/src/main/res/layout/item_task_going.xml -->

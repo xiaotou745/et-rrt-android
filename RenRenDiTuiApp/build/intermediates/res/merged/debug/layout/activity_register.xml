@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical" >
+
+    <RelativeLayout style="@style/activity_headlayout" >
+
+        <LinearLayout style="@style/activity_headlayout_left" >
+
+            <include layout="@layout/layout_back" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/activity_headlayout_centertext"
+            android:text="@string/register" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadingEdge="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                style="@style/input_style"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingRight="12dp" >
+
+                <EditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:drawableLeft="@drawable/icon_phone"
+                    android:drawablePadding="@dimen/_12dp"
+                    android:hint="手机号码"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:singleLine="true"
+                    android:textColorHint="#bbc0c7"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/btn_get_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/btn_get_code_bg"
+                    android:text="获取验证码"
+                    android:textColor="#00bcd5"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#dfdfdf" />
+
+            <EditText
+                android:id="@+id/et_code"
+                style="@style/input_style_for_register"
+                android:drawableLeft="@drawable/icon_verification_code"
+                android:drawablePadding="@dimen/_12dp"
+                android:hint="@string/writeCode"
+                android:inputType="number"
+                android:maxLength="6" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#dfdfdf" />
+
+            <EditText
+                android:id="@+id/et_password"
+                style="@style/input_style_for_register"
+                android:drawableLeft="@drawable/icon_unlock"
+                android:drawablePadding="@dimen/_12dp"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:maxLength="12" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#dfdfdf" />
+
+            <EditText
+                android:id="@+id/et_password2"
+                style="@style/input_style_for_register"
+                android:drawableLeft="@drawable/icon_unlock"
+                android:drawablePadding="@dimen/_12dp"
+                android:hint="@string/againPassword"
+                android:inputType="textPassword"
+                android:maxLength="12" />
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="@dimen/_12dp"
+                android:layout_marginTop="@dimen/_30dp"
+                android:background="@drawable/btn_blue_wane_bg"
+                android:text="@string/confirm"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/_16sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout><!-- From: file:/D:/StudioProjectsWorkSpace/renrenditui_androidApp/RenRenDiTuiApp/src/main/res/layout/activity_register.xml -->

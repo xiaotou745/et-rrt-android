@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@null"
+    android:orientation="vertical" >
+
+    <RelativeLayout style="@style/activity_headlayout" >
+
+        <LinearLayout
+            android:id="@+id/img_back"
+            style="@style/activity_headlayout_left" >
+
+            <include layout="@layout/layout_back" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/activity_headlayout_left_centertext"
+            android:layout_marginLeft="@dimen/_8dp"
+            android:layout_toRightOf="@id/img_back"
+            android:text="@string/personaldata" />
+
+        <TextView
+            android:id="@+id/btn_save"
+            style="@style/activity_headlayout_right"
+            android:layout_marginRight="@dimen/_20dp"
+            android:text="@string/save" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_user_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15dp"
+        android:background="@drawable/textview_button_selector"
+        android:paddingBottom="@dimen/_8dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/_8dp" >
+
+        <com.user.model.CircleImageview
+            android:id="@+id/iv_user_icon_show"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            app:border_color="#ffffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/userIcon"
+            android:textSize="@dimen/_18sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#11000000"
+        android:layerType="software" />
+
+    <RelativeLayout
+        android:id="@+id/layout_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textview_button_selector"
+        android:paddingBottom="@dimen/_8dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/_8dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name"
+            android:textSize="@dimen/_18sp" />
+
+        <TextView
+            android:id="@+id/tv_user_name_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/grey" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#11000000"
+        android:layerType="software" />
+
+    <RelativeLayout
+        android:id="@+id/layout_user_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textview_button_selector"
+        android:paddingBottom="@dimen/_8dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/_8dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/phone"
+            android:textSize="@dimen/_18sp" />
+
+        <TextView
+            android:id="@+id/tv_user_phone_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/grey" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#11000000"
+        android:layerType="software" />
+
+    <RelativeLayout
+        android:id="@+id/layout_user_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textview_button_selector"
+        android:paddingBottom="@dimen/_8dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/_8dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sex"
+            android:textSize="@dimen/_18sp" />
+
+        <TextView
+            android:id="@+id/tv_user_sex_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/grey" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#11000000"
+        android:layerType="software" />
+
+    <RelativeLayout
+        android:id="@+id/layout_user_age"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textview_button_selector"
+        android:paddingBottom="@dimen/_8dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/_8dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/age"
+            android:textSize="@dimen/_18sp" />
+
+        <TextView
+            android:id="@+id/tv_user_age_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/grey" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#11000000"
+        android:layerType="software" />
+
+</LinearLayout><!-- From: file:/D:/StudioProjectsWorkSpace/renrenditui_androidApp/RenRenDiTuiApp/src/main/res/layout/activity_personal_data.xml -->
