@@ -78,7 +78,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_toLeftOf="@+id/ll_amount"
                     android:layout_toRightOf="@id/icon_pusher"
-                    android:drawableLeft="@drawable/icon_surplus_time"
+                    android:drawableLeft="@drawable/icon_finish"
                     android:drawablePadding="10dp"
                     android:textColor="#77000000"
                     android:textSize="@dimen/_10sp" />

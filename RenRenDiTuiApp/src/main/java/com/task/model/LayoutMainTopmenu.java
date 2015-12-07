@@ -22,12 +22,15 @@ public class LayoutMainTopmenu {
 	public View v_task_ongoing;
 	public View v_task_finished;
 	
-	public void setShenheshu(int shenheshu) {
-		btn_task_ongoing.setText("审核中("+shenheshu+")");
+	public void setShenhezhong(int shenhezhong) {
+		btn_task_ongoing.setText("审核中("+shenhezhong+")");
 	}
-	public void setLingqushu(int lingqushu) {
-		btn_task_nogoing.setText("已领取("+lingqushu+")");
-	}
+//	public void setLingqushu(int lingqushu) {
+//		btn_task_nogoing.setText("已领取("+lingqushu+")");
+//	}
+public void setYtongguo(int tongguo) {
+	btn_task_nogoing.setText("已通过("+tongguo+")");
+}
 	public void setWeitongguo(int weitongguo) {
 		btn_task_finished.setText("未通过("+weitongguo+")");
 	}
@@ -61,7 +64,7 @@ public class LayoutMainTopmenu {
 	 */
 	public void selected(int page){
 		hideView();
-		if (page==ToMainPage.已领取.getValue()) {
+		if (page==ToMainPage.已通过.getValue()) {
 			this.btn_task_nogoing.setChecked(true);
 			v_task_nogoing.setVisibility(View.VISIBLE);
 		}

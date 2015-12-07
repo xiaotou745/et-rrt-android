@@ -1,13 +1,13 @@
 package com.renrentui.util;
 
 /**
- * 跳转到mainactivity某一页面
+ * 任务资料的状态
  * 
  * @author llp
  * 
  */
 public enum ToMainPage {
-	审核中(1), 未通过(2), 已领取(0);
+	审核中(0), 未通过(2), 已通过(1);
 	private final int value;
 
 	ToMainPage(int value) {

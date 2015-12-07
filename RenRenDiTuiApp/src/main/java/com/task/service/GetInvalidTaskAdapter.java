@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.renrentui.app.R;
-import com.renrentui.resultmodel.FinishedTaskInfo;
 import com.renrentui.tools.DateUtils;
 import com.renrentui.tools.Util;
 import com.renrentui.util.ImageLoadManager;

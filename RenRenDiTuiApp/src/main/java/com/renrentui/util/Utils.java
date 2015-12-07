@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.Uri;
 
 import com.renrentui.resultmodel.RSUser;
 import com.renrentui.tools.GsonTools;
@@ -127,4 +128,15 @@ public final class Utils {
 
 		return info.versionCode;
 	}
+	/**
+	 * 拨打电话（页面）
+	 *
+	 * @param strPhone
+	 */
+	public static void callPhone(Context con, String strPhone) {
+		Uri telUri = Uri.parse("tel:" + strPhone);
+		Intent intent = new Intent(Intent.ACTION_DIAL, telUri);
+		con.startActivity(intent);
+	}
+
 }

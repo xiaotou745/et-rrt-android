@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/item_task_main_bg"
+    android:padding="@dimen/view_space_half_3_multiple" >
+
+
+<!--发布时间-->
+    <TextView
+        android:id="@+id/tv_pusher_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:singleLine="true"
+        android:gravity="left"
+        android:textColor="@color/tv_order_color_4"
+        android:textSize="@dimen/_12sp"
+        android:text="2015-10-23 11:14"
+
+        />
+    <!-- 发布内容-->
+    <TextView
+        android:id="@+id/tv_pusher_taskcontent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/tv_pusher_time"
+        android:layout_alignLeft="@id/tv_pusher_time"
+        android:gravity="left"
+        android:textColor="@color/tv_order_color_1"
+        android:textSize="@dimen/_16sp"
+        android:layout_marginTop="@dimen/_10dp"
+        android:text="商家简介商家简介商家简介商家简介商家简介商家简介商家简介商家简介商家简介商家简介商家简介商家简介商家简介商家简介"
+        />
+    <View
+        android:id="@+id/line_1"
+        style="@style/line_height_1"
+        android:layout_below="@id/tv_pusher_taskcontent"
+        android:layout_marginTop="@dimen/_10dp"
+        android:layout_marginBottom="@dimen/_10dp"
+        ></View>
+
+    <!-- 状态-->
+    <TextView
+        android:id="@+id/tv_task_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/line_1"
+        android:text="进行中"
+        android:textSize="@dimen/_14sp"
+        android:textColor="@color/tv_order_color_5"
+        />
+<!--金额-->
+    <LinearLayout
+        android:id="@+id/ll_amount"
+        android:layout_width="93dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line_1"
+        android:layout_toLeftOf="@id/tv_task_status"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥"
+            android:textColor="#f7585d"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tv_task_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#f7585d"
+            android:text="1000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/次"
+            android:textColor="#f7585d"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+<!--简介-->
+    <TextView
+        android:id="@+id/tv_task_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line_1"
+        android:layout_toLeftOf="@id/ll_amount"
+        android:singleLine="true"
+        android:textColor="@color/tv_order_color_1"
+        android:layout_alignLeft="@id/tv_pusher_time"
+        android:layout_marginRight="@dimen/_10dp"
+        android:text="任务名称"
+        android:textSize="@dimen/_14sp" />
+</RelativeLayout>

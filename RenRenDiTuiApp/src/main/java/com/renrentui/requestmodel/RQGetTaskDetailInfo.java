@@ -1,5 +1,8 @@
 package com.renrentui.requestmodel;
 
+/**
+ * 获取任务详情请求参数
+ */
 public class RQGetTaskDetailInfo extends RQBase {
 	/**
 	 * 用户id
@@ -28,6 +31,7 @@ public class RQGetTaskDetailInfo extends RQBase {
 		this.userId = userId;
 		this.taskId = taskId;
 	}
+
 
 	@Override
 	public String toString() {

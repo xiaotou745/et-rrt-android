@@ -31,5 +31,22 @@
     <color name="TextColorGray">#FF505050</color>
     <color name="app_bg">#f2f2f2</color>
     <color name="gray">#e8e8e8</color>
-    <color name="white">#ffffff</color>  
+    <color name="white">#ffffff</color>
+    <color name="transparent">#000000</color>
+
+    <!-- 订单金额 -->
+    <color name="tv_order_money_color_1">#f7585d</color>
+    <!-- 订单中的颜色值-->
+    <color name="tv_order_color_1">#333333</color>
+    <color name="tv_order_color_2">#666666</color>
+    <color name="tv_order_color_3">#888888</color>
+    <color name="tv_order_color_4">#BBC0C7</color>
+    <color name="tv_order_color_5">#00BCD5</color>
+    <color name="tv_bg_color_1">#32bcf6</color>
+    <color name="tv_color_1">#00bcd5</color>
+<!--line——color-->
+    <color name="line_bg_color">#E5E5E5</color>
+    <color name="blue_bg">#00BCD5</color>
+    <color name="red_bg">#f7585d</color>
+
 </resources>

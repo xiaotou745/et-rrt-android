@@ -1,5 +1,8 @@
 package com.renrentui.resultmodel;
 
+/**
+ * 领取任务response
+ */
 public class RSReceiveTask extends RSBase {
 	public String data;
 

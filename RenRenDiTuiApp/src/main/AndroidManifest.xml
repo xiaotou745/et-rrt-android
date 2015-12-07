@@ -33,13 +33,13 @@
         </activity>
         <activity android:name="com.user.activity.LoginActivity" />
         <activity
-            android:name="com.task.activity.MyTaskMainActivity"
+            android:name="com.task.activity.MyTaskMaterialActivity"
             android:launchMode="singleTask" />
         <activity
             android:name="com.task.activity.NoGoingTaskActicity"
             android:launchMode="singleTask" />
         <activity android:name="com.task.activity.TaskDetailInfoActivity" />
-        <activity android:name="com.task.activity.FinishedTaskActivity" />
+        <activity android:name="com.task.activity.MyTaskFramentActivity" />
         <activity android:name="com.task.activity.SubmitDataActivity" />
         <activity android:name="com.user.activity.FindPwdActivity" />
         <activity android:name="com.user.activity.RegisterActivity" />
@@ -49,6 +49,8 @@
         <activity android:name="com.user.activity.PersonalDataActivity" />
         <activity android:name="com.user.activity.WithdrawalsActivity" />
         <activity android:name="com.user.activity.MoreActivity" />
+        <activity android:name="com.task.activity.WebViewActivity"></activity>
+        <activity android:name="com.task.activity.MyTaskMaterialDetailActivity"></activity>
 
         <service
             android:name="com.user.model.download.DownLoadService"

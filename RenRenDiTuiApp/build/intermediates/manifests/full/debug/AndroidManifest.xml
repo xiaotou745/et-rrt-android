@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.renrentui.app"
-    android:versionCode="100"
-    android:versionName="1.0.0" >
+    android:versionCode="102"
+    android:versionName="1.0.2" >
 
     <uses-sdk
         android:maxSdkVersion="24"
@@ -34,13 +34,13 @@
         </activity>
         <activity android:name="com.user.activity.LoginActivity" />
         <activity
-            android:name="com.task.activity.MyTaskMainActivity"
+            android:name="com.task.activity.MyTaskMaterialActivity"
             android:launchMode="singleTask" />
         <activity
             android:name="com.task.activity.NoGoingTaskActicity"
             android:launchMode="singleTask" />
         <activity android:name="com.task.activity.TaskDetailInfoActivity" />
-        <activity android:name="com.task.activity.FinishedTaskActivity" />
+        <activity android:name="com.task.activity.MyTaskFramentActivity" />
         <activity android:name="com.task.activity.SubmitDataActivity" />
         <activity android:name="com.user.activity.FindPwdActivity" />
         <activity android:name="com.user.activity.RegisterActivity" />
@@ -50,6 +50,8 @@
         <activity android:name="com.user.activity.PersonalDataActivity" />
         <activity android:name="com.user.activity.WithdrawalsActivity" />
         <activity android:name="com.user.activity.MoreActivity" />
+        <activity android:name="com.task.activity.WebViewActivity" />
+        <activity android:name="com.task.activity.MyTaskMaterialDetailActivity" />
 
         <service
             android:name="com.user.model.download.DownLoadService"

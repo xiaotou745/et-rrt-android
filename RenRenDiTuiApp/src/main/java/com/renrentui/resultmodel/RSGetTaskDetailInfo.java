@@ -1,5 +1,8 @@
 package com.renrentui.resultmodel;
 
+/**
+ * 任务详情的返回结果
+ */
 public class RSGetTaskDetailInfo extends RSBase {
 	public TaskDetailInfo data;
 

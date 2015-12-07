@@ -74,5 +74,20 @@
     <string name="pull_to_refresh_footer_release_label">松开后加载</string>
     <string name="pull_to_refresh_footer_pull_label">上拉加载更多</string>
     <string name="pull_to_refresh_footer_refreshing_label">加载中\u2026</string>
+    <!-- 订单详情-->
+    <string name="task_detail_examine_format" formatted="false">审核 ：%s</string>
+    <string name="task_detail_dealtime_format" formatted="false">截止日期 ：%s</string>
+    <string name="task_detail_tel_format" formatted="false"><![CDATA[<font color="#00bcd5">咨询 ：%s</font>]]></string>
+
+    <!-- 拍照或选取图片失败 -->
+    <string name="get_image_by_camera_or_pic_error">请稍后重试...</string>
+    <string name="add_order_img_type_error">选择文件类型错误,请选择jpg格式</string>
+    <string name="add_order_img_upload_reset">点击重新上传</string>
+    <!-- 图片上传状态 -->
+    <string name="upload_task_status_waiting">等待上传</string>
+    <string name="upload_task_status_uploading">正在上传</string>
+    <string name="upload_task_status_complete">已经上传</string>
+    <string name="upload_task_status_fail">上传失败</string>
+    <string name="upload_task_status_stop">已停止上传</string>
 
 </resources>

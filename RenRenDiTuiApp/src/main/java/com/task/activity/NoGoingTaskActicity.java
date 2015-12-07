@@ -29,7 +29,6 @@ import com.task.service.GetNoGoingAdapter;
 import com.user.activity.LoginActivity;
 import com.user.activity.PersonalCenterActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -51,7 +50,7 @@ public class NoGoingTaskActicity extends BaseActivity implements
 		OnHeaderRefreshListener, OnFooterRefreshListener, INodata,
 		OnClickListener {
 
-	private Context context;
+
 	private TextView tv_user_address;// 用户当前地址
 	private TextView tv_to_login;// 登录按钮
 	private ListView lv_no_going_task;// 待领取任务列表
@@ -70,7 +69,6 @@ public class NoGoingTaskActicity extends BaseActivity implements
 
 				@Override
 				public void onBefore() {
-					// TODO Auto-generated method stub
 					hideProgressDialog();
 					pulltorefresh_nogoing_taskList.onHeaderRefreshComplete();
 					pulltorefresh_nogoing_taskList.onFooterRefreshComplete();
@@ -78,7 +76,7 @@ public class NoGoingTaskActicity extends BaseActivity implements
 
 				@Override
 				public void onNetworknotvalide() {
-					// TODO Auto-generated method stub
+					//网络无效
 					hideProgressDialog();
 					pulltorefresh_nogoing_taskList.setVisibility(View.GONE);
 					NoGoingTaskActicity.this.onNodata(
@@ -116,6 +114,7 @@ public class NoGoingTaskActicity extends BaseActivity implements
 
 				@Override
 				public void onSericeErr(RSGetNoGoingTask t) {
+					//服务器返回错误
 					hideProgressDialog();
 					pulltorefresh_nogoing_taskList.setVisibility(View.GONE);
 					NoGoingTaskActicity.this.onNodata(ResultMsgType.ServiceErr,
@@ -124,6 +123,7 @@ public class NoGoingTaskActicity extends BaseActivity implements
 
 				@Override
 				public void onSericeExp() {
+					//服务器返回为空
 					hideProgressDialog();
 					pulltorefresh_nogoing_taskList.setVisibility(View.GONE);
 					NoGoingTaskActicity.this.onNodata(ResultMsgType.ServiceExp,
@@ -172,7 +172,6 @@ public class NoGoingTaskActicity extends BaseActivity implements
 	 * 初始化控件
 	 */
 	private void initControl() {
-		context = this;
 		tv_user_address = (TextView) findViewById(R.id.tv_user_address);
 		tv_user_address.setText(GetCity.cityName);
 		iv_to_personal_center = (ImageView) findViewById(R.id.iv_to_personal_center);
@@ -192,8 +191,12 @@ public class NoGoingTaskActicity extends BaseActivity implements
 	 */
 	public void getInitData() {
 		showProgressDialog();
+//		ApiUtil.Request(new RQBaseModel<RQGetNoGoingTask, RSGetNoGoingTask>(
+//				context, new RQGetNoGoingTask(userId, 0.0f, 0.0f, "0"),
+//				new RSGetNoGoingTask(), ApiNames.获取所有未领取任务.getValue(),
+//				RequestType.POST, rqHandler_getNoGoingTask));
 		ApiUtil.Request(new RQBaseModel<RQGetNoGoingTask, RSGetNoGoingTask>(
-				context, new RQGetNoGoingTask(userId, 0.0f, 0.0f, "0"),
+				context, new RQGetNoGoingTask("28","0","210200"),
 				new RSGetNoGoingTask(), ApiNames.获取所有未领取任务.getValue(),
 				RequestType.POST, rqHandler_getNoGoingTask));
 		pageindex = 1;
@@ -201,14 +204,12 @@ public class NoGoingTaskActicity extends BaseActivity implements
 
 	@Override
 	public void onNoData() {
-		// TODO Auto-generated method stub
 		showProgressDialog();
 		getInitData();
 	}
 
 	@Override
 	public void onFooterRefresh(PullToRefreshView view) {
-		// TODO Auto-generated method stub
 		getMoreData();
 	}
 
@@ -225,7 +226,6 @@ public class NoGoingTaskActicity extends BaseActivity implements
 
 	@Override
 	public void onHeaderRefresh(PullToRefreshView view) {
-		// TODO Auto-generated method stub
 		getInitData();
 	}
 
@@ -240,7 +240,7 @@ public class NoGoingTaskActicity extends BaseActivity implements
 			intent = new Intent(context, PersonalCenterActivity.class);
 			break;
 		case R.id.iv_to_my_task:// 点击书签进入我的任务
-			intent = new Intent(context, MyTaskMainActivity.class);
+			intent = new Intent(context, MyTaskMaterialActivity.class);
 			break;
 		}
 		startActivity(intent);
@@ -250,9 +250,9 @@ public class NoGoingTaskActicity extends BaseActivity implements
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// 点击两次退出应用程序处理逻辑
 		if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-			if (isQuit == false) {
+			if (!isQuit ) {
 				isQuit = true;
-				Toast.makeText(context, "再按一次返回键退出程序", 1).show();
+				Toast.makeText(context, "再按一次返回键退出程序", Toast.LENGTH_SHORT).show();
 				TimerTask task = new TimerTask() {
 					@Override
 					public void run() {

@@ -1,27 +1,16 @@
 package com.renrentui.app;
 
-import java.util.*;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.widget.ImageView;
 import base.BaseActivity;
 
-import com.renrentui.resultmodel.RSUser;
 import com.renrentui.tools.FileUtils;
 import com.renrentui.util.GetCity;
-import com.renrentui.util.Security;
-import com.renrentui.util.Utils;
 import com.task.activity.NoGoingTaskActicity;
-import com.task.activity.MyTaskMainActivity;
-import com.user.activity.LoginActivity;
 
 /**
  * 欢迎页

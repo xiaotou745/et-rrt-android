@@ -1,5 +1,8 @@
 package com.renrentui.requestmodel;
 
+/**
+ * 放弃任务
+ */
 public class RQGiveupTask extends RQBase {
 	/** 用户ID */
 	public String userId;

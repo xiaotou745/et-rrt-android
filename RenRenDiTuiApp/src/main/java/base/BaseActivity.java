@@ -31,6 +31,8 @@ public class BaseActivity extends Activity {
 	public TextView tv_nodata;
 	public View layout_back;
 	public MyProgersssDialog progersssDialog;
+	public Context context;
+	public TextView mtv_title_content;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class BaseActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		context =this;
 		initImageLoader(getApplicationContext());
 	}
 
@@ -68,6 +71,7 @@ public class BaseActivity extends Activity {
 		layout_back = findViewById(R.id.layout_back);
 		progersssDialog = new MyProgersssDialog(this);
 		progersssDialog.setCancelable(false);
+		mtv_title_content = (TextView)findViewById(R.id.tv_title);
 		onBack(null);
 	}
 

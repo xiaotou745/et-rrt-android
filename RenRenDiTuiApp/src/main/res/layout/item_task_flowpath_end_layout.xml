@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:paddingLeft="@dimen/view_space"
+    android:paddingRight="@dimen/view_space"
+    >
+
+    <TextView
+        android:id="@+id/tv_order_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:background="@drawable/task_order_num_bg_shape"
+        />
+    <TextView
+        android:id="@+id/tv_task_flowpath_content_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_order_num"
+        android:layout_alignBaseline="@id/tv_order_num"
+        android:text="开始领取任务3"
+        android:textSize="@dimen/_16sp"
+        android:textColor="@color/tv_order_color_1"
+        android:paddingLeft="@dimen/view_space"
+        />
+
+    <View
+        android:layout_width="@dimen/_2dp"
+        android:layout_height="match_parent"
+        android:background="@color/blue_bg"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/_10dp"
+        android:layout_above="@id/tv_order_num"
+        ></View>
+
+</RelativeLayout>

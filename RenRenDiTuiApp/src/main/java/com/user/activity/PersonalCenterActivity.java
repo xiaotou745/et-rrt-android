@@ -25,7 +25,7 @@ import com.renrentui.util.ApiUtil;
 import com.renrentui.util.ImageLoadManager;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
-import com.task.activity.FinishedTaskActivity;
+import com.task.activity.MyTaskActivity;
 import com.task.activity.NoGoingTaskActicity;
 import com.user.service.CustomerServiceDialog;
 
@@ -166,7 +166,7 @@ public class PersonalCenterActivity extends BaseActivity implements
 			intent = new Intent(this, PersonalDataActivity.class);
 			break;
 		case R.id.rl_finished_task:// 已完成任务
-			intent = new Intent(this, FinishedTaskActivity.class);
+			intent = new Intent(this, MyTaskActivity.class);
 			break;
 		case R.id.rl_customer_service_center:// 客服支持
 			CustomerServiceDialog dialog = new CustomerServiceDialog(context);

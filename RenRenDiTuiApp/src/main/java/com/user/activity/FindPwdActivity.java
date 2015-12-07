@@ -3,9 +3,7 @@ package com.user.activity;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,8 +12,6 @@ import android.widget.EditText;
 import base.BaseActivity;
 
 import com.renrentui.app.R;
-import com.renrentui.app.R.id;
-import com.renrentui.app.R.layout;
 import com.renrentui.interfaces.IRqHandlerMsg;
 import com.renrentui.requestmodel.RQBase;
 import com.renrentui.requestmodel.RQBaseModel;
@@ -28,7 +24,6 @@ import com.renrentui.util.ApiNames;
 import com.renrentui.util.ApiUtil;
 import com.renrentui.util.MD5;
 import com.renrentui.util.ToastUtil;
-import com.task.activity.MyTaskMainActivity;
 
 /**
  * 找回密码界面

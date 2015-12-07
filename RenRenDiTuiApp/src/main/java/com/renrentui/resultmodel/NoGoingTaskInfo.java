@@ -58,6 +58,14 @@ public class NoGoingTaskInfo implements Serializable{
 	 * 审核状态0待审核，2审核通过，3审核拒绝，默认0待审核
 	 */
 	public String auditStatus;
+	/**
+	 * 任务类型id：1是签约类任务；2是分享类任务；3是下载类任
+	 */
+	public int taskType;
+	/**
+	 * 任务类型id对应的任务名称：1是签约类任务；2是分享类任务；3是下载类任
+	 */
+	public String taskTypeName;
 
 	public String getAmount() {
 		DecimalFormat df = new DecimalFormat("0.00");
@@ -69,7 +77,7 @@ public class NoGoingTaskInfo implements Serializable{
 
 	public NoGoingTaskInfo(String taskId, String taskGeneralInfo,
 			String pusher, String taskName, double amount, int availableCount,
-			String beginTime, String endTime, String paymentMethod, String logo) {
+			String beginTime, String endTime, String paymentMethod, String logo,String status,String auditStatus,int taskType,String taskTypeName) {
 		super();
 		this.taskId = taskId;
 		this.taskGeneralInfo = taskGeneralInfo;
@@ -81,6 +89,10 @@ public class NoGoingTaskInfo implements Serializable{
 		this.endTime = endTime;
 		this.paymentMethod = paymentMethod;
 		this.logo = logo;
+		this.status = status;
+		this.auditStatus = auditStatus;
+		this.taskType = taskType;
+		this.taskTypeName = taskTypeName;
 	}
 
 	@Override
@@ -89,7 +101,8 @@ public class NoGoingTaskInfo implements Serializable{
 				+ taskGeneralInfo + ",pusher=" + pusher + ",taskName="
 				+ taskName + ",amount=" + amount + ",availableCount="
 				+ availableCount + ",beginTime=" + beginTime + ",endTime="
-				+ endTime + ",paymentMethod=" + paymentMethod + ",logo=" + logo
-				+ "]";
+				+ endTime + ",paymentMethod=" + paymentMethod + ",logo=" + logo+",status="
+				+ status + ",auditStatus=" + auditStatus + ",taskType=" + taskType+",taskTypeName="
+				+taskTypeName+ "]";
 	}
 }

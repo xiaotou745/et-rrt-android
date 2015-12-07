@@ -3,6 +3,7 @@ package com.task.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,23 +19,24 @@ import com.renrentui.controls.PullToRefreshView.OnHeaderRefreshListener;
 import com.renrentui.interfaces.INodata;
 import com.renrentui.interfaces.IRqHandlerMsg;
 import com.renrentui.requestmodel.RQBaseModel;
-import com.renrentui.requestmodel.RQGetFinishedTask;
 import com.renrentui.requestmodel.RQHandler;
+import com.renrentui.requestmodel.RQTaskMaterial;
 import com.renrentui.requestmodel.RequestType;
 import com.renrentui.requestmodel.ResultMsgType;
-import com.renrentui.resultmodel.FinishedTaskInfo;
-import com.renrentui.resultmodel.RSGetFinishedTask;
+import com.renrentui.resultmodel.RSTaskMaterial;
+import com.renrentui.resultmodel.TaskMetarialContent;
 import com.renrentui.util.ApiNames;
 import com.renrentui.util.ApiUtil;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
 import com.task.model.LayoutMainTopmenu;
-import com.task.service.GetFinishedAdapter;
+import com.task.service.GetOnFinishAdapter;
 
 /**
- * 未通过任务fragment
+ * 审核拒绝的资料列表
  * 
  * @author llp
+ *
  * 
  */
 public class FragmentFinishedTask extends BaseFragment implements
@@ -42,20 +44,22 @@ public class FragmentFinishedTask extends BaseFragment implements
 	private View view;
 	private Context context;
 	private ListView lv_task_main;
-	private GetFinishedAdapter getFinishedAdapter;
+	private GetOnFinishAdapter getFinishedAdapter;
 	private PullToRefreshView pulltorefresh_taskList;
-	private List<FinishedTaskInfo> finishedTaskInfos;
+	private List<TaskMetarialContent> taskMetarialContents;
 	private String nextId = "";
 	private int pageindex = 1;
+	private String taskId = "0";//任务id
 	private LayoutMainTopmenu layoutTopMenu;// 顶部按钮
 	
+	@SuppressLint("ValidFragment")
 	public FragmentFinishedTask(LayoutMainTopmenu layoutTopMenu){
 		this.layoutTopMenu = layoutTopMenu;
 	}
 	public FragmentFinishedTask() {
 	}
-	private RQHandler<RSGetFinishedTask> rqHandler_getOnGoingTask = new RQHandler<>(
-			new IRqHandlerMsg<RSGetFinishedTask>() {
+	private RQHandler<RSTaskMaterial> rqHandler_getOnGoingTask = new RQHandler<>(
+			new IRqHandlerMsg<RSTaskMaterial>() {
 
 				@Override
 				public void onBefore() {
@@ -73,11 +77,11 @@ public class FragmentFinishedTask extends BaseFragment implements
 				}
 
 				@Override
-				public void onSuccess(RSGetFinishedTask t) {
+				public void onSuccess(RSTaskMaterial t) {
 					FragmentFinishedTask.this.hideLayoutNoda();
-					layoutTopMenu.setLingqushu(t.data.receivedCount);
-					layoutTopMenu.setShenheshu(t.data.passCount);
-					layoutTopMenu.setWeitongguo(t.data.noPassCount);
+					layoutTopMenu.setShenhezhong(t.data.waitTotal);
+					layoutTopMenu.setYtongguo(t.data.passTotal);
+					layoutTopMenu.setWeitongguo(t.data.refuseTotal);
 					pulltorefresh_taskList.setVisibility(View.VISIBLE);
 					if (pageindex == 1) {
 						if (t.data.count == 0) {
@@ -86,24 +90,24 @@ public class FragmentFinishedTask extends BaseFragment implements
 									ResultMsgType.Success, "刷新", "暂无已提交任务！",
 									FragmentFinishedTask.this);
 						} else {
-							finishedTaskInfos.clear();
-							nextId = t.data.nextId;
-							finishedTaskInfos.addAll(t.data.content);
+							taskMetarialContents.clear();
+							nextId = t.data.nextID;
+							taskMetarialContents.addAll(t.data.content);
 							getFinishedAdapter.notifyDataSetChanged();
 						}
 					} else {
 						if (t.data.count == 0) {
 							ToastUtil.show(context, "暂无更多数据");
 						} else {
-							nextId = t.data.nextId;
-							finishedTaskInfos.addAll(t.data.content);
+							nextId = t.data.nextID;
+							taskMetarialContents.addAll(t.data.content);
 							getFinishedAdapter.notifyDataSetChanged();
 						}
 					}
 				}
 
 				@Override
-				public void onSericeErr(RSGetFinishedTask t) {
+				public void onSericeErr(RSTaskMaterial t) {
 					pulltorefresh_taskList.setVisibility(View.GONE);
 					FragmentFinishedTask.this.onNodata(
 							ResultMsgType.ServiceErr, "刷新", "数据加载失败！", null);
@@ -130,8 +134,8 @@ public class FragmentFinishedTask extends BaseFragment implements
 		pulltorefresh_taskList.setOnFooterRefreshListener(this);
 		lv_task_main = (ListView) view.findViewById(R.id.lv_task_main);
 		lv_task_main.setOverScrollMode(View.OVER_SCROLL_NEVER);
-		finishedTaskInfos = new ArrayList<FinishedTaskInfo>();
-		getFinishedAdapter = new GetFinishedAdapter(context, finishedTaskInfos);
+		taskMetarialContents = new ArrayList<TaskMetarialContent>();
+		getFinishedAdapter = new GetOnFinishAdapter(context, taskMetarialContents);
 		lv_task_main.setAdapter(getFinishedAdapter);
 		return view;
 	}
@@ -140,9 +144,9 @@ public class FragmentFinishedTask extends BaseFragment implements
 	 * 初始化数据
 	 */
 	public void getInitData() {
-		ApiUtil.Request(new RQBaseModel<RQGetFinishedTask, RSGetFinishedTask>(
-				context, new RQGetFinishedTask(Utils.getUserDTO(context).data.userId, "0",5),
-				new RSGetFinishedTask(), ApiNames.获取所有已提交的任务.getValue(),
+		ApiUtil.Request(new RQBaseModel<RQTaskMaterial, RSTaskMaterial>(
+				context, new RQTaskMaterial(Utils.getUserDTO(context).data.userId, nextId,3,taskId),
+				new RSTaskMaterial(), ApiNames.获取所有已提交的任务.getValue(),
 				RequestType.POST, rqHandler_getOnGoingTask));
 		pageindex = 1;
 	}
@@ -205,9 +209,10 @@ public class FragmentFinishedTask extends BaseFragment implements
 	 * 获取更多数据
 	 */
 	public void getMoreData() {
-		ApiUtil.Request(new RQBaseModel<RQGetFinishedTask, RSGetFinishedTask>(
-				context, new RQGetFinishedTask(Utils.getUserDTO(context).data.userId, nextId,5),
-				new RSGetFinishedTask(), ApiNames.获取所有已提交的任务.getValue(),
+		ApiUtil.Request(new RQBaseModel<RQTaskMaterial, RSTaskMaterial>(
+				context, new RQTaskMaterial(
+				Utils.getUserDTO(context).data.userId,nextId,2,taskId),
+				new RSTaskMaterial(), ApiNames.获取所有已提交的任务.getValue(),
 				RequestType.POST, rqHandler_getOnGoingTask));
 		pageindex++;
 	}

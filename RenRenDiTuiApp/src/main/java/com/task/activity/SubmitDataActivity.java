@@ -15,10 +15,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,7 +36,6 @@ import base.BaseActivity;
 import com.google.gson.Gson;
 import com.renrentui.app.R;
 import com.renrentui.interfaces.IBack;
-import com.renrentui.interfaces.INodata;
 import com.renrentui.interfaces.IRqHandlerMsg;
 import com.renrentui.requestmodel.RQBaseModel;
 import com.renrentui.requestmodel.RQGetTaskDetailInfo;
@@ -66,8 +63,6 @@ import com.renrentui.util.Utils;
 import com.task.service.QuitSubmitDialog;
 import com.task.service.SubmitSuccessDialog;
 import com.task.service.SubmitSuccessDialog.ExitDialogListener;
-import com.user.activity.PersonalCenterActivity;
-import com.user.model.HttpRequest.HttpRequestListener;
 import com.user.model.ImageUploadAsyncTask;
 
 /**
@@ -170,7 +165,7 @@ public class SubmitDataActivity extends BaseActivity implements
 						@Override
 						public void clickCancel() {
 							Intent intent = new Intent(SubmitDataActivity.this,
-									MyTaskMainActivity.class);
+									MyTaskMaterialActivity.class);
 							intent.putExtra("topage", ToMainPage.已领取.getValue());
 							startActivity(intent);
 							finish();

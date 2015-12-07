@@ -1,10 +1,7 @@
 package com.user.activity;
 
 import com.renrentui.app.R;
-import com.renrentui.app.R.id;
-import com.renrentui.app.R.layout;
 import com.renrentui.interfaces.IRqHandlerMsg;
-import com.renrentui.requestmodel.RQBase;
 import com.renrentui.requestmodel.RQBaseModel;
 import com.renrentui.requestmodel.RQHandler;
 import com.renrentui.requestmodel.RQUpdatePwd;
@@ -15,8 +12,6 @@ import com.renrentui.util.ApiUtil;
 import com.renrentui.util.MD5;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
-import com.task.activity.MyTaskMainActivity;
-import com.task.activity.NoGoingTaskActicity;
 
 import android.content.Context;
 import android.content.Intent;

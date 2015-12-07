@@ -4,7 +4,14 @@
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
+
+
+
+
+
+
+
         -->
     </style>
 
@@ -122,5 +129,81 @@
         <item name="android:windowEnterAnimation">@anim/photo_dialog_in_anim</item>
         <item name="android:windowExitAnimation">@anim/photo_dialog_out_anim</item>
     </style>
+    <!-- line_height_1 -->
+    <style name="line_height_1">
+        <item name="android:layout_height">1dip</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/line_bg_color</item>
+    </style>
+    <style name="line_height_10">
+        <item name="android:layout_height">10dip</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/line_bg_color</item>
+    </style>
 
+    <style name="style_btn_blue_fill">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/view_space</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/_16sp</item>
+    <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/btn_blue_wane_bg</item>
+    </style>
+
+    <style name="style_btn_white_fill">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/view_space</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/tv_color_1</item>
+        <item name="android:textSize">@dimen/_16sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/btn_white_wane_bg</item>
+    </style>
+
+    <style name="style_btn_blue_shape_fill">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:padding">@dimen/view_space</item>
+    <item name="android:layout_gravity">center</item>
+    <item name="android:textColor">@color/white</item>
+    <item name="android:textSize">@dimen/_16sp</item>
+    <item name="android:gravity">center</item>
+    <item name="android:background">@drawable/btn_blue_shape_bg</item>
+    </style>
+
+    <style name="style_btn_white_shape_fill">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/view_space</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/tv_color_1</item>
+        <item name="android:textSize">@dimen/_16sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/btn_white_shape_bg</item>
+    </style>
+
+    <!-- 底部动画-->
+    <style name="AnimBottom" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
+    <!-- 对话框-->
+    <style name="DialogStyleBottom" parent="android:Theme.Dialog">
+        <item name="android:windowAnimationStyle">@style/AnimBottom</item>
+        <item name="android:windowFrame">@null</item>
+        <!-- 边框 -->
+        <item name="android:windowIsFloating">false</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+    </style>
 </resources>

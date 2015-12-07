@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 未领取任务信息列表
+ * 未领取任务信息结果类数据集合
  * 
  * @author llp
  * 

@@ -38,6 +38,12 @@ public class RQGetNoGoingTask extends RQBase {
 	public RQGetNoGoingTask() {
 		super();
 	}
+	public RQGetNoGoingTask(String userId,String nextId,String cityCode) {
+		super();
+		this.userId = userId;
+		this.nextId = nextId;
+		this.cityCode = cityCode;
+	}
 
 	public RQGetNoGoingTask(String userId, float longitude, float latitude,
 			String nextId) {

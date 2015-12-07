@@ -1,5 +1,8 @@
 package com.renrentui.requestmodel;
 
+/**
+ * 领取任务quest
+ */
 public class RQReceiveTask extends RQBase {
 	/** 用户ID */
 	public String userId;
