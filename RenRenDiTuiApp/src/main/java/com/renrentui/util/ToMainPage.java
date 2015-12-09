@@ -7,7 +7,7 @@ package com.renrentui.util;
  * 
  */
 public enum ToMainPage {
-	审核中(0), 未通过(2), 已通过(1);
+	审核中(0), 已通过(1),未通过(2);
 	private final int value;
 
 	ToMainPage(int value) {

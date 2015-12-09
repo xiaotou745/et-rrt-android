@@ -85,21 +85,21 @@ public class TaskDatumTemplateMultipleImagesTeamAdapter extends BaseAdapter {
         if(view==null) {
             view = LayoutInflater.from(mContext).inflate(R.layout.item_multiple_team_images_layout, viewGroup, false);
         }
-        LinearLayout mLL_image = (LinearLayout) ViewHolderUtil.get(view, R.id.linear_img);
-        LoadingView mLoadingImage = (LoadingView)ViewHolderUtil.get(view, R.id.iv_team_image_pic_item);
-        TextView mTV_image_reset = (TextView)ViewHolderUtil.get(view,R.id.item_reset_tv);
-        TextView mTV_image_status = (TextView)ViewHolderUtil.get(view, R.id.item_status_tv);
+        LinearLayout mLL_image = ViewHolderUtil.get(view, R.id.linear_img);
+        LoadingView mLoadingImage = ViewHolderUtil.get(view, R.id.item_img_iv);
+        TextView mTV_image_reset = ViewHolderUtil.get(view,R.id.item_reset_tv);
+        TextView mTV_image_status = ViewHolderUtil.get(view, R.id.item_status_tv);
 
         //setTag
-        mLoadingImage.setTag(str_tag + String.valueOf(iTeam_num+"_") + String.valueOf(position)+"_img");
-        mTV_image_reset.setTag(str_tag + String.valueOf(iTeam_num+"_") + String.valueOf(position)+"_reset");
-        mTV_image_status.setTag(str_tag + String.valueOf(iTeam_num + "_") + String.valueOf(position) + "_status");
+        mLoadingImage.setTag(str_tag + String.valueOf("_"+iTeam_num+"_") + String.valueOf(position)+"_img");
+        mTV_image_reset.setTag(str_tag + String.valueOf("_"+iTeam_num+"_") + String.valueOf(position)+"_reset");
+        mTV_image_status.setTag(str_tag + String.valueOf("_"+iTeam_num + "_") + String.valueOf(position) + "_status");
 
-        TaskDatumControlBean bean = (TaskDatumControlBean) getItem(i);
+       final  TaskDatumControlBean taskBean = (TaskDatumControlBean) getItem(i);
 
         if(iShowContentType==1){
             //展示
-            ImageLoadManager.getLoaderInstace().disPlayNormalImg(bean.controlValue,
+            ImageLoadManager.getLoaderInstace().disPlayNormalImg(taskBean.controlValue,
                     mLoadingImage, R.drawable.pusher_logo);
         }else{
             //编辑
@@ -115,6 +115,7 @@ public class TaskDatumTemplateMultipleImagesTeamAdapter extends BaseAdapter {
                         bean.setTeam_type(String.valueOf(iTeam_type));
                         bean.setTeam_num(String.valueOf(iTeam_num));
                         bean.setTeam_position(String.valueOf(position));
+                        bean.setControlKey(taskBean.controlKey);
                         mTaskDatumTemplePIcManager.showCameraDialog("img.jpg", bean, str_userId);
                     } else {
                         Toast.makeText(mContext, "相机错误", Toast.LENGTH_SHORT).show();

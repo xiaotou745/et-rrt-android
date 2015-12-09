@@ -11,7 +11,8 @@
         android:textColorHint="@color/tv_order_color_3"
         android:textColor="@color/tv_order_color_1"
         android:textSize="@dimen/_14sp"
-        android:gravity="left"
+        android:gravity="left|center_vertical"
+        android:singleLine="true"
         />
     <TextView
         android:id="@+id/tv_team_texts_content_item"

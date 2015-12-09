@@ -7,7 +7,7 @@ package com.renrentui.util;
  * 
  */
 public enum ToMyTaskPage {
-	审核通过(0), 过期失效(1), 已取消(2);
+	进行中(0), 已过期(1);
 	private final int value;
 
 	ToMyTaskPage(int value) {

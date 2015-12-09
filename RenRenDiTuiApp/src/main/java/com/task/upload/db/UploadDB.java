@@ -8,9 +8,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
+import android.util.Log;
 
 
-import com.renrentui.util.Constants;
+import com.renrentui.tools.Constants;
 import com.task.upload.bean.uploadPicBean;
 
 /**
@@ -80,10 +81,12 @@ public class UploadDB extends HandlerDB {
             c.close();
             SQLiteDatabase.releaseMemory();
         } catch (Exception e) {
+            Log.e("--uploadDB--","getDataList Exception");
             e.printStackTrace();
         } finally {
             close();
         }
+        Log.e("--uploadDB--","getDataList size="+downloadList.size());
         return downloadList;
     }
 
@@ -96,6 +99,7 @@ public class UploadDB extends HandlerDB {
     public synchronized boolean addData(Context cx, uploadPicBean vo) {
         mOpenCounter.incrementAndGet();
         boolean result = false;
+        long  aa = 0;
         try {
             ContentValues cv = new ContentValues();
             cv.put("user_id", vo.getUser_id());
@@ -107,13 +111,15 @@ public class UploadDB extends HandlerDB {
             cv.put("status",vo.getUploadStatus());
             cv.put("path", vo.getPath());
             cv.put("create_time", System.currentTimeMillis());
-            getDBInstance(cx).insert(CACHE_TABLE_NAME, null, cv);
+            aa = getDBInstance(cx).insert(CACHE_TABLE_NAME, null, cv);
             result = true;
         } catch (Exception e) {
+            Log.e("--uploadDB--","addData Exception");
             e.printStackTrace();
         } finally {
             close();
         }
+        Log.e("--uploadDB--","addData  id="+aa);
         return result;
     }
 
@@ -132,6 +138,7 @@ public class UploadDB extends HandlerDB {
                                                      String team_num,String team_position, int status) {
         mOpenCounter.incrementAndGet();
         boolean result = false;
+        int aa = 0;
         try {
             String sql = "update " + CACHE_TABLE_NAME + " set status=" + status + " WHERE 1=1";
 
@@ -151,10 +158,12 @@ public class UploadDB extends HandlerDB {
             SQLiteDatabase.releaseMemory();
             result = true;
         } catch (Exception e) {
+            Log.e("--uploadDB--","updateDataStatusById Exception");
             e.printStackTrace();
         } finally {
             close();
         }
+        Log.e("--uploadDB--","updateDataStatusById id="+aa);
         return result;
     }
 
@@ -173,6 +182,7 @@ public class UploadDB extends HandlerDB {
                                         String team_num,String team_position) {
         mOpenCounter.incrementAndGet();
         boolean result = false;
+        int aa = 0;
         try {
 
             String sql = "DELETE FROM " + CACHE_TABLE_NAME + " WHERE 1=1";
@@ -195,10 +205,12 @@ public class UploadDB extends HandlerDB {
             SQLiteDatabase.releaseMemory();
             result = true;
         } catch (Exception e) {
+            Log.e("--uploadDB--","delData Exception");
             e.printStackTrace();
         } finally {
             close();
         }
+        Log.e("--uploadDB--","delData sucess");
         return result;
     }
 
@@ -216,13 +228,16 @@ public class UploadDB extends HandlerDB {
         try {
             String sql = "DELETE FROM " + CACHE_TABLE_NAME;
             getDBInstance(cx).execSQL(sql);
+            getDBInstance(cx).execSQL("update sqlite_sequence set seq=0 where name='"+CACHE_TABLE_NAME+"';");
             SQLiteDatabase.releaseMemory();
         } catch (Exception e) {
+            Log.e("--uploadDB--","clearData Exception");
             e.printStackTrace();
             return false;
         } finally {
             close();
         }
+        Log.e("--uploadDB--","clearData sucess");
         return true;
     }
 

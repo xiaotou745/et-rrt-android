@@ -1,125 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/item_task_main_bg" >
+    android:background="@drawable/item_task_main_bg"
+    android:padding="@dimen/view_space"
+    android:orientation="vertical"
+    >        <!-- top 1-->
+        <RelativeLayout
+            android:id="@+id/rl_task_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/icon_pusher"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="15dp"
-        android:src="@drawable/pusher_logo" />
-
-    <LinearLayout
-        android:id="@+id/ll_amount"
-        android:layout_width="93dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tv_taskGeneralInfo"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="12dp"
-        android:gravity="right|bottom"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="￥"
-            android:textColor="#f7585d"
-            android:textSize="11sp" />
-
-        <TextView
-            android:id="@+id/tv_Amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#f7585d"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="/次"
-            android:textColor="#f7585d"
-            android:textSize="10sp" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@id/tv_pusher_taskName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_toRightOf="@id/icon_pusher"
-        android:layout_toLeftOf="@id/ll_amount"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:textColor="#333333"
-        android:textSize="15sp" />
-
-    <TextView
-        android:id="@id/tv_taskGeneralInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_pusher_taskName"
-        android:layout_marginRight="@dimen/_10dp"
-        android:layout_marginTop="10dp"
-        android:layout_toLeftOf="@id/ll_amount"
-        android:layout_toRightOf="@id/icon_pusher"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:textColor="#bbc0c7"
-        android:textSize="12sp" />
-
-    <View
-        android:id="@+id/v"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_below="@id/icon_pusher"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="8dp"
-        android:background="#e5e5e5" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/v"
-        android:paddingBottom="10dp"
-        android:layout_marginTop="9dp" >
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="@dimen/_12dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-
+            <!-- icon-->
             <ImageView
+                android:id="@+id/icon_pusher"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/pusher_logo"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                />
+            <!-- 金额-->
+            <LinearLayout
+                android:id="@+id/ll_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/icon_finish" />
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal" >
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￥"
+                    android:textColor="@color/tv_order_money_color_1"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/tv_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/tv_order_money_color_1"
+                    android:text="1234"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" /次"
+                    android:textColor="@color/tv_order_color_3"
+                    android:textSize="@dimen/_10sp" />
+            </LinearLayout>
+            <!-- 商户名称-->
             <TextView
-                android:id="@+id/tv_surolus_time"
+                android:id="@+id/tv_pusher_taskName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#333333"
-                android:textSize="13sp" />
-        </LinearLayout>
+                android:singleLine="true"
+                android:textColor="@color/tv_order_color_1"
+                android:textSize="@dimen/_16sp"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@id/ll_amount"
+                android:layout_toRightOf="@id/icon_pusher"
+                android:text="测试商都"
+                android:layout_margin="@dimen/view_space"
+                />
+            <!--类型 和内容 -->
+            <TextView
+                android:id="@+id/tv_pusher_taskType_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_16sp"
+                android:textColor="@color/tv_order_color_4"
+                android:layout_toLeftOf="@id/ll_amount"
+                android:layout_below="@id/tv_pusher_taskName"
+                android:layout_alignLeft="@id/tv_pusher_taskName"
+                android:text="签约谁放你哦按佛山发生的丰富撒打发士大夫"
+                android:gravity="left"
+                android:maxLines="2"
+                android:layout_marginRight="@dimen/view_space"
+                />
+        </RelativeLayout>
+        <View
+            style="@style/line_height_1"
+            android:layout_marginTop="@dimen/view_space"
+            android:layout_marginBottom="@dimen/view_space"
+            />
 
-        <Button
-            android:id="@+id/btn_collect_again"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="12dp"
-            android:background="@drawable/btn_blue_wane_bg"
-            android:text="再次领取"
-            android:textColor="@android:color/white"
-            android:textSize="12sp" />
-    </RelativeLayout>
-
-</RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:id="@+id/tv_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="审核中"
+                android:textColor="@color/tv_order_color_1"
+                android:gravity="center"
+                android:drawablePadding="@dimen/view_space"
+                android:drawableLeft="@drawable/icon_finish"
+                android:layout_alignParentLeft="true"
+                />
+            <TextView
+                android:id="@+id/tv_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已通过"
+                android:textColor="@color/tv_order_color_1"
+                android:gravity="center"
+                android:drawablePadding="@dimen/view_space"
+                android:drawableLeft="@drawable/task_pass"
+                android:layout_centerHorizontal="true"
+                />
+            <TextView
+                android:id="@+id/tv_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="未通过"
+                android:textColor="@color/tv_order_color_1"
+                android:gravity="center"
+                android:layout_alignParentRight="true"
+                android:drawableLeft="@drawable/task_up_pass"
+                android:drawablePadding="@dimen/view_space"
+            ></TextView>
+        </RelativeLayout>
+    </LinearLayout>

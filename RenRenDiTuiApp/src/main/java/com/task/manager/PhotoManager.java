@@ -185,6 +185,8 @@ public class PhotoManager {
             if (!tempFile.exists()) {
                 tempFile.createNewFile();
                 isCreateFile = true;
+            }else{
+                isCreateFile=true;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -199,7 +201,10 @@ public class PhotoManager {
                 if (!tempFile.exists()) {
                     tempFile.createNewFile();
                     isCreateFile = true;
+                }else{
+                    isCreateFile=true;
                 }
+
             } catch (Exception e) {
 
             }
@@ -626,7 +631,6 @@ public class PhotoManager {
     public static boolean showStorageToast(Activity activity, int remaining, boolean toast) {
         String noStorageText = null;
         boolean isStorage = true;
-        ;
 
         if (remaining == NO_STORAGE_ERROR) {
             String state = Environment.getExternalStorageState();

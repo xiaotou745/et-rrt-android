@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="@dimen/view_space"
     >
 
     <TextView
@@ -11,14 +12,15 @@
         android:text="图片组"
         android:gravity="left"
         android:textColor="@color/tv_order_color_1"
-        android:textSize="@dimen/_14sp"
+        android:textSize="@dimen/_15sp"
+        android:layout_marginBottom="@dimen/view_space"
         />
-    <ListView
+    <com.renrentui.view.MyListView
         android:id="@+id/ll_team_images_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:dividerHeight="1dip"
         android:divider="@color/line_bg_color"
-        ></ListView>
+        ></com.renrentui.view.MyListView>
 
 </LinearLayout>

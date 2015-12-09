@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -36,8 +38,11 @@ import com.renrentui.tools.Util;
 import com.renrentui.util.ApiNames;
 import com.renrentui.util.ApiUtil;
 import com.renrentui.util.ImageLoadManager;
+import com.renrentui.util.TimeUtils;
+import com.renrentui.util.ToMainPage;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
+import com.renrentui.view.MyListView;
 import com.task.adapter.TaskExplainAdapter;
 import com.task.adapter.TaskFlowPathAdapter;
 import com.task.adapter.TaskLinksAdapter;
@@ -52,7 +57,7 @@ import com.task.service.SuccessDialog.ExitDialogListener;
  */
 public class TaskDetailInfoActivity extends BaseActivity implements
 		OnClickListener, INodata {
-
+public static final String TAG = TaskDetailInfoActivity.class.getSimpleName();
 	private Context context;
 
 	private ImageView icon_pusher;// 任务发布商logo
@@ -66,7 +71,7 @@ public class TaskDetailInfoActivity extends BaseActivity implements
 	private TextView tv_task_tel;//咨询电话
 //	流程
 	private LinearLayout ll_task_description;//流程
-	private ListView lv_task_flowpath;//流程list
+	private MyListView lv_task_flowpath;//流程list
 	private ListView lv_task_explain;//补充说明list
 	private ListView lv_task_detail_link;//详情连接list
 
@@ -84,9 +89,11 @@ public class TaskDetailInfoActivity extends BaseActivity implements
 	private ArrayList<String > mLinksData=new ArrayList<String>();
 
 //	基础数据
-
 	private String userId;// 用户id
 	private String taskId;// 任务id
+	private boolean isShareTask =false;//是否是分享型任务
+	private String str_shareContent ="";//分享的内容
+	private String str_taskName;//任务名称
 
 //	任务详情Handler
 	private RQHandler<RSGetTaskDetailInfo> rqHandler_getTaskDetailInfo = new RQHandler<>(
@@ -105,6 +112,7 @@ public class TaskDetailInfoActivity extends BaseActivity implements
 
 				@Override
 				public void onSuccess(RSGetTaskDetailInfo t) {
+					Log.e(TAG,t.toString());
 					rsGetTaskDetailInfo = t;
 					initData(rsGetTaskDetailInfo.data);
 					hideProgressDialog();
@@ -172,6 +180,24 @@ public class TaskDetailInfoActivity extends BaseActivity implements
 //					dialog.show();
 //					dialog.setCancelable(false);
 					ToastUtil.show(context,"任务领取成功");
+					if(isShareTask){
+					//分享型
+						Intent mIntent = new Intent();
+						mIntent.setClass(context,ShareViewActivity.class);
+						mIntent.putExtra("TASK_ID", taskId);
+						mIntent.putExtra("SHARE_CONTENT", str_shareContent);
+						startActivity(mIntent);
+						finish();
+					}else{
+						//领取型
+						Intent mIntent = new Intent();
+						mIntent.setClass(context, MyTaskMaterialActivity.class);
+						mIntent.putExtra("TASK_ID", taskId);
+						mIntent.putExtra("topage",ToMainPage.审核中.getValue());
+						mIntent.putExtra("TASK_NAME", str_taskName);
+
+						finish();
+					}
 				}
 
 				@Override
@@ -239,6 +265,7 @@ public class TaskDetailInfoActivity extends BaseActivity implements
 		initControl();
 		Intent intent = getIntent();
 		taskId = intent.getStringExtra("TaskId");
+		str_taskName = intent.getStringExtra("TaskName");
 	}
 
 	@Override
@@ -283,7 +310,7 @@ public class TaskDetailInfoActivity extends BaseActivity implements
 		tv_deadline_time =(TextView) findViewById(R.id.tv_deadline_time);
 		tv_task_tel = (TextView)findViewById(R.id.tv_task_tel);
 		ll_task_description = (LinearLayout) findViewById(R.id.ll_task_description);
-		lv_task_flowpath = (ListView)findViewById(R.id.lv_task_flowpath);
+		lv_task_flowpath = (MyListView)findViewById(R.id.lv_task_flowpath);
 		lv_task_explain = (ListView)findViewById(R.id.lv_task_explain);
 		lv_task_detail_link = (ListView)findViewById(R.id.lv_task_detail_link);
 
@@ -302,7 +329,6 @@ public class TaskDetailInfoActivity extends BaseActivity implements
 
 	@Override
 	public void onClick(View v) {
-		Intent intent = null;
 		switch (v.getId()){
 			case R.id.btn_task_get:
 				submitTaskDetail(rsGetTaskDetailInfo.data.task.taskType,rsGetTaskDetailInfo.data.task.isHad);
@@ -370,6 +396,7 @@ public class TaskDetailInfoActivity extends BaseActivity implements
 		tv_Amount.setText(taskBean.task.getAmount());
 
 		tv_pusher_taskName.setText(taskBean.task.taskTitle);
+	//mtv_title_content.setText(taskBean.task.taskTitle);
 		//简介
 		String strType =  " "+taskBean.task.taskTypeName.toString()+" ";
 		String strTypeContent =strType +" "+taskBean.task.taskGeneralInfo.toString();
@@ -382,12 +409,14 @@ public class TaskDetailInfoActivity extends BaseActivity implements
 		style.setSpan(new BackgroundColorSpan(context.getResources().getColor(R.color.tv_bg_color_1)), bstart, bend, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
 		tv_pusher_type_content.setText(style);
 
+
+
 		//审核
 		tv_task_examine.setText(context.getResources().getString(R.string.task_detail_examine_format,taskBean.task.auditCycle));
 		//截止日期
-		tv_deadline_time.setText(context.getResources().getString(R.string.task_detail_dealtime_format,taskBean.task.endTime));
+		tv_deadline_time.setText(context.getResources().getString(R.string.task_detail_dealtime_format, TimeUtils.StringPattern(taskBean.task.endTime,"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd")));
 		//tel
-		tv_task_tel.setText(context.getResources().getString(R.string.task_detail_tel_format,taskBean.task.hotLine));
+		tv_task_tel.setText(Html.fromHtml(context.getResources().getString(R.string.task_detail_tel_format,taskBean.task.hotLine)));
 		tv_task_tel.setOnClickListener(this);
 
 		//解析数据
@@ -400,11 +429,17 @@ public class TaskDetailInfoActivity extends BaseActivity implements
 				mFlowpathData.add(index,bean.getContent());
 			}else if(bean.getSetpType()==2){
 				//说明
-				mFlowpathData.add(index,bean.getContent());
+				mExplainData.add(index,bean.getContent());
 			}else if(bean.getSetpType()==3){
 			   //细则
-				mFlowpathData.add(index,bean.getLinkTitle());
+				mLinksData.add(index,bean.getContent());
 			}
+		}
+		//测试数据
+		for(int i=0;i<10;i++){
+			mFlowpathData.add(mFlowpathData.get(0));
+			mExplainData.add(mExplainData.get(0));
+			mLinksData.add(mLinksData.get(0));
 		}
 		mTaskFlowPathAdapter.setTaskData(mFlowpathData);
 		mTaskExplainAdapter.setTaskData(mExplainData);
@@ -415,26 +450,33 @@ public class TaskDetailInfoActivity extends BaseActivity implements
 			if(taskBean.task.taskType==1){
 				//签约
 				btn_receive_task.setText("立即参与");
+				isShareTask = false;
 			}else if(taskBean.task.taskType==2){
 				//分享
 				btn_receive_task.setText("分享二维码");
+				isShareTask = true;
 			}else  if(taskBean.task.taskType==3){
 				//下载
 				btn_receive_task.setText("立即参与");
+				isShareTask = false;
 			}
 		}else if(taskBean.task.isHad==1){
 			//已领取
 			if(taskBean.task.taskType==1){
 				//签约
 				btn_receive_task.setText("继续任务");
+				isShareTask = false;
 			}else if(taskBean.task.taskType==2){
 				//分享
 				btn_receive_task.setText("继续分享");
+				isShareTask = true;
 			}else  if(taskBean.task.taskType==3){
 				//下载
 				btn_receive_task.setText("继续任务");
+				isShareTask = false;
 			}
 		}
+		str_shareContent = "www.baidu.com";
 	}
 
 	/**
@@ -444,17 +486,19 @@ public class TaskDetailInfoActivity extends BaseActivity implements
 	 */
 private  void submitTaskDetail(int type,int isHad){
 	if(isHad==0){
+		//未领情
 		if(type==1){
 			//单纯领取任务
 			submitTask_1();
 		}else if(type==2){
-			//领取任务并分享二维码
+			//分享二维码
 			submitTask_2();
 		}else if(type==3){
 			//单纯领取任务
 			submitTask_1();
 		}
 	}else{
+		//已领取
 		if(type==1){
 			//单纯继续领取任务
 			submitTask_3();
@@ -502,13 +546,22 @@ private  void submitTaskDetail(int type,int isHad){
 	 * 再次分享二维码
 	 */
 	private void submitTask_4(){
+			//分享型
+			Intent mIntent = new Intent();
+			mIntent.setClass(context,ShareViewActivity.class);
+			mIntent.putExtra("TASK_ID", taskId);
+			mIntent.putExtra("SHARE_CONTENT", str_shareContent);
+			startActivity(mIntent);
+			finish();
 
 	}
 //资料提交页面
 private  void goToTaskMaterialActivity(){
 	Intent mIntent = new Intent();
-	mIntent.setClass(context, null);
-	mIntent.putExtra("taskId",this.taskId);
+	mIntent.setClass(context, MyTaskMaterialActivity.class);
+	mIntent.putExtra("TASK_ID", taskId);
+	mIntent.putExtra("topage",ToMainPage.审核中.getValue());
+	mIntent.putExtra("TASK_NAME",str_taskName);
 	startActivity(mIntent);
 	finish();
 }

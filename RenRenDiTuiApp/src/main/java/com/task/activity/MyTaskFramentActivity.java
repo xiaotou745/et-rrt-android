@@ -38,10 +38,9 @@ public class MyTaskFramentActivity extends BaseFragmentActivity implements
     private ViewPager vp_task_my;
     private MyFragmentPagerAdapter viewPagerAdapter;
     private List<BaseFragment> fragmentList;
-    private FragmentThroughTask fragmentThroughTask;// 审核通过任务页
-    private FragmentInvalidTask fragmentInvalidTask;// 过期失效任务页
-    private FragmentCancelledTask fragmentCancelledTask;// 已取消任务页
-    private int topage = ToMyTaskPage.审核通过.getValue();// intent指向要显示的页面
+    private FragmentThroughTask fragmentThroughTask;// 进行中的任务
+    private FragmentInvalidTask fragmentInvalidTask;// 已过期任务
+    private int topage = ToMyTaskPage.进行中.getValue();// intent指向要显示的页面
     private LayoutMyTaskTopmenu layoutTopMenu;// 顶部按钮
 
     @Override
@@ -65,7 +64,7 @@ public class MyTaskFramentActivity extends BaseFragmentActivity implements
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         if (intent != null) {
-            topage = intent.getIntExtra("to", ToMyTaskPage.审核通过.getValue());
+            topage = intent.getIntExtra("to", ToMyTaskPage.进行中.getValue());
         }
         vp_task_my.setCurrentItem(topage);
     }
@@ -79,17 +78,16 @@ public class MyTaskFramentActivity extends BaseFragmentActivity implements
     private void initViewPager(int topage) {
         fragmentThroughTask = new FragmentThroughTask();
         fragmentInvalidTask = new FragmentInvalidTask();
-        fragmentCancelledTask = new FragmentCancelledTask();
         fragmentList = new ArrayList<BaseFragment>();
         fragmentList.add(fragmentThroughTask);
         fragmentList.add(fragmentInvalidTask);
-        fragmentList.add(fragmentCancelledTask);
         viewPagerAdapter = new MyFragmentPagerAdapter(
                 getSupportFragmentManager(), context, fragmentList);
         vp_task_my.setAdapter(viewPagerAdapter);
         vp_task_my.setOffscreenPageLimit(0);
         vp_task_my.setOnPageChangeListener(new MyOnPageChangeListener());
         vp_task_my.setCurrentItem(topage);
+        layoutTopMenu.selected(topage);
     }
 
     public class MyOnPageChangeListener implements OnPageChangeListener {
@@ -118,13 +116,10 @@ public class MyTaskFramentActivity extends BaseFragmentActivity implements
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_task_through:
-                topage = ToMyTaskPage.审核通过.getValue();
+                topage = ToMyTaskPage.进行中.getValue();
                 break;
             case R.id.btn_task_invalid:
-                topage = ToMyTaskPage.过期失效.getValue();
-                break;
-            case R.id.btn_task_cancelled:
-                topage = ToMyTaskPage.已取消.getValue();
+                topage = ToMyTaskPage.已过期.getValue();
                 break;
         }
         vp_task_my.setCurrentItem(topage);

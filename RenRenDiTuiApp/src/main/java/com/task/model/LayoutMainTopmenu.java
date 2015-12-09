@@ -64,14 +64,15 @@ public void setYtongguo(int tongguo) {
 	 */
 	public void selected(int page){
 		hideView();
-		if (page==ToMainPage.已通过.getValue()) {
-			this.btn_task_nogoing.setChecked(true);
-			v_task_nogoing.setVisibility(View.VISIBLE);
-		}
 		if (page==ToMainPage.审核中.getValue()) {
 			this.btn_task_ongoing.setChecked(true);
 			v_task_ongoing.setVisibility(View.VISIBLE);
 		}
+		if (page==ToMainPage.已通过.getValue()) {
+			this.btn_task_nogoing.setChecked(true);
+			v_task_nogoing.setVisibility(View.VISIBLE);
+		}
+
 		if (page==ToMainPage.未通过.getValue()) {
 			this.btn_task_finished.setChecked(true);
 			v_task_finished.setVisibility(View.VISIBLE);

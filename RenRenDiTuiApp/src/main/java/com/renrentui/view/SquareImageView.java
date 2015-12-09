@@ -6,7 +6,7 @@ import android.widget.ImageView;
 
 /**
  * Created by Administrator on 2015/12/4 0004.
- * fangxin
+ * 方向
  */
 public class SquareImageView extends ImageView {
     public SquareImageView(Context context) {

@@ -2,6 +2,8 @@ package com.renrentui.util;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +26,7 @@ import com.user.activity.LoginActivity;
 public final class Utils {
 	/**
 	 * 获取会员用户
+	 *
 	 * @param context
 	 * @return
 	 */
@@ -42,7 +45,7 @@ public final class Utils {
 
 	/**
 	 * 设置会员用户
-	 * 
+	 *
 	 * @param context
 	 * @param consultantVO
 	 */
@@ -64,7 +67,7 @@ public final class Utils {
 
 	/**
 	 * 退出登录
-	 * 
+	 *
 	 * @param context
 	 */
 	public static void quitUser(Context context) {
@@ -75,7 +78,7 @@ public final class Utils {
 
 	/**
 	 * 跳转登陆页面
-	 * 
+	 *
 	 * @param context
 	 */
 	public static void toLogin(Context context) {
@@ -86,17 +89,17 @@ public final class Utils {
 
 	/**
 	 * 判断字符串是否为空
-	 * 
+	 *
 	 * @param string
 	 * @return true 不为空;false 为空
 	 */
 	public static boolean IsNotNUll(String string) {
 		return string != null && !string.trim().equals("");
 	}
-	
+
 	/**
 	 * 获取当前版本名
-	 * 
+	 *
 	 * @return 当前app的版本号
 	 */
 	public static String getVersion(Context context) {
@@ -110,10 +113,10 @@ public final class Utils {
 		}
 		return info.versionName;
 	}
-	
+
 	/**
 	 * 获取当前版本号
-	 * 
+	 *
 	 * @return 当前app的版本号
 	 */
 	public static int getVersionId(Context context) {
@@ -128,6 +131,7 @@ public final class Utils {
 
 		return info.versionCode;
 	}
+
 	/**
 	 * 拨打电话（页面）
 	 *
@@ -139,4 +143,20 @@ public final class Utils {
 		con.startActivity(intent);
 	}
 
+	/**
+	 * 判断url是否合法
+	 * @param strUrl
+	 * @return
+	 */
+	public static   boolean checkUrl(String strUrl){
+		if(!Utils.IsNotNUll(strUrl)){
+			return false;
+		}
+		String regex = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]" ;
+		Pattern patt = Pattern. compile(regex);
+		Matcher matcher = patt.matcher(strUrl);
+		return   matcher.matches();
+	}
+
 }
+

@@ -24,6 +24,7 @@ public class uploadPicBean   implements Serializable {
     private String network_path;//服务器图片地址
     private int ticket_property;//图片的信息(1:本地  2：网络 3：相机)
     private transient SoftReference<Bitmap> tempIcon;// 序列化忽略此字段
+    private String controlKey;//控件key
 
     public uploadPicBean() {
     }
@@ -41,6 +42,15 @@ public class uploadPicBean   implements Serializable {
         }
         tempIcon = null;
     }
+
+    public String getControlKey() {
+        return controlKey;
+    }
+
+    public void setControlKey(String controlKey) {
+        this.controlKey = controlKey;
+    }
+
     public SoftReference<Bitmap> getTempIcon() {
         return tempIcon;
     }

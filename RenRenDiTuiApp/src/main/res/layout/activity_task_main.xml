@@ -26,24 +26,6 @@
         android:background="@android:color/white"
         android:orientation="horizontal" >
 
-        <RadioButton
-            android:id="@+id/btn_task_nogoing"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:checked="true"
-            android:button="@null"
-            android:gravity="center"
-            android:paddingLeft="@dimen/_10dp"
-            android:text="@string/nogoing"
-            android:textColor="@drawable/home_title_selector"
-            android:textSize="@dimen/_16sp" />
-
-        <TextView
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:background="#22000000" />
 
         <RadioButton
             android:id="@+id/btn_task_ongoing"
@@ -52,8 +34,26 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
+            android:checked="true"
             android:paddingLeft="@dimen/_10dp"
             android:text="@string/ongoing"
+            android:textColor="@drawable/home_title_selector"
+            android:textSize="@dimen/_16sp" />
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="#22000000" />
+
+        <RadioButton
+            android:id="@+id/btn_task_nogoing"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:paddingLeft="@dimen/_10dp"
+            android:text="@string/nogoing_1"
             android:textColor="@drawable/home_title_selector"
             android:textSize="@dimen/_16sp" />
 
@@ -81,21 +81,23 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
+        <View
+            android:id="@+id/v_task_ongoing"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:background="@color/blue"
+            android:visibility="invisible"
+            />
         <View 
             android:id="@+id/v_task_nogoing"
             android:layout_height="1dp"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:background="@color/blue"
-            />
-        <View 
-            android:id="@+id/v_task_ongoing"
-            android:layout_height="1dp"
             android:visibility="invisible"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:background="@color/blue"
             />
+
         <View 
             android:id="@+id/v_task_finished"
             android:layout_height="1dp"
@@ -107,10 +109,20 @@
         
     </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_task_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
     </android.support.v4.view.ViewPager>
 
+        <Button
+            android:id="@+id/btn_submit_taskTemple"
+            style="@style/style_btn_blue_fill"
+            android:text="提交资料"
+            android:layout_alignParentBottom="true"
+            />
+    </RelativeLayout>
 </LinearLayout>

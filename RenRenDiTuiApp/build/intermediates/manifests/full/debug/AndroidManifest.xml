@@ -16,6 +16,45 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <!-- Required  一些系统要求的权限，如访问网络等 -->
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- Optional for location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- since 1.6.0 -->
+
+
+    <!-- SDK1.5需要android.permission.GET_TASKS权限判断本程序是否为当前运行的应用? -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.CAMERA" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <application
         android:allowBackup="true"
@@ -41,7 +80,6 @@
             android:launchMode="singleTask" />
         <activity android:name="com.task.activity.TaskDetailInfoActivity" />
         <activity android:name="com.task.activity.MyTaskFramentActivity" />
-        <activity android:name="com.task.activity.SubmitDataActivity" />
         <activity android:name="com.user.activity.FindPwdActivity" />
         <activity android:name="com.user.activity.RegisterActivity" />
         <activity android:name="com.user.activity.UpdatePwdActivity" />
@@ -51,7 +89,10 @@
         <activity android:name="com.user.activity.WithdrawalsActivity" />
         <activity android:name="com.user.activity.MoreActivity" />
         <activity android:name="com.task.activity.WebViewActivity" />
+        <activity android:name="com.task.activity.ShareViewActivity" />
         <activity android:name="com.task.activity.MyTaskMaterialDetailActivity" />
+        <activity android:name="com.task.activity.TaskDatumSubmitActiviyt" />
+        <activity android:name="com.task.activity.ShowTaskMatailDetailActivity" />
 
         <service
             android:name="com.user.model.download.DownLoadService"
@@ -62,6 +103,10 @@
                 <action android:name="com.user.model.download.DownLoadService.STOP" />
             </intent-filter>
         </service>
+        <!-- 上传service -->
+        <service
+            android:name="com.task.upload.UploadService"
+            android:process=":UploadService" />
     </application>
 
 </manifest>

@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:2:1-66:12
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:2:1-113:12
 	xmlns:android
 		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:2:11-69
 	package
@@ -52,117 +52,215 @@ uses-permission#android.permission.ACCESS_FINE_LOCATION
 ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:17:5-79
 	android:name
 		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:17:22-76
+uses-permission#android.permission.CAMERA
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:19:5-65
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:19:22-62
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:20:5-71
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:20:22-68
+uses-permission#android.permission.RECEIVE_USER_PRESENT
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:23:5-79
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:23:22-76
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:24:5-75
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:24:22-72
+uses-permission#android.permission.ACCESS_LOCATION_EXTRA_COMMANDS
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:29:5-89
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:29:22-86
+uses-permission#android.permission.CHANGE_NETWORK_STATE
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:30:5-79
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:30:22-76
+uses-permission#android.permission.WAKE_LOCK
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:31:5-68
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:31:22-65
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:32:5-80
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:32:22-77
+uses-permission#android.permission.VIBRATE
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:33:5-66
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:33:22-63
+uses-permission#android.permission.SYSTEM_ALERT_WINDOW
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:35:5-78
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:35:22-75
+uses-permission#android.permission.GET_TASKS
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:40:5-68
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:40:22-65
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:45:5-81
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:45:22-78
+uses-permission#android.permission.GET_ACCOUNTS
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:46:5-71
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:46:22-68
+uses-permission#android.permission.USE_CREDENTIALS
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:47:5-74
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:47:22-71
+uses-permission#android.permission.MANAGE_ACCOUNTS
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:48:5-74
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:48:22-71
+uses-permission#android.permission.AUTHENTICATE_ACCOUNTS
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:49:5-80
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:49:22-77
+uses-permission#com.android.launcher.permission.READ_SETTINGS
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:52:5-85
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:52:22-82
+uses-permission#android.permission.CHANGE_WIFI_STATE
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:53:5-76
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:53:22-73
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:54:5-76
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:54:22-73
+uses-permission#android.permission.BROADCAST_STICKY
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:56:5-75
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:56:22-72
+uses-permission#android.permission.WRITE_SETTINGS
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:57:5-73
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:57:22-70
 application
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:19:5-64:19
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:60:5-111:19
 	android:label
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:22:9-41
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:63:9-41
 	android:allowBackup
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:20:9-35
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:61:9-35
 	android:icon
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:21:9-38
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:62:9-38
 	android:theme
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:23:9-40
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:64:9-40
 activity#com.renrentui.app.WelcomeActivity
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:24:9-33:20
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:65:9-74:20
 	android:label
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:26:13-45
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:67:13-45
 	android:theme
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:27:13-77
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:68:13-77
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:25:13-61
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:66:13-61
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:28:13-32:29
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:69:13-73:29
 action#android.intent.action.MAIN
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:29:17-69
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:70:17-69
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:29:25-66
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:70:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:31:17-77
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:72:17-77
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:31:27-74
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:72:27-74
 activity#com.user.activity.LoginActivity
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:34:9-68
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:75:9-68
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:34:19-65
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:75:19-65
 activity#com.task.activity.MyTaskMaterialActivity
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:35:9-37:47
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:76:9-78:47
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:36:13-68
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:77:13-68
 	android:launchMode
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:37:13-44
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:78:13-44
 activity#com.task.activity.NoGoingTaskActicity
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:38:9-40:47
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:79:9-81:47
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:39:13-65
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:80:13-65
 	android:launchMode
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:40:13-44
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:81:13-44
 activity#com.task.activity.TaskDetailInfoActivity
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:41:9-77
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:82:9-77
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:41:19-74
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:82:19-74
 activity#com.task.activity.MyTaskFramentActivity
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:42:9-76
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:83:9-76
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:42:19-73
-activity#com.task.activity.SubmitDataActivity
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:43:9-73
-	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:43:19-70
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:83:19-73
 activity#com.user.activity.FindPwdActivity
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:44:9-70
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:84:9-70
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:44:19-67
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:84:19-67
 activity#com.user.activity.RegisterActivity
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:45:9-71
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:85:9-71
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:45:19-68
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:85:19-68
 activity#com.user.activity.UpdatePwdActivity
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:46:9-72
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:86:9-72
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:46:19-69
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:86:19-69
 activity#com.user.activity.PersonalCenterActivity
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:47:9-77
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:87:9-77
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:47:19-74
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:87:19-74
 activity#com.user.activity.HelpCenterActivity
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:48:9-73
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:88:9-73
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:48:19-70
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:88:19-70
 activity#com.user.activity.PersonalDataActivity
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:49:9-75
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:89:9-75
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:49:19-72
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:89:19-72
 activity#com.user.activity.WithdrawalsActivity
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:50:9-74
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:90:9-74
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:50:19-71
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:90:19-71
 activity#com.user.activity.MoreActivity
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:51:9-67
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:91:9-67
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:51:19-64
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:91:19-64
 activity#com.task.activity.WebViewActivity
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:52:9-79
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:92:9-79
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:52:19-67
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:92:19-67
+activity#com.task.activity.ShareViewActivity
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:93:9-81
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:93:19-69
 activity#com.task.activity.MyTaskMaterialDetailActivity
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:53:9-92
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:94:9-92
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:53:19-80
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:94:19-80
+activity#com.task.activity.TaskDatumSubmitActiviyt
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:95:9-87
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:95:19-75
+activity#com.task.activity.ShowTaskMatailDetailActivity
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:96:9-92
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:96:19-80
 service#com.user.model.download.DownLoadService
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:55:9-63:19
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:98:9-106:19
 	android:exported
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:58:13-37
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:101:13-37
 	android:enabled
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:57:13-35
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:100:13-35
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:56:13-67
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:99:13-67
 intent-filter#com.user.model.download.DownLoadService.START+com.user.model.download.DownLoadService.STOP
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:59:13-62:29
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:102:13-105:29
 action#com.user.model.download.DownLoadService.START
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:60:17-88
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:103:17-88
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:60:25-85
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:103:25-85
 action#com.user.model.download.DownLoadService.STOP
-ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:61:17-87
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:104:17-87
 	android:name
-		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:61:25-84
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:104:25-84
+service#com.task.upload.UploadService
+ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:108:9-110:48
+	android:process
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:110:13-45
+	android:name
+		ADDED from D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\AndroidManifest.xml:109:13-57

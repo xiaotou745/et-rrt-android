@@ -28,4 +28,5 @@ dependencies {
     compile files('libs/apache-mime4j-0.6.jar')
     compile files('libs/universal-image-loader-1.9.4.jar')
     compile files('libs/xUtils-2.6.14.jar')
+    compile files('libs/zxing.jar')
 }

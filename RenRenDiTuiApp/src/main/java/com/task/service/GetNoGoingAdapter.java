@@ -21,6 +21,7 @@ import com.renrentui.app.R;
 import com.renrentui.resultmodel.NoGoingTaskInfo;
 import com.renrentui.tools.Util;
 import com.renrentui.util.ImageLoadManager;
+import com.renrentui.util.Utils;
 import com.task.activity.TaskDetailInfoActivity;
 
 /**
@@ -65,7 +66,7 @@ public class GetNoGoingAdapter extends BaseAdapter {
             viewholder = (ViewHolder) convertView.getTag();
         }
         final NoGoingTaskInfo noGoingTaskInfo = noGoingTaskInfos.get(position);
-        if (Util.IsNotNUll(noGoingTaskInfo.logo)) {
+        if (Util.IsNotNUll(noGoingTaskInfo.logo) && Utils.checkUrl(noGoingTaskInfo.logo)) {
             ImageLoadManager.getLoaderInstace().disPlayNormalImg(
                     noGoingTaskInfo.logo, viewholder.icon_pusher,
                     R.drawable.pusher_logo);
@@ -95,6 +96,7 @@ public class GetNoGoingAdapter extends BaseAdapter {
                 Intent intent = new Intent(context,
                         TaskDetailInfoActivity.class);
                 intent.putExtra("TaskId", noGoingTaskInfo.taskId);
+                intent.putExtra("TaskName",noGoingTaskInfo.taskName);
                 context.startActivity(intent);
             }
         });

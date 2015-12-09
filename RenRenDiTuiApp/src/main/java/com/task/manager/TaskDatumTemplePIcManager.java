@@ -1,17 +1,17 @@
 package com.task.manager;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.renrentui.app.R;
-import com.renrentui.util.Constants;
+import com.renrentui.tools.Constants;
 import com.task.upload.UploadService;
 import com.task.upload.bean.uploadPicBean;
 import com.task.upload.db.UploadDB;
@@ -138,6 +138,8 @@ public class TaskDatumTemplePIcManager {
             Intent intent = new Intent(mAct, UploadService.class);
             intent.putExtra(UploadService.OPERATION, UploadService.ADD_UPLOAD_TASK);
             intent.putExtra(UploadService.VO, mCurrentUploadVO);
+            intent.putExtra("TASK_ID",this.taskId);
+            intent.putExtra("USER_ID",this.userId);
             mAct.startService(intent);
             mCurrentUploadVO.setIcon(bitmap);
             TaskTempleUploadPicInterface.setUploadPicProgress(0,0,"",UploadService.TASK_STATE_START,mCurrentUploadVO);
@@ -159,7 +161,6 @@ public class TaskDatumTemplePIcManager {
                 long fileLength = intent.getLongExtra(UploadService.FILE_LENGTH, 0);
                 long curLength = intent.getLongExtra(UploadService.CUR_LENGTH, 0);
                 int status = intent.getIntExtra(UploadService.OPERATION,0);
-
                 TaskTempleUploadPicInterface.setUploadPicProgress(fileLength, curLength, "",status, vo);
             }
         }

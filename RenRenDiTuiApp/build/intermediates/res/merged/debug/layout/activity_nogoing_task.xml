@@ -58,7 +58,7 @@
             android:divider="#e8e8e8"
             android:dividerHeight="@dimen/_8dp"
             android:fadingEdge="none"
-            android:listSelector="#f2f2f2"
+            android:listSelector="@color/listview_selector_color"
             android:scrollbars="none" >
         </ListView>
     </com.renrentui.controls.PullToRefreshView>

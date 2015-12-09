@@ -5,63 +5,34 @@ package com.task.upload.bean;
  * 图片上传结果类
  */
 public class UploadPicResultBean {
-   private int Code ;//状态 1 成功,其它失败
+   private int Status ;//状态 1 成功,其它失败
     private String Message;// Message 提示信息
-    private  ResultBean  Result;// Result 返回的文件信息
+    private  DataBean  Result;// Result 返回的文件信息
 
-    public int getCode() {
-        return Code;
-    }
-
-    public String getMessage() {
-        return Message;
-    }
-
-    public ResultBean getResult() {
-        return Result;
-    }
-
-    public void setCode(int code) {
-        Code = code;
+    public void setStatus(int status) {
+        Status = status;
     }
 
     public void setMessage(String message) {
         Message = message;
     }
 
-    public void setResult(ResultBean result) {
+    public void setResult(DataBean result) {
         Result = result;
     }
 
-    public class ResultBean{
-      private int   Code  ;//状态 1 成功,其它失败
-      private String  Message ;// 提示信息
-      private DataBean  Data  ;//返回的文件信息
-
-        public void setCode(int code) {
-            Code = code;
-        }
-
-        public void setMessage(String message) {
-            Message = message;
-        }
-
-        public void setData(DataBean data) {
-            Data = data;
-        }
-
-        public int getCode() {
-            return Code;
-        }
-
-        public String getMessage() {
-            return Message;
-        }
-
-        public DataBean getData() {
-            return Data;
-        }
+    public int getStatus() {
+        return Status;
     }
+
+    public String getMessage() {
+        return Message;
+    }
+
+    public DataBean getResult() {
+        return Result;
+    }
+
     public class DataBean{
         private String FileUrl  ;//文件的访问地址(http://192.168.1.38/edsuploadapi/Business/2015/10/13/13/322547f79e.jpg)
         private String RelativePath;// 保存到数据库的相对路径(edsuploadapi/Business/2015/10/13/13/322547f79e.jpg)

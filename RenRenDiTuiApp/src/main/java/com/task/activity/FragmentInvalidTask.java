@@ -18,9 +18,15 @@ import com.renrentui.controls.PullToRefreshView.OnHeaderRefreshListener;
 import com.renrentui.interfaces.INodata;
 import com.renrentui.interfaces.IRqHandlerMsg;
 import com.renrentui.requestmodel.RQBaseModel;
+import com.renrentui.requestmodel.RQGetFinishedTask;
 import com.renrentui.requestmodel.RQHandler;
+import com.renrentui.requestmodel.RQMyTask;
 import com.renrentui.requestmodel.RequestType;
 import com.renrentui.requestmodel.ResultMsgType;
+import com.renrentui.resultmodel.FinishedTaskInfo;
+import com.renrentui.resultmodel.MyTaskContentBean;
+import com.renrentui.resultmodel.RSGetFinishedTask;
+import com.renrentui.resultmodel.RSMyTask;
 import com.renrentui.util.ApiNames;
 import com.renrentui.util.ApiUtil;
 import com.renrentui.util.ToastUtil;
@@ -40,12 +46,12 @@ public class FragmentInvalidTask extends BaseFragment implements
 	private ListView lv_task_main;
 	private GetInvalidTaskAdapter getInvalidTaskAdapter;
 	private PullToRefreshView pulltorefresh_taskList;
-	private List<FinishedTaskInfo> finishedTaskInfos;
+	private List<MyTaskContentBean> finishedTaskInfos;
 	private String nextId = "";
 	private int pageindex = 1;
 
-	private RQHandler<RSGetFinishedTask> rqHandler_getOnGoingTask = new RQHandler<>(
-			new IRqHandlerMsg<RSGetFinishedTask>() {
+	private RQHandler<RSMyTask> rqHandler_gqTask = new RQHandler<>(
+			new IRqHandlerMsg<RSMyTask>() {
 
 				@Override
 				public void onBefore() {
@@ -63,18 +69,18 @@ public class FragmentInvalidTask extends BaseFragment implements
 				}
 
 				@Override
-				public void onSuccess(RSGetFinishedTask t) {
+				public void onSuccess(RSMyTask t) {
 					FragmentInvalidTask.this.hideLayoutNoda();
 					pulltorefresh_taskList.setVisibility(View.VISIBLE);
 					if (pageindex == 1) {
 						if (t.data.count == 0) {
 							pulltorefresh_taskList.setVisibility(View.GONE);
 							FragmentInvalidTask.this.onNodata(
-									ResultMsgType.Success, "刷新", "暂无已提交任务！",
+									ResultMsgType.Success, "刷新", "暂无过期任务！",
 									FragmentInvalidTask.this);
 						} else {
 							finishedTaskInfos.clear();
-							nextId = t.data.nextId;
+							nextId = t.data.nextID;
 							finishedTaskInfos.addAll(t.data.content);
 							getInvalidTaskAdapter.notifyDataSetChanged();
 						}
@@ -82,7 +88,7 @@ public class FragmentInvalidTask extends BaseFragment implements
 						if (t.data.count == 0) {
 							ToastUtil.show(context, "暂无更多数据");
 						} else {
-							nextId = t.data.nextId;
+							nextId = t.data.nextID;
 							finishedTaskInfos.addAll(t.data.content);
 							getInvalidTaskAdapter.notifyDataSetChanged();
 						}
@@ -90,7 +96,7 @@ public class FragmentInvalidTask extends BaseFragment implements
 				}
 
 				@Override
-				public void onSericeErr(RSGetFinishedTask t) {
+				public void onSericeErr(RSMyTask t) {
 					pulltorefresh_taskList.setVisibility(View.GONE);
 					FragmentInvalidTask.this.onNodata(
 							ResultMsgType.ServiceErr, "刷新", "数据加载失败！", null);
@@ -117,7 +123,7 @@ public class FragmentInvalidTask extends BaseFragment implements
 		pulltorefresh_taskList.setOnFooterRefreshListener(this);
 		lv_task_main = (ListView) view.findViewById(R.id.lv_task_main);
 		lv_task_main.setOverScrollMode(View.OVER_SCROLL_NEVER);
-		finishedTaskInfos = new ArrayList<FinishedTaskInfo>();
+		finishedTaskInfos = new ArrayList<MyTaskContentBean>();
 		getInvalidTaskAdapter = new GetInvalidTaskAdapter(context, finishedTaskInfos);
 		lv_task_main.setAdapter(getInvalidTaskAdapter);
 		return view;
@@ -127,17 +133,17 @@ public class FragmentInvalidTask extends BaseFragment implements
 	 * 初始化数据
 	 */
 	public void getInitData() {
-		ApiUtil.Request(new RQBaseModel<RQGetFinishedTask, RSGetFinishedTask>(
-				context, new RQGetFinishedTask(Utils.getUserDTO(context).data.userId, "0",3),
-				new RSGetFinishedTask(), ApiNames.获取所有已提交的任务.getValue(),
-				RequestType.POST, rqHandler_getOnGoingTask));
+		ApiUtil.Request(new RQBaseModel<RQMyTask, RSMyTask>(
+				context, new RQMyTask(Utils.getUserDTO(context).data.userId, "0",3),
+				new RSMyTask(), ApiNames.获取所有已领取任务.getValue(),
+				RequestType.POST, rqHandler_gqTask));
 		pageindex = 1;
 	}
 	
 	@Override
 	public void onResume() {
 		super.onResume();
-		getInitData();
+		//getInitData();
 	}
 
 	@Override
@@ -189,10 +195,10 @@ public class FragmentInvalidTask extends BaseFragment implements
 	 * 获取更多数据
 	 */
 	public void getMoreData() {
-		ApiUtil.Request(new RQBaseModel<RQGetFinishedTask, RSGetFinishedTask>(
-				context, new RQGetFinishedTask(Utils.getUserDTO(context).data.userId, nextId,3),
-				new RSGetFinishedTask(), ApiNames.获取所有已提交的任务.getValue(),
-				RequestType.POST, rqHandler_getOnGoingTask));
+		ApiUtil.Request(new RQBaseModel<RQMyTask, RSMyTask>(
+				context, new RQMyTask(Utils.getUserDTO(context).data.userId, nextId,3),
+				new RSMyTask(), ApiNames.获取所有已领取任务.getValue(),
+				RequestType.POST, rqHandler_gqTask));
 		pageindex++;
 	}
 }

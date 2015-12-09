@@ -90,7 +90,7 @@ public class FragmentGoneTask extends BaseFragment implements
 						if (t.data.count == 0) {
 							pulltorefresh_taskList.setVisibility(View.GONE);
 							FragmentGoneTask.this.onNodata(
-									ResultMsgType.Success, "刷新", "暂无待领取任务！",
+									ResultMsgType.Success, "刷新", "暂无审核通过资料！",
 									FragmentGoneTask.this);
 						} else {
 							taskMetarialContents.clear();

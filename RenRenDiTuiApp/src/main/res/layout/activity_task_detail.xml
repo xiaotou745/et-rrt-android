@@ -20,7 +20,9 @@
         android:id="@+id/layout_data"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fadingEdge="none" >
+        android:fadingEdge="none"
+        android:scrollbars="none"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -172,7 +174,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@color/white"
-                android:padding="@dimen/view_space"
              >
 
                 <TextView
@@ -188,40 +189,48 @@
                     />
                 <!-- 流程-->
 
-                    <ListView
+                    <com.renrentui.view.MyListView
                         android:id="@+id/lv_task_flowpath"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/view_space"
-                        android:listSelector="@color/transparent"
+                        android:layout_height="match_parent"
+                        android:listSelector="@color/white"
+                        android:dividerHeight="0dip"
+                        android:divider="@null"
+                        android:paddingTop="@dimen/_5dp"
+                        android:paddingBottom="@dimen/_5dp"
                         />
                 <View
                         style="@style/line_height_1">
-                    </View>
+                </View>
                     <!-- 当前任务的补充说明-->
-                    <ListView
+                    <com.renrentui.view.MyListView
                         android:id="@+id/lv_task_explain"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/view_space"
-                        android:listSelector="@color/transparent"
+                        android:layout_height="match_parent"
+                        android:paddingTop="@dimen/_5dp"
+                        android:paddingBottom="@dimen/_5dp"
+                        android:listSelector="@color/white"
+                        android:dividerHeight="0dip"
+                        android:divider="@null"
                         >
-                    </ListView>
+                    </com.renrentui.view.MyListView>
             </LinearLayout>
 
             <View
                 style="@style/line_height_10">
             </View>
             <!--详情页面链接 -->
-            <ListView
+            <com.renrentui.view.MyListView
                 android:id="@+id/lv_task_detail_link"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/view_space"
-                android:listSelector="@color/transparent"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/_5dp"
+                android:paddingBottom="@dimen/_5dp"
+                android:dividerHeight="10dip"
+                android:divider="@color/line_bg_color"
                 android:background="@color/white"
                 >
-            </ListView>
+            </com.renrentui.view.MyListView>
             <!-- 操作按钮-->
                 <Button
                     android:id="@+id/btn_task_get"

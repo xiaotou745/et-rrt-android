@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.renrentui.db.Bean.TaskTempleDBBean;
 import com.renrentui.util.Utils;
@@ -57,16 +58,17 @@ public class TaskTempleDBManager {
                 open();
                 ContentValues values = new ContentValues();
                 values.put(TaskTempleColumn.USER_ID, bean.getUSER_ID().trim());
+                values.put(TaskTempleColumn.TASK_ID, bean.getTASK_ID().trim());
                 values.put(TaskTempleColumn.TEAM_NUM, bean.getTEAM_NUM().trim());
                 values.put(TaskTempleColumn.TEAM_TYPE, bean.getTEAM_TYPE().trim());
                 values.put(TaskTempleColumn.TEAM_NUM_INDEX, bean.getTEAM_NUM_INDEX().trim());
                 values.put(TaskTempleColumn.TEAM_CONTENT_TYPE, bean.getTEAM_CONTENT_TYPE().trim());
                 values.put(TaskTempleColumn.TEAM_CONTENT_KEY, bean.getTEAM_CONTENT_KEY().trim());
-                values.put(TaskTempleColumn.TEAM_CONTENT_VALUE, bean.getTEAM_CONTENT_KEY().trim());
+                values.put(TaskTempleColumn.TEAM_CONTENT_VALUE, bean.getTEAM_CONTENT_VALUE().trim());
                 add_id = TaskTempleDB.insert(tableName, null, values);
             }
         }catch (Exception e){
-
+            Log.e("--TaskTempleDBManager--","addTaskTempleInfo  Exception");
         }finally {
             closed();
         }
@@ -83,14 +85,14 @@ public class TaskTempleDBManager {
         try {
             if (bean != null) {
                 open();
-                String whereCase=TaskTempleColumn.USER_ID+ " = ?, "+
-                       TaskTempleColumn.TEAM_TYPE+" = ?,"+ TaskTempleColumn.TEAM_NUM+" = ?"+
+                String whereCase=TaskTempleColumn.USER_ID+ " = ? and "+TaskTempleColumn.TASK_ID+ " = ? and "+
+                       TaskTempleColumn.TEAM_TYPE+" = ? and "+ TaskTempleColumn.TEAM_NUM+" = ? and "+
                         TaskTempleColumn.TEAM_NUM_INDEX+" = ?";
-                String[] whereArgs = {bean.getUSER_ID(),bean.getTEAM_TYPE(),bean.getTEAM_NUM(),bean.getTEAM_NUM_INDEX()};
+                String[] whereArgs = {bean.getUSER_ID(),bean.getTASK_ID() ,bean.getTEAM_TYPE(),bean.getTEAM_NUM(),bean.getTEAM_NUM_INDEX()};
                 del_lines =  TaskTempleDB.delete(tableName, whereCase, whereArgs);
             }
         }catch (Exception e){
-
+            Log.e("--TaskTempleDBManager--","delTaskTempleInfo_one  Exception");
         }finally {
             closed();
         }
@@ -112,13 +114,33 @@ public class TaskTempleDBManager {
                 del_lines =  TaskTempleDB.delete(tableName, whereCase, whereArgs);
             }
         }catch (Exception e){
-
+            Log.e("--TaskTempleDBManager--","delTaskTempleInfoByUserId  Exception");
         }finally {
+            SQLiteDatabase.releaseMemory();
             closed();
         }
         return del_lines;
     }
 
+    /**
+     * 删除表
+     * @return
+     */
+    public synchronized int delTaskTempleTable(){
+        int  del_lines = -1;
+        try {
+            open();
+            String sql = "DELETE FROM " + tableName;
+            TaskTempleDB.execSQL(sql);
+            TaskTempleDB.execSQL("update sqlite_sequence set seq=0 where name='"+tableName+"';");
+            SQLiteDatabase.releaseMemory();
+        }catch (Exception e){
+            Log.e("--TaskTempleDBManager--","delTaskTempleInfoByUserId  Exception");
+        }finally {
+            closed();
+        }
+        return del_lines;
+    }
 
     /**
      * 更新单条数据
@@ -130,22 +152,23 @@ public class TaskTempleDBManager {
         try {
             if (bean != null) {
                 open();
-                String whereCase = TaskTempleColumn.USER_ID + " = ?, " +
-                        TaskTempleColumn.TEAM_TYPE + " = ?," + TaskTempleColumn.TEAM_NUM + " = ?" +
+                String whereCase = TaskTempleColumn.USER_ID + " = ? and " +TaskTempleColumn.TASK_ID + " = ? and " +
+                        TaskTempleColumn.TEAM_TYPE + " = ? and " + TaskTempleColumn.TEAM_NUM + " = ? and " +
                         TaskTempleColumn.TEAM_NUM_INDEX + " = ?";
-                String[] whereArgs = {bean.getUSER_ID(), bean.getTEAM_TYPE(), bean.getTEAM_NUM(), bean.getTEAM_NUM_INDEX()};
+                String[] whereArgs = {bean.getUSER_ID().trim(),bean.getTASK_ID().trim(), bean.getTEAM_TYPE().trim(), bean.getTEAM_NUM().trim(), bean.getTEAM_NUM_INDEX().trim()};
                 ContentValues values = new ContentValues();
                 values.put(TaskTempleColumn.USER_ID, bean.getUSER_ID().trim());
+                values.put(TaskTempleColumn.TASK_ID,bean.getTASK_ID().trim() );
                 values.put(TaskTempleColumn.TEAM_NUM, bean.getTEAM_NUM().trim());
                 values.put(TaskTempleColumn.TEAM_TYPE, bean.getTEAM_TYPE().trim());
                 values.put(TaskTempleColumn.TEAM_NUM_INDEX, bean.getTEAM_NUM_INDEX().trim());
                 values.put(TaskTempleColumn.TEAM_CONTENT_TYPE, bean.getTEAM_CONTENT_TYPE().trim());
                 values.put(TaskTempleColumn.TEAM_CONTENT_KEY, bean.getTEAM_CONTENT_KEY().trim());
-                values.put(TaskTempleColumn.TEAM_CONTENT_VALUE, bean.getTEAM_CONTENT_KEY().trim());
+                values.put(TaskTempleColumn.TEAM_CONTENT_VALUE, bean.getTEAM_CONTENT_VALUE().trim());
                 up_lines = TaskTempleDB.update(tableName, values, whereCase, whereArgs);
             }
         }catch (Exception e){
-
+            Log.e("--TaskTempleDBManager--","updateTempleInfo_one  Exception");
         }finally {
             closed();
         }
@@ -160,19 +183,19 @@ public class TaskTempleDBManager {
      * @param TeamNumIndex
      * @return
      */
-    public boolean getTaskTempleByUserIdAndTeamTypeAndTeamNumAndTeamNumIndex(String userId,String TeamType,String TeamNum,String TeamNumIndex) {
+    public boolean getTaskTempleByUserIdAndTeamTypeAndTeamNumAndTeamNumIndex(String userId,String taskId,String TeamType,String TeamNum,String TeamNumIndex) {
         boolean isResult = false;
         try {
             open();
-            String str_selection = TaskTempleColumn.USER_ID + " = ? and "+TaskTempleColumn.TEAM_TYPE+" = ? and "+
+            String str_selection = TaskTempleColumn.USER_ID + " = ? and "+TaskTempleColumn.TASK_ID+" = ? and "+TaskTempleColumn.TEAM_TYPE+" = ? and "+
                     TaskTempleColumn.TEAM_NUM+" = ? and " +TaskTempleColumn.TEAM_NUM_INDEX+" = ? ";
-            String[] selectionArgs = {userId,TeamType,TeamNum,TeamNumIndex};
+            String[] selectionArgs = {userId.trim(),taskId.trim(),TeamType.trim(),TeamNum.trim(),TeamNumIndex.trim()};
             Cursor mCursor = TaskTempleDB.query(tableName, TaskTempleColumn.TASK_TEMPLE_PROJECT, str_selection, selectionArgs, null, null, null);
             if(mCursor!=null && mCursor.getCount()>0){
                 isResult = true;
             }
         } catch (Exception e){
-
+            Log.e("--TaskTempleDBManager--","getTaskTempleByUserIdAndTeamTypeAndTeamNumAndTeamNumIndex  Exception");
         }finally {
             closed();
         }
@@ -199,18 +222,19 @@ public class TaskTempleDBManager {
                 do {
                     TaskTempleDBBean bean = new TaskTempleDBBean();
                     bean.setUSER_ID(mCursor.getString(1));
-                    bean.setTEAM_TYPE(mCursor.getString(2));
-                    bean.setTEAM_NUM(mCursor.getString(3));
-                    bean.setTEAM_NUM_INDEX(mCursor.getString(4));
-                    bean.setTEAM_CONTENT_TYPE(mCursor.getString(5));
-                    bean.setTEAM_CONTENT_KEY(mCursor.getString(6));
-                    bean.setTEAM_CONTENT_VALUE(mCursor.getString(7));
+                    bean.setTASK_ID(mCursor.getString(2));
+                    bean.setTEAM_TYPE(mCursor.getString(3));
+                    bean.setTEAM_NUM(mCursor.getString(4));
+                    bean.setTEAM_NUM_INDEX(mCursor.getString(5));
+                    bean.setTEAM_CONTENT_TYPE(mCursor.getString(6));
+                    bean.setTEAM_CONTENT_KEY(mCursor.getString(7));
+                    bean.setTEAM_CONTENT_VALUE(mCursor.getString(8));
                     data.add(bean);
                 } while (mCursor.moveToNext());
             }
 
         } catch (Exception e){
-
+            Log.e("--TaskTempleDBManager--","getTaskTempleByUserId  Exception");
         }finally {
             closed();
         }
@@ -236,24 +260,61 @@ public class TaskTempleDBManager {
                 do {
                     TaskTempleDBBean bean = new TaskTempleDBBean();
                     bean.setUSER_ID(mCursor.getString(1));
-                    bean.setTEAM_TYPE(mCursor.getString(2));
-                    bean.setTEAM_NUM(mCursor.getString(3));
-                    bean.setTEAM_NUM_INDEX(mCursor.getString(4));
-                    bean.setTEAM_CONTENT_TYPE(mCursor.getString(5));
-                    bean.setTEAM_CONTENT_KEY(mCursor.getString(6));
-                    bean.setTEAM_CONTENT_VALUE(mCursor.getString(7));
+                    bean.setTASK_ID(mCursor.getString(2));
+                    bean.setTEAM_TYPE(mCursor.getString(3));
+                    bean.setTEAM_NUM(mCursor.getString(4));
+                    bean.setTEAM_NUM_INDEX(mCursor.getString(5));
+                    bean.setTEAM_CONTENT_TYPE(mCursor.getString(6));
+                    bean.setTEAM_CONTENT_KEY(mCursor.getString(7));
+                    bean.setTEAM_CONTENT_VALUE(mCursor.getString(8));
                     data.add(bean);
                 } while (mCursor.moveToNext());
             }
 
         } catch (Exception e){
-
+            Log.e("--TaskTempleDBManager--","getTaskTempleByUserIdAndTeamNum  Exception");
         }finally {
             closed();
         }
         return data;
     }
+    /**
+     * 获取全部的模板信息 根据用户id和任务
+     * @return
+     */
+    public synchronized ArrayList<TaskTempleDBBean> getTaskTempleByUserIdAndTaskId(String userId,String taskId) {
+        ArrayList<TaskTempleDBBean> data = new ArrayList<TaskTempleDBBean>();
+        try {
+            if (!Utils.IsNotNUll(userId)) {
+                return data;
+            }
+            open();
+            String str_selection = TaskTempleColumn.USER_ID + " = ? and "+TaskTempleColumn.TASK_ID+" = ? ";
+            String[] selectionArgs = {userId,taskId};
+            Cursor mCursor = TaskTempleDB.query(tableName, TaskTempleColumn.TASK_TEMPLE_PROJECT, str_selection, selectionArgs, null, null, null);
+            if (mCursor != null && mCursor.getCount() > 0) {
+                mCursor.moveToFirst();
+                do {
+                    TaskTempleDBBean bean = new TaskTempleDBBean();
+                    bean.setUSER_ID(mCursor.getString(1));
+                    bean.setTASK_ID(mCursor.getString(2));
+                    bean.setTEAM_TYPE(mCursor.getString(3));
+                    bean.setTEAM_NUM(mCursor.getString(4));
+                    bean.setTEAM_NUM_INDEX(mCursor.getString(5));
+                    bean.setTEAM_CONTENT_TYPE(mCursor.getString(6));
+                    bean.setTEAM_CONTENT_KEY(mCursor.getString(7));
+                    bean.setTEAM_CONTENT_VALUE(mCursor.getString(8));
+                    data.add(bean);
+                } while (mCursor.moveToNext());
+            }
 
+        } catch (Exception e){
+            Log.e("--TaskTempleDBManager--","getTaskTempleByUserIdAndTeamNum  Exception");
+        }finally {
+            closed();
+        }
+        return data;
+    }
     /**
      * 跟新或添加
      * @param bean
@@ -263,7 +324,7 @@ public class TaskTempleDBManager {
             if(bean==null){
                 return;
             }
-            boolean isAdd = getTaskTempleByUserIdAndTeamTypeAndTeamNumAndTeamNumIndex(bean.getUSER_ID(),bean.getTEAM_TYPE(),bean.getTEAM_NUM(),bean.getTEAM_NUM_INDEX());
+            boolean isAdd = getTaskTempleByUserIdAndTeamTypeAndTeamNumAndTeamNumIndex(bean.getUSER_ID(),bean.getTASK_ID(),bean.getTEAM_TYPE(),bean.getTEAM_NUM(),bean.getTEAM_NUM_INDEX());
             if(isAdd){
                 // 更新
                 this.updateTempleInfo_one(bean);
@@ -272,7 +333,7 @@ public class TaskTempleDBManager {
                 this.addTaskTempleInfo(bean);
             }
         }catch (Exception e){
-
+            Log.e("--TaskTempleDBManager--","updateOrAddTaskTemplate  Exception");
         }finally {
             closed();
         }

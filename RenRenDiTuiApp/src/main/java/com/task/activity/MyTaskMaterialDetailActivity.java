@@ -71,12 +71,12 @@ public class MyTaskMaterialDetailActivity extends BaseActivity implements
      */
     private void initControl() {
         mIV_top_icon = (ImageView)findViewById(R.id.iv_top_icon);
-        mView_top_line = (View)findViewById(R.id.view_top_line);
+        mView_top_line = findViewById(R.id.view_top_line);
         mTV_top_content = (TextView)findViewById(R.id.tv_task_material_top_content);
         mTV_top_time = (TextView)findViewById(R.id.tv_task_material_top_time);
 
         mIV_bottom_icon = (ImageView)findViewById(R.id.iv_bottom_icon);
-        mView_bottom_line = (View)findViewById(R.id.view_bottom_line);
+        mView_bottom_line = findViewById(R.id.view_bottom_line);
         mTV_bottom_content = (TextView)findViewById(R.id.tv_task_material_bottom_content);
         mTV_bottom_time = (TextView)findViewById(R.id.tv_task_material_bottom_time);
 

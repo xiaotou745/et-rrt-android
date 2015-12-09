@@ -255,7 +255,7 @@ public class HttpUploadUtil {
      * @version
      */
     public interface OnUploadProgressLinstener {
-        public void onUploadProgress(long fileLength, long curLength);
+        void onUploadProgress(long fileLength, long curLength);
     }
     //
     // /**

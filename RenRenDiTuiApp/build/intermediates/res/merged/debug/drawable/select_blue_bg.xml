@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/white" android:state_pressed="false"/>
+    <item android:drawable="@color/listview_selector_color" android:state_pressed="true"/>
+
+</selector>
+<!-- From: file:/D:/StudioProjectsWorkSpace/renrenditui_androidApp/RenRenDiTuiApp/src/main/res/drawable/select_blue_bg.xml -->

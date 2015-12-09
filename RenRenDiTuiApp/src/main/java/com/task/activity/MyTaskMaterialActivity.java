@@ -13,7 +13,9 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import base.BaseFragment;
 import base.BaseFragmentActivity;
@@ -22,12 +24,15 @@ import com.renrentui.app.R;
 import com.renrentui.interfaces.IBack;
 import com.renrentui.tools.ExitApplication;
 import com.renrentui.util.ToMainPage;
+import com.renrentui.util.Utils;
 import com.task.model.LayoutMainTopmenu;
 import com.task.service.MyFragmentPagerAdapter;
 import com.user.activity.PersonalCenterActivity;
 
+import org.w3c.dom.Text;
+
 /**
- * 我的任务资料信息
+ * 我的任务资料信息列表
  * @author llp
  * 
  */
@@ -40,8 +45,15 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 	private FragmentOnGoingTash fragment_onGoingTask;//审核中的资料
 	private FragmentGoneTask fragment_GoneTask;//审核通过的资料
 	private FragmentFinishedTask fragment_finishedTask;// 未通过的资料
-	private int topage = ToMainPage.审核中.getValue();// intent指向要显示的页面
 	private LayoutMainTopmenu layoutTopMenu;// 顶部按钮
+	private TextView mTV_title;
+	private Button mBtn_submit_taskTemple;//提交资料
+
+	private int topage = ToMainPage.审核中.getValue();// intent指向要显示的页面
+	public String str_taskId = "";//任务id
+	public String str_taskName = "";//任务名称
+	public String str_userId = "";//用户id
+	public String str_ctId = "";//地推关系id
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +72,11 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 		});
 		ExitApplication.getInstance().addActivity(this);
 		context = this;
-		topage = getIntent().getIntExtra("topage", 0);
+		topage = getIntent().getIntExtra("topage", topage);
+		str_taskId = getIntent().getStringExtra("TASK_ID");
+		str_taskName = getIntent().getStringExtra("TASK_NAME");
+		str_userId = Utils.getUserDTO(context).data.userId;
+		str_ctId = getIntent().getStringExtra("ctId");
 		initView();
 		initViewPager(topage);
 	}
@@ -83,22 +99,42 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 		vp_task_main = (ViewPager) findViewById(R.id.vp_task_main);
 		layoutTopMenu = new LayoutMainTopmenu(context);
 		layoutTopMenu.setOnClickListener(this);
+		mTV_title = (TextView)findViewById(R.id.tv_title);
+		//mTV_title.setText(str_taskName+"已提交资料");
+		mTV_title.setText("已提交资料");
+		mBtn_submit_taskTemple = (Button)findViewById(R.id.btn_submit_taskTemple);
+		mBtn_submit_taskTemple.setOnClickListener(this);
 	}
 
-	public void initViewPager(int topage) {
-		fragment_GoneTask = new FragmentGoneTask(layoutTopMenu);
+	public void initViewPager(int index) {
 		fragment_onGoingTask = new FragmentOnGoingTash(layoutTopMenu);
+		fragment_GoneTask = new FragmentGoneTask(layoutTopMenu);
 		fragment_finishedTask = new FragmentFinishedTask(layoutTopMenu);
 		fragmentList = new ArrayList<BaseFragment>();
-		fragmentList.add(fragment_onGoingTask);
-		fragmentList.add(fragment_GoneTask);
-		fragmentList.add(fragment_finishedTask);
+		fragmentList.add(0,fragment_onGoingTask);
+		fragmentList.add(1,fragment_GoneTask);
+		fragmentList.add(2,fragment_finishedTask);
 		viewPagerAdapter = new MyFragmentPagerAdapter(
 				getSupportFragmentManager(), context, fragmentList);
 		vp_task_main.setAdapter(viewPagerAdapter);
 		vp_task_main.setOffscreenPageLimit(0);
 		vp_task_main.setOnPageChangeListener(new MyOnPageChangeListener());
-		vp_task_main.setCurrentItem(topage);
+		vp_task_main.setCurrentItem(index);
+		layoutTopMenu.selected(index);
+	}
+
+	/**
+	 * 提交资料
+	 */
+	private void showSubmitTaskTemple(){
+		Intent mIntent= new Intent();
+		mIntent.setClass(context, TaskDatumSubmitActiviyt.class);
+		mIntent.putExtra("taskId", str_taskId);
+		mIntent.putExtra("taskName", str_taskName);
+		mIntent.putExtra("ctId",str_ctId);
+		startActivity(mIntent);
+		finish();
+
 	}
 
 	public class MyOnPageChangeListener implements OnPageChangeListener {
@@ -137,15 +173,21 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 		switch (v.getId()) {
 		case R.id.btn_task_nogoing:
 			topage = ToMainPage.已通过.getValue();
+			vp_task_main.setCurrentItem(topage);
 			break;
 		case R.id.btn_task_ongoing:
 			topage = ToMainPage.审核中.getValue();
+			vp_task_main.setCurrentItem(topage);
 			break;
 		case R.id.btn_task_finished:
 			topage = ToMainPage.未通过.getValue();
+			vp_task_main.setCurrentItem(topage);
 			break;
+		case R.id.btn_submit_taskTemple:
+			showSubmitTaskTemple();
+				break;
 		}
-		vp_task_main.setCurrentItem(topage);
+
 	}
 
 	@Override

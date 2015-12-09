@@ -20,6 +20,8 @@
     <color name="grey">#66000000</color>
     <color name="layout_bg_color">#f3f3f3</color>
     <color name="line_bg_color">#E5E5E5</color>
+    <color name="line_stroke">#BBC0C7</color>
+    <color name="listview_selector_color">#0090ce</color>
     <color name="pink_colour">#dcdee0</color>
     <color name="red">#ff0000</color>
     <color name="red_bg">#f7585d</color>
@@ -44,6 +46,7 @@
     <color name="tv_order_color_5">#00BCD5</color>
     <color name="tv_order_money_color_1">#f7585d</color>
     <color name="white">#ffffff</color>
+    <color name="white_pre">#f0f0f0</color>
     <declare-styleable name="CircleImageView"><attr format="dimension" name="border_width"/><attr format="color" name="border_color"/></declare-styleable>
     <!-- From: file:/D:/StudioProjectsWorkSpace/renrenditui_androidApp/RenRenDiTuiApp/src/main/res/values/dimens.xml -->
     <eat-comment/>
@@ -58,6 +61,7 @@
     <dimen name="_14sp">14sp</dimen>
     <dimen name="_150dp">150dp</dimen>
     <dimen name="_15dp">15dp</dimen>
+    <dimen name="_15sp">15sp</dimen>
     <dimen name="_16sp">16sp</dimen>
     <dimen name="_17dp">17dp</dimen>
     <dimen name="_18dp">18dp</dimen>
@@ -70,6 +74,7 @@
     <dimen name="_24sp">24sp</dimen>
     <dimen name="_25dp">25dp</dimen>
     <dimen name="_2dp">2dp</dimen>
+    <dimen name="_300dp">300dp</dimen>
     <dimen name="_30dp">30dp</dimen>
     <dimen name="_3dp">3dp</dimen>
     <dimen name="_40dp">40dp</dimen>
@@ -90,6 +95,8 @@
     <dimen name="layoutPadding">14dp</dimen>
     <dimen name="layout_padding_big">14dp</dimen>
     <dimen name="layout_padding_nor">10dp</dimen>
+    <dimen name="loadingview_line">1dp</dimen>
+    <dimen name="loadingview_radius">20dp</dimen>
     <dimen name="navigation_drawer_width">240dp</dimen>
     <dimen name="titile_height">50dp</dimen>
     <dimen name="title_font_size">21sp</dimen>
@@ -102,6 +109,8 @@
     <eat-comment/>
     <string name="aboutme">关于我们</string>
     <string name="action_settings">Settings</string>
+    <string name="add_order_img_type_error">选择文件类型错误,请选择jpg格式</string>
+    <string name="add_order_img_upload_reset">点击重新上传</string>
     <string name="againPassword">确认密码</string>
     <string name="age">年龄</string>
     <string name="album">从相册中选择</string>
@@ -123,19 +132,26 @@
     <string formatted="false" name="download_title">发现最新版本(%s)</string>
     <string name="finished">未通过(0)</string>
     <string name="finished_task">已完成任务</string>
+    <string name="get_image_by_camera_or_pic_error">请稍后重试...</string>
     <string name="give_up">取消</string>
     <string name="giveup_task">放弃任务</string>
     <string name="helpCenter">帮助中心</string>
     <string name="invalid">过期失效</string>
+    <string name="invalid_1">已过期(0)</string>
     <string name="login">登录</string>
     <string name="matters_need_attention">注意事项</string>
     <string name="more">更多</string>
     <string name="myMoney">我的余额</string>
     <string name="myTask">我的任务</string>
+    <string formatted="false" name="my_task_list_itemt_1">审核中(%1$s)</string>
+    <string formatted="false" name="my_task_list_itemt_2">已通过(%1$s)</string>
+    <string formatted="false" name="my_task_list_itemt_3">未通过(%1$s)</string>
+    <string formatted="false" name="my_task_list_itemt_4">成功分享(%1$s)次</string>
     <string name="name">姓名</string>
     <string name="networknotconnect">网络无连接</string>
     <string name="newPassword">新密码</string>
     <string name="nogoing">已领取(0)</string>
+    <string name="nogoing_1">已通过(0)</string>
     <string name="oldPassword">旧密码</string>
     <string name="ongoing">审核中(0)</string>
     <string name="password">密码</string>
@@ -162,15 +178,21 @@
     <string name="submit_data">提交审核</string>
     <string name="systemSetting">系统设置</string>
     <string name="task_description">任务流程</string>
-    <string formatted="false" name="task_detail_dealtime_format">截止日期 ：%s</string>
-    <string formatted="false" name="task_detail_examine_format">审核 ：%s</string>
-    <string formatted="false" name="task_detail_tel_format"><![CDATA[<font color="#00bcd5">咨询 ：%s</font>]]></string>
+    <string formatted="false" name="task_detail_dealtime_format">截止日期 ：%1$s</string>
+    <string formatted="false" name="task_detail_examine_format">审核 ：%1$s天</string>
+    <string formatted="false" name="task_detail_tel_format">咨询 :<![CDATA[<font color="#00bcd5"> %1$s</font>]]></string>
     <string name="taskcontent">任务详情</string>
     <string name="through">审核通过</string>
+    <string name="through_1">进行中(0)</string>
     <string name="tips">友情提示</string>
     <string name="tips_content">1.为确保转账成功，请保证您的支付宝账户信息真实、有效；\n2.申请提现后，我们将会以最快的速度转账，请您耐心等待！</string>
     <string name="trueWithdrawals">确认提现</string>
     <string name="updatePassword">修改密码</string>
+    <string name="upload_task_status_complete">已经上传</string>
+    <string name="upload_task_status_fail">上传失败</string>
+    <string name="upload_task_status_stop">已停止上传</string>
+    <string name="upload_task_status_uploading">正在上传</string>
+    <string name="upload_task_status_waiting">等待上传</string>
     <string name="userIcon">头像</string>
     <string name="versionUpdate">当前版本</string>
     <string name="withdrawals">提现</string>

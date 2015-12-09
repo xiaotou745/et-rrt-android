@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/item_task_main_bg"
+    android:padding="@dimen/view_space"
+    android:orientation="vertical"
+    >        <!-- top 1-->
+        <RelativeLayout
+            android:id="@+id/rl_task_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- icon-->
+            <ImageView
+                android:id="@+id/icon_pusher"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/pusher_logo"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                />
+            <!-- 金额-->
+            <LinearLayout
+                android:id="@+id/ll_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￥"
+                    android:textColor="@color/tv_order_money_color_1"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/tv_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/tv_order_money_color_1"
+                    android:text="1234"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" /次"
+                    android:textColor="@color/tv_order_color_3"
+                    android:textSize="@dimen/_10sp" />
+            </LinearLayout>
+            <!-- 商户名称-->
+            <TextView
+                android:id="@+id/tv_pusher_taskName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/tv_order_color_1"
+                android:textSize="@dimen/_16sp"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@id/ll_amount"
+                android:layout_toRightOf="@id/icon_pusher"
+                android:text="测试商都"
+                android:layout_margin="@dimen/view_space"
+                />
+            <!--类型 和内容 -->
+            <TextView
+                android:id="@+id/tv_pusher_taskType_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_16sp"
+                android:textColor="@color/tv_order_color_4"
+                android:layout_toLeftOf="@id/ll_amount"
+                android:layout_below="@id/tv_pusher_taskName"
+                android:layout_alignLeft="@id/tv_pusher_taskName"
+                android:text="签约谁放你哦按佛山发生的丰富撒打发士大夫"
+                android:gravity="left"
+                android:maxLines="2"
+                android:layout_marginRight="@dimen/view_space"
+                />
+        </RelativeLayout>
+        <View
+            style="@style/line_height_1"
+            android:layout_marginTop="@dimen/view_space"
+            android:layout_marginBottom="@dimen/view_space"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:id="@+id/tv_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="成功分享20次"
+                android:textColor="@color/tv_order_color_1"
+                android:gravity="center"
+                android:drawablePadding="@dimen/view_space"
+                android:drawableLeft="@drawable/task_pass"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                />
+
+            <Button
+                android:id="@+id/btn_other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/btn_white_selector_bg"
+                android:text="继续分享"
+                android:textColor="@color/tv_order_color_1"
+                android:paddingLeft="@dimen/view_space"
+                android:paddingRight="@dimen/view_space"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </LinearLayout>

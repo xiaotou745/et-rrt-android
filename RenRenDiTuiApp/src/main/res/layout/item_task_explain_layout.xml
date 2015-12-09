@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:padding="@dimen/view_space"
     >
     <TextView
         android:id="@+id/tv_task_explain_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/view_space_half"
         android:text="当前任务详情说明1"
         android:layout_gravity="left"
         android:gravity="left|center_vertical"

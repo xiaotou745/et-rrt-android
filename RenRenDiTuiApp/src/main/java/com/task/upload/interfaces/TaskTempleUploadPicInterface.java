@@ -5,6 +5,6 @@ package com.task.upload.interfaces;
  * 任务模板上传图片进度接口
  */
 public interface TaskTempleUploadPicInterface {
-    public void setUploadPicProgress(long fileLength, long curLength, String path, int status ,Object objData);// 上传进度
+    void setUploadPicProgress(long fileLength, long curLength, String path, int status, Object objData);// 上传进度
 
 }

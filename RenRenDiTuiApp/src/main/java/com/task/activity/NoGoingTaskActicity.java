@@ -240,7 +240,7 @@ public class NoGoingTaskActicity extends BaseActivity implements
 			intent = new Intent(context, PersonalCenterActivity.class);
 			break;
 		case R.id.iv_to_my_task:// 点击书签进入我的任务
-			intent = new Intent(context, MyTaskMaterialActivity.class);
+			intent = new Intent(context, MyTaskFramentActivity.class);
 			break;
 		}
 		startActivity(intent);

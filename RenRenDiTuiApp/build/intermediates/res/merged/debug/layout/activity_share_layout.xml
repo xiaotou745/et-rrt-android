@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical" >
+    <!--title-->
+    <RelativeLayout style="@style/activity_headlayout" >
+        <LinearLayout style="@style/activity_headlayout_left" >
+            <include layout="@layout/layout_back" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/activity_headlayout_center_centertext"
+            android:layout_marginLeft="@dimen/_45dp"
+            android:text="@string/taskcontent" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_25dp"
+        android:background="@color/white"
+        android:padding="@dimen/view_space"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="邀请用户扫描二维码"
+            android:textSize="@dimen/_18sp"
+            android:textColor="@color/tv_order_color_5"
+            android:gravity="center_horizontal|top"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="用户在手机中打开链接，即算成功完成一条任务"
+            android:textSize="@dimen/_14sp"
+            android:textColor="@color/tv_order_color_2"
+            android:gravity="center_horizontal|top"
+            android:layout_marginTop="@dimen/view_space"
+            />
+        <ImageView
+            android:id="@+id/img_pic"
+            android:layout_width="@dimen/_300dp"
+            android:layout_height="@dimen/_300dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="温馨提示："
+            android:textSize="@dimen/_14sp"
+            android:textColor="@color/tv_order_color_2"
+            android:gravity="center_horizontal|top"
+            android:layout_marginTop="@dimen/view_space"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="保存二维码到手机，扫描方便"
+            android:textSize="@dimen/_12sp"
+            android:textColor="@color/tv_order_color_2"
+            android:gravity="center_horizontal|top"
+            android:layout_marginTop="@dimen/view_space"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="可将二维码分享到微博，朋友圈，推广范围更大哦"
+            android:textSize="@dimen/_12sp"
+            android:textColor="@color/tv_order_color_2"
+            android:gravity="center_horizontal|top"
+            android:layout_marginTop="@dimen/view_space"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>
+<!-- From: file:/D:/StudioProjectsWorkSpace/renrenditui_androidApp/RenRenDiTuiApp/src/main/res/layout/activity_share_layout.xml -->

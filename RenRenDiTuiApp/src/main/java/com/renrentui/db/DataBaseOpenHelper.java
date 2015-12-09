@@ -25,6 +25,7 @@ public class DataBaseOpenHelper extends SQLiteOpenHelper {
                  .append(" ( ")
                   .append(TaskTempleColumn._ID).append(" integer primary key autoincrement, ")
                  .append(TaskTempleColumn.USER_ID).append(" varchar(30) ,")
+                .append(TaskTempleColumn.TASK_ID).append(" varchar(30) ,")
                 .append(TaskTempleColumn.TEAM_TYPE).append(" varchar(20) ,")
                 .append(TaskTempleColumn.TEAM_NUM).append(" varchar(20) ,")
                  .append(TaskTempleColumn.TEAM_NUM_INDEX).append(" varchar(20) ,")

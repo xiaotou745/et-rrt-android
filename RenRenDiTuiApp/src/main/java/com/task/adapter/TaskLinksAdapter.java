@@ -1,13 +1,19 @@
 package com.task.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.renrentui.app.R;
+import com.renrentui.util.ToastUtil;
+import com.renrentui.util.Utils;
+import com.task.activity.WebViewActivity;
 
 import java.util.ArrayList;
 
@@ -65,12 +71,20 @@ public class TaskLinksAdapter extends BaseAdapter{
             mHolderView = (HoldeView)convertView.getTag();
         }
         //数据展示
-        String strContent = (String)this.getItem(i);
+        final String strContent = (String)this.getItem(i);
         mHolderView.tv_task_link_content.setText("详情页链接");
         convertView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-
+                if(!TextUtils.isEmpty(strContent) && !Utils.checkUrl(strContent)){
+                    ToastUtil.show(mContext,"详情地址错误!"+strContent);
+                }else {
+                    Intent mIntent = new Intent();
+                    mIntent.setClass(mContext, WebViewActivity.class);
+                    mIntent.putExtra(WebViewActivity.STR_CONTENT_URL, strContent);
+                    mIntent.putExtra(WebViewActivity.STR_TITLE,"任务详情");
+                    mContext.startActivity(mIntent);
+                }
             }
         });
         return convertView;

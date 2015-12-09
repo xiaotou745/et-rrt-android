@@ -17,12 +17,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.IBinder;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 
 import com.google.gson.Gson;
+import com.renrentui.tools.Constants;
 import com.renrentui.util.ApiConstants;
-import com.renrentui.util.Constants;
 import com.task.upload.bean.UploadPicResultBean;
 import com.task.upload.bean.uploadPicBean;
 import com.task.upload.db.UploadDB;
@@ -93,7 +94,6 @@ public class UploadService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-
         preferencesUtil = new PreferencesUtils(this);
         mSContext = this;
         db = new UploadDB();
@@ -109,6 +109,8 @@ public class UploadService extends Service {
         if (intent != null) {
             int ops = intent.getIntExtra(OPERATION, -1);
             uploadPicBean vo = (uploadPicBean) intent.getSerializableExtra(VO);
+            str_taskId = intent.getStringExtra("TASK_ID");
+            str_userId = intent.getStringExtra("USER_ID");
             if (vo != null) {
                 switch (ops) {
                 case ADD_UPLOAD_TASK:
@@ -117,6 +119,7 @@ public class UploadService extends Service {
                     break;
                 case REMOVE_UPLOAD_TASK:
                     // 删除上传任务
+                    Log.e("--------------","removeUpload");
                     removeUpload(vo);
                     break;
                 }
@@ -189,7 +192,6 @@ public class UploadService extends Service {
                     if (vo != null) {
                         // 若已存在通知信息则删除
                         // cancelNotification();
-
                         if (TextUtils.isEmpty(vo.getPath())) {
                             // 图片地址为空
                             stopUpload(TASK_STATE_FAIL);
@@ -202,7 +204,8 @@ public class UploadService extends Service {
                             } else {
                                 startUpload();
                                 // 文件存在，开始上传
-                                httpUploadUtil = new HttpUploadUtil(ApiConstants.uploadImgApiUrl, mSContext);
+                                Log.e("----",ApiConstants.uploadImgApiUrl+"upload/uploadimg?uploadfrom=3");
+                                httpUploadUtil = new HttpUploadUtil(ApiConstants.uploadImgApiUrl+"upload/uploadimg?uploadfrom=3", mSContext);
                                 httpUploadUtil.addTextParameter("uploadfrom", "2");
                                 httpUploadUtil.addFileParameter("imgstream", file);
                                 httpUploadUtil.setOnUploadProgressLinstener(new HttpUploadUtil.OnUploadProgressLinstener() {
@@ -213,17 +216,18 @@ public class UploadService extends Service {
                                 byte[] b = httpUploadUtil.send();
                                 String result = new String(b, "UTF-8");
                                 Gson gson = new Gson();
+                                Log.e("3333",result.toString());
                                 UploadPicResultBean obj = gson.fromJson(result, UploadPicResultBean.class);
-                                if (obj != null && obj.getCode() == 1 && obj.getResult() != null) {
+                                if (obj != null && obj.getStatus()==1 && obj.getResult() != null) {
                                     vo.setUploadStatus(TASK_STATE_COMPLETE);
-                                    vo.setNetwork_path(obj.getResult().getData().getFileUrl());//上传返回的图片地址
+                                    vo.setNetwork_path(obj.getResult().getFileUrl());//上传返回的图片地址
                                     vo.setTicket_property(Constants.TYPE_NET);
                                     completeUpload();
                                 } else {
                                     // 上传失败
                                     stopUpload(TASK_STATE_FAIL);
-                                    if (obj != null)
-                                        Toast.makeText(UploadService.this, obj.getMessage(), Toast.LENGTH_SHORT).show();
+//                                    if (obj != null)
+//                                        Toast.makeText(UploadService.this, obj.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
@@ -232,9 +236,11 @@ public class UploadService extends Service {
                         Thread.sleep(3 * 1000);
                     }
                 } catch (Exception e) {
+                    Log.e("------------Exception",e.getLocalizedMessage());
                     e.printStackTrace();
                     stopUpload(TASK_STATE_FAIL);
                 } finally {
+                    Log.e("------------finally", "Remove Runnable finall");
                     // System.out.println("===========Remove Runnable finally");
                     // threadPool.remove(this);
                 }
@@ -255,7 +261,7 @@ public class UploadService extends Service {
          * 更新上传
          */
         private void updateUpload(long curLength) {
-            // System.out.println("==========updateUpload curLength=" + curLength + " fileLength=" + fileLength
+           //  System.out.println("==========updateUpload curLength=" + curLength + " fileLength=" + fileLength
             // + " order_id:" + vo.getOrder_id() + " threadId=" + mid);
             vo.setUploadStatus(TASK_STATE_UPLOADING);
             sendBroadcast(TASK_STATE_UPLOADING, vo, fileLength, curLength, "");
@@ -316,7 +322,7 @@ public class UploadService extends Service {
                 if (uploadList == null || uploadList.size() == 0) {
                     uploadList = db.getDataList(this,str_userId,str_taskId,"","","",-1);
                 }
-
+                Log.e("-------","str_userId--"+str_userId+"--str_taskId--"+str_taskId);
                 // 如果当前软件不在下载列表中
                 if (!uploadList.contains(vo)) {
                     // 设置状态

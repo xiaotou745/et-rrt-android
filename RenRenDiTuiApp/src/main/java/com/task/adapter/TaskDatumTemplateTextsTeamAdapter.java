@@ -2,8 +2,11 @@ package com.task.adapter;
 
 import android.content.Context;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -16,6 +19,7 @@ import com.renrentui.db.TaskTempleDBManager;
 import com.renrentui.resultmodel.TaskDatumControlBean;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Administrator on 2015/12/4 0004.
@@ -30,7 +34,7 @@ public class TaskDatumTemplateTextsTeamAdapter extends BaseAdapter {
     private int iTeam_type;//组的类型
     private int iTeam_num;//组号
     private TaskTempleDBManager mTaskTempleManager;
-    private int showContentType = 0;//0：是编辑 1：是显示
+    private int showContentType = 0;//0：是编辑 1：是显示//定义一个HashMap，用来存放EditText的值，Key是position
 
     /**
      *
@@ -51,9 +55,11 @@ public class TaskDatumTemplateTextsTeamAdapter extends BaseAdapter {
         this.iTeam_num = iTeam_num;
         this.str_taskId = taskId;
         mTaskTempleManager = new TaskTempleDBManager(con);
+        hashMap.clear();
     }
 
     public void setData(ArrayList<TaskDatumControlBean> data){
+        hashMap.clear();
         if(mData==null){
             mData = new ArrayList<TaskDatumControlBean>();
         }else{
@@ -79,6 +85,9 @@ public class TaskDatumTemplateTextsTeamAdapter extends BaseAdapter {
         return i;
     }
 
+    private int index = -1;
+   private HashMap<Integer, String> hashMap = new HashMap<Integer, String>();
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         HolderView mHolderView = null;
@@ -92,16 +101,27 @@ public class TaskDatumTemplateTextsTeamAdapter extends BaseAdapter {
         }else {
             mHolderView = (HolderView)view.getTag();
         }
-        final TaskDatumControlBean bean = (TaskDatumControlBean) getItem(i);
+        final TaskDatumControlBean taskDean = (TaskDatumControlBean) getItem(i);
         if(showContentType==1){
             //展示数据
             mHolderView.mEitText.setVisibility(View.GONE);
             mHolderView.mTextView.setVisibility(View.VISIBLE);
-            mHolderView.mTextView.setText(bean.controlValue);
+            mHolderView.mTextView.setText(taskDean.controlValue);
         }else {
             //编辑数据
-            mHolderView.mEitText.setHint(bean.defaultValue);
-            mHolderView.mEitText.setTag(str_tag + String.valueOf("_"+iTeam_num+"_") + String.valueOf(i));
+            mHolderView.mEitText.setVisibility(View.VISIBLE);
+            mHolderView.mTextView.setVisibility(View.GONE);
+            mHolderView.mEitText.setHint(taskDean.defaultValue);
+            mHolderView.mEitText.setTag(str_tag + String.valueOf("_" + iTeam_num + "_") + String.valueOf(i));
+            mHolderView.mEitText.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    if(motionEvent.getAction()==MotionEvent.ACTION_UP){
+                        index = position;
+                    }
+                    return false;
+                }
+            });
             mHolderView.mEitText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -118,19 +138,29 @@ public class TaskDatumTemplateTextsTeamAdapter extends BaseAdapter {
                 public void afterTextChanged(Editable s) {
                     //将editText中保存到数据库中
                     String strContent = s.toString();
-                    TaskTempleDBBean beanD = new TaskTempleDBBean();
-                    beanD.setUSER_ID(str_userId);
-                    beanD.setTASK_ID(str_taskId);
-                    beanD.setTEAM_TYPE(String.valueOf(iTeam_type));
-                    beanD.setTEAM_NUM(String.valueOf(iTeam_num));
-                    beanD.setTEAM_NUM_INDEX(String.valueOf(position));
-                    beanD.setTEAM_CONTENT_TYPE(bean.controlTypeId);
-                    beanD.setTEAM_CONTENT_KEY(bean.controlKey);
-                    beanD.setTEAM_CONTENT_VALUE(strContent);
-                    mTaskTempleManager.updateOrAddTaskTemplate(beanD);
+                    if(index!=-1 && index==position){
+                        hashMap.put(position, strContent);
+                        TaskTempleDBBean beanD = new TaskTempleDBBean();
+                        beanD.setUSER_ID(str_userId);
+                        beanD.setTASK_ID(str_taskId);
+                        beanD.setTEAM_TYPE(String.valueOf(iTeam_type));
+                        beanD.setTEAM_NUM(String.valueOf(iTeam_num));
+                        beanD.setTEAM_NUM_INDEX(String.valueOf(position));
+                        beanD.setTEAM_CONTENT_TYPE(taskDean.controlTypeId);
+                        beanD.setTEAM_CONTENT_KEY(taskDean.controlKey);
+                        beanD.setTEAM_CONTENT_VALUE(strContent);
+                        mTaskTempleManager.updateOrAddTaskTemplate(beanD);
+                    }
                 }
             });
+//            /如果hashMap不为空，就设置的editText
+            if(hashMap.get(position) != null){
+                index=-1;
+                mHolderView.mEitText.setText(hashMap.get(position));
+            }
+
         }
+        Log.e("pppppppppppppp","pppppppp"+String.valueOf(position));
         return view;
     }
     public class HolderView{

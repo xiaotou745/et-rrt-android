@@ -27,7 +27,8 @@ public enum ApiNames {
 	版本检查更新("common/versioncheck"),
 	申请提现("userc/withdraw"),
 	获取资料审核列表("taskdatum/getmytaskdatumlist"),
-	获取资料模板或模板详情("taskdatum/gettaskdatumdetail");
+	获取资料模板或模板详情("taskdatum/gettaskdatumdetail"),
+	提交任务模板接口("task/submittask");
 	/**
 	 * PHP接口名称
 	 */
