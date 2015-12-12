@@ -40,6 +40,7 @@ import com.renrentui.util.ToMainPage;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
 import com.task.activity.MyTaskMaterialActivity;
+import com.task.activity.MyTaskMaterialDetailActivity;
 import com.task.activity.TaskDetailInfoActivity;
 import com.task.service.SuccessDialog.ExitDialogListener;
 
@@ -103,7 +104,7 @@ public class GetOnGoingAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		 ViewHolder_1 viewholder_1=null;
 		ViewHolder_2 viewHolder_2 = null;
-		TaskMetarialContent beanContent = (TaskMetarialContent)getItem(position);
+		final TaskMetarialContent beanContent = (TaskMetarialContent)getItem(position);
 		int iType = getItemViewType(beanContent.groupType);
 		if(convertView==null){
 			switch (iType){
@@ -150,7 +151,7 @@ public class GetOnGoingAdapter extends BaseAdapter {
 					viewholder_1.tv_push_content.setText("...");
 				}
 
-				viewholder_1.tv_task_status.setText("进行中");
+				viewholder_1.tv_task_status.setText(beanContent.taskStatus);
 				viewholder_1.tv_task_status.setTextColor(context.getResources().getColor(R.color.tv_order_color_5));
 				viewholder_1.tv_task_amount.setText(String.valueOf(beanContent.getAmount()));
 				//内容信息变换
@@ -167,7 +168,7 @@ public class GetOnGoingAdapter extends BaseAdapter {
 				break;
 			case 2:
 				viewHolder_2.tv_push_time.setText("提交时间  "+ TimeUtils.StringPattern(beanContent.createDate,"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm"));
-				viewHolder_2.tv_task_status.setText("进行中");
+				viewHolder_2.tv_task_status.setText(beanContent.taskStatus);
 				viewHolder_2.tv_task_status.setTextColor(context.getResources().getColor(R.color.tv_order_color_5));
 				viewHolder_2.tv_task_amount.setText(String.valueOf(beanContent.getAmount()));
 				//内容信息变换
@@ -184,7 +185,21 @@ public class GetOnGoingAdapter extends BaseAdapter {
 				viewHolder_2.gridView_task_pic.setAdapter(new GriveiwTaskPicAdapter(context,beanContent.titlesList));
 				break;
 		}
-
+		convertView.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View view) {
+				//审核资料详情
+				Intent mIntent = new Intent();
+				mIntent.setClass(context,MyTaskMaterialDetailActivity.class);
+				mIntent.putExtra("TaskMaterialId", beanContent.taskDatumId);
+				mIntent.putExtra("TaskId",beanContent.taskId);
+				mIntent.putExtra("Status",beanContent.auditStatus);
+				mIntent.putExtra("Title_content",beanContent.taskName);
+				mIntent.putExtra("VO",beanContent);
+				mIntent.putExtra("ctId",beanContent.ctId);
+				context.startActivity(mIntent);
+			}
+		});
 		return convertView;
 
 //

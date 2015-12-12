@@ -19,5 +19,8 @@ public class Constants {
 	public static final int TYPE_LOCAL = 1; // 本地文件
 	public static final int TYPE_NET = 2; // 网络文件
 	public static final int TYPE_CAMERA = 3; // 照相机
-	
+
+	public static final int OPEN_GPS_SERVER_RESULT_CODE = 10004;// 请求开启gps
+
+
 }

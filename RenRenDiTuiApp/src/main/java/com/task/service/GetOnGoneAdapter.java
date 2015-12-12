@@ -1,6 +1,7 @@
 package com.task.service;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.BackgroundColorSpan;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.renrentui.app.R;
 import com.renrentui.resultmodel.TaskMetarialContent;
 import com.renrentui.util.TimeUtils;
+import com.task.activity.MyTaskMaterialDetailActivity;
 
 import java.util.List;
 
@@ -77,7 +79,7 @@ public class GetOnGoneAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		 ViewHolder_1 viewholder_1=null;
 		ViewHolder_2 viewHolder_2 = null;
-		TaskMetarialContent beanContent = (TaskMetarialContent)getItem(position);
+		final TaskMetarialContent beanContent = (TaskMetarialContent)getItem(position);
 		int iType = getItemViewType(beanContent.groupType);
 		if(convertView==null){
 			switch (iType){
@@ -124,7 +126,7 @@ public class GetOnGoneAdapter extends BaseAdapter {
 					viewholder_1.tv_push_content.setText("...");
 				}
 
-				viewholder_1.tv_task_status.setText("进行中");
+				viewholder_1.tv_task_status.setText(beanContent.taskStatus);
 				viewholder_1.tv_task_status.setTextColor(context.getResources().getColor(R.color.tv_order_color_5));
 				viewholder_1.tv_task_amount.setText(String.valueOf(beanContent.getAmount()));
 				//内容信息变换
@@ -141,7 +143,7 @@ public class GetOnGoneAdapter extends BaseAdapter {
 				break;
 			case 2:
 				viewHolder_2.tv_push_time.setText("提交时间  "+ TimeUtils.StringPattern(beanContent.createDate,"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm"));
-				viewHolder_2.tv_task_status.setText("进行中");
+				viewHolder_2.tv_task_status.setText(beanContent.taskStatus);
 				viewHolder_2.tv_task_status.setTextColor(context.getResources().getColor(R.color.tv_order_color_5));
 				viewHolder_2.tv_task_amount.setText(String.valueOf(beanContent.getAmount()));
 				//内容信息变换
@@ -158,7 +160,21 @@ public class GetOnGoneAdapter extends BaseAdapter {
 				viewHolder_2.gridView_task_pic.setAdapter(new GriveiwTaskPicAdapter(context,beanContent.titlesList));
 				break;
 		}
-
+		convertView.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View view) {
+				//审核资料详情
+				Intent mIntent = new Intent();
+				mIntent.setClass(context,MyTaskMaterialDetailActivity.class);
+				mIntent.putExtra("TaskMaterialId", beanContent.taskDatumId);
+				mIntent.putExtra("TaskId",beanContent.taskId);
+				mIntent.putExtra("Status",beanContent.auditStatus);
+				mIntent.putExtra("Title_content",beanContent.taskName);
+				mIntent.putExtra("VO",beanContent);
+				mIntent.putExtra("ctId",beanContent.ctId);
+				context.startActivity(mIntent);
+			}
+		});
 		return convertView;
 
 //

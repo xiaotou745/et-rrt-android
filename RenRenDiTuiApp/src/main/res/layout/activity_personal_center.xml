@@ -262,11 +262,83 @@
                     android:src="@drawable/go" />
             </RelativeLayout>
 
+            <!-- 资料审核详情-->
+            <RelativeLayout
+                android:id="@+id/rl_datum_task"
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:layout_marginTop="11dp"
+                android:background="@drawable/textview_button_selector" >
+
+                <ImageView
+                    android:id="@+id/iv_datum_task"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_23dp"
+                    android:src="@drawable/icon_datum_center" />
+
+                <TextView
+                    android:id="@+id/tv_datum_task"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/iv_datum_task"
+                    android:text="@string/personal_item_task_datumn_tv"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/_14sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="13dp"
+                    android:src="@drawable/go" />
+            </RelativeLayout>
+            <!-- 消息中心-->
+            <RelativeLayout
+                android:id="@+id/rl_message_task"
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:layout_marginTop="11dp"
+                android:background="@drawable/textview_button_selector" >
+
+                <ImageView
+                    android:id="@+id/iv_message_task"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_23dp"
+                    android:src="@drawable/icon_message_center" />
+
+                <TextView
+                    android:id="@+id/tv_message_task"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/iv_message_task"
+                    android:text="@string/personal_item_task_message_tv"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/_14sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="13dp"
+                    android:src="@drawable/go" />
+            </RelativeLayout>
+            <!-- 已完成任务呢-->
             <RelativeLayout
                 android:id="@+id/rl_finished_task"
                 android:layout_width="match_parent"
                 android:layout_height="41dp"
                 android:layout_marginTop="11dp"
+                android:visibility="gone"
                 android:background="@drawable/textview_button_selector" >
 
                 <ImageView

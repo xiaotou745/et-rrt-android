@@ -31,6 +31,8 @@
     <color name="TextColorGray">#FF505050</color>
     <color name="app_bg">#f2f2f2</color>
     <color name="gray">#e8e8e8</color>
+    <color name="gray_line">#e8e8e8</color>
+    <color name="gray_space">#E6E7EB</color>
     <color name="white">#ffffff</color>
     <color name="transparent">#000000</color>
     <color name="white_pre">#f0f0f0</color>

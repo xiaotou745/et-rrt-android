@@ -16,7 +16,7 @@ public enum ApiNames {
 	忘记密码("userc/forgotpwd"), 
 	修改密码("userc/modifypwd"), 
 	修改用户信息("userc/modifyuserc"), 
-	获取所有未领取任务("task/getnewtasklist"), 
+	获取所有可领取任务("task/getnewtasklist"),
 	获取所有已领取任务("task/getmyreceivedtasklist"), 
 	获取所有已提交的任务("task/getsubmittedtasklist"), 
 	获取任务详细信息("task/taskdetail"), 
@@ -28,7 +28,9 @@ public enum ApiNames {
 	申请提现("userc/withdraw"),
 	获取资料审核列表("taskdatum/getmytaskdatumlist"),
 	获取资料模板或模板详情("taskdatum/gettaskdatumdetail"),
-	提交任务模板接口("task/submittask");
+	提交任务模板接口("task/submittask"),
+	获取城市信息列表("region/gethotregionandall"),
+	获取消息列表("/msg/getmymsglist");
 	/**
 	 * PHP接口名称
 	 */

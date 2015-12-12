@@ -17,6 +17,7 @@ import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.renrentui.app.MyApplication;
 import com.renrentui.app.R;
 import com.renrentui.controls.MyProgersssDialog;
 import com.renrentui.interfaces.IBack;
@@ -26,6 +27,7 @@ import com.renrentui.tools.ExitApplication;
 import com.renrentui.tools.Util;
 
 public class BaseActivity extends Activity {
+	public MyApplication mMyApplication =null;
 	public View layout_nodata;
 	public Button btn_nodata;
 	public TextView tv_nodata;
@@ -41,6 +43,9 @@ public class BaseActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		context =this;
+		if(mMyApplication==null){
+			mMyApplication = (MyApplication)getApplication();
+		}
 		initImageLoader(getApplicationContext());
 	}
 

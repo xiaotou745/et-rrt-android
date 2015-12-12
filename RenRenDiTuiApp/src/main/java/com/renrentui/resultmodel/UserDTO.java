@@ -6,7 +6,7 @@ public class UserDTO implements Serializable {
 	/**
 	 * 用户手机号码
 	 */
-	public String userId;
+	public String userId="";
 
 	/**
 	 * 用户名称

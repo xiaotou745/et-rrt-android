@@ -22,7 +22,7 @@ import com.renrentui.util.Utils;
 /**
  * Created by Administrator on 2015/12/2 0002.
  *
- * 任务资料详情页
+ * 任务资料审核详情
  */
 public class MyTaskMaterialDetailActivity extends BaseActivity implements
         View.OnClickListener {
@@ -43,6 +43,7 @@ public class MyTaskMaterialDetailActivity extends BaseActivity implements
     public String taskMaterialId ="";//资料id
     public String userId = "0";
     public String taskID;
+    public String ctId="";//地推关系
     public int status  = 1;//资料状态 1：审核中 2：已通过  3：拒绝
     public String  titlt_content;//任务资料审核
 
@@ -63,8 +64,9 @@ public class MyTaskMaterialDetailActivity extends BaseActivity implements
         taskMaterialId = this.getIntent().getStringExtra("TaskMaterialId");
         userId =this.getIntent().getStringExtra("UserId");
         taskID = this.getIntent().getStringExtra("TaskId");
-        status = this.getIntent().getIntExtra("Status",1);
+        status = this.getIntent().getIntExtra("Status", 1);
         titlt_content = this.getIntent().getStringExtra("Title_content");
+        ctId = this.getIntent().getStringExtra("ctId");
     }
     /**
      * 初始化控件
@@ -117,6 +119,7 @@ public class MyTaskMaterialDetailActivity extends BaseActivity implements
                 mBtn_right.setText("再次参与");
                 break;
             case 3:
+                //拒绝
                 mIV_top_icon.setImageResource(R.drawable.task_pass);
                 mView_top_line.setBackgroundColor(context.getResources().getColor(R.color.blue_bg));
                 mTV_top_content.setText("任务资料提交");
@@ -127,30 +130,33 @@ public class MyTaskMaterialDetailActivity extends BaseActivity implements
                 mTV_bottom_time.setText(beanContent.auditTime);
                 mBtn_left.setVisibility(View.VISIBLE);
                 mBtn_right.setVisibility(View.VISIBLE);
-                mBtn_left.setText("放弃任务");
-                mBtn_right.setText("再次提交");
+                mBtn_left.setText("查看资料");
+                mBtn_right.setText("再次参与");
                 break;
         }
     }
 //    查看资料
     private void showTaskMatetailDetail(){
-        taskMaterialId = this.getIntent().getStringExtra("TaskMaterialId");
-        userId =this.getIntent().getStringExtra("UserId");
-        taskID = this.getIntent().getStringExtra("TaskId");
-        status = this.getIntent().getIntExtra("Status",1);
-
         Intent mIntent = new Intent();
         mIntent.setClass(MyTaskMaterialDetailActivity.this,ShowTaskMatailDetailActivity.class);
         mIntent.putExtra("taskId", taskID);
         mIntent.putExtra("UserId", userId);
         mIntent.putExtra("taskDatumId",this.taskMaterialId);
+        mIntent.putExtra("ctId",ctId);
         startActivity(mIntent);
         finish();
     }
     //   再次参与
     private void getTaskAgain(){
         //提交新资料
-
+        Intent mIntent = new Intent();
+        mIntent.setClass(MyTaskMaterialDetailActivity.this,TaskDatumSubmitActiviyt.class);
+        mIntent.putExtra("taskId", taskID);
+        mIntent.putExtra("UserId", userId);
+        mIntent.putExtra("taskDatumId",this.taskMaterialId);
+        mIntent.putExtra("ctId",ctId);
+        startActivity(mIntent);
+        finish();
     }
 
     @Override

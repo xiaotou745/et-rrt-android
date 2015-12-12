@@ -159,8 +159,8 @@ public class ShowTaskMatailDetailActivity extends BaseActivity implements
         super.init();
         userId = Utils.getUserDTO(context).data.userId;
         mAct = ShowTaskMatailDetailActivity.this;
-        //taskId = getIntent().getStringExtra("taskId");
-        taskId = "266";
+        taskId = getIntent().getStringExtra("taskId");
+       // taskId = "266";
         taskDatumId = getIntent().getStringExtra("taskDatumId");
         taskName = getIntent().getStringExtra("taskName");
         ctId = getIntent().getStringExtra("ctId");//地推关系id

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
+    android:paddingTop="8dip"
+    android:orientation="horizontal" >
+
+    <!-- download icon -->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="正在下载"
+            android:scaleType="center"
+            android:src="@android:drawable/stat_sys_download" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:paddingLeft="7dp" >
+
+        <TextView
+            android:id="@+id/tv_notification_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:singleLine="true"
+            android:text="111"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_notification_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="15dip"
+            android:layout_toRightOf="@id/tv_notification_title"
+            android:gravity="center"
+            android:paddingTop="2dip"
+            android:singleLine="true"
+            android:text="222222"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <ProgressBar
+            android:id="@+id/pb_notification_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="8dp"
+            android:layout_below="@id/tv_notification_title"
+            android:layout_marginTop="6dip"
+            android:paddingRight="25dp"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+</LinearLayout><!-- From: file:/D:/StudioProjectsWorkSpace/renrenditui_androidApp/RenRenDiTuiApp/src/main/res/layout/download_notification.xml -->

@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -54,29 +55,34 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 	public String str_taskName = "";//任务名称
 	public String str_userId = "";//用户id
 	public String str_ctId = "";//地推关系id
+	public boolean isShowSubmitBtn =false;//是否显示提交按钮
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_task_main);
 		super.init();
-		super.onBack(new IBack() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(context, NoGoingTaskActicity.class);
-				startActivity(intent);
-				finish();
-			}
-		});
+//		super.onBack(new IBack() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				Intent intent = new Intent(context, NoGoingTaskActicity.class);
+//				startActivity(intent);
+//				finish();
+//			}
+//		});
 		ExitApplication.getInstance().addActivity(this);
 		context = this;
 		topage = getIntent().getIntExtra("topage", topage);
 		str_taskId = getIntent().getStringExtra("TASK_ID");
+		if(TextUtils.isEmpty(str_taskId)){
+			str_taskId = "0";
+		}
 		str_taskName = getIntent().getStringExtra("TASK_NAME");
 		str_userId = Utils.getUserDTO(context).data.userId;
 		str_ctId = getIntent().getStringExtra("ctId");
+		isShowSubmitBtn = getIntent().getBooleanExtra("isShowSubmitBtn",false);
 		initView();
 		initViewPager(topage);
 	}
@@ -84,16 +90,27 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-	}
-
-	@Override
-	protected void onNewIntent(Intent intent) {
-		super.onNewIntent(intent);
-		if (intent != null) {
-			topage = intent.getIntExtra("to", ToMainPage.审核中.getValue());
+		if(isShowSubmitBtn){
+			mBtn_submit_taskTemple.setVisibility(View.VISIBLE);
+		}else{
+			mBtn_submit_taskTemple.setVisibility(View.GONE);
 		}
-		vp_task_main.setCurrentItem(topage);
 	}
+//	@Override
+//	protected void onStop(){
+//		super.onStop();
+//		//如果页面离开，就认为
+//		isShowSubmitBtn = false;
+//	}
+
+//	@Override
+//	protected void onNewIntent(Intent intent) {
+//		super.onNewIntent(intent);
+//		if (intent != null) {
+//			topage = intent.getIntExtra("to", ToMainPage.审核中.getValue());
+//		}
+//		vp_task_main.setCurrentItem(topage);
+//	}
 
 	private void initView() {
 		vp_task_main = (ViewPager) findViewById(R.id.vp_task_main);
@@ -101,9 +118,10 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 		layoutTopMenu.setOnClickListener(this);
 		mTV_title = (TextView)findViewById(R.id.tv_title);
 		//mTV_title.setText(str_taskName+"已提交资料");
-		mTV_title.setText("已提交资料");
+		mTV_title.setText("资料审核列表");
 		mBtn_submit_taskTemple = (Button)findViewById(R.id.btn_submit_taskTemple);
 		mBtn_submit_taskTemple.setOnClickListener(this);
+
 	}
 
 	public void initViewPager(int index) {
@@ -171,6 +189,9 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+			case R.id.layout_back:
+				finish();
+				break;
 		case R.id.btn_task_nogoing:
 			topage = ToMainPage.已通过.getValue();
 			vp_task_main.setCurrentItem(topage);

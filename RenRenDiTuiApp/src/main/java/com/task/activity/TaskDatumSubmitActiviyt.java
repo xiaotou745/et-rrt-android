@@ -197,8 +197,7 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
         super.init();
         userId = Utils.getUserDTO(context).data.userId;
         mAct = TaskDatumSubmitActiviyt.this;
-        //taskId = getIntent().getStringExtra("taskId");
-        taskId = "266";
+        taskId = getIntent().getStringExtra("taskId");
         taskDatumId = getIntent().getStringExtra("taskDatumId");
         taskName = getIntent().getStringExtra("taskName");
         ctId = getIntent().getStringExtra("ctId");//地推关系id
@@ -225,9 +224,7 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
             case R.id.btn_submit:
                 submitTaskDatumInfo();
                 break;
-
         }
-
     }
     @Override
     public void onNoData() {

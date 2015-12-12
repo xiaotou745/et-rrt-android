@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <EditText
+        android:id="@+id/ed_team_texts_content_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="默认值"
+        android:textColorHint="@color/tv_order_color_3"
+        android:textColor="@color/tv_order_color_1"
+        android:textSize="@dimen/_14sp"
+        android:gravity="left|center_vertical"
+        android:singleLine="true"
+        />
+    <TextView
+        android:id="@+id/tv_team_texts_content_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/tv_order_color_3"
+        android:textColor="@color/tv_order_color_1"
+        android:textSize="@dimen/_14sp"
+        android:gravity="left"
+        android:visibility="gone"
+        />
+</LinearLayout>
+<!-- From: file:/D:/StudioProjectsWorkSpace/renrenditui_androidApp/RenRenDiTuiApp/src/main/res/layout/item_team_texts_layout.xml -->

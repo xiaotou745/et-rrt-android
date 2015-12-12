@@ -47,7 +47,7 @@ public  TaskBeanInfo(){
     public TaskBeanInfo(String taskTitle,double amount,String endTime,String taskGeneralInfo,
                         int isHad,String logo,String auditCycle,int taskType,
                         String taskTypeName,String hotLine ,int ctId,String downUrl,String scanTip,String reminder) {
-
+super();
         this.taskTitle =taskTitle;
         this.amount =amount;
         this.endTime = endTime;

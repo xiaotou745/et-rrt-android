@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/view_space"
+    >
+    <TextView
+        android:id="@+id/tv_task_explain_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="当前任务详情说明1"
+        android:layout_gravity="left"
+        android:gravity="left|center_vertical"
+        android:textColor="@color/tv_order_color_3"
+        android:textSize="@dimen/_16sp"
+        android:drawableLeft="@drawable/icon_point"
+        android:drawablePadding="@dimen/view_space"
+        />
+
+</LinearLayout>
+<!-- From: file:/D:/StudioProjectsWorkSpace/renrenditui_androidApp/RenRenDiTuiApp/src/main/res/layout/item_task_explain_layout.xml -->

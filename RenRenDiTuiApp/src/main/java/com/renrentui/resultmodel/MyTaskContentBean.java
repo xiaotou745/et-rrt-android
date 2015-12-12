@@ -15,7 +15,7 @@ public class MyTaskContentBean implements Serializable {
     public String   taskGeneralInfo ;//任务描述
     public String   taskName ;//任务名称
     public double   amount ;//任务单价
-    public int    taskType ;//任务类型描述（1分享类，2下载类，3签约类）
+    public int    taskType ;//任务类型 (1 签约任务 2 分享任务 3 下载任务)
     public String   taskTypeName ;//任务类型名称
     public String   logo ;//logo图片地址
     public String   auditWaitNum ;//待审核的资料数量(签约类任务才有效)

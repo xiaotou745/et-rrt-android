@@ -75,13 +75,13 @@ public class GetThroughTaskAdapter extends BaseAdapter {
 	public int getItemViewType(int type) {
 		switch (type){
 			case 1:
-				//分享
+				//签约
 				break;
 			case 2:
-				//下载
+				//分享
 				break;
 			case 3:
-				//签约
+				//下载
 				break;
 
 		}
@@ -96,14 +96,15 @@ public class GetThroughTaskAdapter extends BaseAdapter {
 		int type = taskBean.taskType;
 		if(convertView==null){
 			switch (type){
+				case 1:
 				case 3:
 					//签约
 					convertView = LayoutInflater.from(context).inflate(R.layout.item_task_through,parent,false);
 					viewholder = new ViewHolder(convertView);
 					convertView.setTag(viewholder);
 					break;
-				case 1:
 				case 2:
+					//分享
 					convertView = LayoutInflater.from(context).inflate(R.layout.item_task_through_other,parent,false);
 					vieholderOther = new ViewHolder_other(convertView);
 					convertView.setTag(vieholderOther);
@@ -111,17 +112,17 @@ public class GetThroughTaskAdapter extends BaseAdapter {
 			}
 		}else{
 			switch (type){
+				case 1:
 				case 3:
 					//签约
 					viewholder = (ViewHolder)convertView.getTag();
 					break;
-				case 1:
 				case 2:
 					vieholderOther = (ViewHolder_other)convertView.getTag();
 					break;
 			}
 		}
-		if(type==3){
+		if(type==3 || type==1){
 			//签约
 			if (Util.IsNotNUll(taskBean.logo) && Utils.checkUrl(taskBean.logo)) {
 				ImageLoadManager.getLoaderInstace().disPlayNormalImg(
@@ -166,7 +167,7 @@ public class GetThroughTaskAdapter extends BaseAdapter {
 				}
 			});
 		}else{
-			//其他类型
+			//分享
 			if (Util.IsNotNUll(taskBean.logo) && Utils.checkUrl(taskBean.logo)) {
 				ImageLoadManager.getLoaderInstace().disPlayNormalImg(
 						taskBean.logo, vieholderOther.icon_pusher,

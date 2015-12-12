@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/view_space"
+    >
+
+    <TextView
+        android:id="@+id/tv_team_texts_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="文字组"
+        android:gravity="left"
+        android:textColor="@color/tv_order_color_1"
+        android:textSize="@dimen/_15sp"
+        android:layout_marginBottom="@dimen/view_space"
+        />
+    <com.renrentui.view.MyListView
+        android:id="@+id/ll_team_texts_data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:listSelector="@color/white"
+        android:divider="@color/transparent"
+        android:dividerHeight="0dip"
+        ></com.renrentui.view.MyListView>
+
+</LinearLayout>
+<!-- From: file:/D:/StudioProjectsWorkSpace/renrenditui_androidApp/RenRenDiTuiApp/src/main/res/layout/team_texts_layout.xml -->

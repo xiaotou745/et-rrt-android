@@ -26,6 +26,7 @@ import com.renrentui.util.ImageLoadManager;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
 import com.task.activity.MyTaskFramentActivity;
+import com.task.activity.MyTaskMaterialActivity;
 import com.task.activity.NoGoingTaskActicity;
 import com.user.service.CustomerServiceDialog;
 
@@ -44,6 +45,9 @@ public class PersonalCenterActivity extends BaseActivity implements
 	private RelativeLayout rl_withdrawals;// 提现
 	private RelativeLayout rl_help;// 帮助中心
 	private RelativeLayout rl_finished_task;// 已完成任务
+	private RelativeLayout rl_datum_task;// 已完成任务
+	private RelativeLayout rl_message_task;// 已完成任务
+
 	private TextView tv_to_more;// 更多按钮
 	private TextView tv_user_phone;// 用户账号
 	private TextView tv_user_name;// 用户名称
@@ -150,6 +154,10 @@ public class PersonalCenterActivity extends BaseActivity implements
 		tv_withdrawals_money = (TextView) findViewById(R.id.tv_withdrawals_money);
 		rl_customer_service_center = (RelativeLayout) findViewById(R.id.rl_customer_service_center);
 		rl_customer_service_center.setOnClickListener(this);
+		rl_datum_task = (RelativeLayout)findViewById(R.id.rl_datum_task);
+		rl_datum_task.setOnClickListener(this);
+		rl_message_task = (RelativeLayout)findViewById(R.id.rl_message_task);
+		rl_message_task.setOnClickListener(this);
 	}
 
 	@Override
@@ -176,6 +184,12 @@ public class PersonalCenterActivity extends BaseActivity implements
 		case R.id.rl_help:// 帮助中心
 			intent = new Intent(context, HelpCenterActivity.class);
 			break;
+			case R.id.rl_datum_task:
+				intent = new Intent(context, MyTaskMaterialActivity.class);
+				break;
+			case R.id.rl_message_task:
+				intent = new Intent(context,MyMessageActivity.class);
+				break;
 		default:
 			break;
 		}

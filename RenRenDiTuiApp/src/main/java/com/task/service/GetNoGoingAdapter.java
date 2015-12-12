@@ -23,6 +23,7 @@ import com.renrentui.tools.Util;
 import com.renrentui.util.ImageLoadManager;
 import com.renrentui.util.Utils;
 import com.task.activity.TaskDetailInfoActivity;
+import com.user.activity.LoginActivity;
 
 /**
  * 未领取任务适配器
@@ -93,11 +94,17 @@ public class GetNoGoingAdapter extends BaseAdapter {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,
-                        TaskDetailInfoActivity.class);
-                intent.putExtra("TaskId", noGoingTaskInfo.taskId);
-                intent.putExtra("TaskName",noGoingTaskInfo.taskName);
-                context.startActivity(intent);
+                if(Utils.getUserDTO(context)==null || Utils.getUserDTO(context).data.userId==""||Utils.getUserDTO(context).data.userId=="0") {
+                    Intent intent = new Intent(context,
+                            LoginActivity.class);
+                    context.startActivity(intent);
+                }else{
+                    Intent intent = new Intent(context,
+                            TaskDetailInfoActivity.class);
+                    intent.putExtra("TaskId", noGoingTaskInfo.taskId);
+                    intent.putExtra("TaskName", noGoingTaskInfo.taskName);
+                    context.startActivity(intent);
+                }
             }
         });
         return convertView;

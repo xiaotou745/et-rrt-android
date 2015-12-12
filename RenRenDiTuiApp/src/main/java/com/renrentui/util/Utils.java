@@ -5,11 +5,13 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.location.LocationManager;
 import android.net.Uri;
 
 import com.renrentui.resultmodel.RSUser;
@@ -156,6 +158,37 @@ public final class Utils {
 		Pattern patt = Pattern. compile(regex);
 		Matcher matcher = patt.matcher(strUrl);
 		return   matcher.matches();
+	}
+	/**
+	 * 判断gps是否开启
+	 *
+	 * @param context
+	 * @return
+	 */
+	public static final boolean isOpenGPS(Context context) {
+		LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+		// 通过GPS卫星定位，定位级别可以精确到街（通过24颗卫星定位，在室外和空旷的地方定位准确、速度快）
+		boolean gps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		// 通过WLAN或移动网络(3G/2G)确定的位置（也称作AGPS，辅助GPS定位。主要用于在室内或遮盖物（建筑群或茂密的深林等）密集的地方定位）
+		boolean network = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+		// if (gps || network) {
+		// return true;
+		// }
+		return gps;
+
+	}
+	/**
+	 * 强制开启gps
+	 *
+	 * @param context
+	 * @throws CanceledException
+	 */
+	public static final void openGPS(Context context) throws PendingIntent.CanceledException {
+		Intent GPSIntent = new Intent();
+		GPSIntent.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
+		GPSIntent.addCategory("android.intent.category.ALTERNATIVE");
+		GPSIntent.setData(Uri.parse("custom:3"));
+		PendingIntent.getBroadcast(context, 0, GPSIntent, 0).send();
 	}
 
 }

@@ -145,40 +145,13 @@ public static final String TAG = TaskDetailInfoActivity.class.getSimpleName();
 				@Override
 				public void onNetworknotvalide() {
 					hideProgressDialog();
-					ToastUtil.show(
-							context,
-							context.getResources().getString(
+					ToastUtil.show(context,context.getResources().getString(
 									R.string.networknotconnect));
 				}
 
 				@Override
 				public void onSuccess(RSReceiveTask t) {
 					hideProgressDialog();
-//					SuccessDialog dialog = new SuccessDialog(context, "请在"
-//							+ rsGetTaskDetailInfo.data.taskCycle
-//							+ "小时内完成\n提示：完成之后不要忘记提交审核哦");
-//					dialog.addListener(new ExitDialogListener() {
-//
-//						@Override
-//						public void clickCommit() {
-//							ll_receive_task.setVisibility(View.GONE);
-//							ll_through_task.setVisibility(View.GONE);
-//							ll_giveup_task.setVisibility(View.VISIBLE);
-//							tv_states.setText("已领取");
-//							isList = 5;
-//							getInitData();
-//						}
-//
-//						@Override
-//						public void clickCancel() {
-//							Intent intent = new Intent(context,
-//									MyTaskMaterialActivity.class);
-//							context.startActivity(intent);
-//							finish();
-//						}
-//					});
-//					dialog.show();
-//					dialog.setCancelable(false);
 					ToastUtil.show(context,"任务领取成功");
 					if(isShareTask){
 					//分享型
@@ -195,7 +168,8 @@ public static final String TAG = TaskDetailInfoActivity.class.getSimpleName();
 						mIntent.putExtra("TASK_ID", taskId);
 						mIntent.putExtra("topage",ToMainPage.审核中.getValue());
 						mIntent.putExtra("TASK_NAME", str_taskName);
-
+						mIntent.putExtra("isShowSubmitBtn",true);
+						startActivity(mIntent);
 						finish();
 					}
 				}
@@ -212,71 +186,28 @@ public static final String TAG = TaskDetailInfoActivity.class.getSimpleName();
 				}
 			});
 
-//	private RQHandler<RSBase> rqHandler_giveupTask = new RQHandler<>(
-//			new IRqHandlerMsg<RSBase>() {
-//
-//				@Override
-//				public void onBefore() {
-//					hideProgressDialog();
-//				}
-//
-//				@Override
-//				public void onNetworknotvalide() {
-//					hideProgressDialog();
-//					ToastUtil.show(
-//							context,
-//							context.getResources().getString(
-//									R.string.networknotconnect));
-//				}
-//
-//				@Override
-//				public void onSuccess(RSBase t) {
-//					hideProgressDialog();
-//					tv_time.setText("");
-//					tv_time_show.setText("");
-//					ToastUtil.show(context, "放弃任务成功");
-//					ll_receive_task.setVisibility(View.VISIBLE);
-//					ll_giveup_task.setVisibility(View.GONE);
-//					ll_through_task.setVisibility(View.GONE);
-//					tv_states.setText("待领取");
-//					isList = 0;
-//					hideProgressDialog();
-//					getInitData();
-//				}
-//
-//				@Override
-//				public void onSericeErr(RSBase t) {
-//					hideProgressDialog();
-//					ToastUtil.show(context, t.msg);
-//				}
-//
-//				@Override
-//				public void onSericeExp() {
-//					hideProgressDialog();
-//				}
-//			});
-
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_task_detail);
 		super.init();
-		initControl();
 		Intent intent = getIntent();
+		userId = Utils.getUserDTO(context).data.userId;
 		taskId = intent.getStringExtra("TaskId");
 		str_taskName = intent.getStringExtra("TaskName");
+		initControl();
+		getInitData();
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		if (Utils.getUserDTO(context) != null){
-			userId = Utils.getUserDTO(context).data.userId;}
+			userId = Utils.getUserDTO(context).data.userId;
+		}
 		else {
 			userId = "0";
 		}
-		getInitData();
 	}
 
 	@Override
@@ -387,7 +318,7 @@ public static final String TAG = TaskDetailInfoActivity.class.getSimpleName();
 	@SuppressWarnings("deprecation")
 	private void initData(TaskDetailInfo taskBean) {
 		//头像
-		if (Util.IsNotNUll(taskBean.task.logo )) {
+		if (Util.IsNotNUll(taskBean.task.logo )&& Utils.checkUrl(taskBean.task.logo)) {
 			ImageLoadManager.getLoaderInstace().disPlayNormalImg(taskBean.task.logo,
 					icon_pusher, R.drawable.pusher_logo);
 		} else {
@@ -562,6 +493,7 @@ private  void goToTaskMaterialActivity(){
 	mIntent.putExtra("TASK_ID", taskId);
 	mIntent.putExtra("topage",ToMainPage.审核中.getValue());
 	mIntent.putExtra("TASK_NAME",str_taskName);
+	mIntent.putExtra("isShowSubmitBtn",true);
 	startActivity(mIntent);
 	finish();
 }

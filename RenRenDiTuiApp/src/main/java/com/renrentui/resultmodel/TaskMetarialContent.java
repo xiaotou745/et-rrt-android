@@ -12,7 +12,7 @@ public class TaskMetarialContent  implements Serializable {
     public String  taskId ;//任务Id
     public String taskName;// 任务名称
     public double amount ;//任务单价
-    public int taskType ;//任务类型id（1分享类，2下载类，3签约类）
+    public int taskType ;//任务类型  id任务类型1 签约任务 2 分享任务 3 下载任务
     public String taskTypeName ;//任务类型名称
     public String taskStatus;// 任务状态描述：进行中或已过期
     public String auditCycle;// (审核周期)
@@ -21,6 +21,7 @@ public class TaskMetarialContent  implements Serializable {
     public String createDate;// 资料提交时间
     public String auditTime;// 资料审核过或不过的时间
     public int  groupType;// 模板组的类型id（1是文本组，2是图片组，3是多图组）
+    public String ctId;//地推关系id
     public ArrayList<String > titlesList;// 资料的展示信息集合，集合中元素类型是字符串（groupType是文本组时，集合中是资料描述，否则是图片地址）
 
     public String getAmount() {
@@ -37,7 +38,7 @@ public class TaskMetarialContent  implements Serializable {
                             int taskType, String taskTypeName, String taskStatus,
                             String auditCycle, String taskDatumId, String auditStatus,
                             String createDate, String auditTime, int groupType,
-                               ArrayList<String > titlesList) {
+                               ArrayList<String > titlesList,String ciId) {
         super();
         this.taskId = taskId;
         this.taskName = taskName;
@@ -52,6 +53,7 @@ public class TaskMetarialContent  implements Serializable {
         this.auditTime = auditTime;
         this.groupType = groupType;
         this.titlesList = titlesList;
+        this.ctId =ciId;
     }
 
     @Override
