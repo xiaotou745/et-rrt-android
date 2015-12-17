@@ -40,7 +40,12 @@ public class LayoutMyTaskTopmenu {
 		v_task_invalid = view.findViewById(R.id.v_task_invalid);
 		//v_task_cancelled = view.findViewById(R.id.v_task_cancelled);
 	}
-	
+	public void setThroughNum(String num1) {
+		btn_task_through.setText("进行中("+num1+")");
+	}
+	public void setInvalid(String num2) {
+		btn_task_invalid.setText("已过期("+num2+")");
+	}
 	public void setOnClickListener(OnClickListener onClickListener) {
 		this.btn_task_through.setOnClickListener(onClickListener);
 		this.btn_task_invalid.setOnClickListener(onClickListener);

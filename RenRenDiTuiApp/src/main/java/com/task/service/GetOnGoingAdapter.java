@@ -38,6 +38,7 @@ import com.renrentui.util.ImageLoadManager;
 import com.renrentui.util.TimeUtils;
 import com.renrentui.util.ToMainPage;
 import com.renrentui.util.ToastUtil;
+import com.renrentui.util.UIHelper;
 import com.renrentui.util.Utils;
 import com.task.activity.MyTaskMaterialActivity;
 import com.task.activity.MyTaskMaterialDetailActivity;
@@ -64,21 +65,25 @@ public class GetOnGoingAdapter extends BaseAdapter {
 
 	@Override
 	public int getViewTypeCount() {
-		return 2;
+		return 3;
 	}
 
 	@Override
 	public int getItemViewType(int type) {
+		int itype = 0;
 		if (type == 1) {
 			//文本
-			return 1;
+			itype=0;
 		} else if (type == 2) {
 			//图片
-			return 2;
-		} else  {
+			itype=1;
+		} else if(type==3) {
 			//图片组
-			return 2;
+			itype=2;
+		}else{
+			itype = 0;
 		}
+		return itype;
 	}
 
 	@Override
@@ -104,11 +109,13 @@ public class GetOnGoingAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		 ViewHolder_1 viewholder_1=null;
 		ViewHolder_2 viewHolder_2 = null;
+		ViewHolder_3 viewHolder_3 = null;
 		final TaskMetarialContent beanContent = (TaskMetarialContent)getItem(position);
 		int iType = getItemViewType(beanContent.groupType);
-		if(convertView==null){
-			switch (iType){
-				case 1:
+		switch (iType){
+			case 0:
+				//文本
+				if(convertView==null || convertView.getTag(R.id.listview_multiple_type_first_layout)==null){
 					viewholder_1= new ViewHolder_1();
 					convertView = LayoutInflater.from(context).inflate(R.layout.item_task_ongoing_1,parent,false);
 					viewholder_1.tv_push_time = (TextView)convertView.findViewById(R.id.tv_pusher_time);
@@ -117,9 +124,14 @@ public class GetOnGoingAdapter extends BaseAdapter {
 					viewholder_1.tv_task_name = (TextView)convertView.findViewById(R.id.tv_task_name);
 					viewholder_1.ll_amount = (LinearLayout)convertView.findViewById(R.id.ll_amount);
 					viewholder_1.tv_task_amount = (TextView)convertView.findViewById(R.id.tv_task_amount);
-					convertView.setTag(viewholder_1);
-					break;
-				case 2:
+					convertView.setTag(R.id.listview_multiple_type_first_layout,viewholder_1);
+				}else{
+					viewholder_1 = (ViewHolder_1)convertView.getTag(R.id.listview_multiple_type_first_layout);
+				}
+				break;
+			case 1:
+				//图片
+				if(convertView==null || convertView.getTag(R.id.listview_multiple_type_second_layout)==null){
 					viewHolder_2 = new ViewHolder_2();
 					convertView = LayoutInflater.from(context).inflate(R.layout.item_task_ongoing_2,parent,false);
 					viewHolder_2.tv_push_time = (TextView)convertView.findViewById(R.id.tv_pusher_time);
@@ -128,22 +140,63 @@ public class GetOnGoingAdapter extends BaseAdapter {
 					viewHolder_2.tv_task_name = (TextView)convertView.findViewById(R.id.tv_task_name);
 					viewHolder_2.ll_amount = (LinearLayout)convertView.findViewById(R.id.ll_amount);
 					viewHolder_2.tv_task_amount = (TextView)convertView.findViewById(R.id.tv_task_amount);
-					convertView.setTag(viewHolder_2);
-					break;
-			}
-		}else{
-			switch (iType){
-				case 1:
-					viewholder_1 = (ViewHolder_1)convertView.getTag();
-					break;
-				case 2:
-					viewHolder_2 = (ViewHolder_2)convertView.getTag();
-					break;
-			}
+					convertView.setTag(R.id.listview_multiple_type_second_layout,viewHolder_2);
+				}else{
+					viewHolder_2 = (ViewHolder_2)convertView.getTag(R.id.listview_multiple_type_second_layout);
+				}
+				break;
+			case 2:
+				//多组图片
+				if(convertView==null || convertView.getTag(R.id.listview_multiple_type_three_layout)==null){
+					viewHolder_3 = new ViewHolder_3();
+					convertView = LayoutInflater.from(context).inflate(R.layout.item_task_ongoing_2,parent,false);
+					viewHolder_3.tv_push_time = (TextView)convertView.findViewById(R.id.tv_pusher_time);
+					viewHolder_3.gridView_task_pic = (GridView)convertView.findViewById(R.id.gridview_task_pic);
+					viewHolder_3.tv_task_status = (TextView)convertView.findViewById(R.id.tv_task_status);
+					viewHolder_3.tv_task_name = (TextView)convertView.findViewById(R.id.tv_task_name);
+					viewHolder_3.ll_amount = (LinearLayout)convertView.findViewById(R.id.ll_amount);
+					viewHolder_3.tv_task_amount = (TextView)convertView.findViewById(R.id.tv_task_amount);
+					convertView.setTag(R.id.listview_multiple_type_three_layout,viewHolder_3);
+				}else{
+					viewHolder_3 = (ViewHolder_3)convertView.getTag(R.id.listview_multiple_type_three_layout);
+				}
+				break;
+			default:
+				if(convertView==null || convertView.getTag(R.id.listview_multiple_type_first_layout)==null){
+					viewholder_1= new ViewHolder_1();
+					convertView = LayoutInflater.from(context).inflate(R.layout.item_task_ongoing_1,parent,false);
+					viewholder_1.tv_push_time = (TextView)convertView.findViewById(R.id.tv_pusher_time);
+					viewholder_1.tv_push_content = (TextView)convertView.findViewById(R.id.tv_pusher_taskcontent);
+					viewholder_1.tv_task_status = (TextView)convertView.findViewById(R.id.tv_task_status);
+					viewholder_1.tv_task_name = (TextView)convertView.findViewById(R.id.tv_task_name);
+					viewholder_1.ll_amount = (LinearLayout)convertView.findViewById(R.id.ll_amount);
+					viewholder_1.tv_task_amount = (TextView)convertView.findViewById(R.id.tv_task_amount);
+					convertView.setTag(R.id.listview_multiple_type_first_layout,viewholder_1);
+				}else{
+					viewholder_1 = (ViewHolder_1)convertView.getTag(R.id.listview_multiple_type_first_layout);
+				}
+				break;
 		}
-
-		switch (iType){
+		SpannableStringBuilder style = null;
+		switch (beanContent.taskType){
 			case 1:
+				//签约
+				style =  UIHelper.setStyleColorByColor(context, beanContent.taskTypeName.toString(), beanContent.taskName.toString(), R.color.white, R.color.tv_bg_color_1);
+				break;
+			case 2:
+				//分享
+				style =  UIHelper.setStyleColorByColor(context,beanContent.taskTypeName.toString(),beanContent.taskName.toString(),R.color.white,R.color.tv_bg_color_3);
+				break;
+			case 3:
+				//下载
+				style =  UIHelper.setStyleColorByColor(context,beanContent.taskTypeName.toString(),beanContent.taskName.toString(),R.color.white,R.color.tv_bg_color_2);
+				break;
+			default:
+				style =  UIHelper.setStyleColorByColor(context,beanContent.taskTypeName.toString(),beanContent.taskName.toString(),R.color.white,R.color.tv_bg_color_1);
+				break;
+		}
+		switch (iType){
+			case 0:
 				viewholder_1.tv_push_time.setText("提交时间  "+ TimeUtils.StringPattern(beanContent.createDate,"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm"));
 				if(beanContent.titlesList!=null && beanContent.titlesList.size()>0){
 					viewholder_1.tv_push_content.setText(beanContent.titlesList.get(0));
@@ -154,35 +207,25 @@ public class GetOnGoingAdapter extends BaseAdapter {
 				viewholder_1.tv_task_status.setText(beanContent.taskStatus);
 				viewholder_1.tv_task_status.setTextColor(context.getResources().getColor(R.color.tv_order_color_5));
 				viewholder_1.tv_task_amount.setText(String.valueOf(beanContent.getAmount()));
-				//内容信息变换
-				String strType =  " "+beanContent.taskTypeName.toString()+" ";
-				String strTypeContent =strType +" "+beanContent.taskName.toString();
-				int fstart = strTypeContent.indexOf(beanContent.taskTypeName.toString());
-				int fend = fstart + beanContent.taskTypeName.toString().length();
-				int bstart = 0;
-				int bend = strType.length();
-				SpannableStringBuilder style = new SpannableStringBuilder(strTypeContent);
-				style.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.white)),fstart,fend, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-				style.setSpan(new BackgroundColorSpan(context.getResources().getColor(R.color.tv_bg_color_1)),bstart,bend, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
 				viewholder_1.tv_task_name.setText(style);
 				break;
-			case 2:
+			case 1:
 				viewHolder_2.tv_push_time.setText("提交时间  "+ TimeUtils.StringPattern(beanContent.createDate,"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm"));
 				viewHolder_2.tv_task_status.setText(beanContent.taskStatus);
 				viewHolder_2.tv_task_status.setTextColor(context.getResources().getColor(R.color.tv_order_color_5));
 				viewHolder_2.tv_task_amount.setText(String.valueOf(beanContent.getAmount()));
-				//内容信息变换
-				String strType_2 =  " "+beanContent.taskTypeName.toString()+" ";
-				String strTypeContent_2 =strType_2 +" "+beanContent.taskName.toString();
-				int fstart_2 = strTypeContent_2.indexOf(beanContent.taskTypeName.toString());
-				int fend_2 = fstart_2 + beanContent.taskTypeName.toString().length();
-				int bstart_2 = 0;
-				int bend_2 = strType_2.length();
-				SpannableStringBuilder style_2 = new SpannableStringBuilder(strTypeContent_2);
-				style_2.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.white)),fstart_2,fend_2, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-				style_2.setSpan(new BackgroundColorSpan(context.getResources().getColor(R.color.tv_bg_color_1)),bstart_2,bend_2, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-				viewHolder_2.tv_task_name.setText(style_2);
+//
+				viewHolder_2.tv_task_name.setText(style);
 				viewHolder_2.gridView_task_pic.setAdapter(new GriveiwTaskPicAdapter(context,beanContent.titlesList));
+				break;
+			case 2:
+				viewHolder_3.tv_push_time.setText("提交时间  "+ TimeUtils.StringPattern(beanContent.createDate,"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm"));
+				viewHolder_3.tv_task_status.setText(beanContent.taskStatus);
+				viewHolder_3.tv_task_status.setTextColor(context.getResources().getColor(R.color.tv_order_color_5));
+				viewHolder_3.tv_task_amount.setText(String.valueOf(beanContent.getAmount()));
+
+				viewHolder_3.tv_task_name.setText(style);
+				viewHolder_3.gridView_task_pic.setAdapter(new GriveiwTaskPicAdapter(context,beanContent.titlesList));
 				break;
 		}
 		convertView.setOnClickListener(new View.OnClickListener(){
@@ -197,6 +240,7 @@ public class GetOnGoingAdapter extends BaseAdapter {
 				mIntent.putExtra("Title_content",beanContent.taskName);
 				mIntent.putExtra("VO",beanContent);
 				mIntent.putExtra("ctId",beanContent.ctId);
+				mIntent.putExtra("taskStatus",beanContent.taskStatus);
 				context.startActivity(mIntent);
 			}
 		});
@@ -324,6 +368,14 @@ public class GetOnGoingAdapter extends BaseAdapter {
 		public TextView tv_task_name;
 	}
 	public class ViewHolder_2 {
+		public  TextView tv_push_time;
+		public GridView gridView_task_pic;
+		public TextView tv_task_status;
+		public LinearLayout ll_amount;
+		public TextView tv_task_amount;
+		public TextView tv_task_name;
+	}
+	public class ViewHolder_3 {
 		public  TextView tv_push_time;
 		public GridView gridView_task_pic;
 		public TextView tv_task_status;

@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.renrentui.app.R;
@@ -46,6 +48,7 @@ import com.renrentui.util.ImageLoadManager;
 import com.renrentui.util.TimeUtils;
 import com.renrentui.util.ToMainPage;
 import com.renrentui.util.ToastUtil;
+import com.renrentui.util.UIHelper;
 import com.renrentui.util.Utils;
 import com.renrentui.util.ViewHolderUtil;
 import com.task.adapter.TaskDatumTemplateImagesTeamAdapter;
@@ -60,6 +63,8 @@ import com.task.upload.Views.LoadingView;
 import com.task.upload.bean.uploadPicBean;
 import com.task.upload.interfaces.TaskTempleUploadPicInterface;
 import com.task.service.SubmitSuccessDialog.ExitDialogListener;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -90,6 +95,7 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
     private TextView tv_task_tel;//咨询电话
 
     //区域
+    private ScrollView mScrollView;
     private LinearLayout ll_texts_area;//文字组区域
     private LinearLayout ll_images_area;//图片组区域
     private LinearLayout ll_multiple_images_area;//多组图片区域
@@ -169,8 +175,7 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
 
                 @Override
                 public void onNetworknotvalide() {
-                    TaskDatumSubmitActiviyt.this.onNodata(
-                            ResultMsgType.NetworkNotValide, null, null, null);
+                   ToastUtil.show(context,"网络错误!");
                 }
 
                 @Override
@@ -181,12 +186,12 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
 
                 @Override
                 public void onSericeErr(RSTaskDatumnSubmitModel t) {
-
+                    ToastUtil.show(context,t.msg);
                 }
 
                 @Override
                 public void onSericeExp() {
-
+                    ToastUtil.show(context,"服务器错误!");
                 }
             });
 
@@ -219,13 +224,25 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.layout_back:
-                TaskDatumSubmitActiviyt.this.finish();
+                showCancleTaskDatum();
                 break;
             case R.id.btn_submit:
                 submitTaskDatumInfo();
                 break;
         }
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+         //按下的如果是BACK，同时没有重复
+            showCancleTaskDatum();
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
     @Override
     public void onNoData() {
         getTaskDatumnTemplement();
@@ -248,6 +265,7 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
         mBtn_submit = (Button)findViewById(R.id.btn_submit);
         mBtn_submit.setOnClickListener(this);
         layout_back.setOnClickListener(this);
+        mScrollView = (ScrollView)findViewById(R.id.scrollview_view);
     }
 
     /**
@@ -262,11 +280,13 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
      * 获取模板信息
      */
     private void  getTaskDatumnTemplement(){
-        showProgressDialog();
-        ApiUtil.Request(new RQBaseModel<RQTaskDatumModel, RSTaskDatum>(
-                context, new RQTaskDatumModel(userId, taskId),
-                new RSTaskDatum(), ApiNames.获取资料模板或模板详情.getValue(),
-                RequestType.POST, rqHandler_getTaskDatumn));
+
+            showProgressDialog();
+            ApiUtil.Request(new RQBaseModel<RQTaskDatumModel, RSTaskDatum>(
+                    context, new RQTaskDatumModel(userId, taskId),
+                    new RSTaskDatum(), ApiNames.获取资料模板或模板详情.getValue(),
+                    RequestType.POST, rqHandler_getTaskDatumn));
+
     }
 
     /**
@@ -283,25 +303,42 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
         tv_Amount.setText(taskBean.getAmount());
 
         tv_pusher_taskName.setText(taskBean.taskTitle);
+
         //简介
-        String strType =  " "+taskBean.taskTypeName.toString()+" ";
-        String strTypeContent =strType +" "+taskBean.taskGeneralInfo.toString();
-        int fstart = strTypeContent.indexOf(taskBean.taskTypeName.toString());
-        int fend = fstart + taskBean.taskTypeName.toString().length();
-        int bstart = 0;
-        int bend = strType.length();
-        SpannableStringBuilder style = new SpannableStringBuilder(strTypeContent);
-        style.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.white)),fstart,fend, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        style.setSpan(new BackgroundColorSpan(context.getResources().getColor(R.color.tv_bg_color_1)), bstart, bend, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        SpannableStringBuilder style = null;
+        switch (taskBean.taskType){
+            case 1:
+                //签约
+                style =  UIHelper.setStyleColorByColor(context, taskBean.taskTypeName.toString(), taskBean.taskGeneralInfo.toString(), R.color.white, R.color.tv_bg_color_1);
+                break;
+            case 2:
+                //分享
+                style =  UIHelper.setStyleColorByColor(context,taskBean.taskTypeName.toString(),taskBean.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_3);
+                break;
+            case 3:
+                //下载
+                style =  UIHelper.setStyleColorByColor(context,taskBean.taskTypeName.toString(),taskBean.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_2);
+                break;
+            default:
+                style =  UIHelper.setStyleColorByColor(context,taskBean.taskTypeName.toString(),taskBean.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_1);
+                break;
+        }
+
         tv_pusher_type_content.setText(style);
 
         //审核
-        tv_task_examine.setText(context.getResources().getString(R.string.task_detail_examine_format,taskBean.auditCycle));
+        tv_task_examine.setText(context.getResources().getString(R.string.task_detail_examine_format, taskBean.auditCycle));
         //截止日期
         tv_deadline_time.setText(context.getResources().getString(R.string.task_detail_dealtime_format, TimeUtils.StringPattern(taskBean.endTime, "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd")));
         //tel
-        tv_task_tel.setText(Html.fromHtml(context.getResources().getString(R.string.task_detail_tel_format, taskBean.hotLine)));
-        tv_task_tel.setOnClickListener(this);
+        if(TextUtils.isEmpty(taskBean.hotLine)){
+            tv_task_tel.setVisibility(View.GONE);
+        }else{
+            tv_task_tel.setVisibility(View.VISIBLE);
+            tv_task_tel.setText(Html.fromHtml(context.getResources().getString(R.string.task_detail_tel_format, taskBean.hotLine)));
+            tv_task_tel.setOnClickListener(this);
+        }
+
     }
 
     /**
@@ -309,13 +346,13 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
      * @param templateGroups
      */
     private void initTaskDatumTemplet(ArrayList<TaskDatumTemplateGroup> templateGroups){
+        mScrollView.fullScroll(ScrollView.FOCUS_UP);
+        ll_texts_area.removeAllViews();
+        ll_images_area.removeAllViews();
+        ll_multiple_images_area.removeAllViews();
         if(templateGroups==null || templateGroups.size()==0){
             return ;
         }else{
-//            //测试数据
-//            for(int j =0;j<2;j++){
-//                templateGroups.addAll(templateGroups);
-//            }
             if(mLayoutParams==null){
                 mLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.MATCH_PARENT);
@@ -439,26 +476,33 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
      * 提交模板信息你
      */
     private void submitTaskDatumInfo(){
-        ArrayList<RQTaskDatumSubmitModel.ValueInfo> data = new ArrayList<RQTaskDatumSubmitModel.ValueInfo>();
-        ArrayList<TaskTempleDBBean> dataDB=  mTaskTempleDBManager.getTaskTempleByUserIdAndTaskId(userId, taskId);
-        int isize = dataDB==null ?0:dataDB.size();
-        for(int i=0;i<isize;i++){
-            TaskTempleDBBean bean1 =  dataDB.get(i);
-            RQTaskDatumSubmitModel.ValueInfo bean =(new RQTaskDatumSubmitModel()).new ValueInfo();
-            bean.controlValue = bean1.getTEAM_CONTENT_VALUE();
-            bean.controlName = bean1.getTEAM_CONTENT_KEY();
-            data.add(bean);
-        }
-        if(data!=null && data.size()>0){
-
-
-        showProgressDialog();
-        ApiUtil.Request(new RQBaseModel<RQTaskDatumSubmitModel, RSTaskDatumnSubmitModel>(
-                context, new RQTaskDatumSubmitModel(userId,taskId,ctId,data),
-                new RSTaskDatumnSubmitModel(), ApiNames.提交任务模板接口.getValue(),
-                RequestType.POST, rqHandler_SubmitTaskDatumn));
-        }else{
-            ToastUtil.show(context,"模板数据错误");
+        //数据值的判断
+        TaskTempleDBBean bean = new TaskTempleDBBean();
+        bean.setTASK_ID(userId);
+        bean.setUSER_ID(taskId);
+        boolean isCheck =  mTaskTempleDBManager.checkoutTaskTemplateValueIsEmpty(bean);
+        if(!isCheck) {
+            ArrayList<RQTaskDatumSubmitModel.ValueInfo> data = new ArrayList<RQTaskDatumSubmitModel.ValueInfo>();
+            ArrayList<TaskTempleDBBean> dataDB = mTaskTempleDBManager.getTaskTempleByUserIdAndTaskId(userId, taskId);
+            int isize = dataDB == null ? 0 : dataDB.size();
+            for (int i = 0; i < isize; i++) {
+                TaskTempleDBBean bean1 = dataDB.get(i);
+                RQTaskDatumSubmitModel.ValueInfo bean2 = (new RQTaskDatumSubmitModel()).new ValueInfo();
+                bean2.controlValue = bean1.getTEAM_CONTENT_VALUE();
+                bean2.controlName = bean1.getTEAM_CONTENT_KEY();
+                data.add(bean2);
+            }
+            if (data != null && data.size() > 0) {
+                showProgressDialog();
+                ApiUtil.Request(new RQBaseModel<RQTaskDatumSubmitModel, RSTaskDatumnSubmitModel>(
+                        context, new RQTaskDatumSubmitModel(userId, taskId, ctId, data),
+                        new RSTaskDatumnSubmitModel(), ApiNames.提交任务模板接口.getValue(),
+                        RequestType.POST, rqHandler_SubmitTaskDatumn));
+            } else {
+                ToastUtil.show(context, "请填写模板信息");
+            }
+        }else {
+            ToastUtil.show(context, "请填写模板信息");
         }
     }
 
@@ -477,21 +521,20 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
                 @Override
                 public void clickCommit() {
                     //再次提交资料
-                    //ExitApplication.getInstance().lastExit();
+                    getTaskDatumnTemplement();
                 }
 
                 @Override
                 public void clickCancel() {
                     //确定，回到任务的审核列表
-                    Intent intent = new Intent(TaskDatumSubmitActiviyt.this,
-                            MyTaskMaterialActivity.class);
-                    intent.putExtra("topage", ToMainPage.审核中.getValue());
-                    intent.putExtra("TASK_ID", taskId);
-                    intent.putExtra("TASK_NAME", taskName);
-                    intent.putExtra("ctId",ctId);
-                    startActivity(intent);
+//                    Intent intent = new Intent(TaskDatumSubmitActiviyt.this,
+//                            MyTaskMaterialActivity.class);
+//                    intent.putExtra("topage", ToMainPage.审核中.getValue());
+//                    intent.putExtra("TASK_ID", taskId);
+//                    intent.putExtra("TASK_NAME", taskName);
+//                    intent.putExtra("ctId",ctId);
+//                    startActivity(intent);
                     finish();
-
                 }
             });
             ssd.show();
@@ -504,37 +547,31 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
      * 返回操作
      */
     private void showCancleTaskDatum(){
-        ArrayList<TaskTempleDBBean> dataDB=  mTaskTempleDBManager.getTaskTempleByUserIdAndTaskId(userId, taskId);
-        if(dataDB!=null && dataDB.size()>0){
-
-           final   CancleDialog cancleDialog = new CancleDialog(context,"您还有未提交的资料，确定离开吗？"
-                    );
+        TaskTempleDBBean bean = new TaskTempleDBBean();
+        bean.setUSER_ID(this.userId);
+        bean.setTASK_ID(this.taskId);
+        boolean isResult =   mTaskTempleDBManager.checkoutTaskTemplateValue(bean);
+        if(isResult){
+            //
+        final  CancleDialog cancleDialog = new CancleDialog(context,"您还有未提交的资料，确定离开吗？");
             cancleDialog.addListener(new CancleDialog.CancleDialogListener() {
-
                 @Override
                 public void clickOk() {
-                    //再次提交资料
-                    //确定，回到任务的审核列表
-                   cancleDialog.dismiss();
-                    Intent intent = new Intent(TaskDatumSubmitActiviyt.this,
-                            MyTaskMaterialActivity.class);
-                    intent.putExtra("topage", ToMainPage.审核中.getValue());
-                    intent.putExtra("TASK_ID", taskId);
-                    intent.putExtra("TASK_NAME", taskName);
-                    intent.putExtra("ctId", ctId);
-                    startActivity(intent);
-                    finish();
+                //确定离开
+                    mTaskTempleDBManager.delTaskTempleTable();
+                    TaskDatumSubmitActiviyt.this.finish();
                 }
 
                 @Override
                 public void clickCancle() {
-                    cancleDialog.dismiss();
+                    //取消
 
                 }
             });
             cancleDialog.show();
             cancleDialog.setCancelable(false);
         }
+
     }
 
 
@@ -615,15 +652,15 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
                 if(status==UploadService.TASK_STATE_COMPLETE && mUploadPicBean!=null){
                     //上传成功,图片信息存入数据库，方便提交时信息整哈
                         TaskTempleDBBean bean = new  TaskTempleDBBean();
-                         bean.setTASK_ID(mUploadPicBean.getTask_id());
-                        bean.setUSER_ID(mUploadPicBean.getUser_id());
-                        bean.setTAG(mUploadPicBean.getTag());
+                    bean.setTASK_ID(mUploadPicBean.getTask_id());
+                    bean.setUSER_ID(mUploadPicBean.getUser_id());
+                    bean.setTAG(mUploadPicBean.getTag());
                     bean.setTEAM_TYPE(mUploadPicBean.getTeam_type());
                     bean.setTEAM_NUM(mUploadPicBean.getTeam_num());
                     bean.setTEAM_NUM_INDEX(mUploadPicBean.getTeam_position());
                     bean.setTEAM_CONTENT_VALUE(mUploadPicBean.getNetwork_path());
                     bean.setTEAM_CONTENT_KEY(mUploadPicBean.getControlKey());
-                    bean.setTEAM_CONTENT_TYPE("2");
+                    //bean.setTEAM_CONTENT_TYPE("2");
                     mTaskTempleDBManager.updateOrAddTaskTemplate(bean);
                 }
             }

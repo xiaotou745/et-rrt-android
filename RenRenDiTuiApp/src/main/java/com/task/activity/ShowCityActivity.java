@@ -4,8 +4,11 @@ import android.content.Context;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +22,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClientOption;
 import com.renrentui.app.MyApplication;
 import com.renrentui.app.R;
 import com.renrentui.db.Bean.CityDBBean;
 import com.renrentui.db.CityDBManager;
+import com.renrentui.resultmodel.CityRegionModel;
+import com.renrentui.util.ToastUtil;
 import com.renrentui.view.MyLetterListView;
 
 import java.util.ArrayList;
@@ -38,9 +46,9 @@ import base.BaseActivity;
  * Created by Administrator on 2015/12/11 0011.
  * 城市信息展示
  */
-public class ShowCityActivity extends BaseActivity implements AbsListView. OnScrollListener, View.OnClickListener{
+public class ShowCityActivity extends BaseActivity implements AbsListView. OnScrollListener, View.OnClickListener {
 
-    public CityDBManager mCityDBManager =null;//城市数据库
+    public CityDBManager mCityDBManager = null;//城市数据库
     private BaseAdapter adapter;
     private ResultListAdapter resultListAdapter;
     private ListView personList;
@@ -61,12 +69,16 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
 
     private String currentCity; // 用于保存定位到的城市
     private boolean isNeedFresh;
+    private boolean isLocation = false;
+    public MyLocationListenner myListener = new MyLocationListenner();
+    public Handler mShwoLocationHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city_layout);
+        init();
         mCityDBManager = new CityDBManager(context);
         personList = (ListView) findViewById(R.id.list_view);
         allCity_lists = new ArrayList<CityDBBean>();
@@ -120,10 +132,15 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position >= 4) {
-
-                    Toast.makeText(getApplicationContext(), allCity_lists.get(position).getCITY_NAME(), Toast.LENGTH_SHORT)
-                            .show();
+                if (position >= 3) {
+                    //全部城市列表
+                    String strName= allCity_lists.get(position).getCITY_NAME();
+                    String strCode = allCity_lists.get(position).getCITY_CODE();
+                    CityRegionModel bean = new CityRegionModel();
+                    bean.code=strCode;
+                    bean.name = strName;
+                    MyApplication.setmCurrentLocation(bean);
+                    ShowCityActivity.this.finish();
                 }
             }
         });
@@ -135,16 +152,34 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), city_result.get(position).getCITY_NAME(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), city_result.get(position).getCITY_NAME()+"2222", Toast.LENGTH_SHORT).show();
             }
         });
-        initOverlay();
+             initOverlay();
+        //本地数据展示
         cityInit();
         hotCityInit();
         hisCityInit();
         setAdapter(allCity_lists, city_hot, city_history);
+        initLocation();
+        mShwoLocationHandler   = new Handler() {
+            public void handleMessage (Message msg){
+                adapter.notifyDataSetChanged();
+            }
+        };
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(handler!=null){
+            handler.removeCallbacks(overlayThread);
+        }
+        mMyApplication.getmLocClient().stop();
+    }
+
     private boolean mReady;
+
     // 初始化汉语拼音首字母弹出提示框
     private void initOverlay() {
         mReady = true;
@@ -158,24 +193,27 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
         WindowManager windowManager = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
         windowManager.addView(overlay, lp);
     }
-//    初始化城市
+
+    //    初始化城市
     private void cityInit() {
+        allCity_lists.clear();
         CityDBBean city = new CityDBBean("定位", "0"); // 当前定位城市
         allCity_lists.add(city);
-        city = new CityDBBean("最近", "1"); // 最近访问的城市
+//        city = new CityDBBean("最近", "1"); // 最近访问的城市
+//        allCity_lists.add(city);
+        city = new CityDBBean("热门", "1"); // 热门城市
         allCity_lists.add(city);
-        city = new CityDBBean("热门", "2"); // 热门城市
-        allCity_lists.add(city);
-        city = new CityDBBean("全部", "3"); // 全部城市
+        city = new CityDBBean("全部", "2"); // 全部城市
         allCity_lists.add(city);
         city_lists = getCityList();
         allCity_lists.addAll(city_lists);
     }
-//    获取全部城市信息
+
+    //    获取全部城市信息
     private ArrayList<CityDBBean> getCityList() {
 //        列表
         ArrayList<CityDBBean> list = new ArrayList<CityDBBean>();
-       list = mCityDBManager.getAllHotCity("3");
+        list = mCityDBManager.getAllHotCity("3");
         Collections.sort(list, comparator);
         return list;
     }
@@ -185,8 +223,9 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
      */
     public void hotCityInit() {
         //热门
+        city_hot.clear();
         city_hot = mCityDBManager.getAllHotCity("2");
-        Collections.sort(city_hot,comparator);
+        Collections.sort(city_hot, comparator);
 
     }
 
@@ -195,6 +234,7 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
      */
     private void hisCityInit() {
         //历史信息
+        city_history.clear();
         city_history = mCityDBManager.getAllHotCity("4");
         Collections.sort(city_history, comparator);
     }
@@ -203,8 +243,9 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
         adapter = new ListAdapter(this, list, hotList, hisCity);
         personList.setAdapter(adapter);
     }
+
     private void getResultCityList(String keyword) {
-        city_result =  mCityDBManager.getKeyCityByName(keyword);
+        city_result = mCityDBManager.getKeyCityByName(keyword);
         Collections.sort(city_result, comparator);
     }
 
@@ -226,7 +267,8 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
             }
         }
     }
-//    ================================适配器======================================
+
+    //    ================================适配器======================================
     public class ListAdapter extends BaseAdapter {
         private Context context;
         private LayoutInflater inflater;
@@ -256,6 +298,25 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
             }
         }
 
+        public void setCityData(List<CityDBBean> list, List<CityDBBean> hotList, List<CityDBBean> hisCity) {
+            this.list = list;
+            this.hotList = hotList;
+            this.hisCity = hisCity;
+            sections = new String[list.size()];
+            for (int i = 0; i < list.size(); i++) {
+                // 当前汉语拼音首字母
+                String currentStr = getAlpha(list.get(i).getCITY_FIRST_LETTER());
+                // 上一个汉语拼音首字母，如果不存在为" "
+                String previewStr = (i - 1) >= 0 ? getAlpha(list.get(i - 1).getCITY_FIRST_LETTER()) : " ";
+                if (!previewStr.equals(currentStr)) {
+                    String name = getAlpha(list.get(i).getCITY_FIRST_LETTER());
+                    alphaIndexer.put(name, i);
+                    sections[i] = name;
+                }
+            }
+            this.notifyDataSetChanged();
+        }
+
         @Override
         public int getViewTypeCount() {
             return VIEW_TYPE;
@@ -263,7 +324,7 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
 
         @Override
         public int getItemViewType(int position) {
-            return position < 4 ? position : 4;
+            return position < 3 ? position : 3;
         }
 
         @Override
@@ -288,47 +349,67 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
             final TextView city;
             int viewType = getItemViewType(position);
             if (viewType == 0) {
-            // 定位
-                convertView = inflater.inflate(R.layout.frist_list_item, parent,false);
+                // 定位
+                convertView = inflater.inflate(R.layout.frist_list_item, parent, false);
                 city = (TextView) convertView.findViewById(R.id.city);
-                TextView title = (TextView)convertView.findViewById(R.id.recentHint);
-               // city.setText(MyApplication.getmLocalLocation().name);
+                TextView title = (TextView) convertView.findViewById(R.id.recentHint);
+                // city.setText(MyApplication.getmLocalLocation().name);
                 title.setText("定位城市");
-                city.setText("北京市");
-            }  else if (viewType == 1) {
-            // 最近城市（历史）
-                convertView = inflater.inflate(R.layout.recent_city,  parent,false);
-                GridView rencentCity = (GridView) convertView.findViewById(R.id.recent_city);
-                rencentCity.setAdapter(new HisCityAdapter(context, this.hisCity));
-                rencentCity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                if(isLocation){
+                    //定位成功
+                    city.setText(MyApplication.getmLocalLocation().name);
+                    title.setClickable(true);
+                }else{
+                    city.setText("定位中...");
+                    title.setClickable(false);
+                }
+                title.setOnClickListener(new View.OnClickListener(){
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    public void onClick(View view) {
 
                     }
                 });
-                TextView recentHint = (TextView) convertView.findViewById(R.id.recentHint);
-                recentHint.setText("最近访问的城市");
-            } else if (viewType == 2) {
+            }
+//            else if (viewType == 1) {
+//                // 最近城市（历史）
+//                convertView = inflater.inflate(R.layout.recent_city, parent, false);
+//                GridView rencentCity = (GridView) convertView.findViewById(R.id.recent_city);
+//                rencentCity.setAdapter(new HisCityAdapter(context, this.hisCity));
+////                rencentCity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+////                    @Override
+////                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+////
+////                    }
+////                });
+//                TextView recentHint = (TextView) convertView.findViewById(R.id.recentHint);
+//                recentHint.setText("最近访问的城市");
+//            }
+            else if (viewType == 1) {
                 //热门城市
-                convertView = inflater.inflate(R.layout.recent_city, parent,false);
+                convertView = inflater.inflate(R.layout.recent_city, parent, false);
                 GridView hotCity = (GridView) convertView.findViewById(R.id.recent_city);
                 hotCity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                        Toast.makeText(getApplicationContext(), city_hot.get(position).getCITY_NAME(), Toast.LENGTH_SHORT)
-                                .show();
+                        String strName= hotList.get(position).getCITY_NAME();
+                        String strCode = hotList.get(position).getCITY_CODE();
+                        CityRegionModel bean = new CityRegionModel();
+                        bean.code=strCode;
+                        bean.name = strName;
+                        MyApplication.setmCurrentLocation(bean);
+                        ShowCityActivity.this.finish();
                     }
                 });
                 hotCity.setAdapter(new HotCityAdapter(context, this.hotList));
                 TextView hotHint = (TextView) convertView.findViewById(R.id.recentHint);
                 hotHint.setText("热门城市");
-            } else if (viewType == 3) {
-                convertView = inflater.inflate(R.layout.total_item, parent,false);
+            } else if (viewType == 2) {
+                convertView = inflater.inflate(R.layout.total_item, parent, false);
             } else {
                 if (convertView == null) {
-                    convertView = inflater.inflate(R.layout.list_item, parent,false);
+                    convertView = inflater.inflate(R.layout.list_item, parent, false);
                     holder = new ViewHolder();
                     holder.alpha = (TextView) convertView.findViewById(R.id.alpha);
                     holder.name = (TextView) convertView.findViewById(R.id.name);
@@ -356,11 +437,12 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
             TextView name; // 城市名字
         }
     }
-//历史城市
+
+    //历史城市
     class HisCityAdapter extends BaseAdapter {
         private Context context;
         private LayoutInflater inflater;
-    private List<CityDBBean> hisCitys;
+        private List<CityDBBean> hisCitys;
 
         public HisCityAdapter(Context context, List<CityDBBean> hisCitys) {
             this.context = context;
@@ -391,7 +473,8 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
             return convertView;
         }
     }
-//热门城市
+
+    //热门城市
     class HotCityAdapter extends BaseAdapter {
         private Context context;
         private LayoutInflater inflater;
@@ -426,7 +509,8 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
             return convertView;
         }
     }
-//   搜索结果适配器
+
+    //   搜索结果适配器
     private class ResultListAdapter extends BaseAdapter {
         private LayoutInflater inflater;
         private ArrayList<CityDBBean> results = new ArrayList<CityDBBean>();
@@ -478,13 +562,15 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
             overlay.setVisibility(View.GONE);
         }
     }
+
     @SuppressWarnings("rawtypes")
     Comparator comparator = new Comparator<CityDBBean>() {
         @Override
         public int compare(CityDBBean lhs, CityDBBean rhs) {
-                return lhs.getCITY_FIRST_LETTER().compareTo(rhs.getCITY_FIRST_LETTER());
+            return lhs.getCITY_FIRST_LETTER().compareTo(rhs.getCITY_FIRST_LETTER());
         }
     };
+
     // 获得汉语拼音首字母
     private String getAlpha(String str) {
         if (str == null) {
@@ -510,13 +596,14 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
             return "#";
         }
     }
-//    ==========================
-@Override
-public void onScrollStateChanged(AbsListView view, int scrollState) {
-    if (scrollState == SCROLL_STATE_TOUCH_SCROLL || scrollState == SCROLL_STATE_FLING) {
-        isScroll = true;
+
+    //    ==========================
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        if (scrollState == SCROLL_STATE_TOUCH_SCROLL || scrollState == SCROLL_STATE_FLING) {
+            isScroll = true;
+        }
     }
-}
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
@@ -544,10 +631,60 @@ public void onScrollStateChanged(AbsListView view, int scrollState) {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.layout_back:
                 ShowCityActivity.this.finish();
                 break;
+        }
+
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(myListener!=null){
+            mMyApplication.getmLocClient().unRegisterLocationListener(myListener);
+        }
+    }
+    //==============================定位========================
+    /**
+     * 初始化定位
+     */
+    public void initLocation() {
+        try {
+            mMyApplication.getmLocClient().registerLocationListener(myListener);
+            LocationClientOption option = new LocationClientOption();
+            option.setOpenGps(true);// 开启gps
+            option.setCoorType("bd09ll");// 返回百度经纬度坐标
+            option.setIsNeedAddress(true);
+            option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
+            option.setScanSpan(1000);
+            mMyApplication.getmLocClient().setLocOption(option);
+            mMyApplication.getmLocClient().start();
+        }catch (Exception e){
+
+        }finally {
+
+        }
+    }
+    public class MyLocationListenner implements BDLocationListener {
+
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            if(location!=null && !TextUtils.isEmpty(location.getCity())){
+                //定位成功
+                isLocation  =true;
+                mMyApplication.getmLocClient().stop();
+                CityRegionModel localLocation = new CityRegionModel();
+                String StrName = location.getCity();
+                String strCode = mCityDBManager.getCityCodeByName(StrName);
+                localLocation.code = strCode;
+                localLocation.name = StrName;
+                MyApplication.setmLocalLocation(localLocation);
+                mShwoLocationHandler.sendEmptyMessageDelayed(0,2*1000);
+            }else{
+                //定位失败
+                mMyApplication.getmLocClient().stop();
+            }
         }
 
     }

@@ -445,7 +445,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dp"
                     android:layout_toLeftOf="@id/iv_go"
-                    android:text="4006-380-177"
+                    android:text="010-57173598"
                     android:textColor="#333333"
                     android:textSize="@dimen/_14sp" />
             </RelativeLayout>

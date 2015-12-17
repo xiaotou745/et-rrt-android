@@ -3,8 +3,10 @@ package com.task.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +33,7 @@ import com.renrentui.util.ApiNames;
 import com.renrentui.util.ApiUtil;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
+import com.task.model.LayoutMyTaskTopmenu;
 import com.task.service.GetThroughTaskAdapter;
 
 /**
@@ -49,6 +52,14 @@ public class FragmentThroughTask extends BaseFragment implements
 	private List<MyTaskContentBean> finishedTaskInfos;
 	private String nextId = "";
 	private int pageindex = 1;
+	private LayoutMyTaskTopmenu layoutTopMenu;// 顶部按钮
+
+	@SuppressLint("ValidFragment")
+	public FragmentThroughTask(LayoutMyTaskTopmenu layoutTopMenu){
+		this.layoutTopMenu = layoutTopMenu;
+	}
+
+
 
 	private RQHandler<RSMyTask> rqHandler_jxzTask = new RQHandler<>(
 			new IRqHandlerMsg<RSMyTask>() {
@@ -70,6 +81,8 @@ public class FragmentThroughTask extends BaseFragment implements
 				@Override
 				public void onSuccess(RSMyTask t) {
 					FragmentThroughTask.this.hideLayoutNoda();
+					layoutTopMenu.setThroughNum(t.data.passTotal);
+					layoutTopMenu.setInvalid(t.data.refuseTotal);
 					pulltorefresh_taskList.setVisibility(View.VISIBLE);
 					if (pageindex == 1) {
 						if (t.data.count == 0) {
@@ -78,26 +91,25 @@ public class FragmentThroughTask extends BaseFragment implements
 									ResultMsgType.Success, "刷新", "您还没有领取任务",
 									FragmentThroughTask.this);
 						} else {
-							finishedTaskInfos.clear();
-							nextId = t.data.nextID;
+							nextId = t.data.nextId;
 							if(finishedTaskInfos!=null){
 								finishedTaskInfos.clear();
 							}else{
 								finishedTaskInfos = new ArrayList<MyTaskContentBean>();
 							}
 							finishedTaskInfos.addAll(t.data.content);
-							getInvalidTaskAdapter.notifyDataSetChanged();
+							getInvalidTaskAdapter.setThroughTaskData(finishedTaskInfos);
 						}
 					} else {
 						if (t.data.count == 0) {
 							ToastUtil.show(context, "暂无更多数据");
 						} else {
-							nextId = t.data.nextID;
+							nextId = t.data.nextId;
 							if(finishedTaskInfos==null){
-
+								finishedTaskInfos = new ArrayList<MyTaskContentBean>();
 							}
 							finishedTaskInfos.addAll(t.data.content);
-							getInvalidTaskAdapter.notifyDataSetChanged();
+							getInvalidTaskAdapter.setThroughTaskData(finishedTaskInfos);
 						}
 					}
 				}
@@ -140,11 +152,11 @@ public class FragmentThroughTask extends BaseFragment implements
 	 * 初始化数据
 	 */
 	public void getInitData() {
+		pageindex = 1;
 		ApiUtil.Request(new RQBaseModel<RQMyTask, RSMyTask>(
 				context, new RQMyTask(Utils.getUserDTO(context).data.userId, "0",1),
 				new RSMyTask(), ApiNames.获取所有已领取任务.getValue(),
 				RequestType.POST, rqHandler_jxzTask));
-		pageindex = 1;
 	}
 	
 	@Override

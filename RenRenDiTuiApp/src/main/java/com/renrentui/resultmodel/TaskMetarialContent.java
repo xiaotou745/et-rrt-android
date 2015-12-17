@@ -14,7 +14,7 @@ public class TaskMetarialContent  implements Serializable {
     public double amount ;//任务单价
     public int taskType ;//任务类型  id任务类型1 签约任务 2 分享任务 3 下载任务
     public String taskTypeName ;//任务类型名称
-    public String taskStatus;// 任务状态描述：进行中或已过期
+    public String taskStatus;// 任务状态描述：1是审核通过，3是过期，4是终止
     public String auditCycle;// (审核周期)
     public String taskDatumId;// 资料id
     public String auditStatus;// 审核状态描述：待审核，通过，不通过

@@ -16,6 +16,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.renrentui.app.R;
 import com.renrentui.interfaces.IBack;
 import com.renrentui.tools.ExitApplication;
+import com.umeng.analytics.MobclickAgent;
 
 public class BaseFragmentActivity extends FragmentActivity {
 	public View layout_back;
@@ -75,4 +76,13 @@ public class BaseFragmentActivity extends FragmentActivity {
 			});
 		}
 	}
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);       //统计时长
+	}
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
 }

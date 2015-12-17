@@ -63,7 +63,7 @@ public class MyMessageAdapter extends BaseAdapter {
         mViewHolder.mTV_title.setText(bean.title);
         mViewHolder.mTV_content.setText(bean.msg);
         mViewHolder.mTV_time.setText(TimeUtils.StringPattern(bean.time,"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm"));
-        return null;
+        return view;
     }
     public  class ViewHolder{
         private TextView mTV_title;

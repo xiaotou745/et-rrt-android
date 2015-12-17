@@ -40,13 +40,17 @@ import com.renrentui.util.Utils;
 import com.task.service.GetNoGoingAdapter;
 import com.user.activity.LoginActivity;
 import com.user.activity.PersonalCenterActivity;
+import com.user.model.download.DownLoadUtils;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -65,7 +69,10 @@ import base.BaseActivity;
 public class NoGoingTaskActicity extends BaseActivity implements
 		OnHeaderRefreshListener, OnFooterRefreshListener, INodata,
 		OnClickListener {
+	private static final String ACTION_UPDATE_APP_UMENG_FILTER = "com.task.activity.NoGoingTaskActicity.Umeng";
 
+	private static int  isLocation = -1;//是否定位成功(-1: 没有启动定位  0：定位成功   1：定位失败)
+	private static int  isGetCity = -1;//是否获取城市成功(-1: 没有获取成功  0：获取城市成功   1：获取城市失败)
 
 	private TextView tv_user_address;// 用户当前地址
 	private TextView tv_to_login;// 登录按钮
@@ -83,6 +90,9 @@ public class NoGoingTaskActicity extends BaseActivity implements
 	public MyLocationListenner myListener = new MyLocationListenner();
 	public CityDBManager mCityDBManager =null;//城市数据库
 	public ArrayList<CityDBBean> cityAllData= new ArrayList<CityDBBean>();
+	public Handler mGetDataHander;
+	public static final int TAG_WHATE_STOP = 1002;
+	public static final int TAG_WHATE_CONNECTION = 1001;
 
 	private RQHandler<RSGetNoGoingTask> rqHandler_getNoGoingTask = new RQHandler<>(
 			new IRqHandlerMsg<RSGetNoGoingTask>() {
@@ -156,7 +166,6 @@ public class NoGoingTaskActicity extends BaseActivity implements
 
 				@Override
 				public void onBefore() {
-					hideProgressDialog();
 				}
 
 				@Override
@@ -167,23 +176,25 @@ public class NoGoingTaskActicity extends BaseActivity implements
 				@Override
 				public void onSuccess(RSGetCityModel t) {
 					if("200".equals(t.code)){
+						isGetCity = 0;
 						//获取成功
 						initCityInfo(t);
 					}else{
-						ToastUtil.show(context,t.msg);
+						isGetCity = 1;
 					}
 				}
 
 				@Override
 				public void onSericeErr(RSGetCityModel t) {
 					//服务器返回错误
-					//hideProgressDialog();
+					isGetCity = 1;
 				}
 
 				@Override
 				public void onSericeExp() {
 					//服务器返回为空
-					//hideProgressDialog();
+					isGetCity = 1;
+					ToastUtil.show(context,"onSericeExp");
 				}
 			});
 	@Override
@@ -195,23 +206,27 @@ public class NoGoingTaskActicity extends BaseActivity implements
 		initControl();
 		checkoutGPSStatus();
 		initLocation();
+		initHandler();
 		lv_no_going_task.setOverScrollMode(View.OVER_SCROLL_NEVER);
 		noGoingTaskInfos = new ArrayList<NoGoingTaskInfo>();
 		getNoGoingAdapter = new GetNoGoingAdapter(context, noGoingTaskInfos);
 		lv_no_going_task.setAdapter(getNoGoingAdapter);
 		mCityDBManager  = new CityDBManager(context);
 		getCityData();
+//		升级提示信息
+		DownLoadUtils.checkoutAppVersion(this, true, ACTION_UPDATE_APP_UMENG_FILTER,false);
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
+		showProgressDialog();
+		//用户信息
 		if (Utils.getUserDTO(context) != null){
 			userId = Utils.getUserDTO(context).data.userId;
 		}else {
 			userId = "0";
 		}
-		
 		if (!userId.equals("0")) {
 			tv_to_login.setVisibility(View.GONE);
 			iv_to_personal_center.setVisibility(View.VISIBLE);
@@ -220,11 +235,29 @@ public class NoGoingTaskActicity extends BaseActivity implements
 			iv_to_personal_center.setVisibility(View.GONE);
 			tv_to_login.setVisibility(View.VISIBLE);
 			iv_to_my_task.setVisibility(View.GONE);
+		}
+		if(!TextUtils.isEmpty(MyApplication.getmCurrentLocation().code) && !TextUtils.isEmpty(MyApplication.getmLocalLocation().code)){
+			//地址信息完整，可以获取数据
+			tv_user_address.setText(MyApplication.getmCurrentLocation().name);
+			getInitData();
+		}else{
+			//地址信息不完整.
 
 		}
-		getInitData();
-		if(Util.IsNotNUll(tv_user_address.getText().toString())){
-			tv_user_address.setText("北京市");
+	}
+	@Override
+	public void onPause() {
+		super.onPause();
+		if(myListener!=null){
+			mMyApplication.getmLocClient().stop();
+			mMyApplication.getmLocClient().unRegisterLocationListener(myListener);
+		}
+	}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if(myListener!=null){
+			mMyApplication.getmLocClient().unRegisterLocationListener(myListener);
 		}
 	}
 
@@ -262,11 +295,45 @@ public class NoGoingTaskActicity extends BaseActivity implements
 	 */
 	public void getInitData() {
 		showProgressDialog();
+		setCityInfo();
 		ApiUtil.Request(new RQBaseModel<RQGetNoGoingTask, RSGetNoGoingTask>(
-				context, new RQGetNoGoingTask(userId, "0", "210200"),
+				context, new RQGetNoGoingTask(userId, "0", MyApplication.getmCurrentLocation().code),
 				new RSGetNoGoingTask(), ApiNames.获取所有可领取任务.getValue(),
 				RequestType.POST, rqHandler_getNoGoingTask));
 		pageindex = 1;
+	}
+	public  void setCityInfo(){
+		String strLocationCode = "";//定位城市
+		if(!TextUtils.isEmpty(MyApplication.getmLocalLocation().name)){
+			strLocationCode =mCityDBManager.getCityCodeByName(MyApplication.getmLocalLocation().name);
+		}
+		String strCurrentCode = "";//当前城市
+		if(!TextUtils.isEmpty(MyApplication.getmCurrentLocation().name)){
+			strCurrentCode =mCityDBManager.getCityCodeByName(MyApplication.getmCurrentLocation().name);
+		}
+		if(TextUtils.isEmpty(MyApplication.getmCurrentLocation().name) || TextUtils.isEmpty(MyApplication.getmCurrentLocation().code)){
+			MyApplication.setmCurrentLocation(MyApplication.getmLocalLocation());
+		}
+		//完善定位城市
+		if(!TextUtils.isEmpty(strLocationCode) ){
+			CityRegionModel beanCity = new CityRegionModel();
+			beanCity.code=strLocationCode;
+			beanCity.name=MyApplication.getmLocalLocation().name;
+			MyApplication.setmLocalLocation(beanCity);
+		}
+		if(TextUtils.isEmpty(strCurrentCode)){
+			//使用默认城市
+			CityRegionModel beanCity = new CityRegionModel();
+			beanCity.code="110100";
+			beanCity.name="北京市";
+			MyApplication.setmCurrentLocation(beanCity);
+			//MyApplication.setmLocalLocation(beanCity);
+		}else{
+			//个性城市
+			MyApplication.getmCurrentLocation().code=strCurrentCode;
+		//	MyApplication.getmLocalLocation().code=strLocationCode;
+		}
+		tv_user_address.setText(MyApplication.getmCurrentLocation().name);
 	}
 
 	@Override
@@ -283,14 +350,8 @@ public class NoGoingTaskActicity extends BaseActivity implements
 	 * 获取更多数据
 	 */
 	private void getMoreData() {
-//		ApiUtil.Request(new RQBaseModel<RQGetNoGoingTask, RSGetNoGoingTask>(
-//				context, new RQGetNoGoingTask(userId, 0.0f, 0.0f, nextId),
-//				new RSGetNoGoingTask(), ApiNames.获取所有未领取任务.getValue(),
-//				RequestType.POST, rqHandler_getNoGoingTask));
-//		pageindex++;
-
 		ApiUtil.Request(new RQBaseModel<RQGetNoGoingTask, RSGetNoGoingTask>(
-				context, new RQGetNoGoingTask(userId, nextId,"110100"),
+				context, new RQGetNoGoingTask(userId, nextId,MyApplication.getmCurrentLocation().code),
 				new RSGetNoGoingTask(), ApiNames.获取所有可领取任务.getValue(),
 				RequestType.POST, rqHandler_getNoGoingTask));
 		pageindex++;
@@ -307,7 +368,6 @@ public class NoGoingTaskActicity extends BaseActivity implements
 		if(v.getId()==R.id.tv_user_address){
 			//展示城市信息
 			intent =new Intent(context,ShowCityActivity.class);
-
 		}else if(TextUtils.isEmpty(userId) ||"0".equals(userId)){
 			intent = new Intent(context, LoginActivity.class);
 		}else {
@@ -395,6 +455,7 @@ public class NoGoingTaskActicity extends BaseActivity implements
 			//存入数据库
 			mCityDBManager.delCityList();
 			mCityDBManager.addCityList(cityAllData,strVersion);
+
 		}
 	}
 //==============================定位信息===================================
@@ -453,6 +514,7 @@ public class NoGoingTaskActicity extends BaseActivity implements
 
 		}
 	}
+//	定位
 public class MyLocationListenner implements BDLocationListener {
 
 	@Override
@@ -465,13 +527,44 @@ public class MyLocationListenner implements BDLocationListener {
 			String strCode = mCityDBManager.getCityCodeByName(StrName);
 			localLocation.code = strCode;
 			localLocation.name = StrName;
-			//MyApplication.setmLocalLocation(localLocation);
-			ToastUtil.show(context,"<<<<<<<>>>>>>>>"+StrName);
+			MyApplication.setmLocalLocation(localLocation);
+			MyApplication.setmCurrentLocation(localLocation);
+			//ToastUtil.show(context, "<<<<<<<success>>>>>>>>" + StrName);
+			isLocation = 0;
+			mGetDataHander.sendEmptyMessageAtTime(TAG_WHATE_CONNECTION,2*1000);
 		}else{
 			//定位失败
+			isLocation = 1;
 			mMyApplication.getmLocClient().stop();
-			ToastUtil.show(context,"<<<<<<<---fail--->>>>>>>>");
+			mGetDataHander.sendEmptyMessageAtTime(TAG_WHATE_CONNECTION, 2 * 1000);
+			ToastUtil.show(context, "定位失败!" );
 		}
 	}
+}
+//	======================操作数据信息==================
+	private void initHandler(){
+		mGetDataHander = new Handler(){
+			public void handleMessage(Message msg) {
+				switch (msg.what){
+					case  TAG_WHATE_CONNECTION:
+						if(isGetCity!=-1 && isGetCity!=-1){
+							//停止等待，获取任务信息
+							mGetDataHander.removeMessages(TAG_WHATE_CONNECTION);
+							mGetDataHander.sendEmptyMessageDelayed(TAG_WHATE_STOP, 1 * 1000);
+							//获取任务数据
+							getInitData();
+						} else{
+							mGetDataHander.sendEmptyMessageDelayed(TAG_WHATE_CONNECTION,1*1000);
+						}
+					break;
+					case TAG_WHATE_STOP:
+						mGetDataHander.removeMessages(TAG_WHATE_STOP);
+						break;
+				}
+			}
+	};
+
+
+
 }
 }

@@ -15,6 +15,7 @@
     <color name="font_color_red">#fe599a</color>
     <color name="gray">#e8e8e8</color>
     <color name="grayFromSetting">#55000000</color>
+    <color name="gray_color">#999999</color>
     <color name="gray_line">#e8e8e8</color>
     <color name="gray_space">#E6E7EB</color>
     <color name="green">#89c997</color>
@@ -40,6 +41,8 @@
     <color name="title_blue">#70cdf4</color>
     <color name="transparent">#000000</color>
     <color name="tv_bg_color_1">#32bcf6</color>
+    <color name="tv_bg_color_2">#2b8ffc</color>
+    <color name="tv_bg_color_3">#fda72f</color>
     <color name="tv_color_1">#00bcd5</color>
     <color name="tv_order_color_1">#333333</color>
     <color name="tv_order_color_2">#666666</color>
@@ -49,6 +52,7 @@
     <color name="tv_order_money_color_1">#f7585d</color>
     <color name="white">#ffffff</color>
     <color name="white_pre">#f0f0f0</color>
+    <color name="yellow">#FFCB00</color>
     <declare-styleable name="CircleImageView"><attr format="dimension" name="border_width"/><attr format="color" name="border_color"/></declare-styleable>
     <!-- From: file:/D:/StudioProjectsWorkSpace/renrenditui_androidApp/RenRenDiTuiApp/src/main/res/values/dimens.xml -->
     <eat-comment/>
@@ -107,6 +111,14 @@
     <dimen name="view_space_2_multiple">20dip</dimen>
     <dimen name="view_space_half">5dip</dimen>
     <dimen name="view_space_half_3_multiple">15dip</dimen>
+    <!-- From: file:/D:/StudioProjectsWorkSpace/renrenditui_androidApp/RenRenDiTuiApp/src/main/res/values/ids.xml -->
+    <eat-comment/>
+    <item name="listview_multiple_type_first_layout" type="id"/>
+    <item name="listview_multiple_type_five_layout" type="id"/>
+    <item name="listview_multiple_type_four_layout" type="id"/>
+    <item name="listview_multiple_type_second_layout" type="id"/>
+    <item name="listview_multiple_type_six_layout" type="id"/>
+    <item name="listview_multiple_type_three_layout" type="id"/>
     <!-- From: file:/D:/StudioProjectsWorkSpace/renrenditui_androidApp/RenRenDiTuiApp/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="aboutme">关于我们</string>
@@ -118,7 +130,7 @@
     <string name="album">从相册中选择</string>
     <string name="alipay_account">支付宝账号</string>
     <string name="alipay_name">支付宝姓名</string>
-    <string name="app_name">人人地推</string>
+    <string name="app_name">人人推</string>
     <string name="audit">审核中</string>
     <string name="balance">提现金额</string>
     <string name="cache">清除缓存</string>
@@ -150,6 +162,7 @@
     <string formatted="false" name="my_task_list_itemt_2">已通过(%1$s)</string>
     <string formatted="false" name="my_task_list_itemt_3">未通过(%1$s)</string>
     <string formatted="false" name="my_task_list_itemt_4">成功分享(%1$s)次</string>
+    <string formatted="false" name="my_task_list_itemt_5">任务进行中</string>
     <string name="name">姓名</string>
     <string name="networknotconnect">网络无连接</string>
     <string name="newPassword">新密码</string>
@@ -183,9 +196,9 @@
     <string name="submit_data">提交审核</string>
     <string name="systemSetting">系统设置</string>
     <string name="task_description">任务流程</string>
-    <string formatted="false" name="task_detail_dealtime_format">截止日期 ：%1$s</string>
-    <string formatted="false" name="task_detail_examine_format">审核 ：%1$s天</string>
-    <string formatted="false" name="task_detail_tel_format">咨询 :<![CDATA[<font color="#00bcd5"> %1$s</font>]]></string>
+    <string formatted="false" name="task_detail_dealtime_format">截止日期:%1$s</string>
+    <string formatted="false" name="task_detail_examine_format">审核:%1$s天</string>
+    <string formatted="false" name="task_detail_tel_format">咨询:<![CDATA[<font color="#00bcd5"> %1$s</font>]]></string>
     <string name="taskcontent">任务详情</string>
     <string name="through">审核通过</string>
     <string name="through_1">进行中(0)</string>

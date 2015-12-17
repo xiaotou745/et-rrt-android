@@ -3,6 +3,12 @@ package com.renrentui.util;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.ForegroundColorSpan;
+
+import com.renrentui.app.R;
 
 public class UIHelper {
 
@@ -115,4 +121,25 @@ public class UIHelper {
         return 2*statusHeight;
     }
 
+    /**
+     * 设置前景色和背景色
+     * @param context
+     * @param str_1
+     * @param str_2
+     * @param fColor
+     * @param bColor
+     * @return
+     */
+    public static SpannableStringBuilder setStyleColorByColor(Context context,String str_1,String str_2,int fColor,int bColor){
+        String strType =  " "+str_1+" ";
+        String strTypeContent =strType +" "+str_2;
+        int fstart = strTypeContent.indexOf(str_1);
+        int fend = fstart + str_1.length();
+        int bstart = 0;
+        int bend = strType.length();
+        SpannableStringBuilder style = new SpannableStringBuilder(strTypeContent);
+        style.setSpan(new ForegroundColorSpan(context.getResources().getColor(fColor)),fstart,fend, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        style.setSpan(new BackgroundColorSpan(context.getResources().getColor(bColor)),bstart,bend, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        return style;
+    }
 }

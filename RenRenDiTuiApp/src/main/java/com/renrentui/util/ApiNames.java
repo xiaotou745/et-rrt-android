@@ -30,7 +30,7 @@ public enum ApiNames {
 	获取资料模板或模板详情("taskdatum/gettaskdatumdetail"),
 	提交任务模板接口("task/submittask"),
 	获取城市信息列表("region/gethotregionandall"),
-	获取消息列表("/msg/getmymsglist");
+	获取消息列表("msg/getmymsglist");
 	/**
 	 * PHP接口名称
 	 */

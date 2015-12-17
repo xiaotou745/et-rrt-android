@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class TaskMetarialBean implements Serializable {
     public String title ;//页签标题
     public int  count ;//本次条数
-    public String nextID ;//下一次获取数据时的开始位置
+    public String nextId ;//下一次获取数据时的开始位置
     public  int waitTotal;//申请中的数量
     public  int passTotal;//通过的数量
     public int refuseTotal;//没有通过的数量
@@ -21,11 +21,11 @@ public class TaskMetarialBean implements Serializable {
         super();
     }
 
-    public TaskMetarialBean(String title, int count, String nextID, ArrayList<TaskMetarialContent> content) {
+    public TaskMetarialBean(String title, int count, String nextId, ArrayList<TaskMetarialContent> content) {
         super();
         this.title = title;
         this.count = count;
-        this.nextID = nextID;
+        this.nextId = nextId;
         this.content = content;
     }
 
@@ -34,7 +34,7 @@ public class TaskMetarialBean implements Serializable {
         String str_1 = "TaskMetarialBean{" +
                 "title='" + title + '\'' +
                 ", count=" + count +
-                ", nextID='" + nextID + '\'' +
+                ", nextId='" + nextId + '\'' +
                 ", nextID='" + waitTotal + '\'' +
                 ", nextID='" + passTotal + '\'' +
                 ", nextID='" + refuseTotal + '\'' +

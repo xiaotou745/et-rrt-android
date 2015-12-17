@@ -76,8 +76,8 @@ public class MyTaskFramentActivity extends BaseFragmentActivity implements
     }
 
     private void initViewPager(int topage) {
-        fragmentThroughTask = new FragmentThroughTask();
-        fragmentInvalidTask = new FragmentInvalidTask();
+        fragmentThroughTask = new FragmentThroughTask(layoutTopMenu);
+        fragmentInvalidTask = new FragmentInvalidTask(layoutTopMenu);
         fragmentList = new ArrayList<BaseFragment>();
         fragmentList.add(fragmentThroughTask);
         fragmentList.add(fragmentInvalidTask);

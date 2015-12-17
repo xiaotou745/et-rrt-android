@@ -66,7 +66,8 @@ public class DownLoadDialog extends Dialog implements android.view.View.OnClickL
 
     private void initVIew() {
         mTVTitle = (TextView) findViewById(R.id.tv_dialog_title);
-        mTVTitle.setText(context.getResources().getString(R.string.download_title, strVersion));
+       // mTVTitle.setText(context.getResources().getString(R.string.download_title, strVersion));
+        mTVTitle.setText("发现最新版本");
         mTVContent = (TextView) findViewById(R.id.download_update_content);
         mTVContent.setText(this.content);
         mBtnOK = (Button) findViewById(R.id.DL_update_id_ok);

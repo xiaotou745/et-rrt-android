@@ -5,6 +5,7 @@
     android:background="@drawable/item_task_main_bg"
     android:padding="@dimen/view_space"
     android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants"
     >        <!-- top 1-->
         <RelativeLayout
             android:id="@+id/rl_task_content"
@@ -106,14 +107,14 @@
 
             <Button
                 android:id="@+id/btn_other"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dip"
+                android:layout_height="35dip"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/btn_white_selector_bg"
                 android:text="继续分享"
                 android:textColor="@color/tv_order_color_1"
-                android:paddingLeft="@dimen/view_space"
-                android:paddingRight="@dimen/view_space"
+                android:focusable="false"
+                android:clickable="true"
                 android:textSize="12sp" />
         </RelativeLayout>
     </LinearLayout>

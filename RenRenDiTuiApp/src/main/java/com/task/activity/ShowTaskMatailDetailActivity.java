@@ -89,8 +89,6 @@ public class ShowTaskMatailDetailActivity extends BaseActivity implements
     private LinearLayout ll_texts_area;//文字组区域
     private LinearLayout ll_images_area;//图片组区域
     private LinearLayout ll_multiple_images_area;//多组图片区域
-    //提交
-    private Button mBtn_submit;
 
     private RSTaskDatum mRSTaskDatum;//
 
@@ -160,7 +158,6 @@ public class ShowTaskMatailDetailActivity extends BaseActivity implements
         userId = Utils.getUserDTO(context).data.userId;
         mAct = ShowTaskMatailDetailActivity.this;
         taskId = getIntent().getStringExtra("taskId");
-       // taskId = "266";
         taskDatumId = getIntent().getStringExtra("taskDatumId");
         taskName = getIntent().getStringExtra("taskName");
         ctId = getIntent().getStringExtra("ctId");//地推关系id
@@ -202,8 +199,6 @@ public class ShowTaskMatailDetailActivity extends BaseActivity implements
         ll_texts_area = (LinearLayout)findViewById(R.id.ll_texts_area);
         ll_images_area = (LinearLayout)findViewById(R.id.ll_images_area);
         ll_multiple_images_area = (LinearLayout)findViewById(R.id.ll_multiple_images_area);
-        mBtn_submit = (Button)findViewById(R.id.btn_submit);
-        mBtn_submit.setOnClickListener(this);
         layout_back.setOnClickListener(this);
     }
 
@@ -221,7 +216,7 @@ public class ShowTaskMatailDetailActivity extends BaseActivity implements
     private void  getTaskDatumnTemplement(){
         showProgressDialog();
         ApiUtil.Request(new RQBaseModel<RQTaskDatumModel, RSTaskDatum>(
-                context, new RQTaskDatumModel(userId, taskId),
+                context, new RQTaskDatumModel(userId, taskId,taskDatumId),
                 new RSTaskDatum(), ApiNames.获取资料模板或模板详情.getValue(),
                 RequestType.POST, rqHandler_getTaskDatumn));
     }
@@ -385,102 +380,4 @@ public class ShowTaskMatailDetailActivity extends BaseActivity implements
             ll_multiple_images_area.addView(line_view);
         }
     }
-
-
-//=======================================图片的上传处理======================================
-//@Override
-//protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//    if (requestCode == PhotoManager.CAMERA_WITH_DATA || requestCode == PhotoManager.PHOTO_PICKED_WITH_DATA
-//            || requestCode == PhotoManager.SELECT_PICKED_LOCALTION) {
-//        // 默认回调是拍摄小票
-//        mTaskDatumTemplePIcManager.showOnActivityResult(mAct, requestCode, resultCode, data);
-//    }
-//}
-
-    //根据返回的bean信息更新指定view信息
-//    public synchronized void  setViewInfoByTeam(int status ,uploadPicBean mUploadPicBean){
-//        View controlView =null;
-//        if(mUploadPicBean!=null){
-//            String strTag = mUploadPicBean.getTag()+"_"+mUploadPicBean.getTeam_num()+"_"+mUploadPicBean.getTeam_position()+"_img";
-//            if(mUploadPicBean.getTag().equals(images_tag)){
-//                //图片组
-//                controlView = (View)ll_images_area.findViewWithTag(strTag).getParent().getParent().getParent();
-//            }else if(mUploadPicBean.getTag().equals(multiple_images)){
-//            //多组图片
-//                controlView = (View)ll_multiple_images_area.findViewWithTag(strTag).getParent().getParent();
-//            }
-//            if(controlView !=null){
-//                LinearLayout mLL_image = ViewHolderUtil.get(controlView, R.id.linear_img);
-//                LoadingView mLoadingImage = ViewHolderUtil.get(controlView, R.id.item_img_iv);
-//                TextView mTV_image_reset = ViewHolderUtil.get(controlView,R.id.item_reset_tv);
-//                TextView mTV_image_status = ViewHolderUtil.get(controlView, R.id.item_status_tv);
-//                mLoadingImage.setClickable(false);
-//                switch(status){
-//                    case UploadService.TASK_STATE_START:
-//                        //开始上传
-//                        mLoadingImage.setImageBitmap(mUploadPicBean.getIcon());
-//                        mTV_image_status.setText(R.string.upload_task_status_uploading);
-//                        mTV_image_reset.setVisibility(View.INVISIBLE);
-//                        mTV_image_status.setVisibility(View.VISIBLE);
-//                        break;
-//                    case UploadService.TASK_STATE_UPLOADING:
-//                        //上传中
-//                        mTV_image_status.setText(R.string.upload_task_status_uploading);
-//                        mTV_image_reset.setVisibility(View.INVISIBLE);
-//                        mTV_image_status.setVisibility(View.VISIBLE);
-//                        break;
-//                    case UploadService.TASK_STATE_COMPLETE:
-//                        //上传成功
-//                        mTV_image_status.setText(R.string.upload_task_status_complete);
-//                        mLoadingImage.setLoadingVisibility(View.INVISIBLE);
-//                        mTV_image_reset.setVisibility(View.INVISIBLE);
-//                        mTV_image_status.setVisibility(View.VISIBLE);
-//                        break;
-//                    case UploadService.TASK_STATE_WAITING:
-//                        //等候上传
-//                        mTV_image_status.setText(R.string.upload_task_status_waiting);
-//                        mLoadingImage.setLoadingVisibility(View.VISIBLE);
-//                        mTV_image_reset.setVisibility(View.INVISIBLE);
-//                        mTV_image_status.setVisibility(View.VISIBLE);
-//                        break;
-//                    case UploadService.TASK_STATE_FAIL:
-//                        //上传失败
-//                        mTV_image_status.setText(R.string.upload_task_status_fail);
-//                        mTV_image_status.setTextColor(Color.RED);
-//                        mLoadingImage.setLoadingVisibility(View.INVISIBLE);
-//                        mTV_image_reset.setVisibility(View.VISIBLE);
-//                        mTV_image_status.setVisibility(View.VISIBLE);
-//                        mLoadingImage.setClickable(true);
-//                        break;
-//                    case  UploadService.TASK_STATE_STOP:
-//                        //上传已停止
-//                        mTV_image_status.setText(R.string.upload_task_status_stop);
-//                        mTV_image_status.setTextColor(Color.RED);
-//                        mLoadingImage.setLoadingVisibility(View.INVISIBLE);
-//                        mTV_image_reset.setVisibility(View.VISIBLE);
-//                        mTV_image_status.setVisibility(View.VISIBLE);
-//                        break;
-//                }
-//                if(status==UploadService.TASK_STATE_COMPLETE && mUploadPicBean!=null){
-//                    //上传成功,图片信息存入数据库，方便提交时信息整哈
-//                        TaskTempleDBBean bean = new  TaskTempleDBBean();
-//                         bean.setTASK_ID(mUploadPicBean.getTask_id());
-//                        bean.setUSER_ID(mUploadPicBean.getUser_id());
-//                        bean.setTAG(mUploadPicBean.getTag());
-//                    bean.setTEAM_TYPE(mUploadPicBean.getTeam_type());
-//                    bean.setTEAM_NUM(mUploadPicBean.getTeam_num());
-//                    bean.setTEAM_NUM_INDEX(mUploadPicBean.getTeam_position());
-//                    bean.setTEAM_CONTENT_VALUE(mUploadPicBean.getNetwork_path());
-//                    bean.setTEAM_CONTENT_KEY(mUploadPicBean.getControlKey());
-//                    bean.setTEAM_CONTENT_TYPE("2");
-//                    mTaskTempleDBManager.updateOrAddTaskTemplate(bean);
-//                }
-//            }
-//        }
-//    }
-//    @Override
-////    public void setUploadPicProgress(long fileLength, long curLength, String path,int status, Object objData) {
-//        setViewInfoByTeam(status, (uploadPicBean) objData);
-//    }
-
 }

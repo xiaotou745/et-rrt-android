@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class MyTaskBean implements Serializable {
    public String  title ;//页签标题
     public int  count;// 本次条数
-    public String  nextID ;//下一次获取数据时的开始位置
+    public String  nextId ;//下一次获取数据时的开始位置
     public String  passTotal ;//进行中的任务的总数
     public String refuseTotal ;//已过期的任务的总数
     public ArrayList<MyTaskContentBean> content ;//数据集合 可能为null
@@ -20,7 +20,7 @@ public class MyTaskBean implements Serializable {
         String str_1 = "MyTaskBean{" +
                 "title='" + title + '\'' +
                 ", count='" + count + '\'' +
-                ", nextID='" + nextID + '\'' +
+                ", nextId='" + nextId + '\'' +
                 ", passTotal='" + passTotal + '\'' +
                 ", refuseTotal='" + refuseTotal + '\'' +
                 ", content=["  +

@@ -23,6 +23,11 @@ public class MyTaskContentBean implements Serializable {
     public String   auditRefuseNum ;//审核不通过的资料数量(签约类任务才有效)
     public String   complateNum ;//完成数量(分享类和下载类任务才有效)
     public String   ctId;//地推关系
+    public String downUrl ;//非签约任务 时 下载地址
+    public String scanTip ;//非签约任务 时 扫码说明
+    public String reminder ;//非签约任务 时 温馨提示
+    public String status;//任务状态,1是审核通过，3是过期，4是终止
+
 
     public String getAmount() {
         DecimalFormat df = new DecimalFormat("0.00");

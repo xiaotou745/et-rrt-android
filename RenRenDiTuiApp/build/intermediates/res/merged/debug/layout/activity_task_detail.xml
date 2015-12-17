@@ -140,6 +140,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/icon_examine"
+                            android:singleLine="true"
                             android:drawablePadding="10dp" />
 
                         <TextView
@@ -148,6 +149,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_5dp"
                             android:drawableLeft="@drawable/icon_tel"
+                            android:singleLine="true"
                             android:drawablePadding="10dp" />
                     </LinearLayout>
                         <TextView
@@ -157,17 +159,13 @@
                             android:layout_gravity="top"
                             android:gravity="top"
                             android:layout_weight="1"
-                            android:layout_marginTop="@dimen/_5dp"
                             android:drawableLeft="@drawable/icon_finish"
+                            android:singleLine="true"
                             android:drawablePadding="10dp" />
                 </LinearLayout>
             </LinearLayout>
 
-            <View
-               style="@style/line_height_10">
-            </View>
-
-<!--任务流程-->
+                <!-- 任务流程描述-->
             <LinearLayout
                 android:id="@+id/ll_task_description"
                 android:layout_width="match_parent"
@@ -175,6 +173,10 @@
                 android:orientation="vertical"
                 android:background="@color/white"
              >
+
+                <View
+                    style="@style/line_height_10">
+                </View>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -200,6 +202,7 @@
                         android:paddingBottom="@dimen/_5dp"
                         />
                 <View
+                    android:id="@+id/line_task_explain_top"
                         style="@style/line_height_1">
                 </View>
                     <!-- 当前任务的补充说明-->
@@ -214,9 +217,10 @@
                         android:divider="@null"
                         >
                     </com.renrentui.view.MyListView>
-            </LinearLayout>
+
 
             <View
+                android:id="@+id/line_detail_link_top"
                 style="@style/line_height_10">
             </View>
             <!--详情页面链接 -->
@@ -241,7 +245,7 @@
                     android:layout_marginTop="@dimen/_50dp"
                     android:layout_marginBottom="@dimen/view_space"
                     />
-
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

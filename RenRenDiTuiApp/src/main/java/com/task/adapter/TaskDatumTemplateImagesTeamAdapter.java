@@ -1,6 +1,7 @@
 package com.task.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.renrentui.app.R;
+import com.renrentui.db.Bean.TaskTempleDBBean;
+import com.renrentui.db.TaskTempleDBManager;
 import com.renrentui.resultmodel.TaskDatumControlBean;
 import com.renrentui.util.ImageLoadManager;
 import com.renrentui.util.ViewHolderUtil;
@@ -37,7 +40,7 @@ public class TaskDatumTemplateImagesTeamAdapter extends BaseAdapter {
     private int iTeam_num;//组号
     private int iShowContentType = 0;//0：编辑  1：展示
     private TaskDatumTemplePIcManager mTaskDatumTemplePIcManager = null;//拍照管理类
-
+    private TaskTempleDBManager mTaskTempleManager;
     public TaskDatumTemplateImagesTeamAdapter(Context con, ArrayList<TaskDatumControlBean> data, int iShowContentType ,
                                               String userId,String str_taskId,String tag,int iTeam_type,int iTeam_num){
         mContext = con;
@@ -48,6 +51,7 @@ public class TaskDatumTemplateImagesTeamAdapter extends BaseAdapter {
         this.iTeam_num = iTeam_num;
         this.iShowContentType = iShowContentType;
         this.str_taskId = str_taskId;
+        mTaskTempleManager = new TaskTempleDBManager(con);
     }
     public void  setTaskDatumTemplePIcManager(TaskDatumTemplePIcManager mObj){
         if(mTaskDatumTemplePIcManager==null){
@@ -83,27 +87,6 @@ public class TaskDatumTemplateImagesTeamAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         final  int position = i;
-//        HolderView mHolderView = null;
-//        if(view==null){
-//            view = LayoutInflater.from(mContext).inflate(R.layout.item_team_images_layout,viewGroup,false);
-//            mHolderView = new HolderView();
-//            LinearLayout mLL_image = (LinearLayout)view.findViewById(R.id.linear_img);
-//            LoadingView  mLoadingImage = (LoadingView)view.findViewById(R.id.iv_team_image_pic_item);
-//            TextView mTV_image_reset = (TextView)view.findViewById(R.id.item_reset_tv);
-//            TextView mTV_image_status = (TextView)view.findViewById(R.id.item_status_tv);
-//            mLoadingImage.setTag(str_tag + String.valueOf("_"+iTeam_num+"_") + String.valueOf(position)+"_img");
-//            mTV_image_reset.setTag(str_tag + String.valueOf("_"+iTeam_num+"_") + String.valueOf(position)+"_reset");
-//            mTV_image_status.setTag(str_tag + String.valueOf("_"+iTeam_num+"_") + String.valueOf(position)+"_status");
-//
-//            mHolderView.mLL_image = mLL_image;
-//            mHolderView.mImageView_images_pic = mLoadingImage;
-//            mHolderView.mTV_image_reset = mTV_image_reset;
-//            mHolderView.mTV_image_upload_status =mTV_image_status;
-//            mHolderView.mTV_images_title = (TextView)view.findViewById(R.id.tv_team_images_title_item);
-//            view.setTag(mHolderView);
-//        }else {
-//            mHolderView = (HolderView)view.getTag();
-//        }
         if(view==null) {
             view = LayoutInflater.from(mContext).inflate(R.layout.item_team_images_layout, viewGroup, false);
         }
@@ -124,11 +107,27 @@ public class TaskDatumTemplateImagesTeamAdapter extends BaseAdapter {
         if(iShowContentType==1){
             //展示
             mTV_image_title.setText(taskDean.controlTitle);
+            if(!TextUtils.isEmpty(taskDean.controlValue)){
+                mLoadingImage.setLoadingVisibility(View.INVISIBLE);
+            }else{
+                mLoadingImage.setLoadingVisibility(View.VISIBLE);
+            }
             ImageLoadManager.getLoaderInstace().disPlayNormalImg(taskDean.controlValue,
                     mLoadingImage, R.drawable.pusher_logo);
         }else{
             //编辑
-            mTV_image_title.setText(taskDean.defaultValue);
+            //添加空数据
+            TaskTempleDBBean beanD = new TaskTempleDBBean();
+            beanD.setUSER_ID(str_userId);
+            beanD.setTASK_ID(str_taskId);
+            beanD.setTEAM_TYPE(String.valueOf(iTeam_type));
+            beanD.setTEAM_NUM(String.valueOf(iTeam_num));
+            beanD.setTEAM_NUM_INDEX(String.valueOf(position));
+            beanD.setTEAM_CONTENT_TYPE(taskDean.controlTypeId);
+            beanD.setTEAM_CONTENT_KEY(taskDean.controlKey);
+            beanD.setTEAM_CONTENT_VALUE("");
+            mTaskTempleManager.AddTaskTemplateEmptyValue(beanD);
+
             mLoadingImage.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
@@ -151,13 +150,4 @@ public class TaskDatumTemplateImagesTeamAdapter extends BaseAdapter {
         }
         return view;
     }
-
-//    public class HolderView{
-//        public LinearLayout mLL_image;
-//        public LoadingView mImageView_images_pic;//图片
-//        public TextView mTV_image_reset;//重新上传
-//        public TextView mTV_image_upload_status;//上传装填
-//        public TextView mTV_images_title;
-//    }
-
 }

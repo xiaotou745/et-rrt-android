@@ -42,8 +42,8 @@ public class CancleDialog extends AlertDialog implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.success_dialog_layout);
-		mTitleTv = (TextView) findViewById(R.id.tv_success_content_dialog);
+		setContentView(R.layout.cancle_dialog_layout);
+		mTitleTv = (TextView) findViewById(R.id.tv_cancle_content_dialog);
 		mBtn_ok = (Button) findViewById(R.id.stand_on_bt);
 		mBtn_ok.setOnClickListener(this);
 		mBtn_cancle = (Button) findViewById(R.id.leave_out_bt);

@@ -11,20 +11,27 @@ import com.renrentui.resultmodel.RSCheckVersion;
 import com.renrentui.tools.Util;
 import com.renrentui.util.ApiConstants;
 import com.renrentui.util.ToastUtil;
-import com.renrentui.util.Utils;
 import com.user.model.HttpRequest;
 
+/**
+ * 下载工具类
+ */
 public class DownLoadUtils {
 
 	public static void checkoutAppVersion(Context context, boolean auto,
 			String action) {
 		DownLoadAsyncTask mUpdataTask = new DownLoadAsyncTask(context, auto,
-				action);
+				action,false);
 		mUpdataTask.execute("");
 	}
-
+	public static void checkoutAppVersion(Context context, boolean auto,
+										  String action,boolean isShowToast) {
+		DownLoadAsyncTask mUpdataTask = new DownLoadAsyncTask(context, auto,
+				action,isShowToast);
+		mUpdataTask.execute("");
+	}
 	public static void checkoutAppVersion(Context context, boolean auto) {
-		DownLoadAsyncTask mUpdataTask = new DownLoadAsyncTask(context, auto);
+		DownLoadAsyncTask mUpdataTask = new DownLoadAsyncTask(context, auto,false);
 		mUpdataTask.execute("");
 	}
 
@@ -34,17 +41,20 @@ public class DownLoadUtils {
 		private Context mContext;
 		private boolean isAuto;
 		private String strAction;
+		private boolean isShowToast;
 
-		public DownLoadAsyncTask(Context mContext, boolean isAuto) {
+		public DownLoadAsyncTask(Context mContext, boolean isAuto,boolean isShowToast) {
 			super();
 			this.mContext = mContext;
 			this.isAuto = isAuto;
+			this.isShowToast = isShowToast;
 		}
 
-		public DownLoadAsyncTask(Context con, boolean auto, String action) {
+		public DownLoadAsyncTask(Context con, boolean auto, String action,boolean isShowToast) {
 			mContext = con;
 			isAuto = auto;
 			strAction = action;
+			this.isShowToast = isShowToast;
 		}
 
 		@Override
@@ -90,7 +100,10 @@ public class DownLoadUtils {
 								checkVersion.data.message);
 						mUpdateDialog.show();
 					} else {
-						ToastUtil.show(mContext, "已为最新版本");
+						if(isShowToast){
+							ToastUtil.show(mContext, "已为最新版本");
+						}
+
 					}
 				}
 			}

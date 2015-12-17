@@ -2,53 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar"
+        jar="D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\libs\umeng-analytics-v5.6.3.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="a60a5e993c98c864010053cb901b7eab25306568">
-        <dex dex="D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\build\intermediates\pre-dexed\release\gson-2.2.4-752a4694a6e7953de1b9e1ac68ee96a302f761f3.jar" />
-    </item>
-    <item
-        jar="D:\AndroidStudio\LocalSdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
-        <dex dex="D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\build\intermediates\pre-dexed\release\support-v4-19.1.0-9def72764dc562edd743735baab3744d6ab89474.jar" />
-    </item>
-    <item
-        jar="D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\libs\universal-image-loader-1.9.4.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="dd9eeb557650c4ad7394df23f0f5cf27a7cfc697">
-        <dex dex="D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\build\intermediates\pre-dexed\release\universal-image-loader-1.9.4-6a0cc920bf016eac32d1f5e762652e4d1c3694dc.jar" />
-    </item>
-    <item
-        jar="D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\libs\apache-mime4j-0.6.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="12e7270b1819bae792c9a9e5e8076ebbcdaaac4b">
-        <dex dex="D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\build\intermediates\pre-dexed\release\apache-mime4j-0.6-7e7f07c368adfe75a884b9f5540e76be8e50feee.jar" />
-    </item>
-    <item
-        jar="D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\libs\xUtils-2.6.14.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="f10c51f3e0732fdeefe6e104279a58e275879b6c">
-        <dex dex="D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\build\intermediates\pre-dexed\release\xUtils-2.6.14-8de1b7d212788ba88607ebd56277b3a6700880ac.jar" />
-    </item>
-    <item
-        jar="D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\libs\BaiduLBS_Android.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="cd62865d067ecdb3efc9d321e82e4a2832a50259">
-        <dex dex="D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\build\intermediates\pre-dexed\release\BaiduLBS_Android-d2aa6bd73481d854b792691746e854b3ee87248a.jar" />
-    </item>
-    <item
-        jar="D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\libs\zxing.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="e88c14e6e7daa0fa65172a62b54ee6a16ff4162d">
-        <dex dex="D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\build\intermediates\pre-dexed\release\zxing-e08cc7b46d7fb2c6a72d51e7f0e207081b15e2b3.jar" />
+        sha1="8a8255ad63bcf5d7609e26b24d6cc38a3d961d40">
+        <dex dex="D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\build\intermediates\pre-dexed\release\umeng-analytics-v5.6.3-fa14b2f29a27744ce4599802577929101a64fd0c.jar" />
     </item>
 
 </items>

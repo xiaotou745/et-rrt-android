@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/layout_bg_color"
     >
     <!-- title-->
     <RelativeLayout
@@ -145,7 +146,6 @@
                 android:layout_gravity="top"
                 android:gravity="top"
                 android:layout_weight="1"
-                android:layout_marginTop="@dimen/_5dp"
                 android:drawableLeft="@drawable/icon_finish"
                 android:drawablePadding="10dp" />
         </LinearLayout>
@@ -156,7 +156,6 @@
         android:id="@+id/ll_task_control_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:orientation="vertical"
         android:layout_below="@id/ll_task_detail"
          >
@@ -183,6 +182,7 @@
             android:background="#e8e8e8" />
         <!-- area-->
         <ScrollView
+            android:id="@+id/scrollview_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="none"

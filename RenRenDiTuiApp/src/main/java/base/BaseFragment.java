@@ -17,8 +17,10 @@ import com.renrentui.interfaces.IBack;
 import com.renrentui.interfaces.INodata;
 import com.renrentui.requestmodel.ResultMsgType;
 import com.renrentui.tools.Util;
+import com.umeng.analytics.MobclickAgent;
 
 public class BaseFragment extends Fragment {
+	private String  tag = "";
 	private View layout_nodata;
 	private Button btn_nodata;
 	private TextView tv_nodata;
@@ -28,7 +30,20 @@ public class BaseFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		tag =this.getTag();
 		return super.onCreateView(inflater, container, savedInstanceState);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onPageStart(tag);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPageEnd(tag);
 	}
 
 	/**
@@ -44,8 +59,8 @@ public class BaseFragment extends Fragment {
 	/**
 	 * 页面没有数据时的统一处理
 	 * 
-	 * @param ResultMsgType
-	 *            页面没有数据时的情况：网络无连接，数据加载失败，数据没有
+	 * @param
+	 *            ：网络无连接，数据加载失败，数据没有
 	 * @param btnText
 	 *            按钮上面显示的文字
 	 * @param tvText
@@ -143,4 +158,5 @@ public class BaseFragment extends Fragment {
 			progersssDialog = null;
 		}
 	}
+
 }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.renrentui.app.R;
+import com.renrentui.resultmodel.TaskSpecBeanInfo;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
 import com.task.activity.WebViewActivity;
@@ -23,12 +24,12 @@ import java.util.ArrayList;
  */
 public class TaskLinksAdapter extends BaseAdapter{
     public Context mContext;
-    private ArrayList<String> data;
-    public TaskLinksAdapter(Context con, ArrayList<String> data) {
+    private ArrayList<TaskSpecBeanInfo> data;
+    public TaskLinksAdapter(Context con, ArrayList<TaskSpecBeanInfo> data) {
         this.mContext = con;
         this.data =data;
     }
-    public  void setTaskData(ArrayList<String> ndata){
+    public  void setTaskData(ArrayList<TaskSpecBeanInfo> ndata){
         data = ndata;
         this.notifyDataSetChanged();
     }
@@ -71,18 +72,18 @@ public class TaskLinksAdapter extends BaseAdapter{
             mHolderView = (HoldeView)convertView.getTag();
         }
         //数据展示
-        final String strContent = (String)this.getItem(i);
-        mHolderView.tv_task_link_content.setText("详情页链接");
+        final TaskSpecBeanInfo bean = (TaskSpecBeanInfo)this.getItem(i);
+        mHolderView.tv_task_link_content.setText(bean.getLinkTitle());
         convertView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                if(!TextUtils.isEmpty(strContent) && !Utils.checkUrl(strContent)){
-                    ToastUtil.show(mContext,"详情地址错误!"+strContent);
+                if(!TextUtils.isEmpty(bean.getContent()) && !Utils.checkUrl(bean.getContent())){
+                    ToastUtil.show(mContext,"详情地址错误!"+bean.getContent());
                 }else {
                     Intent mIntent = new Intent();
                     mIntent.setClass(mContext, WebViewActivity.class);
-                    mIntent.putExtra(WebViewActivity.STR_CONTENT_URL, strContent);
-                    mIntent.putExtra(WebViewActivity.STR_TITLE,"任务详情");
+                    mIntent.putExtra(WebViewActivity.STR_CONTENT_URL, bean.getContent());
+                    mIntent.putExtra(WebViewActivity.STR_TITLE,bean.getLinkTitle());
                     mContext.startActivity(mIntent);
                 }
             }

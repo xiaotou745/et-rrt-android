@@ -90,6 +90,7 @@ public class CityDBManager {
     //    批量添加
     public void delCityList(){
         try{
+            open();
             String sql = "DELETE FROM " + tableName;
             CityDB.execSQL(sql);
             CityDB.execSQL("update sqlite_sequence set seq=0 where name='"+tableName+"';");

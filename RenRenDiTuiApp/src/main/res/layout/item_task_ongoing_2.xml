@@ -24,14 +24,14 @@
     <GridView
         android:id="@+id/gridview_task_pic"
         android:layout_width="match_parent"
-        android:layout_height="80dip"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/tv_pusher_time"
         android:layout_alignLeft="@id/tv_pusher_time"
         android:layout_marginTop="@dimen/_10dp"
-        android:spacing="5dip"
         android:numColumns="5"
         android:gravity="left"
+        android:horizontalSpacing="@dimen/view_space"
         ></GridView>
 
     <View

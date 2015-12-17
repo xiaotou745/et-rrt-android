@@ -3,6 +3,7 @@ package com.task.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -54,6 +55,7 @@ public class FragmentOnGoingTash extends BaseFragment implements
 	public FragmentOnGoingTash(){
 
 	}
+	@SuppressLint("ValidFragment")
 	public FragmentOnGoingTash(LayoutMainTopmenu layoutTopMenu){
 		this.layoutTopMenu = layoutTopMenu;
 	}
@@ -92,7 +94,7 @@ public class FragmentOnGoingTash extends BaseFragment implements
 									FragmentOnGoingTash.this);
 						} else {
 							taskMetarialContents.clear();
-							nextId = t.data.nextID;
+							nextId = t.data.nextId;
 							taskMetarialContents.addAll(t.data.content);
 							getOnGoingAdapter.notifyDataSetChanged();
 						}
@@ -100,7 +102,7 @@ public class FragmentOnGoingTash extends BaseFragment implements
 						if (t.data.count == 0) {
 							ToastUtil.show(context, "暂无更多数据");
 						} else {
-							nextId = t.data.nextID;
+							nextId = t.data.nextId;
 							taskMetarialContents.addAll(t.data.content);
 							getOnGoingAdapter.notifyDataSetChanged();
 						}
@@ -145,11 +147,11 @@ public class FragmentOnGoingTash extends BaseFragment implements
 	 * 初始化数据
 	 */
 	public void getInitData() {
+		pageindex = 1;
 		ApiUtil.Request(new RQBaseModel<RQTaskMaterial, RSTaskMaterial>(
-				context, new RQTaskMaterial(Utils.getUserDTO(context).data.userId,nextId,1,taskId),
+				context, new RQTaskMaterial(Utils.getUserDTO(context).data.userId,"0",1,taskId),
 				new RSTaskMaterial(), ApiNames.获取资料审核列表.getValue(),
 				RequestType.POST, rqHandler_getOnGoingTask));
-		pageindex = 1;
 	}
 	
 	@Override
@@ -209,7 +211,7 @@ public class FragmentOnGoingTash extends BaseFragment implements
 	public void getMoreData() {
 		ApiUtil.Request(new RQBaseModel<RQTaskMaterial, RSTaskMaterial>(
 				context, new RQTaskMaterial(Utils.getUserDTO(context).data.userId, nextId,1,taskId),
-				new RSTaskMaterial(), ApiNames.获取所有已提交的任务.getValue(),
+				new RSTaskMaterial(), ApiNames.获取资料审核列表.getValue(),
 				RequestType.POST, rqHandler_getOnGoingTask));
 		pageindex++;
 	}

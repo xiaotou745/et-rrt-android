@@ -33,6 +33,7 @@
             android:gravity="center_horizontal|top"
             />
         <TextView
+            android:id="@+id/tv_share_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="用户在手机中打开链接，即算成功完成一条任务"
@@ -40,6 +41,7 @@
             android:textColor="@color/tv_order_color_2"
             android:gravity="center_horizontal|top"
             android:layout_marginTop="@dimen/view_space"
+            android:singleLine="true"
             />
         <ImageView
             android:id="@+id/img_pic"
@@ -58,15 +60,7 @@
             android:layout_marginTop="@dimen/view_space"
             />
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="保存二维码到手机，扫描方便"
-            android:textSize="@dimen/_12sp"
-            android:textColor="@color/tv_order_color_2"
-            android:gravity="center_horizontal|top"
-            android:layout_marginTop="@dimen/view_space"
-            />
-        <TextView
+            android:id="@+id/tv_share_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="可将二维码分享到微博，朋友圈，推广范围更大哦"

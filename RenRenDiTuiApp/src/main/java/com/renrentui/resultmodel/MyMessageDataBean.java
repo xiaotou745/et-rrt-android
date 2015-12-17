@@ -10,18 +10,18 @@ import java.util.List;
 public class MyMessageDataBean implements Serializable {
    public String  title ;//页签标题
     public String    count ;//本次条数
-    public String    nextID ;//下一次获取数据时的开始位置
+    public String    nextId ;//下一次获取数据时的开始位置
     public ArrayList<MyMessageContentBean> content;// 数据集合 可能为null
 
     public MyMessageDataBean() {
         super();
     }
 
-    public MyMessageDataBean(String title, String count, String nextID, ArrayList<MyMessageContentBean> content) {
+    public MyMessageDataBean(String title, String count, String nextId, ArrayList<MyMessageContentBean> content) {
         super();
         this.title = title;
         this.count = count;
-        this.nextID = nextID;
+        this.nextId = nextId;
         this.content = content;
     }
 
@@ -30,7 +30,7 @@ public class MyMessageDataBean implements Serializable {
         String str_1 = "MyMessageDataBean{" +
                 "title='" + title + '\'' +
                 ", count='" + count + '\'' +
-                ", nextID='" + nextID + '\'' +
+                ", nextId='" + nextId + '\'' +
                 ", content=[" ;
         StringBuffer sb = new StringBuffer(str_1);
         int isize = content==null?0:content.size();

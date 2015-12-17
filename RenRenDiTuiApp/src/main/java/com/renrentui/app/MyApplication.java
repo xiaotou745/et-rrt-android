@@ -26,6 +26,7 @@ public class MyApplication extends Application{
         mAppContext = this;
         mLocClient = new LocationClient(getApplicationContext());
         initCurrentLocation();
+        initLocation();
     }
 
     /**
@@ -34,6 +35,14 @@ public class MyApplication extends Application{
     public void initCurrentLocation(){
         mCurrentLocation.code = "110100";
         mCurrentLocation.name = "北京市";
+
+    }
+    /**
+     * 定位城市
+     */
+    public void initLocation(){
+        mLocalLocation.code = "";
+        mLocalLocation.name = "";
 
     }
 

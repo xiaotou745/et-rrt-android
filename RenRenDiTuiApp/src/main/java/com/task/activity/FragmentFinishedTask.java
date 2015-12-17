@@ -71,7 +71,6 @@ public class FragmentFinishedTask extends BaseFragment implements
 				@Override
 				public void onNetworknotvalide() {
 					pulltorefresh_taskList.setVisibility(View.GONE);
-
 					FragmentFinishedTask.this.onNodata(
 							ResultMsgType.NetworkNotValide, null, null, null);
 				}
@@ -91,7 +90,7 @@ public class FragmentFinishedTask extends BaseFragment implements
 									FragmentFinishedTask.this);
 						} else {
 							taskMetarialContents.clear();
-							nextId = t.data.nextID;
+							nextId = t.data.nextId;
 							taskMetarialContents.addAll(t.data.content);
 							getFinishedAdapter.notifyDataSetChanged();
 						}
@@ -99,7 +98,7 @@ public class FragmentFinishedTask extends BaseFragment implements
 						if (t.data.count == 0) {
 							ToastUtil.show(context, "暂无更多数据");
 						} else {
-							nextId = t.data.nextID;
+							nextId = t.data.nextId;
 							taskMetarialContents.addAll(t.data.content);
 							getFinishedAdapter.notifyDataSetChanged();
 						}
@@ -145,8 +144,8 @@ public class FragmentFinishedTask extends BaseFragment implements
 	 */
 	public void getInitData() {
 		ApiUtil.Request(new RQBaseModel<RQTaskMaterial, RSTaskMaterial>(
-				context, new RQTaskMaterial(Utils.getUserDTO(context).data.userId, nextId,3,taskId),
-				new RSTaskMaterial(), ApiNames.获取所有已提交的任务.getValue(),
+				context, new RQTaskMaterial(Utils.getUserDTO(context).data.userId, "0",3,taskId),
+				new RSTaskMaterial(), ApiNames.获取资料审核列表.getValue(),
 				RequestType.POST, rqHandler_getOnGoingTask));
 		pageindex = 1;
 	}
@@ -211,8 +210,8 @@ public class FragmentFinishedTask extends BaseFragment implements
 	public void getMoreData() {
 		ApiUtil.Request(new RQBaseModel<RQTaskMaterial, RSTaskMaterial>(
 				context, new RQTaskMaterial(
-				Utils.getUserDTO(context).data.userId,nextId,2,taskId),
-				new RSTaskMaterial(), ApiNames.获取所有已提交的任务.getValue(),
+				Utils.getUserDTO(context).data.userId,nextId,3,taskId),
+				new RSTaskMaterial(), ApiNames.获取资料审核列表.getValue(),
 				RequestType.POST, rqHandler_getOnGoingTask));
 		pageindex++;
 	}

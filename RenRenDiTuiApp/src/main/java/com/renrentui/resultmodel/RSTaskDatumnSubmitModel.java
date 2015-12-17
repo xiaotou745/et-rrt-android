@@ -8,24 +8,24 @@ import java.util.Objects;
  * 任务模板信息提交
  */
 public class RSTaskDatumnSubmitModel extends RSBase {
-    public ArrayList<Objects> data;
+    //public ArrayList<Objects> data;
     public  RSTaskDatumnSubmitModel(){
         super();
     }
     public  RSTaskDatumnSubmitModel(String Code, String Message, ArrayList<Objects> data){
-        super();
-        if(this.data!=null){
-            this.data.clear();
-            this.data.addAll(data);
-        }else{
-            this.data = new ArrayList<Objects>();
-        }
+        super(Code,Message);
+//        if(this.data!=null){
+//            this.data.clear();
+//            this.data.addAll(data);
+//        }else{
+//            this.data = new ArrayList<Objects>();
+//        }
     }
 
     @Override
     public String toString() {
         return "RSTaskDatumnSubmitModel{" +
-                "data=" + data +",code=" + code + ",msg=" + msg+
+                "code=" + code + ",msg=" + msg+
                 '}';
     }
 }

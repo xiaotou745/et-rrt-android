@@ -33,6 +33,7 @@ public class TaskBeanInfo implements Serializable {
     public  String downUrl ;//非签约任务 时 下载地址
     public  String scanTip ;//非签约任务 时 扫码说明
     public  String reminder ;//非签约任务 时 温馨提示
+    public String status;//任务状态,1是审核通过，3是过期，4是终止
 
 
     public String getAmount() {
@@ -46,7 +47,7 @@ public  TaskBeanInfo(){
 }
     public TaskBeanInfo(String taskTitle,double amount,String endTime,String taskGeneralInfo,
                         int isHad,String logo,String auditCycle,int taskType,
-                        String taskTypeName,String hotLine ,int ctId,String downUrl,String scanTip,String reminder) {
+                        String taskTypeName,String hotLine ,int ctId,String downUrl,String scanTip,String reminder,String  status) {
 super();
         this.taskTitle =taskTitle;
         this.amount =amount;
@@ -62,6 +63,7 @@ super();
         this.downUrl = downUrl;
         this.scanTip = scanTip;
         this.reminder = reminder;
+        this.status =status;
     }
 
     @Override
@@ -71,6 +73,6 @@ super();
                 + taskGeneralInfo + ",isHad=" + isHad + ",logo="
                 + logo + ",auditCycle=" + auditCycle + ",taskType="
                 + taskType + ",taskTypeName=" + taskTypeName + ",hotLine=" + hotLine
-                + ",ctId=" + ctId +",downUrl="  +downUrl+",scanTip="  +scanTip+",reminder="  +reminder+"}";
+                + ",ctId=" + ctId +",downUrl="  +downUrl+",scanTip="  +scanTip+",reminder="  +reminder+",status="+status+"}";
     }
 }

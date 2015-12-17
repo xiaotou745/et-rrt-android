@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.renrentui.db.Bean.TaskTempleDBBean;
@@ -324,7 +325,7 @@ public class TaskTempleDBManager {
             if(bean==null){
                 return;
             }
-            boolean isAdd = getTaskTempleByUserIdAndTeamTypeAndTeamNumAndTeamNumIndex(bean.getUSER_ID(),bean.getTASK_ID(),bean.getTEAM_TYPE(),bean.getTEAM_NUM(),bean.getTEAM_NUM_INDEX());
+            boolean isAdd = getTaskTempleByUserIdAndTeamTypeAndTeamNumAndTeamNumIndex(bean.getUSER_ID(), bean.getTASK_ID(), bean.getTEAM_TYPE(), bean.getTEAM_NUM(), bean.getTEAM_NUM_INDEX());
             if(isAdd){
                 // 更新
                 this.updateTempleInfo_one(bean);
@@ -338,6 +339,85 @@ public class TaskTempleDBManager {
             closed();
         }
     }
+    /**
+     * 添加任务模板空数据
+     * @param bean
+     */
+    public synchronized void  AddTaskTemplateEmptyValue(TaskTempleDBBean bean){
+        try{
+            if(bean==null){
+                return;
+            }
+            boolean isAdd = getTaskTempleByUserIdAndTeamTypeAndTeamNumAndTeamNumIndex(bean.getUSER_ID(),bean.getTASK_ID(),bean.getTEAM_TYPE(),bean.getTEAM_NUM(),bean.getTEAM_NUM_INDEX());
+           if(!isAdd){
+                //添加
+                this.addTaskTempleInfo(bean);
+            }
+        }catch (Exception e){
+            Log.e("--TaskTempleDBManager--","updateOrAddTaskTemplate  Exception");
+        }finally {
+            closed();
+        }
+    }
 
+    /**
+     * 检查指定用户的指定模板数据是否有空值
+     * @param bean
+     * @return  true 有空值
+     */
+    public synchronized boolean checkoutTaskTemplateValueIsEmpty(TaskTempleDBBean bean){
+        boolean isResult = true;
+        try {
+            open();
+            String str_selection = TaskTempleColumn.USER_ID + " = ? and "+TaskTempleColumn.TASK_ID+" = ? and "+TaskTempleColumn.TEAM_CONTENT_VALUE+" = ? ";
+            String[] selectionArgs = {bean.getUSER_ID(),bean.getTASK_ID() , "",};
+            Cursor mCursor = TaskTempleDB.query(tableName, TaskTempleColumn.TASK_TEMPLE_PROJECT, str_selection, selectionArgs, null, null, null);
+            if(mCursor!=null && mCursor.getCount()>0){
+                mCursor.moveToFirst();
+                do {
+                    String strValue = mCursor.getString(8);
+                    if(strValue!=null && !TextUtils.isEmpty(strValue) && !"null".equals(strValue)){
+                        isResult =false;
+                        break;
+                    }
+
+                } while (mCursor.moveToNext());
+            }
+        } catch (Exception e){
+        }finally {
+            closed();
+        }
+        return isResult;
+    }
+    /**
+     * 检查指定用户的指定模板是否有值
+     * @param bean
+     * @return  true：有值  false  :都为空值
+     */
+    public synchronized boolean checkoutTaskTemplateValue(TaskTempleDBBean bean){
+        boolean isResult = false;
+        try {
+            open();
+            String str_selection = TaskTempleColumn.USER_ID + " = ? and "+TaskTempleColumn.TASK_ID+" = ? ";
+            String[] selectionArgs = {bean.getUSER_ID(),bean.getTASK_ID()};
+            Cursor mCursor = TaskTempleDB.query(tableName, TaskTempleColumn.TASK_TEMPLE_PROJECT, str_selection, selectionArgs, null, null, null);
+            if(mCursor!=null && mCursor.getCount()>0){
+                mCursor.moveToFirst();
+                do {
+                    String strValue = mCursor.getString(8);
+                    if(!TextUtils.isEmpty(strValue) && !"null".equals(strValue)){
+                        isResult =true;
+                        break;
+                    }
+
+                } while (mCursor.moveToNext());
+
+            }
+        } catch (Exception e){
+        }finally {
+            closed();
+        }
+        return isResult;
+    }
 
 }

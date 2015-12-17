@@ -55,7 +55,6 @@ public class MyMessageActivity extends BaseActivity implements
                 @Override
                 public void onNetworknotvalide() {
                     mPullMyMessageListView.setVisibility(View.GONE);
-
                     MyMessageActivity.this.onNodata(
                             ResultMsgType.NetworkNotValide, null, null, null);
                 }
@@ -65,22 +64,27 @@ public class MyMessageActivity extends BaseActivity implements
                     MyMessageActivity.this.hideLayoutNoda();
                     mPullMyMessageListView.setVisibility(View.VISIBLE);
                     if (pageindex == 1) {
+                        //第一页
                         if (t.data.content==null || t.data.content.size()==0) {
                             mPullMyMessageListView.setVisibility(View.GONE);
                             MyMessageActivity.this.onNodata(
-                                    ResultMsgType.Success, "刷新", "暂无审核未通过资料！",
+                                    ResultMsgType.Success, "刷新", "暂无消息信息",
                                     MyMessageActivity.this);
                         } else {
+                            if(myMessageList==null){
+                                myMessageList =  new ArrayList<MyMessageContentBean>();
+                            }
                             myMessageList.clear();
-                            nextId = t.data.nextID;
-                            myMessageAdapter.setMessageData(t.data.content);
-
+                            nextId = t.data.nextId;
+                            myMessageList.addAll(t.data.content);
+                            myMessageAdapter.setMessageData(myMessageList);
                         }
                     } else {
+                        //多条数据
                         if (t.data.content==null || t.data.content.size()==0) {
                             ToastUtil.show(context, "暂无更多数据");
                         } else {
-                            nextId = t.data.nextID;
+                            nextId = t.data.nextId;
                             myMessageList.addAll(t.data.content);
                             myMessageAdapter.setMessageData(myMessageList);
                         }
@@ -91,7 +95,7 @@ public class MyMessageActivity extends BaseActivity implements
                 public void onSericeErr(RSMyMessage t) {
                     mPullMyMessageListView.setVisibility(View.GONE);
                     MyMessageActivity.this.onNodata(
-                            ResultMsgType.ServiceErr, "刷新", "数据加载失败！", null);
+                            ResultMsgType.ServiceErr, "刷新", "信息加载失败！", null);
                 }
 
                 @Override
@@ -108,6 +112,7 @@ public class MyMessageActivity extends BaseActivity implements
         setContentView(R.layout.activity_mymessage_layout);
         super.init();
         initView();
+        getMyMessageData();
     }
     private void initView(){
         mPullMyMessageListView = (PullToRefreshView)findViewById(R.id.pulltorefresh_message_taskList);
@@ -115,9 +120,11 @@ public class MyMessageActivity extends BaseActivity implements
         mListView = (ListView)findViewById(R.id.lv_message);
         myMessageAdapter = new MyMessageAdapter(context);
         mListView.setAdapter(myMessageAdapter);
+        myMessageAdapter.setMessageData(myMessageList);
     }
     //获取信息
     private void getMyMessageData(){
+        showProgressDialog();
         ApiUtil.Request(new RQBaseModel<RQMyMessage, RSMyMessage>(
                 context, new RQMyMessage(Utils.getUserDTO(context).data.userId, "0"),
                 new RSMyMessage(),ApiNames.获取消息列表.getValue(),
@@ -146,7 +153,6 @@ public class MyMessageActivity extends BaseActivity implements
 
     @Override
     public void onNoData() {
-        showProgressDialog();
         getMyMessageData();
     }
 

@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.renrentui.app.R;
+import com.renrentui.resultmodel.TaskSpecBeanInfo;
 
 import java.util.ArrayList;
 
@@ -17,12 +18,12 @@ import java.util.ArrayList;
  */
 public class TaskExplainAdapter extends BaseAdapter{
     public Context mContext;
-    private ArrayList<String> data;
-    public TaskExplainAdapter(Context con, ArrayList<String> data) {
+    private ArrayList<TaskSpecBeanInfo> data;
+    public TaskExplainAdapter(Context con, ArrayList<TaskSpecBeanInfo> data) {
         this.mContext = con;
         this.data =data;
     }
-    public  void setTaskData(ArrayList<String> ndata){
+    public  void setTaskData(ArrayList<TaskSpecBeanInfo> ndata){
         data = ndata;
         this.notifyDataSetChanged();
     }
@@ -65,8 +66,8 @@ public class TaskExplainAdapter extends BaseAdapter{
             mHolderView = (HoldeView)convertView.getTag();
         }
         //数据展示
-        String strContent = (String)this.getItem(i);
-        mHolderView.tv_task_explain_content.setText(strContent);
+        TaskSpecBeanInfo bean = (TaskSpecBeanInfo)this.getItem(i);
+        mHolderView.tv_task_explain_content.setText(bean.getContent());
         return convertView;
 
     }

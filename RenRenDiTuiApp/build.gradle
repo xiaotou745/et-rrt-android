@@ -20,6 +20,24 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+    signingConfigs {
+        release {
+            storeFile file("D:\\StudioProjectsWorkSpace\\renrenditui_androidApp\\etaoshi.keystore")
+            storePassword "123456"
+            keyAlias "etaoshi"
+            keyPassword "123456"
+        }
+    }
+
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+        }
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
 }
 
 dependencies {
@@ -30,4 +48,5 @@ dependencies {
     compile files('libs/xUtils-2.6.14.jar')
     compile files('libs/zxing.jar')
     compile files('libs/BaiduLBS_Android.jar')
+    compile files('libs/umeng-analytics-v5.6.3.jar')
 }

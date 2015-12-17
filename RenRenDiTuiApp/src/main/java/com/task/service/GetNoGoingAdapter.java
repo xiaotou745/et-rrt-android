@@ -21,6 +21,7 @@ import com.renrentui.app.R;
 import com.renrentui.resultmodel.NoGoingTaskInfo;
 import com.renrentui.tools.Util;
 import com.renrentui.util.ImageLoadManager;
+import com.renrentui.util.UIHelper;
 import com.renrentui.util.Utils;
 import com.task.activity.TaskDetailInfoActivity;
 import com.user.activity.LoginActivity;
@@ -78,16 +79,24 @@ public class GetNoGoingAdapter extends BaseAdapter {
 //        viewholder.tv_pusher_taskType_content.setText(noGoingTaskInfo.taskTypeName+noGoingTaskInfo.taskGeneralInfo);
         viewholder.tv_pusher_amount.setText(noGoingTaskInfo.getAmount());
 
-        //内容信息变换
-        String strType =  " "+noGoingTaskInfo.taskTypeName.toString()+" ";
-        String strTypeContent =strType +" "+noGoingTaskInfo.taskGeneralInfo.toString();
-        int fstart = strTypeContent.indexOf(noGoingTaskInfo.taskTypeName.toString());
-        int fend = fstart + noGoingTaskInfo.taskTypeName.toString().length();
-        int bstart = 0;
-        int bend = strType.length();
-        SpannableStringBuilder style = new SpannableStringBuilder(strTypeContent);
-        style.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.white)),fstart,fend, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        style.setSpan(new BackgroundColorSpan(context.getResources().getColor(R.color.tv_bg_color_1)),bstart,bend, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        SpannableStringBuilder style = null;
+        switch (noGoingTaskInfo.taskType){
+            case 1:
+                //签约
+                style =  UIHelper.setStyleColorByColor(context,noGoingTaskInfo.taskTypeName.toString(),noGoingTaskInfo.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_1);
+                break;
+            case 2:
+                //分享
+                style =  UIHelper.setStyleColorByColor(context,noGoingTaskInfo.taskTypeName.toString(),noGoingTaskInfo.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_3);
+                break;
+            case 3:
+                //下载
+                style =  UIHelper.setStyleColorByColor(context,noGoingTaskInfo.taskTypeName.toString(),noGoingTaskInfo.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_2);
+                break;
+            default:
+                style =  UIHelper.setStyleColorByColor(context,noGoingTaskInfo.taskTypeName.toString(),noGoingTaskInfo.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_1);
+                break;
+        }
         viewholder.tv_pusher_taskType_content.setText(style);
 
         convertView.setOnClickListener(new OnClickListener() {

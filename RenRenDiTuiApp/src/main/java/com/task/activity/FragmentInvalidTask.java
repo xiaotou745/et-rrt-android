@@ -3,6 +3,7 @@ package com.task.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -31,6 +32,7 @@ import com.renrentui.util.ApiNames;
 import com.renrentui.util.ApiUtil;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
+import com.task.model.LayoutMyTaskTopmenu;
 import com.task.service.GetInvalidTaskAdapter;
 
 /**
@@ -49,7 +51,12 @@ public class FragmentInvalidTask extends BaseFragment implements
 	private List<MyTaskContentBean> finishedTaskInfos;
 	private String nextId = "";
 	private int pageindex = 1;
+	private LayoutMyTaskTopmenu layoutTopMenu;// 顶部按钮
 
+	@SuppressLint("ValidFragment")
+	public FragmentInvalidTask(LayoutMyTaskTopmenu layoutTopMenu){
+		this.layoutTopMenu = layoutTopMenu;
+	}
 	private RQHandler<RSMyTask> rqHandler_gqTask = new RQHandler<>(
 			new IRqHandlerMsg<RSMyTask>() {
 
@@ -72,6 +79,8 @@ public class FragmentInvalidTask extends BaseFragment implements
 				public void onSuccess(RSMyTask t) {
 					FragmentInvalidTask.this.hideLayoutNoda();
 					pulltorefresh_taskList.setVisibility(View.VISIBLE);
+					layoutTopMenu.setThroughNum(t.data.passTotal);
+					layoutTopMenu.setInvalid(t.data.refuseTotal);
 					if (pageindex == 1) {
 						if (t.data.count == 0) {
 							pulltorefresh_taskList.setVisibility(View.GONE);
@@ -80,7 +89,7 @@ public class FragmentInvalidTask extends BaseFragment implements
 									FragmentInvalidTask.this);
 						} else {
 							finishedTaskInfos.clear();
-							nextId = t.data.nextID;
+							nextId = t.data.nextId;
 							finishedTaskInfos.addAll(t.data.content);
 							getInvalidTaskAdapter.notifyDataSetChanged();
 						}
@@ -88,7 +97,7 @@ public class FragmentInvalidTask extends BaseFragment implements
 						if (t.data.count == 0) {
 							ToastUtil.show(context, "暂无更多数据");
 						} else {
-							nextId = t.data.nextID;
+							nextId = t.data.nextId;
 							finishedTaskInfos.addAll(t.data.content);
 							getInvalidTaskAdapter.notifyDataSetChanged();
 						}

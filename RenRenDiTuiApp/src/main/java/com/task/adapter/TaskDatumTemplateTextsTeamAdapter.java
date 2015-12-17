@@ -109,9 +109,23 @@ public class TaskDatumTemplateTextsTeamAdapter extends BaseAdapter {
             mHolderView.mTextView.setText(taskDean.controlValue);
         }else {
             //编辑数据
+
+            //添加空数据
+            TaskTempleDBBean beanD = new TaskTempleDBBean();
+            beanD.setUSER_ID(str_userId);
+            beanD.setTASK_ID(str_taskId);
+            beanD.setTEAM_TYPE(String.valueOf(iTeam_type));
+            beanD.setTEAM_NUM(String.valueOf(iTeam_num));
+            beanD.setTEAM_NUM_INDEX(String.valueOf(position));
+            beanD.setTEAM_CONTENT_TYPE(taskDean.controlTypeId);
+            beanD.setTEAM_CONTENT_KEY(taskDean.controlKey);
+            beanD.setTEAM_CONTENT_VALUE("");
+            mTaskTempleManager.AddTaskTemplateEmptyValue(beanD);
+
+
             mHolderView.mEitText.setVisibility(View.VISIBLE);
             mHolderView.mTextView.setVisibility(View.GONE);
-            mHolderView.mEitText.setHint(taskDean.defaultValue);
+            mHolderView.mEitText.setHint(taskDean.controlTitle);
             mHolderView.mEitText.setTag(str_tag + String.valueOf("_" + iTeam_num + "_") + String.valueOf(i));
             mHolderView.mEitText.setOnTouchListener(new View.OnTouchListener() {
                 @Override
@@ -160,7 +174,6 @@ public class TaskDatumTemplateTextsTeamAdapter extends BaseAdapter {
             }
 
         }
-        Log.e("pppppppppppppp","pppppppp"+String.valueOf(position));
         return view;
     }
     public class HolderView{

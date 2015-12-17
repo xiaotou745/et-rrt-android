@@ -84,7 +84,7 @@
                 android:background="@drawable/dialog_right_btn_bg"
                 android:paddingBottom="@dimen/_10dp"
                 android:paddingTop="@dimen/_10dp"
-                android:text="再次领取" />
+                android:text="再次提交" />
         </LinearLayout>
     </LinearLayout>
 

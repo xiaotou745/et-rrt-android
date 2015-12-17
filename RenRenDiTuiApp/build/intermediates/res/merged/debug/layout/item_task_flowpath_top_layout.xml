@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="@dimen/view_space"
+    android:layout_height="match_parent"
     android:paddingLeft="@dimen/view_space"
     android:paddingRight="@dimen/view_space"
+    android:paddingTop="@dimen/view_space"
     >
 
 <TextView
     android:id="@+id/tv_order_num"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="20dip"
+    android:layout_height="20dip"
     android:layout_alignParentLeft="true"
     android:layout_alignParentTop="true"
     android:gravity="center"
+    android:textColor="@color/white"
     android:background="@drawable/task_order_num_bg_shape"
     />
     <TextView
@@ -21,21 +22,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/tv_order_num"
-        android:layout_alignBaseline="@id/tv_order_num"
+        android:layout_alignParentTop="true"
         android:text="开始领取任务"
         android:textSize="@dimen/_16sp"
         android:textColor="@color/tv_order_color_1"
         android:paddingLeft="@dimen/view_space"
-        android:maxLines="2"
+        android:paddingBottom="@dimen/view_space"
         />
-    <View
+    <TextView
         android:layout_width="@dimen/_2dp"
-        android:layout_height="@dimen/_15dp"
+        android:layout_height="match_parent"
         android:background="@color/blue_bg"
-        android:layout_alignParentLeft="true"
         android:layout_below="@id/tv_order_num"
-        android:layout_marginLeft="@dimen/_10dp"
-        ></View>
+        android:layout_marginLeft="@dimen/view_space"
+        android:layout_alignBottom="@id/tv_task_flowpath_content_top"
+        ></TextView>
 
 </RelativeLayout>
 <!-- From: file:/D:/StudioProjectsWorkSpace/renrenditui_androidApp/RenRenDiTuiApp/src/main/res/layout/item_task_flowpath_top_layout.xml -->

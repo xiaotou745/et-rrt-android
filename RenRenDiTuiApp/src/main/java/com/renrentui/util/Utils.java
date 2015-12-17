@@ -13,6 +13,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
+import android.telephony.TelephonyManager;
 
 import com.renrentui.resultmodel.RSUser;
 import com.renrentui.tools.GsonTools;
@@ -154,7 +156,7 @@ public final class Utils {
 		if(!Utils.IsNotNUll(strUrl)){
 			return false;
 		}
-		String regex = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]" ;
+		String regex = "^(https?|ftp|file|www)(://)?[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]" ;
 		Pattern patt = Pattern. compile(regex);
 		Matcher matcher = patt.matcher(strUrl);
 		return   matcher.matches();
@@ -190,6 +192,66 @@ public final class Utils {
 		GPSIntent.setData(Uri.parse("custom:3"));
 		PendingIntent.getBroadcast(context, 0, GPSIntent, 0).send();
 	}
+	/**
+	 * 获取当前程序的版本号
+	 *
+	 * @param cx
+	 * @return
+	 */
+	public static String getVersionName(Context cx) {
+		return getPackageInfo(cx).versionName;
+	}
 
+	/**
+	 * 获取当前程序的内部版本号
+	 *
+	 * @param cx
+	 * @return
+	 */
+	public static int getVersionCode(Context cx) {
+		return getPackageInfo(cx).versionCode;
+	}
+
+	/**
+	 * 或得程序名称
+	 *
+	 * @param cx
+	 * @return
+	 */
+	public static String getAppName(Context cx) {
+		PackageInfo pi = getPackageInfo(cx);
+		PackageManager packageManager = cx.getPackageManager();
+		return packageManager.getApplicationLabel(pi.applicationInfo).toString();
+	}
+	/**
+	 * 获得包信息
+	 *
+	 * @param c
+	 * @return
+	 */
+	private static PackageInfo getPackageInfo(Context c) {
+		try {
+			return c.getPackageManager().getPackageInfo(c.getPackageName(), PackageManager.GET_CONFIGURATIONS);
+		} catch (NameNotFoundException e) {
+		}
+		return null;
+	}
+	// 获取手机类型
+	public static String getModel(Context cx) {
+		return Build.MODEL;
+	}
+	//获取手机系统版本
+	public static String getModelSysVersion(Context cx){
+		return Build.VERSION.RELEASE;
+	}
+	/**
+	 * 获得国际移动设备身份码
+	 *
+	 * @param context
+	 * @return
+	*/
+	public static String getMobileDevieceId(Context context) {
+		return ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+	}
 }
 

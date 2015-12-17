@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
@@ -41,6 +42,7 @@ import com.renrentui.util.ImageLoadManager;
 import com.renrentui.util.TimeUtils;
 import com.renrentui.util.ToMainPage;
 import com.renrentui.util.ToastUtil;
+import com.renrentui.util.UIHelper;
 import com.renrentui.util.Utils;
 import com.renrentui.view.MyListView;
 import com.task.adapter.TaskExplainAdapter;
@@ -72,7 +74,9 @@ public static final String TAG = TaskDetailInfoActivity.class.getSimpleName();
 //	流程
 	private LinearLayout ll_task_description;//流程
 	private MyListView lv_task_flowpath;//流程list
+	private View mLine_task_explain_top;
 	private ListView lv_task_explain;//补充说明list
+	private View mLine_detail_link_top;
 	private ListView lv_task_detail_link;//详情连接list
 
 	//操作按钮
@@ -84,9 +88,9 @@ public static final String TAG = TaskDetailInfoActivity.class.getSimpleName();
 	private TaskLinksAdapter mTaskLinkAdapter;
 
 	private RSGetTaskDetailInfo rsGetTaskDetailInfo;
-	private ArrayList<String> mFlowpathData=new ArrayList<String>();
-	private ArrayList<String> mExplainData=new ArrayList<String>();
-	private ArrayList<String > mLinksData=new ArrayList<String>();
+	private ArrayList<TaskSpecBeanInfo> mFlowpathData=new ArrayList<TaskSpecBeanInfo>();
+	private ArrayList<TaskSpecBeanInfo> mExplainData=new ArrayList<TaskSpecBeanInfo>();
+	private ArrayList<TaskSpecBeanInfo > mLinksData=new ArrayList<TaskSpecBeanInfo>();
 
 //	基础数据
 	private String userId;// 用户id
@@ -94,6 +98,11 @@ public static final String TAG = TaskDetailInfoActivity.class.getSimpleName();
 	private boolean isShareTask =false;//是否是分享型任务
 	private String str_shareContent ="";//分享的内容
 	private String str_taskName;//任务名称
+	private String str_ctId = "";//地推关系id
+	private String str_scanTip;//扫码说明
+	private String str_reminder ;//温馨提示
+	private String str_taskStatus="";//状态信息
+
 
 //	任务详情Handler
 	private RQHandler<RSGetTaskDetailInfo> rqHandler_getTaskDetailInfo = new RQHandler<>(
@@ -153,12 +162,17 @@ public static final String TAG = TaskDetailInfoActivity.class.getSimpleName();
 				public void onSuccess(RSReceiveTask t) {
 					hideProgressDialog();
 					ToastUtil.show(context,"任务领取成功");
+					str_ctId = t.data;
 					if(isShareTask){
 					//分享型
 						Intent mIntent = new Intent();
 						mIntent.setClass(context,ShareViewActivity.class);
 						mIntent.putExtra("TASK_ID", taskId);
 						mIntent.putExtra("SHARE_CONTENT", str_shareContent);
+						mIntent.putExtra("ctId",str_ctId);
+						mIntent.putExtra("scanTip",str_scanTip);
+						mIntent.putExtra("reminder",str_reminder);
+						mIntent.putExtra("taskStatus",str_taskStatus);
 						startActivity(mIntent);
 						finish();
 					}else{
@@ -169,6 +183,8 @@ public static final String TAG = TaskDetailInfoActivity.class.getSimpleName();
 						mIntent.putExtra("topage",ToMainPage.审核中.getValue());
 						mIntent.putExtra("TASK_NAME", str_taskName);
 						mIntent.putExtra("isShowSubmitBtn",true);
+						mIntent.putExtra("ctId",str_ctId);
+						mIntent.putExtra("taskStatus",str_taskStatus);
 						startActivity(mIntent);
 						finish();
 					}
@@ -195,6 +211,7 @@ public static final String TAG = TaskDetailInfoActivity.class.getSimpleName();
 		userId = Utils.getUserDTO(context).data.userId;
 		taskId = intent.getStringExtra("TaskId");
 		str_taskName = intent.getStringExtra("TaskName");
+		str_ctId = intent.getStringExtra("ctId");
 		initControl();
 		getInitData();
 	}
@@ -213,7 +230,7 @@ public static final String TAG = TaskDetailInfoActivity.class.getSimpleName();
 	@Override
 	protected void onRestart() {
 		super.onRestart();
-		getInitData();
+		//getInitData();
 	}
 
 	/**
@@ -242,7 +259,9 @@ public static final String TAG = TaskDetailInfoActivity.class.getSimpleName();
 		tv_task_tel = (TextView)findViewById(R.id.tv_task_tel);
 		ll_task_description = (LinearLayout) findViewById(R.id.ll_task_description);
 		lv_task_flowpath = (MyListView)findViewById(R.id.lv_task_flowpath);
+		mLine_task_explain_top = findViewById(R.id.line_task_explain_top);
 		lv_task_explain = (ListView)findViewById(R.id.lv_task_explain);
+		mLine_detail_link_top = findViewById(R.id.line_detail_link_top);
 		lv_task_detail_link = (ListView)findViewById(R.id.lv_task_detail_link);
 
 		btn_receive_task = (Button) findViewById(R.id.btn_task_get);
@@ -269,45 +288,6 @@ public static final String TAG = TaskDetailInfoActivity.class.getSimpleName();
 				Utils.callPhone(context,rsGetTaskDetailInfo.data.task.hotLine.trim());
 				break;
 		}
-//		switch (v.getId()) {
-//		case R.id.btn_look_shenhe:// 查看审核
-//			intent = new Intent(context, SubmitDataActivity.class);
-//			intent.putExtra("auditStatus", 2);
-//			intent.putExtra("taskId", rsGetTaskDetailInfo.data.id);
-//			intent.putExtra("myReceivedTaskId",
-//					rsGetTaskDetailInfo.data.orderId);
-//			context.startActivity(intent);
-//			break;
-//		case R.id.btn_submit_data:// 提交资料
-//			intent = new Intent(context, SubmitDataActivity.class);
-//			intent.putExtra("taskId", taskId);
-//			intent.putExtra("myReceivedTaskId", orderId);
-//			context.startActivity(intent);
-//			break;
-//		case R.id.btn_giveup_task:// 放弃任务
-//			showProgressDialog();
-//			ApiUtil.Request(new RQBaseModel<RQGiveupTask, RSBase>(context,
-//					new RQGiveupTask(Utils.getUserDTO(context).data.userId,
-//							orderId, ""), new RSBase(), ApiNames.放弃任务
-//							.getValue(), RequestType.POST, rqHandler_giveupTask));
-//			break;
-//		case R.id.btn_receive_task_again:// 再次领取
-//		case R.id.btn_receive_task:// 点击领取任务时
-//			if (userId.equals("0")) {
-//				intent = new Intent(context, LoginActivity.class);
-//				context.startActivity(intent);
-//				break;
-//			}
-//			showProgressDialog();
-//			ApiUtil.Request(new RQBaseModel<RQReceiveTask, RSReceiveTask>(
-//					context, new RQReceiveTask(
-//							Utils.getUserDTO(context).data.userId, taskId),
-//					new RSReceiveTask(), ApiNames.领取任务.getValue(),
-//					RequestType.POST, rqHandler_receiveTask));
-//			break;
-//		default:
-//			break;
-//		}
 	}
 
 	/**
@@ -327,29 +307,71 @@ public static final String TAG = TaskDetailInfoActivity.class.getSimpleName();
 		tv_Amount.setText(taskBean.task.getAmount());
 
 		tv_pusher_taskName.setText(taskBean.task.taskTitle);
-	//mtv_title_content.setText(taskBean.task.taskTitle);
-		//简介
-		String strType =  " "+taskBean.task.taskTypeName.toString()+" ";
-		String strTypeContent =strType +" "+taskBean.task.taskGeneralInfo.toString();
-		int fstart = strTypeContent.indexOf(taskBean.task.taskTypeName.toString());
-		int fend = fstart + taskBean.task.taskTypeName.toString().length();
-		int bstart = 0;
-		int bend = strType.length();
-		SpannableStringBuilder style = new SpannableStringBuilder(strTypeContent);
-		style.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.white)),fstart,fend, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-		style.setSpan(new BackgroundColorSpan(context.getResources().getColor(R.color.tv_bg_color_1)), bstart, bend, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+		if(taskBean.task.isHad==1){
+			str_ctId = String.valueOf(taskBean.task.ctId);
+		}
+
+		//mtv_title_content.setText(taskBean.task.taskTitle);
+
+		str_scanTip = taskBean.task.scanTip;
+		str_reminder = taskBean.task.reminder;
+		str_taskStatus = taskBean.task.status;
+
+		SpannableStringBuilder style = null;
+		switch (taskBean.task.taskType){
+			case 1:
+				//签约
+				style =  UIHelper.setStyleColorByColor(context, taskBean.task.taskTypeName.toString(), taskBean.task.taskGeneralInfo.toString(), R.color.white, R.color.tv_bg_color_1);
+				break;
+			case 2:
+				//分享
+				style =  UIHelper.setStyleColorByColor(context,taskBean.task.taskTypeName.toString(),taskBean.task.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_2);
+				break;
+			case 3:
+				//下载
+				style =  UIHelper.setStyleColorByColor(context,taskBean.task.taskTypeName.toString(),taskBean.task.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_3);
+				break;
+			default:
+				style =  UIHelper.setStyleColorByColor(context,taskBean.task.taskTypeName.toString(),taskBean.task.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_1);
+				break;
+		}
 		tv_pusher_type_content.setText(style);
-
-
 
 		//审核
 		tv_task_examine.setText(context.getResources().getString(R.string.task_detail_examine_format,taskBean.task.auditCycle));
 		//截止日期
 		tv_deadline_time.setText(context.getResources().getString(R.string.task_detail_dealtime_format, TimeUtils.StringPattern(taskBean.task.endTime,"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd")));
 		//tel
-		tv_task_tel.setText(Html.fromHtml(context.getResources().getString(R.string.task_detail_tel_format,taskBean.task.hotLine)));
-		tv_task_tel.setOnClickListener(this);
-
+		if(TextUtils.isEmpty(taskBean.task.hotLine)){
+			tv_task_tel.setVisibility(View.GONE);
+		}else {
+			tv_task_tel.setVisibility(View.VISIBLE);
+			tv_task_tel.setText(Html.fromHtml(context.getResources().getString(R.string.task_detail_tel_format, taskBean.task.hotLine)));
+			tv_task_tel.setOnClickListener(this);
+		}
+		if(mFlowpathData!=null){
+			mFlowpathData.clear();
+		}
+		if(mExplainData!=null){
+			mExplainData.clear();
+		}
+		if(mLinksData!=null){
+			mLinksData.clear();
+		}
+//		if("1".equals(taskBean.task.status)){
+//		//任务审核通过，可以提交
+//			btn_receive_task.setVisibility(View.VISIBLE);
+//		}else{
+//			//非合法任务信息
+//			btn_receive_task.setVisibility(View.GONE);
+//			String strUnMessage= "";
+//			if("3".equals(taskBean.task.status)){
+//				strUnMessage = "此任务已过期!";
+//			}else{
+//				strUnMessage = "此任务已被终止!";
+//			}
+//			ToastUtil.show(context,strUnMessage);
+//		}
 		//解析数据
 		int isize = taskBean.taskSetps==null ?0:taskBean.taskSetps.size();
 		for(int i=0;i<isize;i++){
@@ -357,24 +379,37 @@ public static final String TAG = TaskDetailInfoActivity.class.getSimpleName();
 			int index = bean.getSortNo()-1;
 			if(bean.getSetpType()==1){
 				//步骤
-				mFlowpathData.add(index,bean.getContent());
+				mFlowpathData.add(index,bean);
 			}else if(bean.getSetpType()==2){
 				//说明
-				mExplainData.add(index,bean.getContent());
+				mExplainData.add(index,bean);
 			}else if(bean.getSetpType()==3){
 			   //细则
-				mLinksData.add(index,bean.getContent());
+				mLinksData.add(index,bean);
 			}
 		}
-		//测试数据
-		for(int i=0;i<10;i++){
-			mFlowpathData.add(mFlowpathData.get(0));
-			mExplainData.add(mExplainData.get(0));
-			mLinksData.add(mLinksData.get(0));
+		if(mExplainData==null ||mExplainData.size()==0){
+			mLine_task_explain_top.setVisibility(View.GONE);
+		}else{
+			mLine_task_explain_top.setVisibility(View.VISIBLE);
 		}
+		if(mLinksData==null ||mLinksData.size()==0){
+			mLine_detail_link_top.setVisibility(View.GONE);
+		}else{
+			mLine_detail_link_top.setVisibility(View.VISIBLE);
+		}
+		//适配数据
 		mTaskFlowPathAdapter.setTaskData(mFlowpathData);
 		mTaskExplainAdapter.setTaskData(mExplainData);
 		mTaskLinkAdapter.setTaskData(mLinksData);
+
+//		判断是否包含流程描述信息
+		if(mFlowpathData.size()==0 &&mExplainData.size()==0 && mLinksData.size()==0){
+			//无流程描述性信息
+			ll_task_description.setVisibility(View.GONE);
+		}else{
+			ll_task_description.setVisibility(View.VISIBLE);
+		}
 
 		if(taskBean.task.isHad==0){
 			//未领取
@@ -388,8 +423,8 @@ public static final String TAG = TaskDetailInfoActivity.class.getSimpleName();
 				isShareTask = true;
 			}else  if(taskBean.task.taskType==3){
 				//下载
-				btn_receive_task.setText("立即参与");
-				isShareTask = false;
+				btn_receive_task.setText("分享二维码");
+				isShareTask = true;
 			}
 		}else if(taskBean.task.isHad==1){
 			//已领取
@@ -403,11 +438,11 @@ public static final String TAG = TaskDetailInfoActivity.class.getSimpleName();
 				isShareTask = true;
 			}else  if(taskBean.task.taskType==3){
 				//下载
-				btn_receive_task.setText("继续任务");
-				isShareTask = false;
+				btn_receive_task.setText("继续分享");
+				isShareTask = true;
 			}
 		}
-		str_shareContent = "www.baidu.com";
+		str_shareContent = taskBean.task.downUrl;
 	}
 
 	/**
@@ -425,8 +460,8 @@ private  void submitTaskDetail(int type,int isHad){
 			//分享二维码
 			submitTask_2();
 		}else if(type==3){
-			//单纯领取任务
-			submitTask_1();
+			//分享二维码
+			submitTask_2();
 		}
 	}else{
 		//已领取
@@ -437,8 +472,8 @@ private  void submitTaskDetail(int type,int isHad){
 			//继续领取任务并分享二维码
 			submitTask_4();
 		}else if(type==3){
-			//单纯继续领取任务
-			submitTask_3();
+			//继续领取任务并分享二维码
+			submitTask_4();
 		}
 	}
 }
@@ -480,8 +515,12 @@ private  void submitTaskDetail(int type,int isHad){
 			//分享型
 			Intent mIntent = new Intent();
 			mIntent.setClass(context,ShareViewActivity.class);
-			mIntent.putExtra("TASK_ID", taskId);
+		mIntent.putExtra("TASK_ID", taskId);
 			mIntent.putExtra("SHARE_CONTENT", str_shareContent);
+			mIntent.putExtra("ctId",str_ctId);
+		mIntent.putExtra("scanTip",str_scanTip);
+		mIntent.putExtra("reminder",str_reminder);
+		mIntent.putExtra("taskStatus",str_taskStatus);
 			startActivity(mIntent);
 			finish();
 
@@ -494,6 +533,8 @@ private  void goToTaskMaterialActivity(){
 	mIntent.putExtra("topage",ToMainPage.审核中.getValue());
 	mIntent.putExtra("TASK_NAME",str_taskName);
 	mIntent.putExtra("isShowSubmitBtn",true);
+	mIntent.putExtra("ctId",str_ctId);
+	mIntent.putExtra("taskStatus",str_taskStatus);
 	startActivity(mIntent);
 	finish();
 }

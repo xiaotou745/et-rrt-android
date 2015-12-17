@@ -23,6 +23,7 @@
         android:stretchMode="columnWidth"
         android:horizontalSpacing="@dimen/view_space_half"
         android:verticalSpacing="@dimen/view_space_half"
+        android:listSelector="@color/white"
         ></com.renrentui.view.MyGridView>
 
 

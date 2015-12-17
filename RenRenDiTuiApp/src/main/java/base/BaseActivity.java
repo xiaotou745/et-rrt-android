@@ -25,6 +25,7 @@ import com.renrentui.interfaces.INodata;
 import com.renrentui.requestmodel.ResultMsgType;
 import com.renrentui.tools.ExitApplication;
 import com.renrentui.tools.Util;
+import com.umeng.analytics.MobclickAgent;
 
 public class BaseActivity extends Activity {
 	public MyApplication mMyApplication =null;
@@ -156,7 +157,7 @@ public class BaseActivity extends Activity {
 		if (progersssDialog == null) {
 			progersssDialog = new MyProgersssDialog(this);
 		}
-		if (!this.isFinishing()) {
+		if (!progersssDialog.isShowing()) {
 			progersssDialog.show();
 		}
 	}
@@ -195,7 +196,18 @@ public class BaseActivity extends Activity {
 			});
 		}
 	}
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
@@ -205,4 +217,6 @@ public class BaseActivity extends Activity {
 			progersssDialog = null;
 		}
 	}
+
+
 }

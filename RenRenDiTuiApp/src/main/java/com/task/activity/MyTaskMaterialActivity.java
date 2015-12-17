@@ -56,6 +56,7 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 	public String str_userId = "";//用户id
 	public String str_ctId = "";//地推关系id
 	public boolean isShowSubmitBtn =false;//是否显示提交按钮
+	public String str_taskStatus="";//任务的装填
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +83,8 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 		str_taskName = getIntent().getStringExtra("TASK_NAME");
 		str_userId = Utils.getUserDTO(context).data.userId;
 		str_ctId = getIntent().getStringExtra("ctId");
-		isShowSubmitBtn = getIntent().getBooleanExtra("isShowSubmitBtn",false);
+		isShowSubmitBtn = getIntent().getBooleanExtra("isShowSubmitBtn", false);
+		str_taskStatus = getIntent().getStringExtra("taskStatus");
 		initView();
 		initViewPager(topage);
 	}
@@ -90,7 +92,7 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if(isShowSubmitBtn){
+		if(isShowSubmitBtn && "1".equals(str_taskStatus)){
 			mBtn_submit_taskTemple.setVisibility(View.VISIBLE);
 		}else{
 			mBtn_submit_taskTemple.setVisibility(View.GONE);
@@ -214,8 +216,8 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-			Intent intent = new Intent(context, NoGoingTaskActicity.class);
-			startActivity(intent);
+//			Intent intent = new Intent(context, NoGoingTaskActicity.class);
+//			startActivity(intent);
 			finish();
 		}
 		return true;

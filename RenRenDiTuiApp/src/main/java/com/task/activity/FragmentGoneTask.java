@@ -84,7 +84,7 @@ public class FragmentGoneTask extends BaseFragment implements
 					FragmentGoneTask.this.hideLayoutNoda();
 					layoutTopMenu.setShenhezhong(t.data.waitTotal);
 					layoutTopMenu.setYtongguo(t.data.passTotal);
-					layoutTopMenu.setWeitongguo(t.data.waitTotal);
+					layoutTopMenu.setWeitongguo(t.data.refuseTotal);
 					pulltorefresh_taskList.setVisibility(View.VISIBLE);
 					if (pageindex == 1) {
 						if (t.data.count == 0) {
@@ -94,7 +94,7 @@ public class FragmentGoneTask extends BaseFragment implements
 									FragmentGoneTask.this);
 						} else {
 							taskMetarialContents.clear();
-							nextId = t.data.nextID;
+							nextId = t.data.nextId;
 							taskMetarialContents.addAll(t.data.content);
 							getGoneAdapter.notifyDataSetChanged();
 
@@ -106,7 +106,7 @@ public class FragmentGoneTask extends BaseFragment implements
 							if (nextId == null) {
 								ToastUtil.show(context, "暂无更多数据");
 							} else {
-								nextId = t.data.nextID;
+								nextId = t.data.nextId;
 								taskMetarialContents.addAll(t.data.content);
 								getGoneAdapter.notifyDataSetChanged();
 							}
@@ -151,12 +151,13 @@ public class FragmentGoneTask extends BaseFragment implements
 	 * 获取数据
 	 */
 	public void getInitData() {
+		pageindex = 1;
 		ApiUtil.Request(new RQBaseModel<RQTaskMaterial, RSTaskMaterial>(
 				context, new RQTaskMaterial(
-						Utils.getUserDTO(context).data.userId, nextId,2,taskId),
+						Utils.getUserDTO(context).data.userId, "0",2,taskId),
 				new RSTaskMaterial(), ApiNames.获取资料审核列表.getValue(),
 				RequestType.POST, rqHandler_getNoGoingTask));
-		pageindex = 1;
+
 	}
 
 	@Override
@@ -213,7 +214,7 @@ public class FragmentGoneTask extends BaseFragment implements
 		ApiUtil.Request(new RQBaseModel<RQTaskMaterial, RSTaskMaterial>(
 				context, new RQTaskMaterial(
 				Utils.getUserDTO(context).data.userId,nextId,2,taskId),
-				new RSTaskMaterial(), ApiNames.获取所有已领取任务.getValue(),
+				new RSTaskMaterial(), ApiNames.获取资料审核列表.getValue(),
 				RequestType.POST, rqHandler_getNoGoingTask));
 		pageindex++;
 	}

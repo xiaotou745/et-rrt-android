@@ -34,12 +34,15 @@ import com.task.activity.NoGoingTaskActicity;
  */
 public class LoginActivity extends BaseActivity implements OnClickListener {
 
-	private Context context;
 	private EditText et_phone;// 手机号码
 	private EditText et_password;// 用户密码
 	private TextView btn_register;// 注册按钮
 	private TextView tv_forgot_password;// 忘记密码
 	private Button btn_login;// 登录按钮
+	private String SSID="";
+	private String operSystemModel="";//手机具体型号
+	private String phoneType="";//手机类型
+
 
 	private RQHandler<RSUser> rqHandler_userLogin = new RQHandler<RSUser>(
 			new IRqHandlerMsg<RSUser>() {
@@ -93,6 +96,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 				finish();
 			}
 		});
+		SSID = Utils.getMobileDevieceId(context);
+		operSystemModel = Utils.getModelSysVersion(context);
+		phoneType = Utils.getModel(context);
 		initControl();
 	}
 
@@ -148,7 +154,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		if (password != null && !password.trim().equals("")) {
 			showProgressDialog();
 			ApiUtil.Request(new RQBaseModel<RQLogin, RSUser>(context,
-					new RQLogin(context, phone, MD5.GetMD5Code(password)),
+					new RQLogin(context, phone, MD5.GetMD5Code(password),SSID,operSystemModel,phoneType),
 					new RSUser(), ApiNames.用户登录.getValue(), RequestType.POST,
 					rqHandler_userLogin));
 		} else {

@@ -38,9 +38,9 @@ public class WebViewActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webview_layout);
         super.init();
+        getIntentData();
         initTitle();
         initView();
-        getIntentData();
     }
 
     @Override
@@ -54,7 +54,6 @@ public class WebViewActivity extends BaseActivity implements
     }
 
     private void initTitle() {
-        mtv_title_content.setText("任务详情简介");
         layout_back.setOnClickListener(this);
 
     }
@@ -69,9 +68,9 @@ public class WebViewActivity extends BaseActivity implements
     }
 
     private void getIntentData() {
-//        strTitle = this.getIntent().getStringExtra(STR_TITLE);
+        strTitle = this.getIntent().getStringExtra(STR_TITLE);
         strContentUrl = this.getIntent().getStringExtra(STR_CONTENT_URL);
-//        tv_title_content.setText(strTitle);
+        mtv_title_content.setText(strTitle);
     }
 
     private void loadWebViewInfo() {

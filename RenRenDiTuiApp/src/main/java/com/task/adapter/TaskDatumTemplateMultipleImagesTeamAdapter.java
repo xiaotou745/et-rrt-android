@@ -1,6 +1,7 @@
 package com.task.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.renrentui.app.R;
+import com.renrentui.db.Bean.TaskTempleDBBean;
+import com.renrentui.db.TaskTempleDBManager;
 import com.renrentui.resultmodel.TaskDatumControlBean;
 import com.renrentui.util.ImageLoadManager;
 import com.renrentui.util.ViewHolderUtil;
@@ -35,7 +38,7 @@ public class TaskDatumTemplateMultipleImagesTeamAdapter extends BaseAdapter {
     private int iTeam_num;//组号
     private int iShowContentType = 0;//0：编辑  1：展示
     private TaskDatumTemplePIcManager mTaskDatumTemplePIcManager = null;//拍照管理类
-
+    private TaskTempleDBManager mTaskTempleManager;
     public TaskDatumTemplateMultipleImagesTeamAdapter(Context con, ArrayList<TaskDatumControlBean> data, int iShowContentType ,
                                                       String userId,String str_taskId,String tag,int iTeam_type,int iTeam_num){
         mContext = con;
@@ -46,6 +49,7 @@ public class TaskDatumTemplateMultipleImagesTeamAdapter extends BaseAdapter {
         this.iTeam_num = iTeam_num;
         this.iShowContentType = iShowContentType;
         this.str_taskId = str_taskId;
+        mTaskTempleManager = new TaskTempleDBManager(con);
     }
     public void  setTaskDatumTemplePIcManager(TaskDatumTemplePIcManager mObj){
         if(mTaskDatumTemplePIcManager==null){
@@ -99,10 +103,27 @@ public class TaskDatumTemplateMultipleImagesTeamAdapter extends BaseAdapter {
 
         if(iShowContentType==1){
             //展示
+            if(!TextUtils.isEmpty(taskBean.controlValue)){
+                mLoadingImage.setLoadingVisibility(View.INVISIBLE);
+            }else{
+                mLoadingImage.setLoadingVisibility(View.VISIBLE);
+            }
             ImageLoadManager.getLoaderInstace().disPlayNormalImg(taskBean.controlValue,
                     mLoadingImage, R.drawable.pusher_logo);
         }else{
             //编辑
+            //添加空数据
+            TaskTempleDBBean beanD = new TaskTempleDBBean();
+            beanD.setUSER_ID(str_userId);
+            beanD.setTASK_ID(str_taskId);
+            beanD.setTEAM_TYPE(String.valueOf(iTeam_type));
+            beanD.setTEAM_NUM(String.valueOf(iTeam_num));
+            beanD.setTEAM_NUM_INDEX(String.valueOf(position));
+            beanD.setTEAM_CONTENT_TYPE(taskBean.controlTypeId);
+            beanD.setTEAM_CONTENT_KEY(taskBean.controlKey);
+            beanD.setTEAM_CONTENT_VALUE("");
+            mTaskTempleManager.AddTaskTemplateEmptyValue(beanD);
+
             mLoadingImage.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {

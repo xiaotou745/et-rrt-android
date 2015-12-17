@@ -15,7 +15,7 @@ public class GetOnGoingTask implements Serializable {
 	/**
 	 * 为分页处理服务，下次如果继续获取，需要填写该ID
 	 */
-	public String nextID;
+	public String nextId;
 	/**
 	 * 已领取任务详情集合
 	 */
@@ -31,13 +31,13 @@ public class GetOnGoingTask implements Serializable {
 		super();
 	}
 
-	public GetOnGoingTask(int total, int count, String nextID,
+	public GetOnGoingTask(int total, int count, String nextId,
 			List<OnGoingTaskInfo> content, int receivedCount, int passCount,
 			int noPassCount) {
 		super();
 		this.total = total;
 		this.count = count;
-		this.nextID = nextID;
+		this.nextId = nextId;
 		this.content = content;
 		this.receivedCount = receivedCount;
 		this.passCount = passCount;
@@ -47,8 +47,8 @@ public class GetOnGoingTask implements Serializable {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "GetOnGoingTask[total=" + total + ",count=" + count + ",nextID="
-				+ nextID + ",content=" + content + "]";
+		return "GetOnGoingTask[total=" + total + ",count=" + count + ",nextId="
+				+ nextId + ",content=" + content + "]";
 	}
 
 }
