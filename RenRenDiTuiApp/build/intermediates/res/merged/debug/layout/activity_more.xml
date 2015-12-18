@@ -124,8 +124,7 @@
     <Button
         android:id="@+id/btn_sign_out"
         style="@style/style_btn_blue_fill"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/btn_blue_wane_bg"
+        android:layout_margin="@dimen/_30dp"
         android:text="@string/signOut"
         android:textColor="#ffffff"
         android:textSize="16sp" />

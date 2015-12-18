@@ -111,7 +111,7 @@ public class DownLoadUtils {
 					}
 				}
 			}else{
-				ToastUtil.show(mContext, "升级错误");
+				//ToastUtil.show(mContext, "升级错误");
 			}
 		}
 	}
