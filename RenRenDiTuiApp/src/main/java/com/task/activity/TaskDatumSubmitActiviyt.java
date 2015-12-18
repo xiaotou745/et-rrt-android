@@ -112,6 +112,7 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
     public AtomicInteger images_team = new AtomicInteger(-1);
     public AtomicInteger multiple_images_team = new AtomicInteger(-1);
     public LinearLayout.LayoutParams mLayoutParams = null;
+    public String str_hotPhone;//电话
 
     //文字组
     public ArrayList<TaskDatumTempletParamsBean> mListTaskDatumTemplet_Texts_data=new  ArrayList<TaskDatumTempletParamsBean>();
@@ -229,6 +230,10 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
             case R.id.btn_submit:
                 submitTaskDatumInfo();
                 break;
+            case R.id.tv_task_tel:
+                //电话
+                Utils.callPhone(context,str_hotPhone.trim());
+                break;
         }
     }
 
@@ -337,6 +342,7 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
             tv_task_tel.setVisibility(View.VISIBLE);
             tv_task_tel.setText(Html.fromHtml(context.getResources().getString(R.string.task_detail_tel_format, taskBean.hotLine)));
             tv_task_tel.setOnClickListener(this);
+            str_hotPhone =  taskBean.hotLine;
         }
 
     }
@@ -570,6 +576,8 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
             });
             cancleDialog.show();
             cancleDialog.setCancelable(false);
+        }else{
+            TaskDatumSubmitActiviyt.this.finish();
         }
 
     }
@@ -660,7 +668,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
                     bean.setTEAM_NUM_INDEX(mUploadPicBean.getTeam_position());
                     bean.setTEAM_CONTENT_VALUE(mUploadPicBean.getNetwork_path());
                     bean.setTEAM_CONTENT_KEY(mUploadPicBean.getControlKey());
-                    //bean.setTEAM_CONTENT_TYPE("2");
+                    bean.setTEAM_CONTENT_TYPE("2");
                     mTaskTempleDBManager.updateOrAddTaskTemplate(bean);
                 }
             }

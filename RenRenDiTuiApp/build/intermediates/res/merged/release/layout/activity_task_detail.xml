@@ -244,6 +244,7 @@
                     android:layout_marginRight="@dimen/view_space"
                     android:layout_marginTop="@dimen/_50dp"
                     android:layout_marginBottom="@dimen/view_space"
+                    android:visibility="gone"
                     />
             </LinearLayout>
         </LinearLayout>

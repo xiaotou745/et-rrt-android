@@ -368,6 +368,8 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
                     @Override
                     public void onClick(View view) {
 
+                        MyApplication.setmCurrentLocation(MyApplication.getmLocalLocation());
+                        ShowCityActivity.this.finish();
                     }
                 });
             }

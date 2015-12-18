@@ -103,10 +103,9 @@ public class TaskDatumTemplateImagesTeamAdapter extends BaseAdapter {
 
         final TaskDatumControlBean taskDean = (TaskDatumControlBean) getItem(i);
 
-
+        mTV_image_title.setText(taskDean.controlTitle);
         if(iShowContentType==1){
             //展示
-            mTV_image_title.setText(taskDean.controlTitle);
             if(!TextUtils.isEmpty(taskDean.controlValue)){
                 mLoadingImage.setLoadingVisibility(View.INVISIBLE);
             }else{
@@ -127,6 +126,7 @@ public class TaskDatumTemplateImagesTeamAdapter extends BaseAdapter {
             beanD.setTEAM_CONTENT_KEY(taskDean.controlKey);
             beanD.setTEAM_CONTENT_VALUE("");
             mTaskTempleManager.AddTaskTemplateEmptyValue(beanD);
+
 
             mLoadingImage.setOnClickListener(new View.OnClickListener(){
                 @Override

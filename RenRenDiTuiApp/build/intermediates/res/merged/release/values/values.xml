@@ -163,6 +163,7 @@
     <string formatted="false" name="my_task_list_itemt_3">未通过(%1$s)</string>
     <string formatted="false" name="my_task_list_itemt_4">成功分享(%1$s)次</string>
     <string formatted="false" name="my_task_list_itemt_5">任务进行中</string>
+    <string formatted="false" name="my_task_list_itemt_6">任务已过期</string>
     <string name="name">姓名</string>
     <string name="networknotconnect">网络无连接</string>
     <string name="newPassword">新密码</string>
@@ -356,7 +357,7 @@
     </style>
     <style name="style_btn_blue_fill">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">55dip</item>
         <item name="android:padding">@dimen/view_space</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:textColor">@color/white</item>

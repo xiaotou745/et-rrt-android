@@ -177,8 +177,8 @@ public class MyTaskMaterialDetailActivity extends BaseActivity implements
                 mBtn_left.setText("查看资料");
                 mBtn_right.setText("再次提交");
         }
-        if("1".equals(str_taskStatus)){
-            //任务为合法装填
+        if(!"1".equals(str_taskStatus)){
+            //过期装填
             mBtn_right.setClickable(false);
             mBtn_right.setBackgroundColor(context.getResources().getColor(R.color.gray_color));
         }else{

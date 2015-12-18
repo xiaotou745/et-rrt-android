@@ -366,7 +366,7 @@ public class TaskTempleDBManager {
      * @return  true 有空值
      */
     public synchronized boolean checkoutTaskTemplateValueIsEmpty(TaskTempleDBBean bean){
-        boolean isResult = true;
+        boolean isResult = false;
         try {
             open();
             String str_selection = TaskTempleColumn.USER_ID + " = ? and "+TaskTempleColumn.TASK_ID+" = ? and "+TaskTempleColumn.TEAM_CONTENT_VALUE+" = ? ";
@@ -376,8 +376,8 @@ public class TaskTempleDBManager {
                 mCursor.moveToFirst();
                 do {
                     String strValue = mCursor.getString(8);
-                    if(strValue!=null && !TextUtils.isEmpty(strValue) && !"null".equals(strValue)){
-                        isResult =false;
+                    if(strValue==null || TextUtils.isEmpty(strValue) || "null".equals(strValue)){
+                        isResult =true;
                         break;
                     }
 

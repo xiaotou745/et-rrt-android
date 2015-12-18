@@ -95,12 +95,14 @@
         android:layout_width="fill_parent"
         android:layout_height="1px"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         android:background="#cccccc" />
 
     <RelativeLayout
         android:id="@+id/rl_cache"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:visibility="gone"
         android:background="@drawable/textview_button_selector" >
 
         <TextView
@@ -116,14 +118,12 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="1px"
+        android:visibility="gone"
         android:background="#cccccc" />
 
     <Button
         android:id="@+id/btn_sign_out"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_12dp"
-        android:layout_marginRight="@dimen/_12dp"
+        style="@style/style_btn_blue_fill"
         android:layout_marginTop="30dp"
         android:background="@drawable/btn_blue_wane_bg"
         android:text="@string/signOut"

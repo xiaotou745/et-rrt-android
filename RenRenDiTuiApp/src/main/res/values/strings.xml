@@ -98,6 +98,7 @@
     <string name="my_task_list_itemt_3" formatted="false">未通过(%1$s)</string>
     <string name="my_task_list_itemt_4" formatted="false">成功分享(%1$s)次</string>
     <string name="my_task_list_itemt_5" formatted="false">任务进行中</string>
+    <string name="my_task_list_itemt_6" formatted="false">任务已过期</string>
     <!-- 个人中心-->
     <string name="personal_item_task_datumn_tv">资料审核详情</string>
     <string name="personal_item_task_message_tv">消息中心</string>

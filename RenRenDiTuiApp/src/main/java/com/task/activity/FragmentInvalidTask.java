@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -51,11 +52,14 @@ public class FragmentInvalidTask extends BaseFragment implements
 	private List<MyTaskContentBean> finishedTaskInfos;
 	private String nextId = "";
 	private int pageindex = 1;
-	private LayoutMyTaskTopmenu layoutTopMenu;// 顶部按钮
-
+	//private LayoutMyTaskTopmenu layoutTopMenu;// 顶部按钮
+	public MyTaskFramentActivity mMyTaskListener;
 	@SuppressLint("ValidFragment")
-	public FragmentInvalidTask(LayoutMyTaskTopmenu layoutTopMenu){
-		this.layoutTopMenu = layoutTopMenu;
+//	public FragmentInvalidTask(LayoutMyTaskTopmenu layoutTopMenu){
+//		this.layoutTopMenu = layoutTopMenu;
+//	}
+	public FragmentInvalidTask(){
+
 	}
 	private RQHandler<RSMyTask> rqHandler_gqTask = new RQHandler<>(
 			new IRqHandlerMsg<RSMyTask>() {
@@ -79,8 +83,9 @@ public class FragmentInvalidTask extends BaseFragment implements
 				public void onSuccess(RSMyTask t) {
 					FragmentInvalidTask.this.hideLayoutNoda();
 					pulltorefresh_taskList.setVisibility(View.VISIBLE);
-					layoutTopMenu.setThroughNum(t.data.passTotal);
-					layoutTopMenu.setInvalid(t.data.refuseTotal);
+					mMyTaskListener.showMyTaskCount(t.data.passTotal,t.data.refuseTotal);
+//					layoutTopMenu.setThroughNum(t.data.passTotal);
+//					layoutTopMenu.setInvalid(t.data.refuseTotal);
 					if (pageindex == 1) {
 						if (t.data.count == 0) {
 							pulltorefresh_taskList.setVisibility(View.GONE);
@@ -119,7 +124,12 @@ public class FragmentInvalidTask extends BaseFragment implements
 
 				}
 			});
-
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		context = activity;
+		mMyTaskListener = (MyTaskFramentActivity) activity;
+	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

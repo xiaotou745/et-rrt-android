@@ -20,17 +20,14 @@ import com.task.activity.NoGoingTaskActicity;
  */
 public class WelcomeActivity extends BaseActivity {
 
-	private Context context;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
-		context = this;
 		goOtherActivity();
 		FileUtils.createDirectory(FileUtils.getSaveFilePath());
-		System.out.println(FileUtils.getSaveFilePath());
-		GetCity.getCity(context).getCNBylocation();
+		//GetCity.getCity(context).getCNBylocation();
 	}
 
 	/**

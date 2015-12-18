@@ -252,7 +252,7 @@ public class GetInvalidTaskAdapter extends BaseAdapter {
 
 			viewholder_thread.tv_pusher_taskType_content.setText(style);
 			if("0".equals(taskBean.getComplateNum())){
-				viewholder_thread.textView_4.setText(context.getResources().getString(R.string.my_task_list_itemt_5));
+				viewholder_thread.textView_4.setText(context.getResources().getString(R.string.my_task_list_itemt_6));
 			}else {
 				viewholder_thread.textView_4.setText(context.getResources().getString(R.string.my_task_list_itemt_4, taskBean.getComplateNum()));
 			}

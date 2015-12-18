@@ -33,7 +33,7 @@ import com.user.activity.PersonalCenterActivity;
  * 我的任务列表页
  */
 public class MyTaskFramentActivity extends BaseFragmentActivity implements
-        OnClickListener {
+        OnClickListener , BaseFragmentActivity.MyTaskInterface {
     private Context context;
     private ViewPager vp_task_my;
     private MyFragmentPagerAdapter viewPagerAdapter;
@@ -76,8 +76,8 @@ public class MyTaskFramentActivity extends BaseFragmentActivity implements
     }
 
     private void initViewPager(int topage) {
-        fragmentThroughTask = new FragmentThroughTask(layoutTopMenu);
-        fragmentInvalidTask = new FragmentInvalidTask(layoutTopMenu);
+        fragmentThroughTask = new FragmentThroughTask();
+        fragmentInvalidTask = new FragmentInvalidTask();
         fragmentList = new ArrayList<BaseFragment>();
         fragmentList.add(fragmentThroughTask);
         fragmentList.add(fragmentInvalidTask);
@@ -124,5 +124,11 @@ public class MyTaskFramentActivity extends BaseFragmentActivity implements
         }
         vp_task_my.setCurrentItem(topage);
     }
+//===========数量更改===============
 
+    @Override
+    public void showMyTaskCount(String num1, String num2) {
+        layoutTopMenu.setThroughNum(String.valueOf(num1));
+        layoutTopMenu.setInvalid(String.valueOf(num2));
+    }
 }

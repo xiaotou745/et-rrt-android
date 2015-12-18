@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
@@ -42,6 +43,7 @@ import com.renrentui.util.ImageLoadManager;
 import com.renrentui.util.TimeUtils;
 import com.renrentui.util.ToMainPage;
 import com.renrentui.util.ToastUtil;
+import com.renrentui.util.UIHelper;
 import com.renrentui.util.Utils;
 import com.renrentui.util.ViewHolderUtil;
 import com.task.adapter.TaskDatumTemplateImagesTeamAdapter;
@@ -100,6 +102,7 @@ public class ShowTaskMatailDetailActivity extends BaseActivity implements
     public AtomicInteger images_team = new AtomicInteger(-1);
     public AtomicInteger multiple_images_team = new AtomicInteger(-1);
     public LinearLayout.LayoutParams mLayoutParams = null;
+    public String str_hotPhone = "";//电话
 
     //文字组
     public ArrayList<TaskDatumTempletParamsBean> mListTaskDatumTemplet_Texts_data=new  ArrayList<TaskDatumTempletParamsBean>();
@@ -175,6 +178,10 @@ public class ShowTaskMatailDetailActivity extends BaseActivity implements
             case R.id.layout_back:
                 ShowTaskMatailDetailActivity.this.finish();
                 break;
+            case R.id.tv_task_tel:
+                //咨询电话
+                Utils.callPhone(context, str_hotPhone.trim());
+                break;
 
 
         }
@@ -236,24 +243,41 @@ public class ShowTaskMatailDetailActivity extends BaseActivity implements
 
         tv_pusher_taskName.setText(taskBean.taskTitle);
         //简介
-        String strType =  " "+taskBean.taskTypeName.toString()+" ";
-        String strTypeContent =strType +" "+taskBean.taskGeneralInfo.toString();
-        int fstart = strTypeContent.indexOf(taskBean.taskTypeName.toString());
-        int fend = fstart + taskBean.taskTypeName.toString().length();
-        int bstart = 0;
-        int bend = strType.length();
-        SpannableStringBuilder style = new SpannableStringBuilder(strTypeContent);
-        style.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.white)),fstart,fend, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        style.setSpan(new BackgroundColorSpan(context.getResources().getColor(R.color.tv_bg_color_1)), bstart, bend, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        SpannableStringBuilder style = null;
+        switch (taskBean.taskType){
+            case 1:
+                //签约
+                style =  UIHelper.setStyleColorByColor(context, taskBean.taskTypeName.toString(), taskBean.taskGeneralInfo.toString(), R.color.white, R.color.tv_bg_color_1);
+                break;
+            case 2:
+                //分享
+                style =  UIHelper.setStyleColorByColor(context,taskBean.taskTypeName.toString(),taskBean.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_3);
+                break;
+            case 3:
+                //下载
+                style =  UIHelper.setStyleColorByColor(context,taskBean.taskTypeName.toString(),taskBean.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_2);
+                break;
+            default:
+                style =  UIHelper.setStyleColorByColor(context,taskBean.taskTypeName.toString(),taskBean.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_1);
+                break;
+        }
+
         tv_pusher_type_content.setText(style);
 
         //审核
-        tv_task_examine.setText(context.getResources().getString(R.string.task_detail_examine_format,taskBean.auditCycle));
+        tv_task_examine.setText(context.getResources().getString(R.string.task_detail_examine_format, taskBean.auditCycle));
         //截止日期
         tv_deadline_time.setText(context.getResources().getString(R.string.task_detail_dealtime_format, TimeUtils.StringPattern(taskBean.endTime, "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd")));
+
         //tel
-        tv_task_tel.setText(Html.fromHtml(context.getResources().getString(R.string.task_detail_tel_format, taskBean.hotLine)));
-        tv_task_tel.setOnClickListener(this);
+        if(TextUtils.isEmpty(taskBean.hotLine)){
+            tv_task_tel.setVisibility(View.GONE);
+        }else{
+            tv_task_tel.setVisibility(View.VISIBLE);
+            tv_task_tel.setText(Html.fromHtml(context.getResources().getString(R.string.task_detail_tel_format, taskBean.hotLine)));
+            tv_task_tel.setOnClickListener(this);
+            str_hotPhone =  taskBean.hotLine;
+        }
     }
 
     /**

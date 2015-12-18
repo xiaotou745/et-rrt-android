@@ -17,7 +17,7 @@
             android:id="@+id/tv_title"
             style="@style/activity_headlayout_center_centertext"
             android:layout_marginLeft="@dimen/_45dp"
-            android:text="@string/taskcontent" />
+            android:text="资料录入" />
     </RelativeLayout>
     <!-- task-->
     <LinearLayout

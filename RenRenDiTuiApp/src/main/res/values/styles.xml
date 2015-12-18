@@ -143,7 +143,7 @@
 
     <style name="style_btn_blue_fill">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">55dip</item>
         <item name="android:padding">@dimen/view_space</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:textColor">@color/white</item>

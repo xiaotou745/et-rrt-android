@@ -17,6 +17,7 @@ import com.renrentui.app.R;
 import com.renrentui.db.Bean.TaskTempleDBBean;
 import com.renrentui.db.TaskTempleDBManager;
 import com.renrentui.resultmodel.TaskDatumControlBean;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -130,7 +131,10 @@ public class TaskDatumTemplateTextsTeamAdapter extends BaseAdapter {
             mHolderView.mEitText.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
-                    if(motionEvent.getAction()==MotionEvent.ACTION_UP){
+//                    if(motionEvent.getAction()==MotionEvent.ACTION_UP){
+//                        index = position;
+//                    }
+                    if(motionEvent.getAction()== MotionEvent.ACTION_DOWN){
                         index = position;
                     }
                     return false;

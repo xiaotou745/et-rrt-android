@@ -12,15 +12,15 @@ public class MyMessageContentBean implements Serializable {
     public String    msg ;//消息内容
     public String   hasRead ;//消息是否已读
     public String   taskId ;//任务id
-    public String time;//时间
+    public String createDate;//时间
 
     public MyMessageContentBean() {
         super();
     }
 
-    public MyMessageContentBean(String taskId, String id, String title, String msg, String hasRead,String time) {
+    public MyMessageContentBean(String taskId, String id, String title, String msg, String hasRead,String createDate) {
         super();
-        this.time = time;
+        this.createDate = createDate;
         this.taskId = taskId;
         this.id = id;
         this.title = title;
@@ -36,6 +36,7 @@ public class MyMessageContentBean implements Serializable {
                 ", msg='" + msg + '\'' +
                 ", hasRead='" + hasRead + '\'' +
                 ", taskId='" + taskId + '\'' +
+                ", createDate='" + createDate + '\'' +
                 '}';
     }
 }

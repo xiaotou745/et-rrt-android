@@ -78,6 +78,7 @@ public class MyTaskContentBean implements Serializable {
                 ", auditPassNum='" + auditPassNum + '\'' +
                 ", auditRefuseNum='" + auditRefuseNum + '\'' +
                 ", complateNum='" + complateNum + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

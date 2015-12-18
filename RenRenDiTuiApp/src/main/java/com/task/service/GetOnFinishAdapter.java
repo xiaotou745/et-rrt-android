@@ -175,17 +175,17 @@ public class GetOnFinishAdapter extends BaseAdapter {
 				if(beanContent.titlesList!=null && beanContent.titlesList.size()>0){
 					viewholder_1.tv_push_content.setText(beanContent.titlesList.get(0));
 				}else{
-					viewholder_1.tv_push_content.setText("...");
+					viewholder_1.tv_push_content.setText("");
 				}
 
-				viewholder_1.tv_task_status.setText(beanContent.taskStatus);
+				viewholder_1.tv_task_status.setText(beanContent.taskStatusName);
 				viewholder_1.tv_task_status.setTextColor(context.getResources().getColor(R.color.tv_order_color_5));
 				viewholder_1.tv_task_amount.setText(String.valueOf(beanContent.getAmount()));
 				viewholder_1.tv_task_name.setText(style);
 				break;
 			case 1:
 				viewHolder_2.tv_push_time.setText("提交时间  "+ TimeUtils.StringPattern(beanContent.createDate,"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm"));
-				viewHolder_2.tv_task_status.setText(beanContent.taskStatus);
+				viewHolder_2.tv_task_status.setText(beanContent.taskStatusName);
 				viewHolder_2.tv_task_status.setTextColor(context.getResources().getColor(R.color.tv_order_color_5));
 				viewHolder_2.tv_task_amount.setText(String.valueOf(beanContent.getAmount()));
 				viewHolder_2.tv_task_name.setText(style);
@@ -193,7 +193,7 @@ public class GetOnFinishAdapter extends BaseAdapter {
 				break;
 			case 2:
 				viewHolder_3.tv_push_time.setText("提交时间  "+ TimeUtils.StringPattern(beanContent.createDate,"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm"));
-				viewHolder_3.tv_task_status.setText(beanContent.taskStatus);
+				viewHolder_3.tv_task_status.setText(beanContent.taskStatusName);
 				viewHolder_3.tv_task_status.setTextColor(context.getResources().getColor(R.color.tv_order_color_5));
 				viewHolder_3.tv_task_amount.setText(String.valueOf(beanContent.getAmount()));
 				viewHolder_3.tv_task_name.setText(style);

@@ -1,6 +1,7 @@
 package com.task.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -51,14 +52,15 @@ public class FragmentGoneTask extends BaseFragment implements
 	private String nextId = "";
 	private int pageindex = 1;
 	private String taskId;//任务id
-	private LayoutMainTopmenu layoutTopMenu;// 顶部按钮
+	//private LayoutMainTopmenu layoutTopMenu;// 顶部按钮
+	public MyTaskMaterialActivity myTaskMaterialListener;
 
 
-	public FragmentGoneTask(LayoutMainTopmenu layoutTopMenu) {
-		this.layoutTopMenu = layoutTopMenu;
+	public FragmentGoneTask(String strTaskId) {
+		taskId = strTaskId;
 	}
-	public FragmentGoneTask() {
-	}
+//	public FragmentGoneTask() {
+//	}
 
 	private RQHandler<RSTaskMaterial> rqHandler_getNoGoingTask = new RQHandler<>(
 			new IRqHandlerMsg<RSTaskMaterial>() {
@@ -82,9 +84,10 @@ public class FragmentGoneTask extends BaseFragment implements
 				@Override
 				public void onSuccess(RSTaskMaterial t) {
 					FragmentGoneTask.this.hideLayoutNoda();
-					layoutTopMenu.setShenhezhong(t.data.waitTotal);
-					layoutTopMenu.setYtongguo(t.data.passTotal);
-					layoutTopMenu.setWeitongguo(t.data.refuseTotal);
+//					layoutTopMenu.setShenhezhong(t.data.waitTotal);
+//					layoutTopMenu.setYtongguo(t.data.passTotal);
+//					layoutTopMenu.setWeitongguo(t.data.refuseTotal);
+					myTaskMaterialListener.showMyTaskMateriaCount(t.data.waitTotal,t.data.passTotal,t.data.refuseTotal);
 					pulltorefresh_taskList.setVisibility(View.VISIBLE);
 					if (pageindex == 1) {
 						if (t.data.count == 0) {
@@ -128,12 +131,16 @@ public class FragmentGoneTask extends BaseFragment implements
 							"刷新", "数据加载失败！", null);
 				}
 			});
-
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		context = activity;
+		myTaskMaterialListener = (MyTaskMaterialActivity) activity;
+	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.fragment_task_main, null);
-		context = getActivity();
 		super.init(view);
 		pulltorefresh_taskList = (PullToRefreshView) view
 				.findViewById(R.id.pulltorefresh_taskList);

@@ -84,5 +84,22 @@ public class BaseFragmentActivity extends FragmentActivity {
 		super.onPause();
 		MobclickAgent.onPause(this);
 	}
-
+//	接口
+	public interface MyTaskInterface {
+	/**
+	 *
+	 * @param num1  进行中
+	 * @param num2  已过期
+	 */
+	void showMyTaskCount(String num1, String num2);
+	}
+	public interface  MyTaskMateriaInterface{
+		/**
+		 *
+		 * @param num1  审核中
+		 * @param num2   通过
+		 * @param num3    拒绝
+		 */
+		void showMyTaskMateriaCount(int num1, int num2, int num3);
+	}
 }

@@ -2,6 +2,7 @@ package com.user.model.download;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.renrentui.net.HttpRequestDigestImpl;
@@ -66,15 +67,18 @@ public class DownLoadUtils {
 				strResult = HttpRequest.sendPostJSON(mContext,
 						ApiConstants.ApiUrl + "/common/versioncheck",
 						checkVersion);
+				if(strResult==null){
+					strResult = "";
+				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				strResult = "";
 			}
 			return strResult.trim();
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
-			if (Util.IsNotNUll(result.toString())) {
+			if (Util.IsNotNUll(result)) {
 				Gson gson = new Gson();
 				RSCheckVersion checkVersion = gson.fromJson(result,
 						RSCheckVersion.class);
@@ -106,6 +110,8 @@ public class DownLoadUtils {
 
 					}
 				}
+			}else{
+				ToastUtil.show(mContext, "升级错误");
 			}
 		}
 	}

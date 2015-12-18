@@ -15,6 +15,7 @@ public class TaskMetarialContent  implements Serializable {
     public int taskType ;//任务类型  id任务类型1 签约任务 2 分享任务 3 下载任务
     public String taskTypeName ;//任务类型名称
     public String taskStatus;// 任务状态描述：1是审核通过，3是过期，4是终止
+    public String taskStatusName ;//任务状态描述：1是进行中，3是过期，4是终止
     public String auditCycle;// (审核周期)
     public String taskDatumId;// 资料id
     public String auditStatus;// 审核状态描述：待审核，通过，不通过
@@ -38,7 +39,7 @@ public class TaskMetarialContent  implements Serializable {
                             int taskType, String taskTypeName, String taskStatus,
                             String auditCycle, String taskDatumId, String auditStatus,
                             String createDate, String auditTime, int groupType,
-                               ArrayList<String > titlesList,String ciId) {
+                               ArrayList<String > titlesList,String ciId,String taskStatusName) {
         super();
         this.taskId = taskId;
         this.taskName = taskName;
@@ -54,6 +55,7 @@ public class TaskMetarialContent  implements Serializable {
         this.groupType = groupType;
         this.titlesList = titlesList;
         this.ctId =ciId;
+        this.taskStatusName = taskStatusName;
     }
 
     @Override
@@ -72,6 +74,7 @@ public class TaskMetarialContent  implements Serializable {
                 ", auditTime='" + auditTime + '\'' +
                 ", groupType=" + groupType +
                 ", titlesList='" + titlesList + '\'' +
+                ", taskStatusName='" + taskStatusName + '\'' +
                 '}';
     }
 }

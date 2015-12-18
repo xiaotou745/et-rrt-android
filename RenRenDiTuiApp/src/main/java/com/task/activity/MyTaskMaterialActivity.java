@@ -38,7 +38,7 @@ import org.w3c.dom.Text;
  * 
  */
 public class MyTaskMaterialActivity extends BaseFragmentActivity implements
-		OnClickListener {
+		OnClickListener , BaseFragmentActivity.MyTaskMateriaInterface {
 	private Context context;
 	public ViewPager vp_task_main;
 	private MyFragmentPagerAdapter viewPagerAdapter;
@@ -63,16 +63,6 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_task_main);
 		super.init();
-//		super.onBack(new IBack() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				// TODO Auto-generated method stub
-//				Intent intent = new Intent(context, NoGoingTaskActicity.class);
-//				startActivity(intent);
-//				finish();
-//			}
-//		});
 		ExitApplication.getInstance().addActivity(this);
 		context = this;
 		topage = getIntent().getIntExtra("topage", topage);
@@ -87,16 +77,19 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 		str_taskStatus = getIntent().getStringExtra("taskStatus");
 		initView();
 		initViewPager(topage);
-	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
 		if(isShowSubmitBtn && "1".equals(str_taskStatus)){
 			mBtn_submit_taskTemple.setVisibility(View.VISIBLE);
 		}else{
 			mBtn_submit_taskTemple.setVisibility(View.GONE);
 		}
+
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
 	}
 //	@Override
 //	protected void onStop(){
@@ -119,17 +112,18 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 		layoutTopMenu = new LayoutMainTopmenu(context);
 		layoutTopMenu.setOnClickListener(this);
 		mTV_title = (TextView)findViewById(R.id.tv_title);
-		//mTV_title.setText(str_taskName+"已提交资料");
 		mTV_title.setText("资料审核列表");
 		mBtn_submit_taskTemple = (Button)findViewById(R.id.btn_submit_taskTemple);
 		mBtn_submit_taskTemple.setOnClickListener(this);
-
+		if(!str_taskId.equals("0")) {
+			mTV_title.setText(str_taskName);
+		}
 	}
 
 	public void initViewPager(int index) {
-		fragment_onGoingTask = new FragmentOnGoingTash(layoutTopMenu);
-		fragment_GoneTask = new FragmentGoneTask(layoutTopMenu);
-		fragment_finishedTask = new FragmentFinishedTask(layoutTopMenu);
+		fragment_onGoingTask = new FragmentOnGoingTash(str_taskId);
+		fragment_GoneTask = new FragmentGoneTask(str_taskId);
+		fragment_finishedTask = new FragmentFinishedTask(str_taskId);
 		fragmentList = new ArrayList<BaseFragment>();
 		fragmentList.add(0,fragment_onGoingTask);
 		fragmentList.add(1,fragment_GoneTask);
@@ -153,7 +147,6 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 		mIntent.putExtra("taskName", str_taskName);
 		mIntent.putExtra("ctId",str_ctId);
 		startActivity(mIntent);
-		finish();
 
 	}
 
@@ -221,6 +214,15 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 			finish();
 		}
 		return true;
+	}
+
+//	========================数值调整========================
+
+	@Override
+	public void showMyTaskMateriaCount(int num1, int num2, int num3) {
+		layoutTopMenu.setShenhezhong(num1);
+		layoutTopMenu.setYtongguo(num2);
+		layoutTopMenu.setWeitongguo(num3);
 	}
 
 }

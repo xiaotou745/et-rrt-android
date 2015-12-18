@@ -52,6 +52,7 @@ public class PersonalCenterActivity extends BaseActivity implements
 	private TextView tv_user_phone;// 用户账号
 	private TextView tv_user_name;// 用户名称
 	private TextView tv_my_money;// 我的余额
+	private TextView tv_my_new_money;//我的新余额
 	private TextView tv_can_withdrawals_money;// 用户可提现金额
 	private TextView tv_withdrawals_money;// 用户提现中金额
 	private RelativeLayout rl_customer_service_center;// 客服支持
@@ -82,6 +83,7 @@ public class PersonalCenterActivity extends BaseActivity implements
 						iv_user_icon.setImageResource(R.drawable.icon);
 					}
 					tv_my_money.setText(t.data.getBalance());
+					tv_my_new_money.setText(t.data.getBalance());
 					tv_can_withdrawals_money.setText(t.data.getWithdraw());
 					tv_withdrawals_money.setText(t.data.getWithdrawing());
 				}
@@ -90,6 +92,7 @@ public class PersonalCenterActivity extends BaseActivity implements
 				public void onSericeErr(RSMyInCome t) {
 					// TODO Auto-generated method stub
 					tv_my_money.setText("0.00");
+					tv_my_new_money.setText("0.00");
 					tv_can_withdrawals_money.setText("0.00");
 					tv_withdrawals_money.setText("0.00");
 					ToastUtil.show(context, t.msg);
@@ -158,6 +161,8 @@ public class PersonalCenterActivity extends BaseActivity implements
 		rl_datum_task.setOnClickListener(this);
 		rl_message_task = (RelativeLayout)findViewById(R.id.rl_message_task);
 		rl_message_task.setOnClickListener(this);
+
+		tv_my_new_money = (TextView)findViewById(R.id.tv_my_money_new);
 	}
 
 	@Override

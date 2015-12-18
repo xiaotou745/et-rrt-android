@@ -408,6 +408,7 @@ public static final String TAG = TaskDetailInfoActivity.class.getSimpleName();
 			//无流程描述性信息
 			ll_task_description.setVisibility(View.GONE);
 		}else{
+			btn_receive_task.setVisibility(View.VISIBLE);
 			ll_task_description.setVisibility(View.VISIBLE);
 		}
 
