@@ -1,0 +1,122 @@
+-injars 'D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\build\intermediates\multi-dex\HybridETS\release\allclasses.jar'
+-outjars 'D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\build\intermediates\multi-dex\HybridETS\release\componentClasses.jar'
+
+-libraryjars 'D:\AndroidStudio\LocalSdk\build-tools\23.0.1\lib\shrinkedAndroid.jar'
+
+-forceprocessing
+-dontoptimize
+-dontobfuscate
+-dontpreverify
+-dontwarn
+-printconfiguration 'D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\build\intermediates\multi-dex\HybridETS\release\components.flags'
+
+
+-keep class com.renrentui.app.MyApplication {
+    <init>();
+    void attachBaseContext(android.content.Context);
+}
+
+-keep class com.renrentui.app.WelcomeActivity {
+    <init>();
+}
+
+-keep class com.user.activity.LoginActivity {
+    <init>();
+}
+
+-keep class com.task.activity.MyTaskMaterialActivity {
+    <init>();
+}
+
+-keep class com.task.activity.NoGoingTaskActicity {
+    <init>();
+}
+
+-keep class com.task.activity.TaskDetailInfoActivity {
+    <init>();
+}
+
+-keep class com.task.activity.MyTaskFramentActivity {
+    <init>();
+}
+
+-keep class com.user.activity.FindPwdActivity {
+    <init>();
+}
+
+-keep class com.user.activity.RegisterActivity {
+    <init>();
+}
+
+-keep class com.user.activity.UpdatePwdActivity {
+    <init>();
+}
+
+-keep class com.user.activity.PersonalCenterActivity {
+    <init>();
+}
+
+-keep class com.user.activity.HelpCenterActivity {
+    <init>();
+}
+
+-keep class com.user.activity.PersonalDataActivity {
+    <init>();
+}
+
+-keep class com.user.activity.WithdrawalsActivity {
+    <init>();
+}
+
+-keep class com.user.activity.MoreActivity {
+    <init>();
+}
+
+-keep class com.task.activity.WebViewActivity {
+    <init>();
+}
+
+-keep class com.task.activity.ShareViewActivity {
+    <init>();
+}
+
+-keep class com.task.activity.MyTaskMaterialDetailActivity {
+    <init>();
+}
+
+-keep class com.task.activity.TaskDatumSubmitActiviyt {
+    <init>();
+}
+
+-keep class com.task.activity.ShowTaskMatailDetailActivity {
+    <init>();
+}
+
+-keep class com.task.activity.ShowCityActivity {
+    <init>();
+}
+
+-keep class com.user.activity.MyMessageActivity {
+    <init>();
+}
+
+-keep class com.user.model.download.DownLoadService {
+    <init>();
+}
+
+-keep class com.task.upload.UploadService {
+    <init>();
+}
+
+-keep class com.baidu.location.f {
+    <init>();
+}
+
+-keep public class * extends android.app.backup.BackupAgent {
+    <init>();
+}
+
+-keep public class * extends java.lang.annotation.Annotation {
+    <fields>;
+    <methods>;
+}

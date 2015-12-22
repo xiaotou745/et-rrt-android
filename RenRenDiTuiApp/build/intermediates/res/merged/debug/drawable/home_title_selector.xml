@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="#09a3b8" android:state_checked="true"/>
-    <item android:color="#09a3b8" android:state_pressed="true"/>
-    <item android:color="#333333" />
-
-
-</selector><!-- From: file:/D:/StudioProjectsWorkSpace/renrenditui_androidApp/RenRenDiTuiApp/src/main/res/drawable/home_title_selector.xml -->

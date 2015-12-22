@@ -1,21 +1,33 @@
 apply plugin: 'com.android.application'
-
+    def releaseTime() {
+        return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+    }
 android {
+    //编译sdk的版本
     compileSdkVersion 'Google Inc.:Google APIs (x86 System Image):19'
+//    build tools的版本
     buildToolsVersion "23.0.1"
 
     defaultConfig {
         applicationId "com.renrentui.app"
         minSdkVersion 11
         targetSdkVersion 11
+        versionCode 110
+        versionName "1.1.0"
+//        java 版本
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_7
             targetCompatibility JavaVersion.VERSION_1_7
         }
+        // dex突破65535的限制
+        multiDexEnabled true
+        // 默认是umeng的渠道
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "umeng_develop"]
     }
 
     buildTypes {
         release {
+//            是否混淆
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
@@ -35,12 +47,55 @@ android {
             signingConfig signingConfigs.release
         }
         release {
+            //签名
             signingConfig signingConfigs.release
+            //混淆
+           // minifyEnabled true
+            //aipalign 优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        // 输出apk名称为boohee_v1.0_2015-01-15_wandoujia.apk
+                        //def fileName = "renrentui_${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+                        def fileName = outputFile.name.replace(".apk", "_${defaultConfig.versionName}_${releaseTime()}.apk")
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
         }
+    }
+
+    // 友盟多渠道打包
+    productFlavors {
+        _91 {}
+        _360 {}
+        android {}
+        anzhi {}
+        baidu {}
+        HybridETS {}
+        jifeng {}
+        kchuan {}
+        mumayi {}
+        Nduo {}
+        NetEase {}
+        Tencent {}
+        wandoujia {}
+        xiaomi {}
+        yingyonghui {}
+    }
+
+    productFlavors.all { flavor ->
+        flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
     }
 }
 
 dependencies {
+//    编译libs目录下的所有jar包
     compile 'com.android.support:support-v4:19.1.0'
     compile 'com.google.code.gson:gson:2.2.4'
     compile files('libs/apache-mime4j-0.6.jar')
