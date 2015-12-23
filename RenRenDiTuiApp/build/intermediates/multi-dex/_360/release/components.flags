@@ -1,7 +1,7 @@
 -injars 'D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\build\intermediates\multi-dex\_360\release\allclasses.jar'
 -outjars 'D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\build\intermediates\multi-dex\_360\release\componentClasses.jar'
 
--libraryjars 'D:\AndroidStudio\LocalSdk\build-tools\23.0.1\lib\shrinkedAndroid.jar'
+-libraryjars 'D:\AndroidStudio_SDK\LocalSdk\build-tools\23.0.1\lib\shrinkedAndroid.jar'
 
 -forceprocessing
 -dontoptimize
