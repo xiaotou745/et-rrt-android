@@ -95,8 +95,7 @@ android {
 }
 
 dependencies {
-//    编译libs目录下的所有jar包
-    compile 'com.android.support:support-v4:19.1.0'
+    //    编译libs目录下的所有jar包
     compile 'com.google.code.gson:gson:2.2.4'
     compile files('libs/apache-mime4j-0.6.jar')
     compile files('libs/universal-image-loader-1.9.4.jar')
@@ -104,4 +103,5 @@ dependencies {
     compile files('libs/zxing.jar')
     compile files('libs/BaiduLBS_Android.jar')
     compile files('libs/umeng-analytics-v5.6.3.jar')
+    compile 'com.android.support:support-v4:19.1.0'
 }
