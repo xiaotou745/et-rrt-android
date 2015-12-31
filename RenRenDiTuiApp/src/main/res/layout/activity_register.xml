@@ -101,7 +101,14 @@
                 android:hint="@string/againPassword"
                 android:inputType="textPassword"
                 android:maxLength="12" />
-
+            <EditText
+                android:id="@+id/et_phone_referee"
+                style="@style/input_style_for_register"
+                android:drawableLeft="@drawable/icon_unlock"
+                android:drawablePadding="@dimen/_12dp"
+                android:hint="@string/referee"
+                android:inputType="phone"
+                android:maxLength="12" />
             <Button
                 android:id="@+id/btn_submit"
                 android:layout_width="match_parent"

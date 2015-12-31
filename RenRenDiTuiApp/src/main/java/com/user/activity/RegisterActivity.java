@@ -6,6 +6,7 @@ import java.util.TimerTask;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import com.renrentui.requestmodel.RQSendCode;
 import com.renrentui.requestmodel.RequestType;
 import com.renrentui.resultmodel.RSBase;
 import com.renrentui.resultmodel.RSUser;
+import com.renrentui.tools.Util;
 import com.renrentui.util.ApiNames;
 import com.renrentui.util.ApiUtil;
 import com.renrentui.util.MD5;
@@ -43,6 +45,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	private EditText etCode;// 手机获取验证码
 	private EditText etPasssword;// 用户密码
 	private EditText etPassword2;// 再次输入密码
+	private EditText etRefereePhone;// 推荐人手机号
 	private Button btnSubmit;// 确定按钮
 	private Button btnGetCode;// 获取验证码按钮
 
@@ -138,6 +141,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		etPassword2 = (EditText) findViewById(R.id.et_password2);
 		btnSubmit = (Button) findViewById(R.id.btn_submit);
 		btnSubmit.setOnClickListener(this);
+		etRefereePhone= (EditText)findViewById(R.id.et_phone_referee);
 		btnGetCode = (Button) findViewById(R.id.btn_get_code);
 		btnGetCode.setOnClickListener(this);
 	}
@@ -171,6 +175,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		String password = etPasssword.getText().toString().trim();
 		String password2 = etPassword2.getText().toString().trim();
 		String code = etCode.getText().toString();
+		String recommendPhone = etRefereePhone.getText().toString().trim();
 		if (phone.length() != 11 || !phone.substring(0, 1).equals("1")) {
 			ToastUtil.show(context, "请输入正确的手机号");
 			return;
@@ -187,10 +192,16 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			ToastUtil.show(context, "两次密码不一致");
 			return;
 		}
+		if(!TextUtils.isEmpty(recommendPhone)){
+			if(!Util.isMobileNO(recommendPhone)){
+				ToastUtil.show(context, "请输入正确的推荐人手机号");
+				return ;
+			}
+		}
 		showProgressDialog();
 		ApiUtil.Request(new RQBaseModel<RQRegisterUser, RSUser>(
 				context,
-				new RQRegisterUser(phone, MD5.GetMD5Code(password), code,""),
+				new RQRegisterUser(phone, MD5.GetMD5Code(password), code,"",recommendPhone),
 				new RSUser(), ApiNames.用户注册.getValue(), RequestType.POST,
 				rqHandler_registerUser));
 	}

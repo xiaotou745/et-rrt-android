@@ -25,12 +25,26 @@ public class RQRegisterUser extends RQBase {
 	
 	private String name;
 
+	/**
+	 * 推荐人
+	 */
+	private String recommendPhone;
+
 	public RQRegisterUser() {
 		super();
 	}
 
 	public RQRegisterUser(String phoneNo, String passWord,
-			String verifyCode,String name) {
+			String verifyCode,String name,String recommendPhone) {
+		super();
+		this.phoneNo = phoneNo;
+		this.passWord = passWord;
+		this.verifyCode = verifyCode;
+		this.name = name;
+		this.recommendPhone = recommendPhone;
+	}
+	public RQRegisterUser(String phoneNo, String passWord,
+						  String verifyCode,String name) {
 		super();
 		this.phoneNo = phoneNo;
 		this.passWord = passWord;
@@ -41,6 +55,6 @@ public class RQRegisterUser extends RQBase {
 	@Override
 	public String toString() {
 		return "RQRegisterUser[PhoneNo=" + phoneNo + ",Password=" + passWord
-				+ ",VerifyCode=" + verifyCode + "]";
+				+ ",VerifyCode=" + verifyCode + ",recommendPhone=" + recommendPhone +"]";
 	}
 }

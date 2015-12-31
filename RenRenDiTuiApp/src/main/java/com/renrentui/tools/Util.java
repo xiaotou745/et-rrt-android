@@ -21,6 +21,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
@@ -479,5 +480,19 @@ public class Util {
 	 */
 	public static String TrimLeftRightStr(String str, String trim) {
 		return TrimRightStr(TrimLeftStr(str, trim), trim);
+	}
+
+	/**
+	 * 手机号验证
+	 * @param mobiles
+	 * @return
+	 */
+	public static boolean isMobileNO(String mobiles) {
+
+		String telRegex = "1[0-9]{10}";
+		if (TextUtils.isEmpty(mobiles))
+			return false;
+		else
+			return mobiles.matches(telRegex);
 	}
 }

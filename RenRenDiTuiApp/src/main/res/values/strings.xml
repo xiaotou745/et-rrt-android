@@ -46,6 +46,7 @@
     <string name="oldPassword">旧密码</string>
     <string name="newPassword">新密码</string>
     <string name="againPassword">确认密码</string>
+    <string name="referee">请输入推荐人手机号(非必填)</string>
     <string name="login">登录</string>
     <string name="more">更多</string>
     <string name="register">注册</string>
