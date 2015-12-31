@@ -87,6 +87,44 @@ android {
         wandoujia {}
         xiaomi {}
         yingyonghui {}
+        AnFen {
+        }
+        AnBei {
+        }
+        AiQiYi {
+        }
+        flavor {
+        }
+        JinLi {
+        }
+        MeiZu {
+        }
+        HaiXin {
+        }
+        SanXing {
+        }
+        YingYongKu {
+        }
+        LeShi {
+        }
+        LianTong {
+        }
+        SuNing {
+        }
+        YouYi {
+        }
+        MaoPaoTang {
+        }
+        LianXiang {
+        }
+        YiDong {
+        }
+        SouGou {
+        }
+        YiYongHui {
+        }
+        HuaWei {
+        }
     }
 
     productFlavors.all { flavor ->
