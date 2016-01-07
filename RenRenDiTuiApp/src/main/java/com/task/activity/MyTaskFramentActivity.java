@@ -14,18 +14,31 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import base.BaseFragment;
 import base.BaseFragmentActivity;
 
+import com.renrentui.app.MyApplication;
 import com.renrentui.app.R;
 import com.renrentui.interfaces.IBack;
+import com.renrentui.interfaces.IRqHandlerMsg;
+import com.renrentui.requestmodel.RQBaseModel;
+import com.renrentui.requestmodel.RQGetMyMessage;
+import com.renrentui.requestmodel.RQHandler;
+import com.renrentui.requestmodel.RequestType;
+import com.renrentui.resultmodel.RSGetMyMessage;
 import com.renrentui.tools.ExitApplication;
+import com.renrentui.util.ApiNames;
+import com.renrentui.util.ApiUtil;
+import com.renrentui.util.GetCity;
 import com.renrentui.util.ToMainPage;
 import com.renrentui.util.ToMyTaskPage;
 import com.task.model.LayoutMainTopmenu;
 import com.task.model.LayoutMyTaskTopmenu;
 import com.task.service.MyFragmentPagerAdapter;
+import com.user.activity.LoginActivity;
 import com.user.activity.PersonalCenterActivity;
 
 /**
@@ -34,7 +47,6 @@ import com.user.activity.PersonalCenterActivity;
  */
 public class MyTaskFramentActivity extends BaseFragmentActivity implements
         OnClickListener , BaseFragmentActivity.MyTaskInterface {
-    private Context context;
     private ViewPager vp_task_my;
     private MyFragmentPagerAdapter viewPagerAdapter;
     private List<BaseFragment> fragmentList;
@@ -43,21 +55,63 @@ public class MyTaskFramentActivity extends BaseFragmentActivity implements
     private int topage = ToMyTaskPage.进行中.getValue();// intent指向要显示的页面
     private LayoutMyTaskTopmenu layoutTopMenu;// 顶部按钮
 
+    //	bottom
+    private LinearLayout mTab_01;
+    private LinearLayout mTab_02;
+    private LinearLayout mTab_03;
+    private ImageView mTab_image_03;
+    private TextView mTab_text_03;
+    private boolean isQuit = false;
+
+
+    private RQHandler<RSGetMyMessage> rqHandler_getMyMessage = new RQHandler<>(
+            new IRqHandlerMsg<RSGetMyMessage>() {
+
+                @Override
+                public void onBefore() {
+                }
+
+                @Override
+                public void onNetworknotvalide() {
+                    //网络无效
+                }
+
+                @Override
+                public void onSuccess(RSGetMyMessage t) {
+                    if(t.getData()>0){
+                        MyApplication.isMessage = true;
+                        mTab_image_03.setImageResource(R.drawable.bg_main_menu_tab3_2_image_layout);
+                    }else{
+                        //无信息
+                        MyApplication.isMessage = false;
+                        mTab_image_03.setImageResource(R.drawable.bg_main_menu_tab3_1_image_layout);
+                    }
+                }
+
+                @Override
+                public void onSericeErr(RSGetMyMessage t) {
+                }
+
+                @Override
+                public void onSericeExp() {
+
+                }
+            });
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_my);
         super.init();
         ExitApplication.getInstance().addActivity(this);
-        context = this;
         initView();
         initViewPager(topage);
     }
 
     @Override
     protected void onResume() {
-        // TODO Auto-generated method stub
         super.onResume();
+        getMyMessageInfo();
     }
 
     @Override
@@ -68,8 +122,35 @@ public class MyTaskFramentActivity extends BaseFragmentActivity implements
         }
         vp_task_my.setCurrentItem(topage);
     }
-
+    /**
+     * 获取未读信息
+     */
+    private void getMyMessageInfo(){
+        ApiUtil.Request(new RQBaseModel<RQGetMyMessage, RSGetMyMessage>(
+                context, new RQGetMyMessage(strUserId),
+                new RSGetMyMessage(), ApiNames.获取未读信息数量.getValue(),
+                RequestType.POST, rqHandler_getMyMessage));
+    }
     private void initView() {
+        if(mTV_title_content!=null){
+            mTV_title_content.setText("我的任务");
+        }
+//		menu
+        mTab_01 = (LinearLayout)findViewById(R.id.tab_01);
+        mTab_01.setOnClickListener(this);
+        mTab_02 = (LinearLayout)findViewById(R.id.tab_02);
+        mTab_02.setOnClickListener(this);
+        mTab_02.setSelected(true);
+        mTab_03 = (LinearLayout)findViewById(R.id.tab_03);
+        mTab_03.setOnClickListener(this);
+        mTab_image_03 = (ImageView)findViewById(R.id.tab_image_03);
+        if( MyApplication.isMessage){
+            mTab_image_03.setImageResource(R.drawable.bg_main_menu_tab3_1_image_layout);
+        }else{
+            mTab_image_03.setImageResource(R.drawable.bg_main_menu_tab3_2_image_layout);
+        }
+        mTab_text_03 = (TextView)findViewById(R.id.tab_text_03);
+
         vp_task_my = (ViewPager) findViewById(R.id.vp_task_my);
         layoutTopMenu = new LayoutMyTaskTopmenu(context);
         layoutTopMenu.setOnClickListener(this);
@@ -114,15 +195,63 @@ public class MyTaskFramentActivity extends BaseFragmentActivity implements
 
     @Override
     public void onClick(View v) {
+        Intent intent = null;
+        boolean isFinish =false;
         switch (v.getId()) {
             case R.id.btn_task_through:
+                intent = null;
                 topage = ToMyTaskPage.进行中.getValue();
                 break;
             case R.id.btn_task_invalid:
+                intent = null;
                 topage = ToMyTaskPage.已过期.getValue();
                 break;
+            case R.id.tab_01:
+                //可接任务
+                intent = new Intent(context, NoGoingTaskActicity.class);
+                isFinish = true;
+                break;
+            case R.id.tab_02:
+                //我的任务
+                break;
+            case R.id.tab_03:
+                //个人中心
+                    intent = new Intent(context, PersonalCenterActivity.class);
+                    isFinish = true;
+                break;
         }
-        vp_task_my.setCurrentItem(topage);
+        if(intent==null){
+            vp_task_my.setCurrentItem(topage);
+        }else{
+            startActivity(intent);
+            if(isFinish){
+                finish();
+            }
+        }
+
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // 点击两次退出应用程序处理逻辑
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            if (!isQuit ) {
+                isQuit = true;
+                Toast.makeText(context, "再按一次返回键退出程序", Toast.LENGTH_SHORT).show();
+                TimerTask task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        isQuit = false;
+                    }
+                };
+                new Timer().schedule(task, 2000);
+            } else {
+                ExitApplication.getInstance().exit();
+                MyTaskFramentActivity.this.finish();
+                System.exit(0);
+            }
+        }
+        return true;
     }
 //===========数量更改===============
 

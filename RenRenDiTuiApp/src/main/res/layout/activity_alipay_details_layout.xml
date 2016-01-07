@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/layout_view_bg"
+    >
+    <!-- title-->
+    <include
+        layout="@layout/main_title_home_layout"
+        ></include>
+
+    <!-- conten-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="当前绑定的支付宝: "
+        android:textColor="@color/tv_order_color_1"
+        android:textSize="@dimen/_14sp"
+        android:padding="@dimen/view_space"
+        ></TextView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/view_space"
+        android:background="@color/white"
+        >
+        <TextView
+            android:id="@+id/tv_key_01"
+            android:layout_width="100dip"
+            android:layout_height="36dip"
+            android:gravity="center"
+            android:textColor="@color/tv_order_color_1"
+            android:textSize="@dimen/_14sp"
+            android:text="支付宝账户:"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            />
+        <TextView
+            android:id="@+id/tv_key_02"
+            android:layout_width="match_parent"
+            android:layout_height="36dip"
+            android:gravity="left|center_vertical"
+            android:textColor="@color/tv_order_color_5"
+            android:textSize="@dimen/_14sp"
+            android:text="11111111111111111"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/tv_key_01"
+            />
+        <TextView
+            android:id="@+id/tv_key_03"
+            android:layout_width="100dip"
+            android:layout_height="36dip"
+            android:gravity="center"
+            android:textColor="@color/tv_order_color_1"
+            android:textSize="@dimen/_14sp"
+            android:text="支付宝实名:"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/tv_key_01"
+            />
+        <TextView
+            android:id="@+id/tv_key_04"
+            android:layout_width="match_parent"
+            android:layout_height="36dip"
+            android:gravity="left|center_vertical"
+            android:textColor="@color/tv_order_color_5"
+            android:textSize="@dimen/_14sp"
+            android:text="3333333333333333333"
+            android:layout_below="@id/tv_key_02"
+            android:layout_toRightOf="@id/tv_key_03"
+            />
+        <Button
+            android:id="@+id/btn_click_01"
+            android:layout_width="wrap_content"
+            android:layout_height="30dip"
+            android:background="@drawable/bg_shape_square"
+            android:text="更改"
+            android:gravity="center"
+            android:textSize="@dimen/_12sp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tv_key_02"
+            android:textColor="@color/tv_order_color_5"
+            />
+    </RelativeLayout>
+</LinearLayout>

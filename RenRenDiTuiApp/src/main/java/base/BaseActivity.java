@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -25,21 +27,32 @@ import com.renrentui.interfaces.INodata;
 import com.renrentui.requestmodel.ResultMsgType;
 import com.renrentui.tools.ExitApplication;
 import com.renrentui.tools.Util;
+import com.renrentui.util.Utils;
 import com.umeng.analytics.MobclickAgent;
 
+/**
+ * 基础页面
+ */
 public class BaseActivity extends Activity {
 	public MyApplication mMyApplication =null;
+	//无数据
 	public View layout_nodata;
 	public Button btn_nodata;
 	public TextView tv_nodata;
-	public View layout_back;
+
 	public MyProgersssDialog progersssDialog;
 	public Context context;
-	public TextView mtv_title_content;
+	//title
+	public ImageView mIV_title_left;
+	public TextView mTV_title_left;
+	public TextView mTV_title_content;
+	public TextView mTV_title_right;
+	public ImageView mIV_title_right;
+
+	public String strUserId = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -74,24 +87,24 @@ public class BaseActivity extends Activity {
 		layout_nodata = findViewById(R.id.layout_nodata);
 		btn_nodata = (Button) findViewById(R.id.btn_nodata);
 		tv_nodata = (TextView) findViewById(R.id.tv_nodata);
-		layout_back = findViewById(R.id.layout_back);
 		progersssDialog = new MyProgersssDialog(this);
 		progersssDialog.setCancelable(false);
-		mtv_title_content = (TextView)findViewById(R.id.tv_title);
-		onBack(null);
+		mIV_title_left = (ImageView)findViewById(R.id.iv_title_left);
+		mTV_title_left = (TextView)findViewById(R.id.tv_title_left);
+		mTV_title_content = (TextView)findViewById(R.id.tv_title_content);
+		mTV_title_right = (TextView)findViewById(R.id.tv_title_right);
+		mIV_title_right = (ImageView)findViewById(R.id.iv_title_right);
+		//onBack(null);
 	}
+
+
 
 	/**
 	 * 页面没有数据时的统一处理
-	 * 
-	 * @param ResultMsgType
-	 *            页面没有数据时的情况：网络无连接，数据加载失败，数据没有
-	 * @param btnText
-	 *            按钮上面显示的文字
-	 * @param tvText
-	 *            textview上面显示的文字
+	 * @param resultMsgType
+	 * @param btnText 按钮上面显示的文字
+	 * @param tvText	没有数据对应的后续操作
 	 * @param iNodata
-	 *            没有数据对应的后续操作
 	 */
 	public void onNodata(int resultMsgType, String btnText, String tvText,
 			final INodata iNodata) {
@@ -174,28 +187,28 @@ public class BaseActivity extends Activity {
 		}
 	}
 
-	/**
-	 * 返回操作统一处理或者定制处理
-	 * 
-	 * @param iBack
-	 */
-	public void onBack(IBack iBack) {
-		if (layout_back == null) {
-			return;
-		}
-		if (iBack != null) {
-			layout_back.setOnClickListener(iBack);
-		} else {
-			layout_back.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					((Activity) v.getContext()).finish();
-				}
-			});
-		}
-	}
+//	/**
+//	 * 返回操作统一处理或者定制处理
+//	 *
+//	 * @param iBack
+//	 */
+////	public void onBack(IBack iBack) {
+//		if (layout_back == null) {
+//			return;
+//		}
+//		if (iBack != null) {
+//			layout_back.setOnClickListener(iBack);
+//		} else {
+//			layout_back.setOnClickListener(new OnClickListener() {
+//
+//				@Override
+//				public void onClick(View v) {
+//					// TODO Auto-generated method stub
+//					((Activity) v.getContext()).finish();
+//				}
+//			});
+//		}
+//	}
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -206,7 +219,13 @@ public class BaseActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		if (Utils.getUserDTO(context) != null){
+			strUserId = Utils.getUserDTO(context).data.userId;
+		}else {
+			strUserId = "0";
+		}
 		MobclickAgent.onResume(this);
+
 	}
 	@Override
 	protected void onDestroy() {
@@ -215,6 +234,18 @@ public class BaseActivity extends Activity {
 		if (progersssDialog != null) {
 			progersssDialog.dismiss();
 			progersssDialog = null;
+		}
+	}
+
+	/**
+	 * 判断用户是否登录
+	 * @return
+	 */
+	protected boolean isLogin(){
+		if(TextUtils.isEmpty(strUserId) || "0".equals(strUserId)){
+			return false;
+		}else {
+			return true;
 		}
 	}
 

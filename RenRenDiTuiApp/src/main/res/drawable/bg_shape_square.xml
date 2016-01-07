@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle"
+    >
+<corners
+    android:radius="5dip"
+    ></corners>
+
+    <stroke
+        android:color="@color/tv_order_color_5"
+        android:width="@dimen/_1dp"
+        ></stroke>
+    <solid
+        android:color="@color/white"
+        ></solid>
+    <padding
+        android:left="@dimen/_10dp"
+        android:top="@dimen/_5dp"
+        android:right="@dimen/_10dp"
+        android:bottom="@dimen/_5dp"
+        ></padding>
+</shape>

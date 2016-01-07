@@ -7,6 +7,9 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
@@ -14,19 +17,27 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.renrentui.app.R;
-import com.renrentui.interfaces.IBack;
 import com.renrentui.tools.ExitApplication;
+import com.renrentui.util.Utils;
 import com.umeng.analytics.MobclickAgent;
 
 public class BaseFragmentActivity extends FragmentActivity {
-	public View layout_back;
-	
+
+	//title
+	public ImageView mIV_title_left;
+	public TextView mTV_title_left;
+	public TextView mTV_title_content;
+	public TextView mTV_title_right;
+	public ImageView mIV_title_right;
+	public Context context;
+	public String strUserId = "";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		context =this;
 		initImageLoader(getApplicationContext());
 	}
 	
@@ -50,34 +61,44 @@ public class BaseFragmentActivity extends FragmentActivity {
 	 */
 	protected void init() {
 		ExitApplication.getInstance().addActivity(this);
-		layout_back = findViewById(R.id.layout_back);
-		onBack(null);
+		//onBack(null);
+		mIV_title_left = (ImageView)findViewById(R.id.iv_title_left);
+		mTV_title_left = (TextView)findViewById(R.id.tv_title_left);
+		mTV_title_content = (TextView)findViewById(R.id.tv_title_content);
+		mTV_title_right = (TextView)findViewById(R.id.tv_title_right);
+		mIV_title_right = (ImageView)findViewById(R.id.iv_title_right);
+		//onBack(null);
 	}
 
-	/**
-	 * 返回操作统一处理或者定制处理
-	 * 
-	 * @param iBack
-	 */
-	public void onBack(IBack iBack) {
-		if (layout_back == null) {
-			return;
-		}
-		if (iBack != null) {
-			layout_back.setOnClickListener(iBack);
-		} else {
-			layout_back.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					((FragmentActivity) v.getContext()).finish();
-				}
-			});
-		}
-	}
+//	/**
+//	 * 返回操作统一处理或者定制处理
+//	 *
+//	 * @param iBack
+//	 */
+//	public void onBack(IBack iBack) {
+//		if (layout_back == null) {
+//			return;
+//		}
+//		if (iBack != null) {
+//			layout_back.setOnClickListener(iBack);
+//		} else {
+//			layout_back.setOnClickListener(new OnClickListener() {
+//
+//				@Override
+//				public void onClick(View v) {
+//					// TODO Auto-generated method stub
+//					((FragmentActivity) v.getContext()).finish();
+//				}
+//			});
+//		}
+//	}
 	protected void onResume() {
 		super.onResume();
+		if (Utils.getUserDTO(context) != null){
+			strUserId = Utils.getUserDTO(context).data.userId;
+		}else {
+			strUserId = "0";
+		}
 		MobclickAgent.onResume(this);       //统计时长
 	}
 	protected void onPause() {

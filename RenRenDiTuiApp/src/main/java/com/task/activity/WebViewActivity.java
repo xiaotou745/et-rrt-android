@@ -39,7 +39,7 @@ public class WebViewActivity extends BaseActivity implements
         setContentView(R.layout.webview_layout);
         super.init();
         getIntentData();
-        initTitle();
+       // initTitle();
         initView();
     }
 
@@ -53,10 +53,10 @@ public class WebViewActivity extends BaseActivity implements
         }
     }
 
-    private void initTitle() {
-        layout_back.setOnClickListener(this);
-
-    }
+//    private void initTitle() {
+//        layout_back.setOnClickListener(this);
+//
+//    }
 
     private void initView() {
         mWebView = (WebView) findViewById(R.id.webview_help);
@@ -70,7 +70,7 @@ public class WebViewActivity extends BaseActivity implements
     private void getIntentData() {
         strTitle = this.getIntent().getStringExtra(STR_TITLE);
         strContentUrl = this.getIntent().getStringExtra(STR_CONTENT_URL);
-        mtv_title_content.setText(strTitle);
+        mTV_title_content.setText(strTitle);
     }
 
     private void loadWebViewInfo() {

@@ -22,8 +22,9 @@
     <!-- activity或者fragment页面顶部布局     相对布局 -->
     <style name="activity_headlayout">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">44dp</item>
+        <item name="android:layout_height">@dimen/unify_title_height</item>
         <item name="android:background">#222222</item>
+        <item name="android:padding">@dimen/layout_padding_nor</item>
     </style>
     <!-- activity或者fragment页面顶部中间侧布局 父布局相对布局 -->
     <style name="activity_headlayout_centertext">
@@ -69,6 +70,20 @@
         <item name="android:textSize">@dimen/_14dp</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:layout_alignParentRight">true</item>
+    </style>
+    <style name="activity_headlayout_imageView_right">
+        <item name="android:layout_width">40dip</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
+    <style name="activity_headlayout_imageView_left">
+        <item name="android:layout_width">40dip</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentLeft">true</item>
     </style>
     <!-- 用户输入框样式 -->
     <style name="input_style">
@@ -205,5 +220,22 @@
         <!-- 背景透明 -->
         <item name="android:backgroundDimEnabled">true</item>
         <!-- 模糊 -->
+    </style>
+    <!--<====================================================-->
+    <style name="btn_match_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginLeft">@dimen/_10dp</item>
+        <item name="android:layout_marginRight">@dimen/_10dp</item>
+        <item name="android:layout_height">@dimen/btn_style_height</item>
+        <item name="android:layout_marginTop">@dimen/_30dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/btn_blue_wane_bg</item>
+        <item name="android:paddingBottom">@dimen/_8dp</item>
+        <item name="android:paddingTop">@dimen/_8dp</item>
+        <item name="android:textColor">@android:color/white</item>
+
+
+
+
     </style>
 </resources>

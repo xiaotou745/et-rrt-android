@@ -269,7 +269,7 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
         ll_multiple_images_area = (LinearLayout)findViewById(R.id.ll_multiple_images_area);
         mBtn_submit = (Button)findViewById(R.id.btn_submit);
         mBtn_submit.setOnClickListener(this);
-        layout_back.setOnClickListener(this);
+       // layout_back.setOnClickListener(this);
         mScrollView = (ScrollView)findViewById(R.id.scrollview_view);
     }
 
@@ -278,7 +278,7 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
      * @return
      */
     private  void initViewValue(){
-        mtv_title_content.setText(taskName);
+        mTV_title_content.setText(taskName);
     }
 
     /**

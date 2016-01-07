@@ -60,6 +60,8 @@
             android:paddingTop="@dimen/_10dp"
             android:paddingBottom="@dimen/_10dp"
             android:layout_weight="1"
+            android:textSize="@dimen/_14sp"
+            android:textColor="@color/tv_order_color_2"
             android:background="@drawable/dialog_left_btn_bg"
             android:text="取消" />
 
@@ -76,6 +78,8 @@
             android:paddingTop="@dimen/_10dp"
             android:paddingBottom="@dimen/_10dp"
             android:layout_weight="1"
+            android:textSize="@dimen/_14sp"
+            android:textColor="@color/tv_order_color_2"
             android:background="@drawable/dialog_right_btn_bg"
             android:text="确定" />
     </LinearLayout>

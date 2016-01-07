@@ -5,18 +5,10 @@
     android:background="@color/gray"
     android:orientation="vertical" >
 
-    <RelativeLayout style="@style/activity_headlayout" >
-
-        <LinearLayout style="@style/activity_headlayout_left" >
-
-            <include layout="@layout/layout_back" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_title"
-            style="@style/activity_headlayout_centertext"
-            android:text="@string/register" />
-    </RelativeLayout>
+    <!-- title-->
+   <include
+       layout="@layout/main_title_home_layout"
+       ></include>
 
     <ScrollView
         android:layout_width="match_parent"

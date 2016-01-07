@@ -6,23 +6,10 @@
     android:background="@color/gray"
     android:orientation="vertical" >
 
-    <RelativeLayout style="@style/activity_headlayout" >
-
-        <LinearLayout style="@style/activity_headlayout_left" >
-
-            <include layout="@layout/layout_back" />
-        </LinearLayout>
-
-        <TextView
-            style="@style/activity_headlayout_center_centertext"
-            android:text="@string/login" />
-
-        <TextView
-            android:id="@+id/btn_register"
-            style="@style/activity_headlayout_right"
-            android:layout_marginRight="@dimen/_10dp"
-            android:text="@string/register" />
-    </RelativeLayout>
+    <!-- title  登录 与注册-->
+    <include
+        layout="@layout/main_title_home_layout"
+        ></include>
 
     <EditText
         android:id="@+id/et_phone"

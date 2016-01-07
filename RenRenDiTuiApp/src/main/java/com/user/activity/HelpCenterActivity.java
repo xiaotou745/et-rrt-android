@@ -31,9 +31,9 @@ public class HelpCenterActivity extends BaseActivity {
 		});
 	}
 	
-	@Override
-	public void onBack(IBack iBack) {
-		super.onBack(iBack);
-	}
+//	@Override
+//	public void onBack(IBack iBack) {
+//		super.onBack(iBack);
+//	}
 
 }

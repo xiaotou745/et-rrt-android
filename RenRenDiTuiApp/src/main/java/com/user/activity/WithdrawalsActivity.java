@@ -1,7 +1,9 @@
 package com.user.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -16,6 +18,7 @@ import com.renrentui.requestmodel.RQHandler;
 import com.renrentui.requestmodel.RQUserId;
 import com.renrentui.requestmodel.RQWithdraw;
 import com.renrentui.requestmodel.RequestType;
+import com.renrentui.resultmodel.MyInCome;
 import com.renrentui.resultmodel.RSBase;
 import com.renrentui.resultmodel.RSMyInCome;
 import com.renrentui.tools.Util;
@@ -26,16 +29,31 @@ import com.renrentui.util.Utils;
 import com.user.service.WithdrawalsDialog;
 import com.user.service.WithdrawalsDialog.ExitDialogListener;
 
+import org.w3c.dom.Text;
+
+/**
+ * 提现页面
+ */
 public class WithdrawalsActivity extends BaseActivity implements
 		OnClickListener {
+	public static  final  int STR_REQUESET_FLAG_ADD = 1005;
 
-	private Context context;
-	private Button btn_withdrawals;// 提现按钮
-	private EditText et_zhifubao_name;// 支付宝开户姓名
-	private EditText et_zhifubao;// 支付宝账号
+
+	private TextView tv_can_withdrawals_money;// 我的余额
+	private TextView tv_accumulated_wealth;// 已提现
+	private TextView mTV_account_type;//提现账户类型
+	private TextView mTV_account_num;//提现账户
 	private EditText et_money;// 余额（元）
-	private TextView tv_can_withdrawals_money;// 可用金额
-	private TextView tv_accumulated_wealth;// 累积财富
+
+	private Button btn_withdrawals;// 提现按钮
+	private String strAccountTrueName;//提现的真是姓名
+	private String strAccountTrueNum;//提现的真是账户
+	private boolean isBindAccount = true;//是否绑定了提现账户
+	private String strUserPhone;
+	private String strUserName;
+
+
+	private MyInCome mMyInComeData;
 
 	private RQHandler<RSBase> rqHandler_withdraw = new RQHandler<RSBase>(
 			new IRqHandlerMsg<RSBase>() {
@@ -76,36 +94,7 @@ public class WithdrawalsActivity extends BaseActivity implements
 				}
 			});
 
-	private RQHandler<RSMyInCome> rqHandler_myincome = new RQHandler<RSMyInCome>(
-			new IRqHandlerMsg<RSMyInCome>() {
 
-				@Override
-				public void onBefore() {
-					// TODO Auto-generated method stub
-				}
-
-				@Override
-				public void onNetworknotvalide() {
-					// TODO Auto-generated method stub
-				}
-
-				@Override
-				public void onSuccess(RSMyInCome t) {
-					tv_can_withdrawals_money.setText(t.data.getBalance());
-					tv_accumulated_wealth.setText(t.data.getTotalAmount());
-				}
-
-				@Override
-				public void onSericeErr(RSMyInCome t) {
-					// TODO Auto-generated method stub
-					ToastUtil.show(context, t.msg);
-				}
-
-				@Override
-				public void onSericeExp() {
-					// TODO Auto-generated method stub
-				}
-			});
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -114,81 +103,183 @@ public class WithdrawalsActivity extends BaseActivity implements
 		super.init();
 		initControl();
 		getData();
+		initViewData();
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		getData();
+		initViewData();
 	}
 
 	/**
-	 * 获取用户金额数据
+	 * 获取传递数据
 	 */
-	private void getData() {
-		ApiUtil.Request(new RQBaseModel<RQUserId, RSMyInCome>(context,
-				new RQUserId(Utils.getUserDTO(context).data.userId),
-				new RSMyInCome(), ApiNames.获取用户信息.getValue(), RequestType.POST,
-				rqHandler_myincome));
+private  void getData(){
+	mMyInComeData = (MyInCome)this.getIntent().getSerializableExtra("VO");
+
+}
+//	/**
+//	 * 获取用户金额数据
+//	 */
+//	private void getData() {
+//		ApiUtil.Request(new RQBaseModel<RQUserId, RSMyInCome>(context,
+//				new RQUserId(Utils.getUserDTO(context).data.userId),
+//				new RSMyInCome(), ApiNames.获取用户信息.getValue(), RequestType.POST,
+//				rqHandler_myincome));
+//	}
+
+	private void initViewData(){
+		if(mMyInComeData!=null){
+			strUserName = mMyInComeData.clienterName;
+			strUserPhone = mMyInComeData.phoneNo;
+			strAccountTrueName = mMyInComeData.getTrueName();
+			tv_can_withdrawals_money.setText(mMyInComeData.getWithdraw());
+			tv_accumulated_wealth.setText(mMyInComeData.getHadWithdraw());
+			if("-1".equals(mMyInComeData.getAccountType())){
+				mTV_account_type.setText("未绑定");
+				mTV_account_num.setText("绑定支付宝");
+				isBindAccount = false;
+				return;
+			}else if("1".equals(mMyInComeData.getAccountType())){
+				mTV_account_type.setText("网银");
+			}else if("2".equals(mMyInComeData.getAccountType())){
+				mTV_account_type.setText("支付宝");
+			}else if("3".equals(mMyInComeData.getAccountType())){
+				mTV_account_type.setText("微信");
+			}else if("4".equals(mMyInComeData.getAccountType())){
+				mTV_account_type.setText("财付通");
+			}else if("5".equals(mMyInComeData.getAccountType())){
+				mTV_account_type.setText("百度钱包");
+			}
+			strAccountTrueNum = mMyInComeData.getAccountNo();
+			mTV_account_num.setText(getUserBankInfo(mMyInComeData.getAccountType(), mMyInComeData.getAccountNo()));
+		}
+
 	}
 
 	/**
 	 * 初始化控件
 	 */
 	private void initControl() {
-		context = this;
+		if(mIV_title_left!=null){
+			mIV_title_left.setVisibility(View.VISIBLE);
+			mIV_title_left.setOnClickListener(this);
+		}
+
+		if(mTV_title_content!=null){
+			mTV_title_content.setText("提现");
+		}
 		btn_withdrawals = (Button) findViewById(R.id.btn_withdrawals);
 		btn_withdrawals.setOnClickListener(this);
-		et_zhifubao_name = (EditText) findViewById(R.id.et_zhifubao_name);
-		et_zhifubao = (EditText) findViewById(R.id.et_zhifubao);
 		et_money = (EditText) findViewById(R.id.et_money);
 		tv_can_withdrawals_money = (TextView) findViewById(R.id.tv_can_withdrawals_money);
 		tv_accumulated_wealth = (TextView) findViewById(R.id.tv_accumulated_wealth);
+		mTV_account_type = (TextView)findViewById(R.id.tv_account_type);
+		mTV_account_num = (TextView)findViewById(R.id.tv_account_num);
+		mTV_account_num.setOnClickListener(this);
 	}
 
+	/**
+	 * 数据整理
+	 */
+	private String  getUserBankInfo(String type, String content) {
+		if(content==null  ||content.length()<=0){
+			return "";
+		}
+		StringBuffer sb = new StringBuffer();
+		if ("1".equals(type)) {
+			// 银行
+			if(content.length()<=4){
+				return content;
+			}
+			sb.append(content.substring(0,4) +"****"+content.substring(content.length()-4));
+		} else if ("2".equals(type)) {
+			// 支付宝
+			int iBankNo = content.lastIndexOf("@");
+			if (iBankNo > 0) {
+				// 邮箱
+				String strStart = content.substring(iBankNo);
+				int i = strStart.length() >= 3 ? 3 : strStart.length();
+				sb.append(content.substring(0, i));
+				sb.append("****").append(content.substring(i));
+			} else {
+				// 手机号
+				if(content.length()<=3){
+					return content;
+				}
+				sb.append(content.substring(0, 3));
+				sb.append("****").append(content.substring(content.length() - 3));
+			}
+		}
+		return sb.toString();
+	}
+//	@Override
+//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//		if(resultCode==RESULT_OK){
+//			strAccountTrueNum = data.getStringExtra("STR_ALIPAY_NUM");
+//			strAccountTrueName = data.getStringExtra("STR_ALIPAY_NAME");
+//			strUserName = data.getStringExtra("STR_USER_NAME");
+//			strUserPhone = data.getStringExtra("STR_USER_PHONE");
+//			switch (requestCode){
+//				case STR_REQUESET_FLAG_ADD:
+//					//add
+//					if(!TextUtils.isEmpty(strAccountTrueName) && !TextUtils.isEmpty(strAccountTrueNum)){
+//						this.isBindAccount =true;
+//						mTV_account_num.setText(getUserBankInfo("2",strAccountTrueNum));
+//					}else{
+//						this.isBindAccount = false;
+//					}
+//					break;
+//
+//			}
+//		}
+//
+//	}
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+			case R.id.iv_title_left:
+				finish();
+				break;
+			case R.id.tv_account_num:
+				Intent intent = new Intent();
+				if(isBindAccount) {
+					//查看账号信息
+					intent.setClass(WithdrawalsActivity.this, ShowAlipayDetailActivity.class);
+//					intent.putExtra("STR_USER_NAME", strUserName);
+//					intent.putExtra("STR_USER_PHONE", strUserPhone);
+					intent.putExtra("VO",mMyInComeData);
+					startActivity(intent);
+				} else {
+					//绑定账号
+					intent.setClass(WithdrawalsActivity.this, EditEditUserAlipayActivity.class);
+//					intent.putExtra("STR_USER_NAME", strUserName);
+//					intent.putExtra("STR_USER_PHONE", strUserPhone);
+					intent.putExtra("VO",mMyInComeData);
+					startActivity(intent);
+				}
+
+				break;
 		case R.id.btn_withdrawals:
-			final String amount = et_money.getText().toString().trim();
-			final String accountInfo = et_zhifubao.getText().toString().trim();
-			final String trueName = et_zhifubao_name.getText().toString()
-					.trim();
+			String amount = et_money.getText().toString().trim();
+			if(!isBindAccount){
+				ToastUtil.show(context, "请绑定提现账号");
+				return;
+			}
 			if (!Util.IsNotNUll(amount)) {
 				ToastUtil.show(context, "提现金额不能为空");
 				return;
 			}
-			if (!Util.IsNotNUll(accountInfo)) {
-				ToastUtil.show(context, "支付宝账号不能为空");
-				return;
-			}
-			if (!Util.IsNotNUll(trueName)) {
-				ToastUtil.show(context, "支付宝开户姓名不能为空");
-				return;
-			}
 			if (Float.parseFloat(amount) < 10) {
-				ToastUtil.show(context, "提现金额必须大于等于10元");
+				ToastUtil.show(context, "提现金额不能小于10元");
 			} else {
-				// AlertDialog.Builder builder = new Builder(context);
-				// builder.setMessage("支付宝账号：" + accountInfo + "\n支付宝开户名："
-				// + trueName + "\n转账金额：" + amount);
-				// builder.setTitle("确认资料");
-				// builder.setPositiveButton("确认",
-				// new DialogInterface.OnClickListener() {
-				// @Override
-				// public void onClick(DialogInterface dialog,
-				// int which) {
 				ApiUtil.Request(new RQBaseModel<RQWithdraw, RSBase>(context,
 						new RQWithdraw(Utils.getUserDTO(context).data.userId,
-								amount, accountInfo, trueName), new RSBase(),
+								amount, strAccountTrueNum, strAccountTrueName), new RSBase(),
 						ApiNames.申请提现.getValue(), RequestType.POST,
 						rqHandler_withdraw));
-				// }
-				// });
-				// builder.setNegativeButton("取消",
-				// new DialogInterface.OnClickListener() {
-				// @Override
-				// public void onClick(DialogInterface dialog,
-				// int which) {
-				// dialog.dismiss();
-				// }
-				// });
-				// builder.create().show();
-				//
 			}
 			break;
 

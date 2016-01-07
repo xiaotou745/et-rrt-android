@@ -206,7 +206,7 @@ public class ShowTaskMatailDetailActivity extends BaseActivity implements
         ll_texts_area = (LinearLayout)findViewById(R.id.ll_texts_area);
         ll_images_area = (LinearLayout)findViewById(R.id.ll_images_area);
         ll_multiple_images_area = (LinearLayout)findViewById(R.id.ll_multiple_images_area);
-        layout_back.setOnClickListener(this);
+//        layout_back.setOnClickListener(this);
     }
 
     /**
@@ -214,7 +214,7 @@ public class ShowTaskMatailDetailActivity extends BaseActivity implements
      * @return
      */
     private  void initViewValue(){
-        mtv_title_content.setText(taskName);
+        mTV_title_content.setText(taskName);
     }
 
     /**

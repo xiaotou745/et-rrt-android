@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e8e8e8"
-    android:orientation="vertical" >
-
-    <RelativeLayout style="@style/activity_headlayout" >
-
-        <LinearLayout style="@style/activity_headlayout_left" >
-
-            <include layout="@layout/layout_back" />
-        </LinearLayout>
-
-        <TextView
-            style="@style/activity_headlayout_center_centertext"
-            android:text="@string/personalcenter" />
-
-        <TextView
-            android:id="@+id/tv_to_more"
-            style="@style/activity_headlayout_right"
-            android:layout_marginRight="@dimen/_10dp"
-            android:text="@string/more" />
-    </RelativeLayout>
-
+    android:background="@color/layout_view_bg"
+     >
+    <!-- title-->
+    <include
+        android:id="@+id/peisonal_title_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/unify_title_height"
+        android:layout_alignParentTop="true"
+        layout="@layout/main_title_home_layout"
+        ></include>
+    <!-- bottom-->
+    <include
+        android:id="@+id/peisonal_menu_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_menu_height"
+        android:layout_alignParentBottom="true"
+        layout="@layout/main_menu_layout"
+        ></include>
+<!--content-->
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:layout_below="@id/peisonal_title_top"
+        android:layout_above="@id/peisonal_menu_bottom"
+        >
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >
-
+<!--账号-->
             <RelativeLayout
                 android:id="@+id/rl_to_user_info"
                 android:layout_width="match_parent"
@@ -101,196 +102,90 @@
             </RelativeLayout>
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="#e8e8e8" />
+                style="@style/line_height_1"></View>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="41dp"
                 android:background="@drawable/textview_button_selector"
                 >
                 <TextView
+                    android:id="@+id/tv_my_money_01"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="我的余额"
-                    android:layout_gravity="center_vertical|left"
-                    android:gravity="center_vertical|left"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_23dp"
                     android:textColor="#333333"
                     android:textSize="@dimen/_14sp"
                     />
                 <TextView
+                    android:id="@+id/tv_my_money_02"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="￥"
                     android:textColor="@color/red"
-                    android:layout_gravity="center_vertical|left"
-                    android:gravity="center_vertical|left"
+                    android:layout_centerVertical="true"
                     android:textSize="@dimen/_14sp"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/tv_my_money_01"
+                    />
                 <TextView
                     android:id="@+id/tv_my_money_new"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="12321"
                     android:textColor="@color/red"
-                    android:layout_gravity="center_vertical|left"
                     android:gravity="center_vertical|left"
                     android:textSize="@dimen/_14sp"
                     android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@id/tv_my_money_02"
+                    android:layout_centerVertical="true"
                     />
 
-            </LinearLayout>
-<!--old 提现-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@android:color/white"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                >
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                <Button
+                    android:id="@+id/tv_withdrawals"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dip"
+                    android:text="@string/withdrawals"
+                    android:textColor="@color/tv_order_color_5"
+                    android:textSize="@dimen/_14sp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="13dp"
                     android:gravity="center"
-                    android:orientation="vertical" >
+                    android:background="@drawable/bg_shape_square"
+                    />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal" >
+            </RelativeLayout>
+<!--分割线-->
+            <View
+               style="@style/line_height_10"></View>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="￥"
-                            android:textColor="#f7585d"
-                            android:textSize="11sp" />
-
-                        <TextView
-                            android:id="@+id/tv_my_money"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="#f7585d"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/myMoney"
-                        android:textColor="#333333"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="1px"
-                    android:layout_height="match_parent"
-                    android:background="@color/gray" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical" >
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="￥"
-                            android:textColor="#f7585d"
-                            android:textSize="11sp" />
-
-                        <TextView
-                            android:id="@+id/tv_can_withdrawals_money"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="#f7585d"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/canWithdrawals"
-                        android:textColor="#333333"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="1px"
-                    android:layout_height="match_parent"
-                    android:background="@color/gray" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical" >
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="￥"
-                            android:textColor="#f7585d"
-                            android:textSize="11sp" />
-
-                        <TextView
-                            android:id="@+id/tv_withdrawals_money"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="#f7585d"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/withdrawalsing"
-                        android:textColor="#333333"
-                        android:textSize="14sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-
+            <!-- 资金明细-->
             <RelativeLayout
-                android:id="@+id/rl_withdrawals"
+                android:id="@+id/rl_money_detail"
                 android:layout_width="match_parent"
                 android:layout_height="41dp"
-                android:layout_marginTop="20dp"
                 android:background="@drawable/textview_button_selector" >
 
                 <ImageView
-                    android:id="@+id/iv_withdrawals"
+                    android:id="@+id/iv_mmoney_01"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_23dp"
-                    android:src="@drawable/icon_withdrawals" />
+                    android:src="@drawable/icon_money_center" />
 
                 <TextView
-                    android:id="@+id/tv_withdrawals"
+                    android:id="@+id/tv_mmoney_02"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/iv_withdrawals"
-                    android:text="@string/withdrawals"
+                    android:layout_toRightOf="@id/iv_mmoney_01"
+                    android:text="@string/personal_item_task_money_tv"
                     android:textColor="#333333"
                     android:textSize="@dimen/_14sp" />
 
@@ -302,13 +197,49 @@
                     android:layout_marginRight="13dp"
                     android:src="@drawable/go" />
             </RelativeLayout>
+            <View
+                style="@style/line_height_1"></View>
+            <!-- 我的合伙人-->
+            <RelativeLayout
+                android:id="@+id/rl_friend_details"
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:background="@drawable/textview_button_selector" >
 
+                <ImageView
+                    android:id="@+id/iv_friend_01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_23dp"
+                    android:src="@drawable/icon_friend_center" />
+
+                <TextView
+                    android:id="@+id/tv_friend_02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/iv_friend_01"
+                    android:text="@string/personal_item_task_friend_tv"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/_14sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="13dp"
+                    android:src="@drawable/go" />
+            </RelativeLayout>
+            <View
+                style="@style/line_height_1"></View>
             <!-- 资料审核详情-->
             <RelativeLayout
                 android:id="@+id/rl_datum_task"
                 android:layout_width="match_parent"
                 android:layout_height="41dp"
-                android:layout_marginTop="11dp"
                 android:background="@drawable/textview_button_selector" >
 
                 <ImageView
@@ -338,83 +269,13 @@
                     android:layout_marginRight="13dp"
                     android:src="@drawable/go" />
             </RelativeLayout>
-            <!-- 消息中心-->
-            <RelativeLayout
-                android:id="@+id/rl_message_task"
-                android:layout_width="match_parent"
-                android:layout_height="41dp"
-                android:layout_marginTop="11dp"
-                android:background="@drawable/textview_button_selector" >
-
-                <ImageView
-                    android:id="@+id/iv_message_task"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/_23dp"
-                    android:src="@drawable/icon_message_center" />
-
-                <TextView
-                    android:id="@+id/tv_message_task"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/iv_message_task"
-                    android:text="@string/personal_item_task_message_tv"
-                    android:textColor="#333333"
-                    android:textSize="@dimen/_14sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="13dp"
-                    android:src="@drawable/go" />
-            </RelativeLayout>
-            <!-- 已完成任务呢-->
-            <RelativeLayout
-                android:id="@+id/rl_finished_task"
-                android:layout_width="match_parent"
-                android:layout_height="41dp"
-                android:layout_marginTop="11dp"
-                android:visibility="gone"
-                android:background="@drawable/textview_button_selector" >
-
-                <ImageView
-                    android:id="@+id/iv_finished_task"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/_23dp"
-                    android:src="@drawable/icon_finished_task" />
-
-                <TextView
-                    android:id="@+id/tv_finished_task"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/iv_finished_task"
-                    android:text="@string/finished_task"
-                    android:textColor="#333333"
-                    android:textSize="@dimen/_14sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="13dp"
-                    android:src="@drawable/go" />
-            </RelativeLayout>
+            <View
+                style="@style/line_height_10"></View>
 
             <RelativeLayout
                 android:id="@+id/rl_help"
                 android:layout_width="match_parent"
                 android:layout_height="41dp"
-                android:layout_marginTop="11dp"
                 android:background="@drawable/textview_button_selector" >
 
                 <ImageView
@@ -445,52 +306,80 @@
                     android:src="@drawable/go" />
             </RelativeLayout>
 
+            <View
+                style="@style/line_height_1"></View>
+            <!-- 更多-->
             <RelativeLayout
-                android:id="@+id/rl_customer_service_center"
+                android:id="@+id/rl_more"
                 android:layout_width="match_parent"
                 android:layout_height="41dp"
-                android:layout_marginTop="11dp"
                 android:background="@drawable/textview_button_selector" >
 
                 <ImageView
-                    android:id="@+id/iv_customer_service_center"
+                    android:id="@+id/iv_more_01"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_23dp"
-                    android:src="@drawable/icon_customer_service_support" />
+                    android:src="@drawable/icon_more_center" />
 
                 <TextView
-                    android:id="@+id/tv_customer_service_center"
+                    android:id="@+id/tv_more_02"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/iv_customer_service_center"
-                    android:text="客服支持"
+                    android:layout_toRightOf="@id/iv_more_01"
+                    android:text="@string/more"
                     android:textColor="#333333"
                     android:textSize="@dimen/_14sp" />
 
                 <ImageView
-                    android:id="@+id/iv_go"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="13dp"
                     android:src="@drawable/go" />
+            </RelativeLayout>
+
+            <!-- 客服电话-->
+            <RelativeLayout
+                android:id="@+id/rl_customer_service_center"
+                android:layout_width="match_parent"
+                android:layout_height="80dip"
+                 >
+
+                <TextView
+                    android:id="@+id/tv_customer_service_center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="010-57173598"
+                    android:textColor="@color/tv_order_color_5"
+                    android:textSize="@dimen/_14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="20dp"
-                    android:layout_toLeftOf="@id/iv_go"
-                    android:text="010-57173598"
-                    android:textColor="#333333"
-                    android:textSize="@dimen/_14sp" />
+                    android:layout_marginRight="@dimen/_10dp"
+                    android:text="联系客服"
+                    android:textColor="@color/tv_order_color_1"
+                    android:textSize="@dimen/_14sp"
+                    android:layout_toLeftOf="@id/tv_customer_service_center"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tv_customer_service_center"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_servicer_tel"
+                    android:layout_marginLeft="@dimen/_10dp"
+                    />
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+</RelativeLayout>

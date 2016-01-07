@@ -1,48 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e8e8e8"
-    android:orientation="vertical" >
-
-    <RelativeLayout style="@style/activity_headlayout" >
-
-        <ImageView
-            android:id="@+id/iv_to_personal_center"
-            style="@style/activity_headlayout_left"
-            android:layout_marginLeft="@dimen/_10dp"
-            android:src="@drawable/icon_personal" />
-
-        <TextView
-            style="@style/activity_headlayout_center_centertext"
-            android:text="@string/can_receive_task" />
-
-        <TextView
-            android:id="@+id/tv_to_login"
-            style="@style/activity_headlayout_right"
-            android:layout_marginRight="@dimen/_10dp"
-            android:text="@string/login" />
-        
-        <ImageView 
-            android:id="@+id/iv_to_my_task"
-            style="@style/activity_headlayout_right"
-            android:layout_marginRight="@dimen/_10dp"
-            android:src="@drawable/icon_book_mark"
-            />
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/tv_user_address"
+    android:background="@color/layout_view_bg"
+    >
+<!--title-->
+    <include
+        android:id="@+id/main_title_top"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_40dp"
-        android:gravity="center_vertical"
-        android:background="@android:color/white"
-        android:drawableLeft="@drawable/icon_user_address"
-        android:drawablePadding="@dimen/_10dp"
-        android:textSize="@dimen/_14sp"
-        android:textColor="#333333"
-        android:paddingLeft="@dimen/activity_horizontal_margin" />
-
+        android:layout_height="@dimen/unify_title_height"
+        layout="@layout/main_title_home_layout"
+        android:layout_alignParentTop="true"
+        ></include>
+    <!-- bottom-->
+    <include
+        android:id="@+id/main_menu_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_menu_height"
+        android:layout_alignParentBottom="true"
+        layout="@layout/main_menu_layout"
+        ></include>
+<!--content-->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_below="@id/main_title_top"
+    android:layout_above="@id/main_menu_bottom"
+    >
     <com.renrentui.controls.PullToRefreshView
         android:id="@+id/pulltorefresh_nogoing_taskList"
         android:layout_width="match_parent"
@@ -63,6 +48,7 @@
         </ListView>
     </com.renrentui.controls.PullToRefreshView>
 
+    <!-- no data-->
     <include layout="@layout/layout_nodata" />
-
 </LinearLayout>
+</RelativeLayout>

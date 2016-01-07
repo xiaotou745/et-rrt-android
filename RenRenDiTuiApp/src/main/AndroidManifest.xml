@@ -15,7 +15,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
@@ -46,22 +45,21 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL"/>
-
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
 
     <application
-        android:name="com.renrentui.app.MyApplication"
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.renrentui.app.WelcomeActivity"
+            android:name=".WelcomeActivity"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-            >
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -71,26 +69,29 @@
             android:launchMode="singleTask" />
         <activity
             android:name="com.task.activity.NoGoingTaskActicity"
-            android:launchMode="singleTask" />
+            />
         <activity android:name="com.task.activity.TaskDetailInfoActivity" />
-        <activity
-            android:name="com.task.activity.MyTaskFramentActivity"
-            ></activity>
+        <activity android:name="com.task.activity.MyTaskFramentActivity" />
         <activity android:name="com.user.activity.FindPwdActivity" />
         <activity android:name="com.user.activity.RegisterActivity" />
         <activity android:name="com.user.activity.UpdatePwdActivity" />
-        <activity android:name="com.user.activity.PersonalCenterActivity" />
+        <activity android:name="com.user.activity.PersonalCenterActivity"
+            />
         <activity android:name="com.user.activity.HelpCenterActivity" />
         <activity android:name="com.user.activity.PersonalDataActivity" />
-        <activity android:name="com.user.activity.WithdrawalsActivity" />
+        <activity android:name="com.user.activity.WithdrawalsActivity"
+            android:launchMode="singleTask"
+            />
         <activity android:name="com.user.activity.MoreActivity" />
-        <activity android:name="com.task.activity.WebViewActivity"></activity>
-        <activity android:name="com.task.activity.ShareViewActivity"></activity>
-        <activity android:name="com.task.activity.MyTaskMaterialDetailActivity"></activity>
-        <activity android:name="com.task.activity.TaskDatumSubmitActiviyt"></activity>
-        <activity android:name="com.task.activity.ShowTaskMatailDetailActivity"></activity>
-        <activity android:name="com.task.activity.ShowCityActivity"></activity>
-        <activity android:name="com.user.activity.MyMessageActivity"></activity>
+        <activity android:name="com.task.activity.WebViewActivity" />
+        <activity android:name="com.task.activity.ShareViewActivity" />
+        <activity android:name="com.task.activity.MyTaskMaterialDetailActivity" />
+        <activity android:name="com.task.activity.TaskDatumSubmitActiviyt" />
+        <activity android:name="com.task.activity.ShowTaskMatailDetailActivity" />
+        <activity android:name="com.task.activity.ShowCityActivity" />
+        <activity android:name="com.user.activity.MyMessageActivity" />
+        <activity android:name="com.user.activity.EditEditUserAlipayActivity"></activity>
+        <activity android:name="com.user.activity.ShowAlipayDetailActivity"></activity>
 
         <service
             android:name="com.user.model.download.DownLoadService"
@@ -106,7 +107,7 @@
             android:name="com.task.upload.UploadService"
             android:process=":UploadService" />
 
-        <!-- baiduditu-->
+        <!-- baiduditu -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="BFObCRofj97nFNd8N5eozBMU" />
@@ -115,13 +116,15 @@
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
-        <!-- 友盟-->
+        <!-- 友盟 -->
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="566e3fd967e58e9d56000ae1" />
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
+
+
     </application>
 
 </manifest>

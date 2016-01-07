@@ -19,6 +19,7 @@ public class MyApplication extends Application{
     public LocationClient mLocClient;
     private static CityRegionModel mCurrentLocation =new CityRegionModel();//当前城市信息
     private static CityRegionModel mLocalLocation = new CityRegionModel();//定位城市信息
+    public static boolean isMessage=false;//是否有未读信息
 
     @Override
     public void onCreate() {

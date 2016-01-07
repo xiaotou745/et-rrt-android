@@ -88,14 +88,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		super.init();
-		super.onBack(new IBack() {
-			@Override
-			public void onClick(View arg0) {
-				Intent intent = new Intent(context, NoGoingTaskActicity.class);
-				startActivity(intent);
-				finish();
-			}
-		});
 		SSID = Utils.getMobileDevieceId(context);
 		operSystemModel = Utils.getModelSysVersion(context);
 		phoneType = Utils.getModel(context);
@@ -106,11 +98,21 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	 * 初始化控件
 	 */
 	private void initControl() {
-		context = this;
 		et_phone = (EditText) findViewById(R.id.et_phone);
 		et_password = (EditText) findViewById(R.id.et_password);
-		btn_register = (TextView) findViewById(R.id.btn_register);
-		btn_register.setOnClickListener(this);
+		if(mIV_title_left!=null){
+			mIV_title_left.setVisibility(View.VISIBLE);
+			mIV_title_left.setImageResource(R.drawable.back);
+			mIV_title_left.setOnClickListener(this);
+		}
+		if(mTV_title_content!=null){
+			mTV_title_content.setText(context.getResources().getString(R.string.login));
+		}
+		if(mTV_title_right!=null){
+			mTV_title_right.setVisibility(View.VISIBLE);
+			mTV_title_right.setText(context.getResources().getString(R.string.register));
+			mTV_title_right.setOnClickListener(this);
+		}
 		tv_forgot_password = (TextView) findViewById(R.id.tv_forgot_password);
 		tv_forgot_password.setOnClickListener(this);
 		btn_login = (Button) findViewById(R.id.btn_login);
@@ -121,7 +123,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	public void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
-		case R.id.btn_register:// 点击注册按钮时
+		case R.id.tv_title_right:// 点击注册按钮时
 			intent = new Intent();
 			intent.setClass(context, RegisterActivity.class);
 			startActivity(intent);
@@ -134,6 +136,12 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			intent.setClass(context, FindPwdActivity.class);
 			startActivity(intent);
 			break;
+			case R.id.iv_title_left:
+				//返回
+				Intent mIntent = new Intent(context, NoGoingTaskActicity.class);
+				startActivity(mIntent);
+				finish();
+				break;
 		}
 	}
 

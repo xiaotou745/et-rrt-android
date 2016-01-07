@@ -48,6 +48,8 @@
                 android:background="@drawable/dialog_left_btn_bg"
                 android:paddingBottom="@dimen/_10dp"
                 android:paddingTop="@dimen/_10dp"
+                android:textSize="@dimen/_14sp"
+                android:textColor="@color/tv_order_color_2"
                 android:text="取消" />
 
             <View
@@ -64,6 +66,8 @@
                 android:background="@drawable/dialog_right_btn_bg"
                 android:paddingBottom="@dimen/_10dp"
                 android:paddingTop="@dimen/_10dp"
+                android:textSize="@dimen/_14sp"
+                android:textColor="@color/tv_order_color_2"
                 android:text="确定" />
         </LinearLayout>
     </LinearLayout>

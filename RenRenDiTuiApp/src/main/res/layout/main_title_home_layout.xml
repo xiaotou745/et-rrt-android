@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/activity_headlayout">
+    <!-- left-->
+    <ImageView
+        android:id="@+id/iv_title_left"
+        style="@style/activity_headlayout_imageView_left"
+        android:src="@drawable/back"
+        android:visibility="gone"
+        />
+    <!-- 城市-->
+    <TextView
+        android:id="@+id/tv_title_left"
+        style="@style/activity_headlayout_left"
+        android:drawableLeft="@drawable/icon_user_address"
+        android:drawablePadding="@dimen/layout_padding_nor"
+        android:text="城市"
+        android:visibility="gone"
+         />
+
+<!--title-->
+    <TextView
+        android:id="@+id/tv_title_content"
+        style="@style/activity_headlayout_center_centertext"
+        android:text="@string/can_receive_task"
+        android:layout_centerInParent="true"
+
+        />
+<!--排序-->
+    <TextView
+        android:id="@+id/tv_title_right"
+        style="@style/activity_headlayout_right"
+        android:text="@string/order_sort"
+        android:visibility="gone"
+        />
+    <ImageView
+        android:id="@+id/iv_title_right"
+        style="@style/activity_headlayout_imageView_right"
+        android:src="@drawable/icon_message_center_nor"
+        android:visibility="gone"
+        />
+</RelativeLayout>

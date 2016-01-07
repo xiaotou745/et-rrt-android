@@ -63,7 +63,7 @@ android {
                         // 输出apk名称为boohee_v1.0_2015-01-15_wandoujia.apk
                         //def fileName = "renrentui_${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
                         def fileName = outputFile.name.replace(".apk", "_${defaultConfig.versionName}_${releaseTime()}.apk")
-                        output.outputFile = new File(outputFile.parent, fileName)
+                        output.outputFile = new File(outputFile.parent+"\\SinglechangleApp", fileName)
                     }
                 }
             }
@@ -87,6 +87,44 @@ android {
         wandoujia {}
         xiaomi {}
         yingyonghui {}
+        AnFen {
+        }
+        AnBei {
+        }
+        AiQiYi {
+        }
+        flavor {
+        }
+        JinLi {
+        }
+        MeiZu {
+        }
+        HaiXin {
+        }
+        SanXing {
+        }
+        YingYongKu {
+        }
+        LeShi {
+        }
+        LianTong {
+        }
+        SuNing {
+        }
+        YouYi {
+        }
+        MaoPaoTang {
+        }
+        LianXiang {
+        }
+        YiDong {
+        }
+        SouGou {
+        }
+        YiYongHui {
+        }
+        HuaWei {
+        }
     }
 
     productFlavors.all { flavor ->

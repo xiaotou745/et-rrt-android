@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout_view_bg"
+    android:orientation="vertical" >
+<!--title-->
+    <include layout="@layout/main_title_home_layout" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <!-- 账户 -->
+
+            <TextView
+                android:id="@+id/tv_alipay_code_default"
+                android:layout_width="100dip"
+                android:layout_height="50dip"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:background="@color/white"
+                android:gravity="center_vertical|left"
+                android:padding="@dimen/view_space"
+                android:text="手机验证码"
+                android:textColor="@color/tv_order_color_2"
+                android:textSize="@dimen/_14sp" />
+
+            <EditText
+                android:id="@+id/et_alipay_code_value"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:layout_toRightOf="@+id/tv_alipay_code_default"
+                android:background="@color/white"
+                android:gravity="center_vertical|left"
+                android:hint="请输入接收到的验证码"
+                android:padding="@dimen/view_space"
+                android:singleLine="true"
+                android:textColor="@color/tv_order_color_2"
+                android:textColorHint="@color/tv_order_color_4"
+                android:textSize="@dimen/_14sp"
+                android:maxLength="8" >
+            </EditText>
+            <Button
+                android:id="@+id/btn_get_code"
+                android:layout_width="110dip"
+                android:layout_height="40dip"
+                android:layout_marginTop="@dimen/_5dp"
+                android:layout_marginBottom="@dimen/_5dp"
+                android:layout_marginRight="@dimen/_5dp"
+                android:paddingLeft="@dimen/_5dp"
+                android:paddingRight="@dimen/_5dp"
+                android:background="@drawable/btn_get_code_bg"
+                android:text="获取验证码"
+                android:textColor="@color/tv_order_color_5"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_alignParentRight="true"
+                />
+
+            <View
+                android:id="@+id/view_1"
+                style="@style/line_height_1"
+                android:layout_below="@id/tv_alipay_code_default" />
+            <!-- 再次输入账号 -->
+
+            <TextView
+                android:id="@+id/tv_alipay_num_default"
+                android:layout_width="100dip"
+                android:layout_height="50dip"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/view_1"
+                android:layout_centerVertical="true"
+                android:background="@color/white"
+                android:padding="@dimen/view_space"
+                android:text="支付宝账号"
+                android:gravity="center_vertical|left"
+                android:textColor="@color/tv_order_color_2"
+                android:textSize="@dimen/_14sp" />
+
+            <EditText
+                android:id="@+id/et_alipay_num_value"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:layout_below="@id/et_alipay_code_value"
+                android:layout_toRightOf="@+id/tv_alipay_num_default"
+                android:background="@color/white"
+                android:gravity="center_vertical|left"
+                android:hint="请再次输入账号"
+                android:padding="@dimen/view_space"
+                android:singleLine="true"
+                android:textColor="@color/tv_order_color_2"
+                android:textColorHint="@color/tv_order_color_4"
+                android:textSize="@dimen/_14sp"
+                android:maxLength="31"
+                android:layout_marginTop="1dip"
+                >
+            </EditText>
+
+            <View
+                android:id="@+id/view_2"
+                style="@style/line_height_1"
+                android:layout_below="@id/tv_alipay_num_default" />
+            <!-- 账户名 -->
+
+            <TextView
+                android:id="@+id/tv_alipay_name_default"
+                android:layout_width="100dip"
+                android:layout_height="50dip"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/view_2"
+                android:layout_centerVertical="true"
+                android:background="@color/white"
+                android:gravity="center_vertical|left"
+                android:padding="@dimen/view_space"
+                android:text="支付宝姓名"
+                android:textColor="@color/tv_order_color_2"
+                android:textSize="@dimen/_14sp" />
+
+            <EditText
+                android:id="@+id/et_alipay_name_value"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:layout_below="@id/et_alipay_num_value"
+                android:layout_toRightOf="@+id/tv_alipay_name_default"
+                android:background="@color/white"
+                android:gravity="center_vertical|left"
+                android:hint="请输入支付宝姓名"
+                android:padding="@dimen/view_space"
+                android:textColor="@color/tv_order_color_2"
+                android:textColorHint="@color/tv_order_color_4"
+                android:singleLine="true"
+                android:textSize="@dimen/_14sp"
+                android:layout_marginTop="1dip"
+                >
+            </EditText>
+
+            <Button
+                android:id="@+id/bind_btn"
+                android:layout_below="@id/tv_alipay_name_default"
+                style="@style/btn_match_style"
+                android:text="绑定"
+                />
+            <TextView
+                android:layout_below="@id/bind_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tv_order_color_4"
+                android:textSize="@dimen/_12sp"
+                android:text="*绑定成功后,您的提现资金将进入此支付宝账户中"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_20dp"
+                />
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

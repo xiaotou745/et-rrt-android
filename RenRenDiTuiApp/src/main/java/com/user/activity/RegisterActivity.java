@@ -134,7 +134,16 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	 * 初始化控件
 	 */
 	private void initControl() {
-		context = this;
+
+		if(mIV_title_left!=null){
+			mIV_title_left.setVisibility(View.VISIBLE);
+			mIV_title_left.setImageResource(R.drawable.back);
+			mIV_title_left.setOnClickListener(this);
+		}
+		if(mTV_title_content!=null){
+			mTV_title_content.setText(context.getResources().getString(R.string.register));
+		}
+
 		etPhone = (EditText) findViewById(R.id.et_phone);
 		etCode = (EditText) findViewById(R.id.et_code);
 		etPasssword = (EditText) findViewById(R.id.et_password);
@@ -149,6 +158,10 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+			case R.id.iv_title_left:
+				//返回
+				finish();
+				break;
 		case R.id.btn_submit:
 			submitUserInfo();
 			break;

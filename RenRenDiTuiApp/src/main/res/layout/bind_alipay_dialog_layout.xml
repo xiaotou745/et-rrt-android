@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_8dp"
+        android:layout_marginRight="@dimen/_8dp"
+        android:background="@drawable/round_dialog_shape"
+        android:orientation="vertical" >
+        <!-- 用户信息核实-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="请核实您的账户信息"
+            android:layout_gravity="left"
+            android:gravity="center"
+            android:textColor="@color/tv_order_color_1"
+            android:textSize="@dimen/_16sp"
+            android:layout_marginTop="@dimen/_20dp"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dip"
+            android:layout_marginTop="15dip"
+            >
+            <TextView
+                android:id="@+id/tv_key_01"
+                android:layout_width="100dip"
+                android:layout_height="30dip"
+                android:gravity="center"
+                android:textColor="@color/tv_order_color_2"
+                android:textSize="@dimen/_14sp"
+                android:text="支付宝账户:"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                />
+            <TextView
+                android:id="@+id/tv_key_02"
+                android:layout_width="match_parent"
+                android:layout_height="30dip"
+                android:gravity="left|center_vertical"
+                android:textColor="@color/tv_order_color_5"
+                android:textSize="@dimen/_14sp"
+                android:text="11111111111111111"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@id/tv_key_01"
+                />
+            <TextView
+                android:id="@+id/tv_key_03"
+                android:layout_width="100dip"
+                android:layout_height="30dip"
+                android:gravity="center"
+                android:textColor="@color/tv_order_color_2"
+                android:textSize="@dimen/_14sp"
+                android:text="支付宝实名:"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/tv_key_01"
+                />
+            <TextView
+                android:id="@+id/tv_key_04"
+                android:layout_width="match_parent"
+                android:layout_height="30dip"
+                android:gravity="left|center_vertical"
+                android:textColor="@color/tv_order_color_5"
+                android:textSize="@dimen/_14sp"
+                android:text="3333333333333333333"
+                android:layout_below="@id/tv_key_02"
+                android:layout_toRightOf="@id/tv_key_03"
+                />
+
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_alipay_dialog_notice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="*为保证您顺利提现，请确保上述支付宝账号和支付宝实名信息准确无误"
+            android:layout_gravity="left"
+            android:gravity="left"
+            android:textColor="@color/tv_order_color_4"
+            android:textSize="@dimen/_12sp"
+            android:layout_marginBottom="@dimen/_10dp"
+            android:layout_marginLeft="@dimen/view_space"
+            android:layout_marginRight="@dimen/view_space"
+            />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_05dp"
+            android:background="@color/grayFromSetting" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/stand_on_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/_10dp"
+                android:paddingBottom="@dimen/_10dp"
+                android:layout_weight="1"
+                android:textColor="@color/tv_order_color_2"
+                android:background="@drawable/dialog_left_btn_bg"
+                android:text="取消"
+                android:textSize="@dimen/_14sp"
+                />
+
+            <View
+                android:id="@+id/exit_line"
+                android:layout_width="@dimen/_05dp"
+                android:layout_height="fill_parent"
+                android:background="@color/grayFromSetting" />
+
+            <Button
+                android:id="@+id/leave_out_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/_10dp"
+                android:paddingBottom="@dimen/_10dp"
+                android:layout_weight="1"
+                android:textColor="@color/tv_order_color_2"
+                android:background="@drawable/dialog_right_btn_bg"
+                android:textSize="@dimen/_14sp"
+                android:text="确定" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -4,17 +4,11 @@
     android:background="@color/layout_bg_color"
     android:orientation="vertical"
     >
-    <!--title-->
-    <RelativeLayout style="@style/activity_headlayout" >
-        <LinearLayout style="@style/activity_headlayout_left" >
-            <include layout="@layout/layout_back" />
-        </LinearLayout>
-        <TextView
-            android:id="@+id/tv_title"
-            style="@style/activity_headlayout_center_centertext"
-            android:layout_marginLeft="@dimen/_45dp"
-            android:text="@string/taskcontent" />
-    </RelativeLayout>
+    <!-- title-->
+    <include
+    layout="@layout/main_title_home_layout"
+    ></include>
+
     <!-- top-->
     <RelativeLayout
         android:id="@+id/rl_flow_top"

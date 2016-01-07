@@ -6,19 +6,9 @@
     android:background="@color/layout_bg_color"
     >
     <!-- title-->
-    <RelativeLayout
-        android:id="@+id/rl_title"
-        style="@style/activity_headlayout"
-        >
-        <LinearLayout style="@style/activity_headlayout_left" >
-            <include layout="@layout/layout_back" />
-        </LinearLayout>
-        <TextView
-            android:id="@+id/tv_title"
-            style="@style/activity_headlayout_center_centertext"
-            android:layout_marginLeft="@dimen/_45dp"
-            android:text="资料录入" />
-    </RelativeLayout>
+    <include
+        layout="@layout/main_title_home_layout"
+        ></include>
     <!-- task-->
     <LinearLayout
         android:id="@+id/ll_task_detail"

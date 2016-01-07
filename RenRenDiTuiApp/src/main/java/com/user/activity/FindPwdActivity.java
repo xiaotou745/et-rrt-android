@@ -125,7 +125,20 @@ public class FindPwdActivity extends BaseActivity implements OnClickListener {
 	 * 初始化控件
 	 */
 	private void initControl() {
-		context = this;
+
+		if(mIV_title_left!=null){
+			mIV_title_left.setVisibility(View.VISIBLE);
+			mIV_title_left.setImageResource(R.drawable.back);
+			mIV_title_left.setOnClickListener(this);
+		}
+		if(mTV_title_content!=null){
+			mTV_title_content.setText(context.getResources().getString(R.string.login));
+		}
+		if(mTV_title_right!=null){
+			mTV_title_right.setVisibility(View.VISIBLE);
+			mTV_title_right.setText(context.getResources().getString(R.string.register));
+			mTV_title_right.setOnClickListener(this);
+		}
 		et_phone = (EditText) findViewById(R.id.et_phone);
 		btn_get_code = (Button) findViewById(R.id.btn_get_code);
 		btn_get_code.setOnClickListener(this);
@@ -139,6 +152,10 @@ public class FindPwdActivity extends BaseActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+			case R.id.iv_title_left:
+				//返回
+				finish();
+				break;
 		case R.id.btn_get_code:
 			String phone = et_phone.getText().toString();
 			if (phone != null && !phone.equals("") && phone.length() == 11) {

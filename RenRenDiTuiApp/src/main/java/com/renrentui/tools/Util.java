@@ -10,6 +10,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -77,7 +79,6 @@ public class Util {
 	/**
 	 * GridView 高度重新定义
 	 * 
-	 * @param listView
 	 */
 	public static ViewGroup.LayoutParams setGridViewHeightBasedOnChildren(
 	        GridView gridView) {
@@ -494,5 +495,20 @@ public class Util {
 			return false;
 		else
 			return mobiles.matches(telRegex);
+	}
+	/**
+	 * 邮箱验证
+	 *
+	 * @param email
+	 * @return
+	 */
+	public static boolean isEmail(String email) {
+		if (email == null || TextUtils.isEmpty(email)) {
+			return false;
+		}
+		String str = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
+		Pattern p = Pattern.compile(str);
+		Matcher m = p.matcher(email);
+		return m.matches();
 	}
 }

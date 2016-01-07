@@ -114,9 +114,9 @@ public class PersonalDataActivity extends BaseActivity implements
 						rq.Result.RelativePath = t.data.headImage;
 						ImageLoadManager.getLoaderInstace().disPlayNormalImg(
 								t.data.fullHeadImage, iv_user_icon_show,
-								R.drawable.icon);
+								R.drawable.icon_user_default);
 					} else {
-						iv_user_icon_show.setImageResource(R.drawable.icon);
+						iv_user_icon_show.setImageResource(R.drawable.icon_user_default);
 					}
 					tv_user_name_show.setText(t.data.userName);
 					tv_user_phone_show.setText(t.data.phoneNo);

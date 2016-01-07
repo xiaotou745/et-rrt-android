@@ -111,7 +111,7 @@ public class MyTaskMaterialDetailActivity extends BaseActivity implements
         mBtn_right.setOnClickListener(this);
     }
     private void initControlValue(){
-        mtv_title_content.setText(titlt_content);
+        mTV_title_content.setText(titlt_content);
         if("1".equals(status)) {
             //审核中
             mRL_top.setVisibility(View.VISIBLE);

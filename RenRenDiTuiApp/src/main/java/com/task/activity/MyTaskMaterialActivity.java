@@ -39,7 +39,6 @@ import org.w3c.dom.Text;
  */
 public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 		OnClickListener , BaseFragmentActivity.MyTaskMateriaInterface {
-	private Context context;
 	public ViewPager vp_task_main;
 	private MyFragmentPagerAdapter viewPagerAdapter;
 	private List<BaseFragment> fragmentList;
@@ -47,7 +46,6 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 	private FragmentGoneTask fragment_GoneTask;//审核通过的资料
 	private FragmentFinishedTask fragment_finishedTask;// 未通过的资料
 	private LayoutMainTopmenu layoutTopMenu;// 顶部按钮
-	private TextView mTV_title;
 	private Button mBtn_submit_taskTemple;//提交资料
 
 	private int topage = ToMainPage.审核中.getValue();// intent指向要显示的页面
@@ -64,7 +62,6 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 		setContentView(R.layout.activity_task_main);
 		super.init();
 		ExitApplication.getInstance().addActivity(this);
-		context = this;
 		topage = getIntent().getIntExtra("topage", topage);
 		str_taskId = getIntent().getStringExtra("TASK_ID");
 		if(TextUtils.isEmpty(str_taskId)){
@@ -108,15 +105,21 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 //	}
 
 	private void initView() {
+		if(mIV_title_left!=null){
+			mIV_title_left.setVisibility(View.VISIBLE);
+			mIV_title_left.setOnClickListener(this);
+		}
+		if(mTV_title_content!=null){
+			mTV_title_content.setText("资料审核列表");
+		}
+
 		vp_task_main = (ViewPager) findViewById(R.id.vp_task_main);
 		layoutTopMenu = new LayoutMainTopmenu(context);
 		layoutTopMenu.setOnClickListener(this);
-		mTV_title = (TextView)findViewById(R.id.tv_title);
-		mTV_title.setText("资料审核列表");
 		mBtn_submit_taskTemple = (Button)findViewById(R.id.btn_submit_taskTemple);
 		mBtn_submit_taskTemple.setOnClickListener(this);
 		if(!str_taskId.equals("0")) {
-			mTV_title.setText(str_taskName);
+			mTV_title_content.setText(str_taskName);
 		}
 	}
 
@@ -184,7 +187,7 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-			case R.id.layout_back:
+			case R.id.iv_title_left:
 				finish();
 				break;
 		case R.id.btn_task_nogoing:
