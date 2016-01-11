@@ -73,6 +73,6 @@ public class BindAlipayDialog extends AlertDialog implements android.view.View.O
 
 
     public interface  DialogInterfaceClick{
-        public void dialogClickOk();
+        void dialogClickOk();
     }
 }

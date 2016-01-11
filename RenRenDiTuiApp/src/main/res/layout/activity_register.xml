@@ -43,12 +43,13 @@
 
                 <Button
                     android:id="@+id/btn_get_code"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/btn_width_code"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="12dp"
                     android:background="@drawable/btn_get_code_bg"
                     android:text="获取验证码"
                     android:textColor="#00bcd5"
+                    android:gravity="center"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -93,10 +94,14 @@
                 android:hint="@string/againPassword"
                 android:inputType="textPassword"
                 android:maxLength="12" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#dfdfdf" />
             <EditText
                 android:id="@+id/et_phone_referee"
                 style="@style/input_style_for_register"
-                android:drawableLeft="@drawable/icon_unlock"
+                android:drawableLeft="@drawable/icon_phone"
                 android:drawablePadding="@dimen/_12dp"
                 android:hint="@string/referee"
                 android:inputType="phone"

@@ -17,7 +17,6 @@
        android:gravity="center_vertical"
        android:clickable="true"
        android:focusable="true"
-       android:focusableInTouchMode="true"
        >
        <ImageView
            android:id="@+id/tab_image_01"
@@ -51,7 +50,6 @@
         android:gravity="center_vertical"
         android:clickable="true"
         android:focusable="true"
-        android:focusableInTouchMode="true"
         >
         <ImageView
             android:id="@+id/tab_image_02"
@@ -85,7 +83,6 @@
         android:gravity="center_vertical"
         android:clickable="true"
         android:focusable="true"
-        android:focusableInTouchMode="true"
         >
         <ImageView
             android:id="@+id/tab_image_03"

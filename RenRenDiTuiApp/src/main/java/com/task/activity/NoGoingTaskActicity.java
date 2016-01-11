@@ -347,7 +347,7 @@ private RQHandler<RSGetMyMessage> rqHandler_getMyMessage = new RQHandler<>(
 		showProgressDialog();
 		setCityInfo();
 		ApiUtil.Request(new RQBaseModel<RQGetNoGoingTask, RSGetNoGoingTask>(
-				context, new RQGetNoGoingTask(strUserId, "0", MyApplication.getmCurrentLocation().code),
+				context, new RQGetNoGoingTask(strUserId, "0", MyApplication.getmCurrentLocation().code,"5"),
 				new RSGetNoGoingTask(), ApiNames.获取所有可领取任务.getValue(),
 				RequestType.POST, rqHandler_getNoGoingTask));
 		pageindex = 1;
@@ -410,7 +410,7 @@ private RQHandler<RSGetMyMessage> rqHandler_getMyMessage = new RQHandler<>(
 	 */
 	private void getMoreData() {
 		ApiUtil.Request(new RQBaseModel<RQGetNoGoingTask, RSGetNoGoingTask>(
-				context, new RQGetNoGoingTask(strUserId, nextId,MyApplication.getmCurrentLocation().code),
+				context, new RQGetNoGoingTask(strUserId, nextId,MyApplication.getmCurrentLocation().code,"5"),
 				new RSGetNoGoingTask(), ApiNames.获取所有可领取任务.getValue(),
 				RequestType.POST, rqHandler_getNoGoingTask));
 		pageindex++;

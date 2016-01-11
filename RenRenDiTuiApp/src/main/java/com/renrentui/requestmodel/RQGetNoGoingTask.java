@@ -34,38 +34,43 @@ public class RQGetNoGoingTask extends RQBase {
 	 * 城市名称
 	 */
 	public String cityName;
+	//排列顺序
+	public String orderBy;//排序方式 1是佣金，2是审核周期，3是预计用时，4是参与人数，5是发布时间（int类型）
 
 	public RQGetNoGoingTask() {
 		super();
 	}
-	public RQGetNoGoingTask(String userId,String nextId,String cityCode) {
+	public RQGetNoGoingTask(String userId,String nextId,String cityCode,String orderBy) {
 		super();
 		this.userId = userId;
 		this.nextId = nextId;
 		this.cityCode = cityCode;
+		this.orderBy = orderBy;
 	}
 
 	public RQGetNoGoingTask(String userId, float longitude, float latitude,
-			String nextId) {
+			String nextId,String orderBy) {
 		super();
 		this.userId = userId;
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.nextId = nextId;
+		this.orderBy = orderBy;
 	}
 
 	public RQGetNoGoingTask(String userId, float longitude, float latitude,
-			int itemsCount, String nextId) {
+			int itemsCount, String nextId,String orderBy) {
 		super();
 		this.userId = userId;
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.itemsCount = itemsCount;
 		this.nextId = nextId;
+		this.orderBy = orderBy;
 	}
 
 	public RQGetNoGoingTask(String userId, float longitude, float latitude,
-			int itemsCount, String nextId, String cityCode) {
+			int itemsCount, String nextId, String cityCode,String orderBy) {
 		super();
 		this.userId = userId;
 		this.longitude = longitude;
@@ -73,10 +78,11 @@ public class RQGetNoGoingTask extends RQBase {
 		this.itemsCount = itemsCount;
 		this.nextId = nextId;
 		this.cityCode = cityCode;
+		this.orderBy = orderBy;
 	}
 
 	public RQGetNoGoingTask(String userId, float longitude, float latitude,
-			int itemsCount, String nextId, String cityCode, String cityName) {
+			int itemsCount, String nextId, String cityCode, String cityName,String orderBy) {
 		super();
 		this.userId = userId;
 		this.longitude = longitude;
@@ -85,6 +91,7 @@ public class RQGetNoGoingTask extends RQBase {
 		this.nextId = nextId;
 		this.cityCode = cityCode;
 		this.cityName = cityName;
+		this.orderBy = orderBy;
 	}
 
 	@Override

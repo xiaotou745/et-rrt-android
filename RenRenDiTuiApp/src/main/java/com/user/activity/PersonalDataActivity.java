@@ -34,6 +34,7 @@ import base.BaseActivity;
 
 import com.google.gson.Gson;
 import com.lidroid.xutils.BitmapUtils;
+import com.renrentui.app.MyApplication;
 import com.renrentui.app.R;
 import com.renrentui.interfaces.IRqHandlerMsg;
 import com.renrentui.requestmodel.RQBaseModel;
@@ -71,7 +72,6 @@ import com.user.service.EditDialog.ExitDialogListener;
 public class PersonalDataActivity extends BaseActivity implements
 		OnClickListener, HttpRequestListener {
 
-	private Context context;
 	private RelativeLayout layout_user_icon;// 用户头像
 	private CircleImageview iv_user_icon_show;
 	private RelativeLayout layout_user_name;// 用户姓名
@@ -83,7 +83,6 @@ public class PersonalDataActivity extends BaseActivity implements
 	private RelativeLayout layout_user_age;// 用户年龄
 	private TextView tv_user_age_show;
 	private CityMode area;// 地址实体类对象
-	private TextView btn_save;// 保存按钮
 
 	Button carema, album, give_up;// 点击用户头像弹出层按钮
 	public static String fileName;
@@ -118,7 +117,7 @@ public class PersonalDataActivity extends BaseActivity implements
 					} else {
 						iv_user_icon_show.setImageResource(R.drawable.icon_user_default);
 					}
-					tv_user_name_show.setText(t.data.userName);
+					tv_user_name_show.setText(t.data.clienterName);
 					tv_user_phone_show.setText(t.data.phoneNo);
 					// tv_user_address_show.setText(t.data.cityName);
 					if (t.data.sex.equals("1"))
@@ -205,7 +204,20 @@ public class PersonalDataActivity extends BaseActivity implements
 	 * 初始化控件
 	 */
 	private void initControl() {
-		context = this;
+
+		if(mIV_title_left!=null){
+			mIV_title_left.setVisibility(View.VISIBLE);
+			mIV_title_left.setOnClickListener(this);
+		}
+		if(mTV_title_content!=null){
+			mTV_title_content.setText("个人资料");
+		}
+		if(mTV_title_right!=null){
+			mTV_title_right.setVisibility(View.VISIBLE);
+			mTV_title_right.setText("保存");
+			mIV_title_right.setOnClickListener(this);
+		}
+
 		layout_user_icon = (RelativeLayout) findViewById(R.id.layout_user_icon);
 		layout_user_icon.setOnClickListener(this);
 		// iv_user_icon_show = (CircleImageview)
@@ -224,8 +236,6 @@ public class PersonalDataActivity extends BaseActivity implements
 		layout_user_age.setOnClickListener(this);
 		tv_user_age_show = (TextView) findViewById(R.id.tv_user_age_show);
 
-		btn_save = (TextView) findViewById(R.id.btn_save);
-		btn_save.setOnClickListener(this);
 	}
 
 	@Override
@@ -233,6 +243,9 @@ public class PersonalDataActivity extends BaseActivity implements
 		EditDialog dialog;
 		InputMethodManager mInputManager;
 		switch (v.getId()) {
+			case R.id.iv_title_left:
+				finish();
+				break;
 		case R.id.layout_user_icon:// 点击头像时
 			showDialogs();
 			break;
@@ -311,7 +324,7 @@ public class PersonalDataActivity extends BaseActivity implements
 			dialog.setCanceledOnTouchOutside(false);
 			break;
 
-		case R.id.btn_save:
+		case R.id.tv_title_right:
 			if (!networknotvalide) {
 				ToastUtil.show(context, "网络异常，请先重新加载用户信息");
 				return;

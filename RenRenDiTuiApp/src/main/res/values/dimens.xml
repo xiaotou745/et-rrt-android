@@ -69,5 +69,7 @@
     <dimen name="unify_title_height">40dp</dimen>
     <!-- btn 高度-->
     <dimen name="btn_style_height">45dip</dimen>
+    <!-- 验证码统一的宽度-->
+    <dimen name="btn_width_code">100dip</dimen>
 
 </resources>

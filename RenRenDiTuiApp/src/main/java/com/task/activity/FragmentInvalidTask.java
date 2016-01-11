@@ -20,20 +20,16 @@ import com.renrentui.controls.PullToRefreshView.OnHeaderRefreshListener;
 import com.renrentui.interfaces.INodata;
 import com.renrentui.interfaces.IRqHandlerMsg;
 import com.renrentui.requestmodel.RQBaseModel;
-import com.renrentui.requestmodel.RQGetFinishedTask;
 import com.renrentui.requestmodel.RQHandler;
 import com.renrentui.requestmodel.RQMyTask;
 import com.renrentui.requestmodel.RequestType;
 import com.renrentui.requestmodel.ResultMsgType;
-import com.renrentui.resultmodel.FinishedTaskInfo;
 import com.renrentui.resultmodel.MyTaskContentBean;
-import com.renrentui.resultmodel.RSGetFinishedTask;
 import com.renrentui.resultmodel.RSMyTask;
 import com.renrentui.util.ApiNames;
 import com.renrentui.util.ApiUtil;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
-import com.task.model.LayoutMyTaskTopmenu;
 import com.task.service.GetInvalidTaskAdapter;
 
 /**

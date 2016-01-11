@@ -253,5 +253,24 @@ public final class Utils {
 	public static String getMobileDevieceId(Context context) {
 		return ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
 	}
+	/**
+	 * 正整数
+	 *
+	 * @param orginal
+	 * @return
+	 */
+	public static boolean isPositiveInteger(String orginal) {
+		return isMatch("^\\+{0,1}[1-9]\\d*", orginal);
+	}
+	private static boolean isMatch(String regex, String orginal) {
+		if (orginal == null || orginal.trim().equals("")) {
+			return false;
+		}
+		Pattern pattern = Pattern.compile(regex);
+		Matcher isNum = pattern.matcher(orginal);
+		return isNum.matches();
+	}
+
+
 }
 

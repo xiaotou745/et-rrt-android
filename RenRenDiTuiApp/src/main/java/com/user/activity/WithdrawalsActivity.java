@@ -138,8 +138,9 @@ private  void getData(){
 			tv_can_withdrawals_money.setText(mMyInComeData.getWithdraw());
 			tv_accumulated_wealth.setText(mMyInComeData.getHadWithdraw());
 			if("-1".equals(mMyInComeData.getAccountType())){
-				mTV_account_type.setText("未绑定");
-				mTV_account_num.setText("绑定支付宝");
+				mTV_account_type.setText("支付宝");
+				mTV_account_num.setText("未设置");
+				mTV_account_num.setTextColor(context.getResources().getColor(R.color.tv_order_color_3));
 				isBindAccount = false;
 				return;
 			}else if("1".equals(mMyInComeData.getAccountType())){
@@ -153,8 +154,11 @@ private  void getData(){
 			}else if("5".equals(mMyInComeData.getAccountType())){
 				mTV_account_type.setText("百度钱包");
 			}
+			isBindAccount = true;
+			mTV_account_num.setTextColor(context.getResources().getColor(R.color.tv_order_color_2));
 			strAccountTrueNum = mMyInComeData.getAccountNo();
 			mTV_account_num.setText(getUserBankInfo(mMyInComeData.getAccountType(), mMyInComeData.getAccountNo()));
+
 		}
 
 	}
@@ -270,11 +274,27 @@ private  void getData(){
 			}
 			if (!Util.IsNotNUll(amount)) {
 				ToastUtil.show(context, "提现金额不能为空");
+				et_money.setSelection(0);
 				return;
 			}
-			if (Float.parseFloat(amount) < 10) {
+			if(Integer.parseInt(amount.substring(0,1))<1){
+				ToastUtil.show(context, "请输入正确提现金额!");
+				et_money.setSelection(0,et_money.getText().toString().trim().length());
+				return;
+			}
+			if (!Utils.isPositiveInteger(amount)) {
+				ToastUtil.show(context, "提现金额应为10的倍数");
+				et_money.setSelection(0, et_money.getText().toString().trim().length());
+			} else if(Integer.parseInt(amount)%10!=0){
+				ToastUtil.show(context, "提现金额应为10的倍数");
+				et_money.setSelection(0,et_money.getText().toString().trim().length());
+			} else if(Integer.parseInt(amount)<10){
 				ToastUtil.show(context, "提现金额不能小于10元");
-			} else {
+				et_money.setSelection(0, et_money.getText().toString().trim().length());
+			} else if(Integer.parseInt(amount)>1000){
+				ToastUtil.show(context, "单笔提现金额不能超过1000元");
+				et_money.setSelection(0,et_money.getText().toString().trim().length());
+		}else{
 				ApiUtil.Request(new RQBaseModel<RQWithdraw, RSBase>(context,
 						new RQWithdraw(Utils.getUserDTO(context).data.userId,
 								amount, strAccountTrueNum, strAccountTrueName), new RSBase(),

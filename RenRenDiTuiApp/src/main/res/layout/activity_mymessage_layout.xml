@@ -4,17 +4,9 @@
     android:background="@color/layout_bg_color"
     android:orientation="vertical"
     >
-    <RelativeLayout style="@style/activity_headlayout" >
-
-        <LinearLayout style="@style/activity_headlayout_left" >
-
-            <include layout="@layout/layout_back" />
-        </LinearLayout>
-
-        <TextView
-            style="@style/activity_headlayout_center_centertext"
-            android:text="@string/message_title_content" />
-    </RelativeLayout>
+  <include
+      layout="@layout/main_title_home_layout"
+      ></include>
     <!-- 消息列表-->
     <com.renrentui.controls.PullToRefreshView
         android:id="@+id/pulltorefresh_message_taskList"

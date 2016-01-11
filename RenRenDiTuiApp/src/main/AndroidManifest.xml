@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.renrentui.app"
-    android:versionCode="110"
-    android:versionName="1.1.0" >
+    android:versionCode="111"
+    android:versionName="1.1.1" >
 
     <uses-sdk
         android:maxSdkVersion="24"
@@ -66,22 +66,19 @@
         <activity android:name="com.user.activity.LoginActivity" />
         <activity
             android:name="com.task.activity.MyTaskMaterialActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name="com.task.activity.NoGoingTaskActicity"
-            />
+            android:launchMode="singleTop" />
+        <activity android:name="com.task.activity.NoGoingTaskActicity" />
         <activity android:name="com.task.activity.TaskDetailInfoActivity" />
         <activity android:name="com.task.activity.MyTaskFramentActivity" />
         <activity android:name="com.user.activity.FindPwdActivity" />
         <activity android:name="com.user.activity.RegisterActivity" />
         <activity android:name="com.user.activity.UpdatePwdActivity" />
-        <activity android:name="com.user.activity.PersonalCenterActivity"
-            />
+        <activity android:name="com.user.activity.PersonalCenterActivity" />
         <activity android:name="com.user.activity.HelpCenterActivity" />
         <activity android:name="com.user.activity.PersonalDataActivity" />
-        <activity android:name="com.user.activity.WithdrawalsActivity"
-            android:launchMode="singleTask"
-            />
+        <activity
+            android:name="com.user.activity.WithdrawalsActivity"
+            android:launchMode="singleTop" />
         <activity android:name="com.user.activity.MoreActivity" />
         <activity android:name="com.task.activity.WebViewActivity" />
         <activity android:name="com.task.activity.ShareViewActivity" />
@@ -90,8 +87,12 @@
         <activity android:name="com.task.activity.ShowTaskMatailDetailActivity" />
         <activity android:name="com.task.activity.ShowCityActivity" />
         <activity android:name="com.user.activity.MyMessageActivity" />
-        <activity android:name="com.user.activity.EditEditUserAlipayActivity"></activity>
-        <activity android:name="com.user.activity.ShowAlipayDetailActivity"></activity>
+        <activity android:name="com.user.activity.EditEditUserAlipayActivity" />
+        <activity android:name="com.user.activity.ShowAlipayDetailActivity" />
+        <activity android:name="com.user.activity.MyMessageDetails" />
+        <activity
+            android:name="com.user.activity.MyFriendsActivity">
+        </activity>
 
         <service
             android:name="com.user.model.download.DownLoadService"

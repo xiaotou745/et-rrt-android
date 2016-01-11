@@ -10,7 +10,7 @@ public class MyMessageContentBean implements Serializable {
   public String   id ;//消息Id
     public String    title;// 消息标题
     public String    msg ;//消息内容
-    public String   hasRead ;//消息是否已读
+    public boolean   hasRead ;//消息是否已读
     public String   taskId ;//任务id
     public String createDate;//时间
 
@@ -18,7 +18,7 @@ public class MyMessageContentBean implements Serializable {
         super();
     }
 
-    public MyMessageContentBean(String taskId, String id, String title, String msg, String hasRead,String createDate) {
+    public MyMessageContentBean(String taskId, String id, String title, String msg, boolean hasRead,String createDate) {
         super();
         this.createDate = createDate;
         this.taskId = taskId;

@@ -5,8 +5,11 @@ import java.io.Serializable;
 public class UserInfo implements Serializable {
 	/** 用户ID */
 	public String userId;
-	/** 用户姓名 */
-	public String userName;
+
+	/**
+	 * 用户姓名
+	 */
+	public String clienterName;
 	/** 手机号 */
 	public String phoneNo;
 	/** 用户头像地址 */
@@ -28,12 +31,12 @@ public class UserInfo implements Serializable {
 		super();
 	}
 
-	public UserInfo(String userId, String userName, String phoneNo,
+	public UserInfo(String userId, String clienterName, String phoneNo,
 			String headImage, String cityCode, String cityName, String sex,
 			String age, String education) {
 		super();
 		this.userId = userId;
-		this.userName = userName;
+		this.clienterName = clienterName;
 		this.phoneNo = phoneNo;
 		this.headImage = headImage;
 		this.cityCode = cityCode;
@@ -45,7 +48,7 @@ public class UserInfo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "UserInfo[userId=" + userId + ",userName=" + userName
+		return "UserInfo[userId=" + userId + ",clienterName=" + clienterName
 				+ ",phoneNo=" + phoneNo + ",headImage=" + headImage
 				+ ",cityCode=" + cityCode + ",cityName=" + cityName + ",sex="
 				+ sex + ",age=" + age + ",education=" + education + "]";

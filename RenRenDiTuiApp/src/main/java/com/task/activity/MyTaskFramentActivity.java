@@ -22,7 +22,6 @@ import base.BaseFragmentActivity;
 
 import com.renrentui.app.MyApplication;
 import com.renrentui.app.R;
-import com.renrentui.interfaces.IBack;
 import com.renrentui.interfaces.IRqHandlerMsg;
 import com.renrentui.requestmodel.RQBaseModel;
 import com.renrentui.requestmodel.RQGetMyMessage;
@@ -32,13 +31,9 @@ import com.renrentui.resultmodel.RSGetMyMessage;
 import com.renrentui.tools.ExitApplication;
 import com.renrentui.util.ApiNames;
 import com.renrentui.util.ApiUtil;
-import com.renrentui.util.GetCity;
-import com.renrentui.util.ToMainPage;
 import com.renrentui.util.ToMyTaskPage;
-import com.task.model.LayoutMainTopmenu;
 import com.task.model.LayoutMyTaskTopmenu;
 import com.task.service.MyFragmentPagerAdapter;
-import com.user.activity.LoginActivity;
 import com.user.activity.PersonalCenterActivity;
 
 /**

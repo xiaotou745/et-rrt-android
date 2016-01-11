@@ -7,6 +7,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             >
 
             <TextView
@@ -35,6 +36,19 @@
                 android:singleLine="true"
                 />
         </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_new_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/tv_order_color_4"
+        android:textSize="@dimen/_12sp"
+        android:text="2015-112-12 10:56"
+        android:gravity="left"
+        android:layout_gravity="center_vertical"
+        android:layout_alignParentRight="true"
+        android:singleLine="true"
+        />
     <TextView
         android:id="@+id/tv_content"
         android:layout_width="match_parent"
@@ -44,5 +58,7 @@
         android:text="1233213333333333333333333333333333333333"
         android:layout_marginTop="@dimen/view_space_half"
         android:layout_marginBottom="@dimen/view_space_half"
+        android:maxLines="2"
+        android:ellipsize="end"
         />
 </LinearLayout>

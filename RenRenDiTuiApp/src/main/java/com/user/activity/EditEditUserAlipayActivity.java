@@ -43,7 +43,7 @@ public class EditEditUserAlipayActivity extends BaseActivity  implements View.On
 
     private int time = 60;
     private Timer timer;
-
+private TextView mTV_phone;
     private EditText mET_code;
     private EditText mET_num;
     private EditText mET_name;
@@ -76,9 +76,7 @@ public class EditEditUserAlipayActivity extends BaseActivity  implements View.On
                     hideProgressDialog();
                     if("200".equals(t.code)){
                         Intent intent = new Intent(EditEditUserAlipayActivity.this,WithdrawalsActivity.class);
-//                        intent.putExtra("STR_USER_NAME", strUserName);
-//                        intent.putExtra("STR_USER_PHONE",strUserPhone);
-                        ToastUtil.show(context, t.msg);
+                        ToastUtil.show(context, "支付宝绑定成功!");
                         mMyInComeData.setAccountNo(strAlipayNum);
                         mMyInComeData.setAccountType("2");
                         mMyInComeData.setTrueName(strAlipayName);
@@ -86,7 +84,7 @@ public class EditEditUserAlipayActivity extends BaseActivity  implements View.On
                         startActivity(intent);
                         finish();
                     }else{
-                        ToastUtil.show(context,t.msg);
+                        ToastUtil.show(context, "支付宝绑定失败!");
                     }
                 }
 
@@ -153,6 +151,13 @@ public class EditEditUserAlipayActivity extends BaseActivity  implements View.On
         }
         if(mTV_title_content!=null){
             mTV_title_content.setText("绑定支付宝");
+        }
+        mTV_phone = (TextView)findViewById(R.id.tv_alipay_phone_value);
+        if(!TextUtils.isEmpty(strUserPhone)){
+            StringBuffer sb = new StringBuffer();
+            sb.append(strUserPhone.substring(0, 3));
+            sb.append("****").append(strUserPhone.substring(strUserPhone.length() - 3));
+            mTV_phone.setText(sb.toString());
         }
         mET_code = (EditText)findViewById(R.id.et_alipay_code_value);
         mET_num =  (EditText)findViewById(R.id.et_alipay_num_value);

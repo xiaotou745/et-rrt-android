@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import base.BaseActivity;
 
+import com.renrentui.app.MyApplication;
 import com.renrentui.app.R;
 import com.renrentui.tools.ExitApplication;
 import com.renrentui.tools.FileUtils;
@@ -24,7 +25,6 @@ import com.user.service.QuitDialog.ExitDialogListener;
 
 public class MoreActivity extends BaseActivity implements OnClickListener {
 
-	private Context context;
 	private TextView tv_version;// 版本号控件
 	private RelativeLayout rl_version_update;// 版本更新
 	private RelativeLayout rl_cache;// 清除缓存
@@ -40,7 +40,16 @@ public class MoreActivity extends BaseActivity implements OnClickListener {
 	}
 
 	private void initControl() {
-		context = this;
+
+		if(mIV_title_left!=null){
+			mIV_title_left.setVisibility(View.VISIBLE);
+			mIV_title_left.setOnClickListener(this);
+		}
+		if(mTV_title_content!=null){
+			mTV_title_content.setText("更多");
+		}
+
+
 		tv_version = (TextView) findViewById(R.id.tv_version);
 		tv_version.setText("V " + Utils.getVersion(context));
 		rl_version_update = (RelativeLayout) findViewById(R.id.rl_version_update);
@@ -56,6 +65,9 @@ public class MoreActivity extends BaseActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+			case R.id.iv_title_left:
+				finish();
+				break;
 		case R.id.rl_version_update:// 点击版本更新
 			DownLoadUtils.checkoutAppVersion(this, true);
 			break;

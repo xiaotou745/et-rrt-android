@@ -269,17 +269,19 @@ public class PersonalCenterActivity extends BaseActivity implements
 				intent = new Intent(this, PersonalDataActivity.class);
 				break;
 			case R.id.tv_withdrawals:// 提现
-
+				if(mMyInComeData==null || Double.parseDouble(mMyInComeData.getBalance())<=10){
+					intent = null;
+					ToastUtil.show(context,"余额不足10元,暂时不能提现");
+				}else {
 					intent = new Intent(this, WithdrawalsActivity.class);
-					intent.putExtra("VO",mMyInComeData);
-
-
+					intent.putExtra("VO", mMyInComeData);
+				}
 				break;
 			case R.id.rl_money_detail:// 资金明细
 				intent = new Intent(this, null);
 				break;
 			case R.id.rl_friend_details:// 我的合伙人
-				intent = new Intent(this, null);
+				intent = new Intent(this, MyFriendsActivity.class);
 				break;
 			case R.id.rl_datum_task:
 				//资料审核详情

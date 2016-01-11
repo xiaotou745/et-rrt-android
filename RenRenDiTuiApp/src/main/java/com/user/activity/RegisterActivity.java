@@ -40,7 +40,6 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 
 	private int time = 60;
 	private Timer timer;
-	private Context context;
 	private EditText etPhone;// 用户手机号码
 	private EditText etCode;// 手机获取验证码
 	private EditText etPasssword;// 用户密码

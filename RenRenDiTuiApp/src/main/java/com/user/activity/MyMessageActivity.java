@@ -30,16 +30,7 @@ import base.BaseActivity;
  * 我的消息中心
  */
 public class MyMessageActivity extends BaseActivity implements
-        PullToRefreshView.OnHeaderRefreshListener, PullToRefreshView.OnFooterRefreshListener, INodata {
-
-
-
-    public ArrayList<MyMessageContentBean> myMessageList = new ArrayList<MyMessageContentBean>();
-   public MyMessageAdapter myMessageAdapter ;
-    private String nextId = "";
-    private int pageindex = 1;
-   public PullToRefreshView mPullMyMessageListView;
-    public ListView mListView;
+        PullToRefreshView.OnHeaderRefreshListener, PullToRefreshView.OnFooterRefreshListener, INodata ,View.OnClickListener {
 
     //======================================
     private RQHandler<RSMyMessage> rqHandler_getMessage = new RQHandler<>(
@@ -106,6 +97,13 @@ public class MyMessageActivity extends BaseActivity implements
 
                 }
             });
+    public ArrayList<MyMessageContentBean> myMessageList = new ArrayList<MyMessageContentBean>();
+    public MyMessageAdapter myMessageAdapter ;
+    private String nextId = "";
+    private int pageindex = 1;
+    public PullToRefreshView mPullMyMessageListView;
+
+    public ListView mListView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,8 +112,26 @@ public class MyMessageActivity extends BaseActivity implements
         initView();
         getMyMessageData();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(myMessageAdapter!=null){
+            myMessageAdapter.refreshDataView();
+        }
+    }
+
     private void initView(){
+        if(mIV_title_left!=null){
+            mIV_title_left.setVisibility(View.VISIBLE);
+            mIV_title_left.setOnClickListener(this);
+        }
+        if(mTV_title_content!=null){
+            mTV_title_content.setText("个人中心");
+        }
         mPullMyMessageListView = (PullToRefreshView)findViewById(R.id.pulltorefresh_message_taskList);
+        mPullMyMessageListView.setOnHeaderRefreshListener(this);
+        mPullMyMessageListView.setOnFooterRefreshListener(this);
 
         mListView = (ListView)findViewById(R.id.lv_message);
         myMessageAdapter = new MyMessageAdapter(context);
@@ -156,4 +172,13 @@ public class MyMessageActivity extends BaseActivity implements
         getMyMessageData();
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_title_left:
+                finish();
+                break;
+
+        }
+    }
 }

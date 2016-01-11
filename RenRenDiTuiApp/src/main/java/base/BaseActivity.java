@@ -242,11 +242,7 @@ public class BaseActivity extends Activity {
 	 * @return
 	 */
 	protected boolean isLogin(){
-		if(TextUtils.isEmpty(strUserId) || "0".equals(strUserId)){
-			return false;
-		}else {
-			return true;
-		}
+		return !(TextUtils.isEmpty(strUserId) || "0".equals(strUserId));
 	}
 
 
