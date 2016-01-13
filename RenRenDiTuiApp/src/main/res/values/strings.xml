@@ -109,9 +109,11 @@
     <string name="personal_item_task_friend_tv">我的合伙人</string>
 
     <string name="message_title_content">消息中心</string>
-    <string name="title_activity_edit_edit_user_alipay">EditEditUserAlipayActivity</string>
     <string name ="bind_alipay_notice"><![CDATA[<font color="#333333">*为保证您顺利提现，请确保上述</font><font color="#00BCD5">支付宝账号和支付宝实名信息</font><font color="#333333">准确无误</font>]]></string>
-    <string name="title_activity_my_message_details">MyMessageDetails</string>
-    <string name="title_activity_my_friends">MyFriendsActivity</string>
+    <string name = "notice_my_friend">"邀请他人扫码并下载\"人人推\",注册时在推荐人处填写你的账号，注册成功后就成为你的合伙人啦!"</string>
+    <!-- 资金明细-->
+    <string name ="captail_add"><![CDATA[<font color="#f7585d">+%1$s</font><font color="#666666">元</font>]]></string>
+    <string name ="captail_reduce"><![CDATA[<font color="#00bc87">-%1$s</font><font color="#666666">元</font>]]></string>
+    <string name="title_activity_my_capial_detail">MyCapialDetailActivity</string>
 
 </resources>

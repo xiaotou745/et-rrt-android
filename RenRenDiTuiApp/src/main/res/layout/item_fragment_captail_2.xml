@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/item_height"
+    android:background="@color/layout_view_content_bg"
+    >
+
+    <TextView
+        android:id="@+id/tv_captail_0"
+        android:layout_width="120dip"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red_bg"
+        android:text="+100"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:drawableRight="@drawable/go"
+        android:layout_marginRight="@dimen/view_space"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/tv_captail_0"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/view_space"
+        >
+<TextView
+    android:id="@+id/tv_captail_1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="提现"
+    android:textSize="@dimen/_14sp"
+    android:textColor="@color/tv_order_color_1"
+    android:singleLine="true"
+    android:ellipsize="end"
+
+    />
+    <TextView
+        android:id="@+id/tv_captail_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="2015-12-31"
+        android:textSize="@dimen/_14sp"
+        android:textColor="@color/tv_order_color_4"
+        android:singleLine="true"
+        android:layout_below="@id/tv_captail_1"
+        android:layout_marginTop="@dimen/_5dp"
+        ></TextView>
+    </LinearLayout>
+</RelativeLayout>

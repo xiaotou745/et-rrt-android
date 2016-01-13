@@ -1,5 +1,7 @@
 package com.renrentui.resultmodel;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by Administrator on 2016/1/8 0008.
  */
@@ -15,12 +17,14 @@ public class RSMyFriendModel extends RSBase {
     }
 
     public class Result {
-        private String bonusTotal;
-        private String partnerNum;
-        private String recommendPhone;
+        private double bonusTotal;//累计合伙人分红
+        private String partnerNum;//合伙人个数
+        private String recommendPhone;//推荐人手机号
 
         public String getBonusTotal() {
-            return bonusTotal;
+            DecimalFormat df = new DecimalFormat("0.00");
+            String db = df.format(bonusTotal);
+            return db;
         }
 
         public String getPartnerNum() {
@@ -34,7 +38,7 @@ public class RSMyFriendModel extends RSBase {
         public Result() {
         }
 
-        public Result(String recommendPhone, String bonusTotal, String partnerNum) {
+        public Result(String recommendPhone, double bonusTotal, String partnerNum) {
             this.recommendPhone = recommendPhone;
             this.bonusTotal = bonusTotal;
             this.partnerNum = partnerNum;

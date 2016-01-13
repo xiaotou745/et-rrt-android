@@ -278,7 +278,7 @@ public class PersonalCenterActivity extends BaseActivity implements
 				}
 				break;
 			case R.id.rl_money_detail:// 资金明细
-				intent = new Intent(this, null);
+				intent = new Intent(this, MyCapitalFramentActivity.class);
 				break;
 			case R.id.rl_friend_details:// 我的合伙人
 				intent = new Intent(this, MyFriendsActivity.class);

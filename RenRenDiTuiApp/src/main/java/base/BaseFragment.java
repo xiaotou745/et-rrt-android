@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.renrentui.app.R;
 import com.renrentui.controls.MyProgersssDialog;
-import com.renrentui.interfaces.IBack;
 import com.renrentui.interfaces.INodata;
 import com.renrentui.requestmodel.ResultMsgType;
 import com.renrentui.tools.Util;
@@ -132,7 +131,7 @@ public class BaseFragment extends Fragment {
 		if (progersssDialog == null) {
 			progersssDialog = new MyProgersssDialog(getActivity());
 		}
-		if (!getActivity().isFinishing()) {
+		if (!progersssDialog.isShowing()) {
 			progersssDialog.show();
 		}
 	}

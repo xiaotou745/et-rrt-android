@@ -215,7 +215,7 @@ public class PersonalDataActivity extends BaseActivity implements
 		if(mTV_title_right!=null){
 			mTV_title_right.setVisibility(View.VISIBLE);
 			mTV_title_right.setText("保存");
-			mIV_title_right.setOnClickListener(this);
+			mTV_title_right.setOnClickListener(this);
 		}
 
 		layout_user_icon = (RelativeLayout) findViewById(R.id.layout_user_icon);

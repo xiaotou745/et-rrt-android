@@ -90,8 +90,9 @@
         <activity android:name="com.user.activity.EditEditUserAlipayActivity" />
         <activity android:name="com.user.activity.ShowAlipayDetailActivity" />
         <activity android:name="com.user.activity.MyMessageDetails" />
-        <activity
-            android:name="com.user.activity.MyFriendsActivity">
+        <activity android:name="com.user.activity.MyFriendsActivity" >
+        </activity>
+        <activity android:name="com.user.activity.MyCapitalFramentActivity" >
         </activity>
 
         <service
@@ -125,7 +126,10 @@
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
 
-
+        <activity
+            android:name="com.user.activity.MyCapialDetailActivity"
+            android:label="@string/title_activity_my_capial_detail" >
+        </activity>
     </application>
 
 </manifest>

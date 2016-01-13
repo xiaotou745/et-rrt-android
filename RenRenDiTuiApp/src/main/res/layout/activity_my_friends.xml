@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/tv_order_color_3"
                     android:textSize="@dimen/_16sp"
-                    android:text="我的合伙人"
+                    android:text="推荐人手机号"
                     android:gravity="center_horizontal"
                     />
                 <TextView
@@ -100,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/tv_order_color_1"
                     android:textSize="@dimen/_16sp"
-                    android:text="5人"
+                    android:text="13811247642"
                     android:paddingTop="@dimen/_5dp"
                     android:gravity="center_horizontal"
 
@@ -146,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/tv_order_color_3"
                 android:textSize="@dimen/_12sp"
-                android:text="邀请他人扫码并下载人人推,注册时在推荐人处填写你的账号，注册成功后就成为你的合伙人啦!"
+                android:text="@string/notice_my_friend"
                 android:gravity="center_horizontal"
                 android:layout_marginBottom="21dip"
                 android:paddingLeft="@dimen/_40dp"

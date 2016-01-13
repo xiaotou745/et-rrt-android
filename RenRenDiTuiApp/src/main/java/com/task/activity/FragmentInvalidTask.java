@@ -158,7 +158,7 @@ public class FragmentInvalidTask extends BaseFragment implements
 	@Override
 	public void onResume() {
 		super.onResume();
-		//getInitData();
+		getInitData();
 	}
 
 	@Override

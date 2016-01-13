@@ -34,6 +34,7 @@ public enum ApiNames {
 	绑定支付宝("userc/bindalipay"),
 	删除或将消息已读("msg/updatemsg"),
 	获取合伙人分红信息("userc/getpartnerinfo"),
+	获取资金明细列表("userc/getbalancerecordlist"),
 	获取未读信息数量("msg/getmymsgcount");
 	/**
 	 * PHP接口名称

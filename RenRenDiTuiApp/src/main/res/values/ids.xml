@@ -6,5 +6,7 @@
     <item type="id" name="listview_multiple_type_four_layout"></item>
     <item type="id" name="listview_multiple_type_five_layout"></item>
     <item type="id" name="listview_multiple_type_six_layout"></item>
+    <item type="id" name="listview_multiple_type_seven_layout"></item>
+    <item type="id" name="listview_multiple_type_eight_layout"></item>
 
 </resources>

@@ -1,6 +1,7 @@
 package com.user.activity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -45,8 +46,18 @@ hideProgressDialog();
                     hideProgressDialog();
                     if(t!=null){
                         mTV_friend_money.setText(t.data.getBonusTotal());
-                        mTV_friend_num.setText(t.data.getPartnerNum());
-                        mTV_friend_phone.setText(t.data.getRecommendPhone());
+                        mTV_friend_num.setText(t.data.getPartnerNum()+"人");
+                        if(!TextUtils.isEmpty(t.data.getRecommendPhone())){
+                            String strphone = t.data.getRecommendPhone();
+                            StringBuffer sb = new StringBuffer();
+                            sb.append(strphone.substring(0,3))
+                                    .append("****")
+                                    .append(strphone.substring(strphone.length()-4));
+                            mTV_friend_phone.setText(sb.toString());
+                        }else{
+                            mTV_friend_phone.setText("");
+                        }
+
                     }
 
                 }

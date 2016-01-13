@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout_view_bg"
+    android:orientation="vertical" >
+
+    <include
+        layout="@layout/main_title_home_layout" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+         >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="金额( RMB ) "
+            android:textColor="@color/tv_order_color_3"
+            android:textSize="@dimen/_12sp"
+            android:layout_marginLeft="@dimen/_12.5dp"
+            android:layout_marginTop="@dimen/_12.5dp"
+            android:gravity="left"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/_12.5dp"
+            >
+
+            <TextView
+                android:id="@+id/bill_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right|center_vertical"
+                android:layout_gravity="right|center_vertical"
+                android:textColor="@color/red_bg"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="90.00"
+                android:textSize="60sp" />
+            <TextView
+                android:id="@+id/bill_money_flag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right|center_vertical"
+                android:layout_gravity="right|center_vertical"
+                android:textColor="@color/red_bg"
+                android:text="+"
+                android:textSize="44sp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/bill_money"
+                android:layout_marginRight="@dimen/_5dp"
+                android:visibility="gone"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10dp"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/_12.5dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+             >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="账单类型"
+                android:textColor="@color/tv_order_color_1"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/bill_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20dp"
+                android:textColor="@color/tv_order_color_3"
+                android:text="账单类型"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <View
+            style="@style/line_height_1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="68dip"
+            android:orientation="horizontal"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="交易明细"
+                android:textColor="@color/tv_order_color_1"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/bill_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20dp"
+                android:textColor="@color/tv_order_color_3"
+                android:text="交易明细"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <View
+           style="@style/line_height_1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="创建时间"
+                android:textColor="@color/tv_order_color_1"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/bill_create_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20dp"
+                android:textColor="@color/tv_order_color_3"
+                android:text="创建时间"
+                android:textSize="15dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

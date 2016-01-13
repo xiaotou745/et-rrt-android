@@ -38,9 +38,11 @@
     <dimen name="_20dp">20dp</dimen>
     <dimen name="_18dp">18dp</dimen>
     <dimen name="_17dp">17dp</dimen>
+    <dimen name="_16dp">16dp</dimen>
     <dimen name="_15dp">15dp</dimen>
     <dimen name="_14dp">14dp</dimen>
     <dimen name="_12dp">12dp</dimen>
+    <dimen name="_12.5dp">12.5dp</dimen>
     <dimen name="_10dp">10dp</dimen>
     <dimen name="_8dp">8dp</dimen>
     <dimen name="_7dp">7dp</dimen>
@@ -71,5 +73,7 @@
     <dimen name="btn_style_height">45dip</dimen>
     <!-- 验证码统一的宽度-->
     <dimen name="btn_width_code">100dip</dimen>
+    <!-- 统一item 高度-->
+    <dimen name="item_height">65dip</dimen>
 
 </resources>

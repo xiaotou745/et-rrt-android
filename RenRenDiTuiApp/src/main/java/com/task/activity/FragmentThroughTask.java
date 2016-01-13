@@ -3,11 +3,9 @@ package com.task.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +19,6 @@ import com.renrentui.controls.PullToRefreshView.OnHeaderRefreshListener;
 import com.renrentui.interfaces.INodata;
 import com.renrentui.interfaces.IRqHandlerMsg;
 import com.renrentui.requestmodel.RQBaseModel;
-import com.renrentui.requestmodel.RQGetFinishedTask;
 import com.renrentui.requestmodel.RQHandler;
 import com.renrentui.requestmodel.RQMyTask;
 import com.renrentui.requestmodel.RequestType;
@@ -169,7 +166,7 @@ public FragmentThroughTask(){
 	@Override
 	public void onResume() {
 		super.onResume();
-		//getInitData();
+		getInitData();
 	}
 
 	@Override

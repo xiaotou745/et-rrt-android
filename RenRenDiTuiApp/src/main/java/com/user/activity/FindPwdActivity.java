@@ -132,13 +132,9 @@ public class FindPwdActivity extends BaseActivity implements OnClickListener {
 			mIV_title_left.setOnClickListener(this);
 		}
 		if(mTV_title_content!=null){
-			mTV_title_content.setText(context.getResources().getString(R.string.login));
+			mTV_title_content.setText("找回密码");
 		}
-		if(mTV_title_right!=null){
-			mTV_title_right.setVisibility(View.VISIBLE);
-			mTV_title_right.setText(context.getResources().getString(R.string.register));
-			mTV_title_right.setOnClickListener(this);
-		}
+
 		et_phone = (EditText) findViewById(R.id.et_phone);
 		btn_get_code = (Button) findViewById(R.id.btn_get_code);
 		btn_get_code.setOnClickListener(this);
