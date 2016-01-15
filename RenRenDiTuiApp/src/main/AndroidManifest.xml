@@ -68,7 +68,6 @@
             android:name="com.task.activity.MyTaskMaterialActivity"
             android:launchMode="singleTop" />
         <activity android:name="com.task.activity.NoGoingTaskActicity" />
-        <activity android:name="com.task.activity.TaskDetailInfoActivity" />
         <activity android:name="com.task.activity.MyTaskFramentActivity" />
         <activity android:name="com.user.activity.FindPwdActivity" />
         <activity android:name="com.user.activity.RegisterActivity" />
@@ -94,6 +93,15 @@
         </activity>
         <activity android:name="com.user.activity.MyCapitalFramentActivity" >
         </activity>
+        <activity android:name="com.user.activity.MyCapialDetailActivity" >
+        </activity>
+        <activity android:name="com.task.activity.MyMaterialTaskTeamActivity" />
+        <!-- 新的我的任务 -->
+        <activity android:name="com.task.activity.MyTaskFramentNewActivity" />
+        <activity android:name="com.task.activity.TaskDetailInfoNewActivity" />
+        <activity android:name="com.task.activity.TaskMyFriendListViewActivity" >
+        </activity>
+
 
         <service
             android:name="com.user.model.download.DownLoadService"
@@ -126,10 +134,7 @@
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
 
-        <activity
-            android:name="com.user.activity.MyCapialDetailActivity"
-            android:label="@string/title_activity_my_capial_detail" >
-        </activity>
+
     </application>
 
 </manifest>

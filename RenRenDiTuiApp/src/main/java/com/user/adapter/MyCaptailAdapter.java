@@ -13,6 +13,7 @@ import com.renrentui.app.R;
 import com.renrentui.resultmodel.RSMyCaptailModel;
 import com.user.activity.MyCapialDetailActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,10 +31,12 @@ public class MyCaptailAdapter extends BaseAdapter {
         iTypeIndex = type;
     }
     public void setData(List<RSMyCaptailModel.DataList> mData){
-        if(data!=null){
+        if(data==null){
+            data=new ArrayList<RSMyCaptailModel.DataList>();
+        }else{
             data.clear();
         }
-        data = mData;
+        data.addAll(mData);
         notifyDataSetChanged();
     }
 

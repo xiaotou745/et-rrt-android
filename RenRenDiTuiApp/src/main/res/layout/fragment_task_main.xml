@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/layout_bg_color" >
+    android:background="@color/layout_view_bg" >
 
     <com.renrentui.controls.PullToRefreshView
         android:id="@+id/pulltorefresh_taskList"
@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_10dp"
-            android:divider="@color/layout_bg_color"
+            android:divider="@color/layout_view_bg"
             android:dividerHeight="@dimen/_10dp"
             android:fadingEdge="none"
             android:listSelector="#f2f2f2"

@@ -1,4 +1,4 @@
-package com.task.service;
+package com.task.adapter;
 
 import java.util.List;
 

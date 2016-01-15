@@ -30,8 +30,7 @@ import com.renrentui.util.ApiNames;
 import com.renrentui.util.ApiUtil;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
-import com.task.model.LayoutMainTopmenu;
-import com.task.service.GetOnFinishAdapter;
+import com.task.adapter.GetOnFinishAdapter;
 
 /**
  * 审核拒绝的资料列表

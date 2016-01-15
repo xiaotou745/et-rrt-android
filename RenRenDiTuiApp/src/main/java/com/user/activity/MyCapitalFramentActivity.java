@@ -2,15 +2,13 @@ package com.user.activity;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 
 import com.renrentui.app.R;
 import com.renrentui.tools.ExitApplication;
-import com.renrentui.util.ToMainPage;
 import com.renrentui.util.ToMyCapitalPage;
 import com.task.model.LayoutMyCapitalTopmenu;
-import com.task.service.MyFragmentPagerAdapter;
+import com.task.adapter.MyFragmentPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

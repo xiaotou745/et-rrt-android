@@ -35,12 +35,12 @@ public class RQGetNoGoingTask extends RQBase {
 	 */
 	public String cityName;
 	//排列顺序
-	public String orderBy;//排序方式 1是佣金，2是审核周期，3是预计用时，4是参与人数，5是发布时间（int类型）
+	public int  orderBy;//排序方式 1是佣金，2是审核周期，3是预计用时，4是参与人数，5是发布时间（int类型）
 
 	public RQGetNoGoingTask() {
 		super();
 	}
-	public RQGetNoGoingTask(String userId,String nextId,String cityCode,String orderBy) {
+	public RQGetNoGoingTask(String userId,String nextId,String cityCode,int  orderBy) {
 		super();
 		this.userId = userId;
 		this.nextId = nextId;
@@ -49,7 +49,7 @@ public class RQGetNoGoingTask extends RQBase {
 	}
 
 	public RQGetNoGoingTask(String userId, float longitude, float latitude,
-			String nextId,String orderBy) {
+			String nextId,int orderBy) {
 		super();
 		this.userId = userId;
 		this.longitude = longitude;
@@ -59,7 +59,7 @@ public class RQGetNoGoingTask extends RQBase {
 	}
 
 	public RQGetNoGoingTask(String userId, float longitude, float latitude,
-			int itemsCount, String nextId,String orderBy) {
+			int itemsCount, String nextId,int orderBy) {
 		super();
 		this.userId = userId;
 		this.longitude = longitude;
@@ -70,7 +70,7 @@ public class RQGetNoGoingTask extends RQBase {
 	}
 
 	public RQGetNoGoingTask(String userId, float longitude, float latitude,
-			int itemsCount, String nextId, String cityCode,String orderBy) {
+			int itemsCount, String nextId, String cityCode,int orderBy) {
 		super();
 		this.userId = userId;
 		this.longitude = longitude;
@@ -82,7 +82,7 @@ public class RQGetNoGoingTask extends RQBase {
 	}
 
 	public RQGetNoGoingTask(String userId, float longitude, float latitude,
-			int itemsCount, String nextId, String cityCode, String cityName,String orderBy) {
+			int itemsCount, String nextId, String cityCode, String cityName,int orderBy) {
 		super();
 		this.userId = userId;
 		this.longitude = longitude;

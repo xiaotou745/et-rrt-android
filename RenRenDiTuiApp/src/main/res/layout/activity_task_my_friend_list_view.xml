@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.task.activity.TaskMyFriendListViewActivity"
+    android:orientation="vertical"
+    >
+<include
+    layout="@layout/main_title_home_layout"
+    ></include>
+    <ListView
+        android:id="@+id/lv_task_friend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:listSelector="@null"
+        android:dividerHeight="1dp"
+        android:divider="@color/line_bg_color"
+        android:cacheColorHint="@null"
+        ></ListView>
+</LinearLayout>

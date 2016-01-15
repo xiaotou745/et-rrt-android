@@ -25,14 +25,12 @@ import com.renrentui.requestmodel.RQTaskMaterial;
 import com.renrentui.requestmodel.RequestType;
 import com.renrentui.requestmodel.ResultMsgType;
 import com.renrentui.resultmodel.RSTaskMaterial;
-import com.renrentui.resultmodel.TaskMetarialBean;
 import com.renrentui.resultmodel.TaskMetarialContent;
 import com.renrentui.util.ApiNames;
 import com.renrentui.util.ApiUtil;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
-import com.task.model.LayoutMainTopmenu;
-import com.task.service.GetOnGoingAdapter;
+import com.task.adapter.GetOnGoingAdapter;
 
 /**
  * 审核中的资料列表

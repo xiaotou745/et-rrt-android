@@ -176,7 +176,6 @@ public class MyCapitalFramen_1 extends BaseFragment implements PullToRefreshView
     public void onActivityCreated(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         if (getUserVisibleHint()) {
-
             showProgressDialog();
             getInitData();
 
@@ -240,16 +239,16 @@ public class MyCapitalFramen_1 extends BaseFragment implements PullToRefreshView
      * 初始化数据
      */
     public void getInitData() {
-//        ApiUtil.Request(new RQBaseModel<RQMyCaptailModel, RSMyCaptailModel>(
-//                context, new RQMyCaptailModel(Utils.getUserDTO(context).data.userId,"1"),
-//                new RSMyCaptailModel(), ApiNames.获取资金明细列表.getValue(),
-//                RequestType.POST, rqHandler_getMyCaptial));
-//        pageindex = 1;
         ApiUtil.Request(new RQBaseModel<RQMyCaptailModel, RSMyCaptailModel>(
-                context, new RQMyCaptailModel("22","1"),
+                context, new RQMyCaptailModel(Utils.getUserDTO(context).data.userId,"1"),
                 new RSMyCaptailModel(), ApiNames.获取资金明细列表.getValue(),
                 RequestType.POST, rqHandler_getMyCaptial));
         pageindex = 1;
+//        ApiUtil.Request(new RQBaseModel<RQMyCaptailModel, RSMyCaptailModel>(
+//                context, new RQMyCaptailModel("22","1"),
+//                new RSMyCaptailModel(), ApiNames.获取资金明细列表.getValue(),
+//                RequestType.POST, rqHandler_getMyCaptial));
+//        pageindex = 1;
     }
 
     /**

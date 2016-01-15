@@ -227,21 +227,21 @@ public class MyCapitalFramen_2 extends BaseFragment implements PullToRefreshView
     /**
      * 初始化数据
      */
-//    public void getInitData() {
-//        ApiUtil.Request(new RQBaseModel<RQMyCaptailModel, RSMyCaptailModel>(
-//                context, new RQMyCaptailModel(Utils.getUserDTO(context).data.userId,"2"),
-//                new RSMyCaptailModel(), ApiNames.获取资金明细列表.getValue(),
-//                RequestType.POST, rqHandler_getMyCaptial));
-//        pageindex = 1;
-//    }
-
     public void getInitData() {
         ApiUtil.Request(new RQBaseModel<RQMyCaptailModel, RSMyCaptailModel>(
-                context, new RQMyCaptailModel("22","2"),
+                context, new RQMyCaptailModel(Utils.getUserDTO(context).data.userId,"2"),
                 new RSMyCaptailModel(), ApiNames.获取资金明细列表.getValue(),
                 RequestType.POST, rqHandler_getMyCaptial));
         pageindex = 1;
     }
+//
+//    public void getInitData() {
+//        ApiUtil.Request(new RQBaseModel<RQMyCaptailModel, RSMyCaptailModel>(
+//                context, new RQMyCaptailModel("22","2"),
+//                new RSMyCaptailModel(), ApiNames.获取资金明细列表.getValue(),
+//                RequestType.POST, rqHandler_getMyCaptial));
+//        pageindex = 1;
+//    }
     /**
      * 初始化数据
      */

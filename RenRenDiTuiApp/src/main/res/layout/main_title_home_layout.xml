@@ -16,6 +16,9 @@
         android:drawablePadding="@dimen/layout_padding_nor"
         android:text="城市"
         android:visibility="gone"
+        android:singleLine="true"
+        android:maxLength="4"
+        android:ellipsize="end"
          />
 
 <!--title-->

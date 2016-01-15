@@ -1,11 +1,8 @@
-package com.task.service;
+package com.task.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.Spannable;
 import android.text.SpannableStringBuilder;
-import android.text.style.BackgroundColorSpan;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,17 +20,17 @@ import com.task.activity.MyTaskMaterialDetailActivity;
 import java.util.List;
 
 /**
- * 审核通过资料适配器
+ * 未通过资料适配器
  * 
  * @author llp
  * 
  */
-public class GetOnGoneAdapter extends BaseAdapter {
+public class GetOnFinishAdapter extends BaseAdapter {
 	private Context context;
 	private List<TaskMetarialContent> noGoingTaskInfos;
 
-	public GetOnGoneAdapter(Context context,
-							List<TaskMetarialContent> noGoingTaskInfos) {
+	public GetOnFinishAdapter(Context context,
+							  List<TaskMetarialContent> noGoingTaskInfos) {
 		this.context = context;
 		this.noGoingTaskInfos = noGoingTaskInfos;
 	}
@@ -81,7 +78,6 @@ public class GetOnGoneAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-
 		 ViewHolder_1 viewholder_1=null;
 		ViewHolder_2 viewHolder_2 = null;
 		ViewHolder_3 viewHolder_3 = null;
@@ -201,22 +197,23 @@ public class GetOnGoneAdapter extends BaseAdapter {
 				viewHolder_3.gridView_task_pic.setAdapter(new GriveiwTaskPicAdapter(context,beanContent.titlesList));
 				break;
 		}
-		convertView.setOnClickListener(new View.OnClickListener(){
+		convertView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				//审核资料详情
 				Intent mIntent = new Intent();
-				mIntent.setClass(context,MyTaskMaterialDetailActivity.class);
+				mIntent.setClass(context, MyTaskMaterialDetailActivity.class);
 				mIntent.putExtra("TaskMaterialId", beanContent.taskDatumId);
-				mIntent.putExtra("TaskId",beanContent.taskId);
-				mIntent.putExtra("Status",beanContent.auditStatus);
-				mIntent.putExtra("Title_content",beanContent.taskName);
-				mIntent.putExtra("VO",beanContent);
+				mIntent.putExtra("TaskId", beanContent.taskId);
+				mIntent.putExtra("Status", beanContent.auditStatus);
+				mIntent.putExtra("Title_content", beanContent.taskName);
+				mIntent.putExtra("VO", beanContent);
 				mIntent.putExtra("ctId",beanContent.ctId);
 				mIntent.putExtra("taskStatus",beanContent.taskStatus);
 				context.startActivity(mIntent);
 			}
 		});
+
 		return convertView;
 
 //

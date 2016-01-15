@@ -35,6 +35,7 @@ public enum ApiNames {
 	删除或将消息已读("msg/updatemsg"),
 	获取合伙人分红信息("userc/getpartnerinfo"),
 	获取资金明细列表("userc/getbalancerecordlist"),
+	资料审核详情分组后列表("taskdatum/getmytaskdatumgrouplist"),
 	获取未读信息数量("msg/getmymsgcount");
 	/**
 	 * PHP接口名称

@@ -201,8 +201,8 @@ public class UploadService extends Service {
                             } else {
                                 startUpload();
                                 // 文件存在，开始上传
-                                httpUploadUtil = new HttpUploadUtil(ApiConstants.uploadImgApiUrl+"upload/uploadimg?uploadfrom=3", mSContext);
-                                httpUploadUtil.addTextParameter("uploadfrom", "2");
+                                httpUploadUtil = new HttpUploadUtil(ApiConstants.uploadImgApiUrl+"upload/fileupload/uploadimg?uploadFrom=3", mSContext);
+                                httpUploadUtil.addTextParameter("uploadFrom ", "3");
                                 httpUploadUtil.addFileParameter("imgstream", file);
                                 httpUploadUtil.setOnUploadProgressLinstener(new HttpUploadUtil.OnUploadProgressLinstener() {
                                     public void onUploadProgress(long fileLength, long curLength) {
@@ -213,9 +213,9 @@ public class UploadService extends Service {
                                 String result = new String(b, "UTF-8");
                                 Gson gson = new Gson();
                                 UploadPicResultBean obj = gson.fromJson(result, UploadPicResultBean.class);
-                                if (obj != null && obj.getStatus()==1 && obj.getResult() != null) {
+                                if (obj != null && obj.getStatus()==1 && obj.getData() != null) {
                                     vo.setUploadStatus(TASK_STATE_COMPLETE);
-                                    vo.setNetwork_path(obj.getResult().getRelativePath());//上传返回的图片地址
+                                    vo.setNetwork_path(obj.getData().getRelativePath());//上传返回的图片地址
                                     vo.setTicket_property(Constants.TYPE_NET);
                                     completeUpload();
                                 } else {

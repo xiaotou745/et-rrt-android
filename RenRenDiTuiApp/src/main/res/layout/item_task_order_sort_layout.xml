@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="180dip" android:layout_height="50dp"
+    android:background="@color/layout_view_content_bg"
+    >
+<TextView
+    android:id="@+id/tv_task_sort_0"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="发布时间最新"
+    android:textSize="@dimen/_14sp"
+    android:textColor="@color/tv_order_color_2"
+    android:paddingLeft="@dimen/_12.5dp"
+    android:layout_centerVertical="true"
+    android:layout_alignParentLeft="true"
+    />
+    <ImageView
+        android:id="@+id/iv_task_sort_0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/task_sort_selection"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/_12.5dp"
+        />
+    <View
+        android:id="@+id/line_0"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/_12.5dp"
+        style="@style/line_height_1"></View>
+</RelativeLayout>

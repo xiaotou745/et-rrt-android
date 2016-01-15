@@ -81,8 +81,9 @@
     <string name="pull_to_refresh_footer_pull_label">上拉加载更多</string>
     <string name="pull_to_refresh_footer_refreshing_label">加载中\u2026</string>
     <!-- 订单详情-->
-    <string name="task_detail_examine_format" formatted="false">审核:%1$s天</string>
-    <string name="task_detail_dealtime_format" formatted="false">截止日期:%1$s</string>
+    <string name="task_detail_examine_format" formatted="false">审核: %1$s天</string>
+    <string name="task_detail_dealtime_format" formatted="false">截止日期: %1$s</string>
+    <string name="task_detail_forecasttime_format" formatted="false">预计用时: %1$s 时</string>
     <string name="task_detail_tel_format" formatted="false">咨询:<![CDATA[<font color="#00bcd5"> %1$s</font>]]></string>
 
     <!-- 拍照或选取图片失败 -->
@@ -110,10 +111,13 @@
 
     <string name="message_title_content">消息中心</string>
     <string name ="bind_alipay_notice"><![CDATA[<font color="#333333">*为保证您顺利提现，请确保上述</font><font color="#00BCD5">支付宝账号和支付宝实名信息</font><font color="#333333">准确无误</font>]]></string>
-    <string name = "notice_my_friend">"邀请他人扫码并下载\"人人推\",注册时在推荐人处填写你的账号，注册成功后就成为你的合伙人啦!"</string>
+    <string name = "notice_my_friend">"邀请他人扫码并下载\" 人人推 \",注册时在推荐人处填写你的账号，注册成功后就成为你的合伙人啦!"</string>
     <!-- 资金明细-->
     <string name ="captail_add"><![CDATA[<font color="#f7585d">+%1$s</font><font color="#666666">元</font>]]></string>
-    <string name ="captail_reduce"><![CDATA[<font color="#00bc87">-%1$s</font><font color="#666666">元</font>]]></string>
-    <string name="title_activity_my_capial_detail">MyCapialDetailActivity</string>
+    <string name ="captail_reduce"><![CDATA[<font color="#00bc87">%1$s</font><font color="#666666">元</font>]]></string>
+    <string name ="my_material_task_team_num"><![CDATA[<font color="#333333" size="30px">%1$s</font><font color="#333333" size="24px">条</font>]]></string>
+    <string name ="my_material_task_team_content"><![CDATA[<font color="#f7585d" >%1$s</font><font color="#666666" > 元/条</font>]]></string>
 
+    <string name="my_tasknew_qianyue_flag" formatted="false">提交资料 %1$s 条</string>
+    <string name="my_tasknew_friend_flag" formatted="false">任务参与人(%1$s)</string>
 </resources>

@@ -29,7 +29,7 @@ import com.renrentui.util.ApiNames;
 import com.renrentui.util.ApiUtil;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
-import com.task.service.GetThroughTaskAdapter;
+import com.task.adapter.GetThroughTaskAdapter;
 
 /**
  * 进行中的任务
@@ -48,12 +48,7 @@ public class FragmentThroughTask extends BaseFragment implements
 	private String nextId = "";
 	private int pageindex = 1;
 	public MyTaskFramentActivity mMyTaskListener;
-	//private LayoutMyTaskTopmenu layoutTopMenu;// 顶部按钮
 
-//	@SuppressLint("ValidFragment")
-//	public FragmentThroughTask(LayoutMyTaskTopmenu layoutTopMenu){
-//		this.layoutTopMenu = layoutTopMenu;
-//	}
 public FragmentThroughTask(){
 
 }
@@ -80,8 +75,6 @@ public FragmentThroughTask(){
 				public void onSuccess(RSMyTask t) {
 					FragmentThroughTask.this.hideLayoutNoda();
 					mMyTaskListener.showMyTaskCount(t.data.passTotal,t.data.refuseTotal);
-//					layoutTopMenu.setThroughNum(t.data.passTotal);
-//					layoutTopMenu.setInvalid(t.data.refuseTotal);
 					pulltorefresh_taskList.setVisibility(View.VISIBLE);
 					if (pageindex == 1) {
 						if (t.data.count == 0) {

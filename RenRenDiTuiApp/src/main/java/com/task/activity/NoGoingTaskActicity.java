@@ -1,6 +1,5 @@
 package com.task.activity;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -31,23 +30,24 @@ import com.renrentui.resultmodel.NoGoingTaskInfo;
 import com.renrentui.resultmodel.RSGetCityModel;
 import com.renrentui.resultmodel.RSGetMyMessage;
 import com.renrentui.resultmodel.RSGetNoGoingTask;
-import com.renrentui.resultmodel.RSMyMessage;
 import com.renrentui.tools.Constants;
 import com.renrentui.tools.ExitApplication;
-import com.renrentui.tools.Util;
 import com.renrentui.util.ApiNames;
 import com.renrentui.util.ApiUtil;
 import com.renrentui.util.GetCity;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
-import com.task.service.GetNoGoingAdapter;
+import com.task.adapter.GetNoGoingAdapter;
+import com.task.adapter.TaskSorAdapter;
 import com.user.activity.LoginActivity;
 import com.user.activity.PersonalCenterActivity;
 import com.user.model.download.DownLoadUtils;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -55,11 +55,15 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 import base.BaseActivity;
@@ -100,6 +104,12 @@ public class NoGoingTaskActicity extends BaseActivity implements
 	public Handler mGetDataHander;
 	public static final int TAG_WHATE_STOP = 1002;
 	public static final int TAG_WHATE_CONNECTION = 1001;
+
+
+	private PopupWindow mMenuPopupWindow;
+	private int is_selection = 1;
+	private TaskSorAdapter msortAdapter;
+	private ListView menuListView;
 
 	private RQHandler<RSGetNoGoingTask> rqHandler_getNoGoingTask = new RQHandler<>(
 			new IRqHandlerMsg<RSGetNoGoingTask>() {
@@ -246,6 +256,7 @@ private RQHandler<RSGetMyMessage> rqHandler_getMyMessage = new RQHandler<>(
 		setContentView(R.layout.activity_nogoing_task);
 		super.init();
 		initControl();
+		setPopupView();
 		checkoutGPSStatus();
 		initLocation();
 		initHandler();
@@ -309,6 +320,12 @@ private RQHandler<RSGetMyMessage> rqHandler_getMyMessage = new RQHandler<>(
 		if(mTV_title_right!=null){
 			mTV_title_right.setOnClickListener(this);
 			mTV_title_right.setVisibility(View.VISIBLE);
+			mTV_title_right.setText("排序");
+			Drawable mDrawable = context.getResources().getDrawable(R.drawable.icon_order_sort);
+			mDrawable.setBounds(0,0,mDrawable.getMinimumWidth(),mDrawable.getMinimumHeight());
+			mTV_title_right.setCompoundDrawables(null, null, mDrawable, null);
+			mTV_title_right.setCompoundDrawablePadding((int) context.getResources().getDimension(R.dimen._10dp));
+			mTV_title_right.setOnClickListener(this);
 		}
 
 //		menu
@@ -347,7 +364,7 @@ private RQHandler<RSGetMyMessage> rqHandler_getMyMessage = new RQHandler<>(
 		showProgressDialog();
 		setCityInfo();
 		ApiUtil.Request(new RQBaseModel<RQGetNoGoingTask, RSGetNoGoingTask>(
-				context, new RQGetNoGoingTask(strUserId, "0", MyApplication.getmCurrentLocation().code,"5"),
+				context, new RQGetNoGoingTask(strUserId, "0", MyApplication.getmCurrentLocation().code,is_selection),
 				new RSGetNoGoingTask(), ApiNames.获取所有可领取任务.getValue(),
 				RequestType.POST, rqHandler_getNoGoingTask));
 		pageindex = 1;
@@ -410,7 +427,7 @@ private RQHandler<RSGetMyMessage> rqHandler_getMyMessage = new RQHandler<>(
 	 */
 	private void getMoreData() {
 		ApiUtil.Request(new RQBaseModel<RQGetNoGoingTask, RSGetNoGoingTask>(
-				context, new RQGetNoGoingTask(strUserId, nextId,MyApplication.getmCurrentLocation().code,"5"),
+				context, new RQGetNoGoingTask(strUserId, nextId,MyApplication.getmCurrentLocation().code,is_selection),
 				new RSGetNoGoingTask(), ApiNames.获取所有可领取任务.getValue(),
 				RequestType.POST, rqHandler_getNoGoingTask));
 		pageindex++;
@@ -432,6 +449,8 @@ private RQHandler<RSGetMyMessage> rqHandler_getMyMessage = new RQHandler<>(
 				break;
 			case R.id.tv_title_right:
 				//排序
+				intent = null;
+				showAndDismissPopupWindow();
 				break;
 			case R.id.tab_01:
 				//可接任务
@@ -440,7 +459,8 @@ private RQHandler<RSGetMyMessage> rqHandler_getMyMessage = new RQHandler<>(
 			case R.id.tab_02:
 				//我的任务
 				if(isLogin()){
-					intent = new Intent(context, MyTaskFramentActivity.class);
+					//intent = new Intent(context, MyTaskFramentActivity.class);
+					intent = new Intent(context,MyTaskFramentNewActivity.class);
 					isFinish = true;
 				}else{
 					intent = new Intent(context, LoginActivity.class);
@@ -455,6 +475,7 @@ private RQHandler<RSGetMyMessage> rqHandler_getMyMessage = new RQHandler<>(
 					intent = new Intent(context, LoginActivity.class);
 				}
 				break;
+
 		}
 		if(intent!=null){
 			startActivity(intent);
@@ -640,8 +661,63 @@ public class MyLocationListenner implements BDLocationListener {
 				}
 			}
 	};
-
-
-
 }
+	//=========================windonw=======================
+	/**
+	 * 设置订单菜单
+	 */
+	private void setPopupView() {
+		LayoutInflater inflater = LayoutInflater.from(context);
+		View view = inflater.inflate(R.layout.task_order_sort_layout, null);
+		menuListView = (ListView) view.findViewById(R.id.lv_task_sort);
+		 msortAdapter = new TaskSorAdapter(context);
+		menuListView.setAdapter(msortAdapter);
+		menuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				mMenuPopupWindow.dismiss();
+				is_selection = position+1;
+				mMenuPopupWindow.dismiss();
+			}
+		});
+		menuListView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+		if (mMenuPopupWindow == null) {
+			mMenuPopupWindow = new PopupWindow(context);
+		}
+		mMenuPopupWindow.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.bg_popupwindow_shape));
+		mMenuPopupWindow.setWidth(menuListView.getMeasuredWidth());
+		//mMenuPopupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+		mMenuPopupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+		mMenuPopupWindow.setContentView(view);
+		mMenuPopupWindow.setOutsideTouchable(true);
+		mMenuPopupWindow.setFocusable(true);
+		mMenuPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+			@Override
+			public void onDismiss() {
+				getInitData();
+			}
+		});
+		mMenuPopupWindow.update();
+	}
+	/**
+	 * 设置订单菜单
+	 */
+	private void setUpdataPopupView() {
+		msortAdapter.setIs_selection(is_selection);
+		mMenuPopupWindow.update();
+	}
+
+	/**
+	 * 显示or隐藏
+	 */
+	private void showAndDismissPopupWindow() {
+		if (mMenuPopupWindow != null && mMenuPopupWindow.isShowing()) {
+			mMenuPopupWindow.dismiss();
+		} else if (mMenuPopupWindow != null) {
+			setUpdataPopupView();
+			mMenuPopupWindow.showAsDropDown(mTV_title_right,0,20);
+
+		}
+	}
+
 }

@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical" >
+<!--title-->
+   <include
+       layout="@layout/main_title_home_layout"
+       ></include>
+
+    <ScrollView
+        android:id="@+id/layout_data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadingEdge="none"
+        android:scrollbars="none"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <!-- top-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                >
+
+                <!-- top 1-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+                    <!-- icon-->
+                    <ImageView
+                        android:id="@+id/icon_pusher"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:src="@drawable/pusher_logo"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="@dimen/_12.5dp"
+                        android:layout_marginBottom="@dimen/_12.5dp"
+                        android:layout_marginLeft="@dimen/_12.5dp"
+                        />
+                    <!-- 金额-->
+                    <LinearLayout
+                        android:id="@+id/ll_amount"
+                        android:layout_width="74dip"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_alignParentRight="true"
+                        android:background="@color/layout_view_content_other_bg"
+                        android:paddingRight="@dimen/_12.5dp" >
+                        <TextView
+                            android:id="@+id/tv_amount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="1880.00"
+                            android:gravity="center_horizontal"
+                            android:textColor="@color/red_bg"
+                            android:textSize="@dimen/_16sp"
+                            android:layout_marginTop="@dimen/_30dp"
+                            ></TextView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="元/条"
+                            android:textColor="@color/tv_order_color_2"
+                            android:gravity="center_horizontal"
+                            android:textSize="@dimen/_10sp"
+                            ></TextView>
+                    </LinearLayout>
+                    <!-- 商户名称-->
+                    <TextView
+                        android:id="@+id/tv_pusher_taskName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/tv_order_color_1"
+                        android:textSize="@dimen/_16sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@id/ll_amount"
+                        android:layout_toRightOf="@id/icon_pusher"
+                        android:text="测试商都"
+                        android:layout_margin="@dimen/_15dp"
+                        android:layout_marginTop="@dimen/_12.5dp"
+                        android:layout_marginBottom="@dimen/_12.5dp"
+                        android:maxLines="3"
+                        android:ellipsize="end"
+                        />
+                    <ImageView
+                        android:id="@+id/iv_flag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/team_down"
+                        />
+            </RelativeLayout>
+
+                <View
+                    style="@style/line_height_1"
+                    android:layout_marginLeft="@dimen/_12.5dp"
+                    android:layout_marginRight="@dimen/_12.5dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_margin="@dimen/_12.5dp"
+                    >
+                    <!--审核-->
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="0dip"
+                        >
+                        <!-- 审核时间-->
+                        <TextView
+                            android:id="@+id/tv_task_examine"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/icon_examine"
+                            android:singleLine="true"
+                            android:drawablePadding="10dp" />
+                        <!-- 预计用时-->
+                        <TextView
+                            android:id="@+id/tv_task_forecast_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5dp"
+                            android:drawableLeft="@drawable/icon_finish"
+                            android:singleLine="true"
+                            android:drawablePadding="10dp" />
+                    </LinearLayout>
+                        <!-- 截止时期-->
+                        <TextView
+                            android:id="@+id/tv_deadline_time"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:gravity="top"
+                            android:layout_weight="1"
+                            android:drawableLeft="@drawable/icon_finish"
+                            android:singleLine="true"
+                            android:drawablePadding="10dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+                <!-- 任务流程描述-->
+            <LinearLayout
+                android:id="@+id/ll_task_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+             >
+
+                <View
+                    style="@style/line_height_10">
+                </View>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/task_description"
+                    android:textColor="@color/tv_order_color_1"
+                    android:background="@color/layout_view_bg"
+                    android:textSize="15sp"
+                    android:layout_gravity="left"
+                    android:gravity="left"
+                    android:padding="@dimen/view_space"
+                    />
+                <!-- 流程-->
+
+                    <com.renrentui.view.MyListView
+                        android:id="@+id/lv_task_flowpath"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:listSelector="@color/white"
+                        android:dividerHeight="0dip"
+                        android:divider="@null"
+                        android:paddingTop="@dimen/_5dp"
+                        android:paddingBottom="@dimen/_5dp"
+                        />
+                <View
+                    android:id="@+id/line_task_explain_top"
+                        style="@style/line_height_1">
+                </View>
+                    <!-- 当前任务的补充说明-->
+                    <com.renrentui.view.MyListView
+                        android:id="@+id/lv_task_explain"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingTop="@dimen/_5dp"
+                        android:paddingBottom="@dimen/_5dp"
+                        android:listSelector="@color/white"
+                        android:dividerHeight="0dip"
+                        android:divider="@null"
+                        >
+                    </com.renrentui.view.MyListView>
+
+
+            <View
+                android:id="@+id/line_detail_link_top"
+                style="@style/line_height_10">
+            </View>
+            <!--详情页面链接 -->
+            <com.renrentui.view.MyListView
+                android:id="@+id/lv_task_detail_link"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/_5dp"
+                android:paddingBottom="@dimen/_5dp"
+                android:dividerHeight="10dip"
+                android:divider="@color/line_bg_color"
+                android:background="@color/white"
+                >
+            </com.renrentui.view.MyListView>
+
+                <View
+                    style="@style/line_height_10">
+                </View>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_50dp"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/_12.5dp"
+    android:paddingRight="@dimen/_12.5dp"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="咨询电话"
+        android:textColor="@color/tv_order_color_1"
+        android:textSize="@dimen/_14sp"
+        android:gravity="center_vertical"
+        />
+    <TextView
+        android:id="@+id/tv_task_tel"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="010-110"
+        android:textColor="@color/tv_order_color_5"
+        android:textSize="@dimen/_14sp"
+        android:gravity="center_vertical"
+        android:drawableRight="@drawable/icon_tel"
+        android:drawablePadding="@dimen/_10dp"
+        android:layout_marginLeft="@dimen/_10dp"
+        />
+
+</LinearLayout>
+                <View
+                    style="@style/line_height_10">
+                </View>
+                <!-- 参与人-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_12.5dp"
+                    >
+                    <TextView
+                        android:id="@+id/tv_task_friend_flag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="任务参与人(10)"
+                        android:textColor="@color/tv_order_color_1"
+                        android:textSize="@dimen/_14sp"
+                        android:gravity="left|top"
+                        android:layout_marginBottom="@dimen/_5dp"
+                        />
+                  <GridView
+                      android:id="@+id/gv_task_friend"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:horizontalSpacing="@dimen/_5dp"
+                      android:listSelector="@null"
+                      android:numColumns="5"
+                      android:cacheColorHint="@null"
+                      ></GridView>
+
+                </LinearLayout>
+            <!-- 操作按钮-->
+                <Button
+                    android:id="@+id/btn_task_get"
+                    style="@style/style_btn_blue_fill"
+                    android:text="领取任务"
+                    android:layout_marginLeft="@dimen/view_space"
+                    android:layout_marginRight="@dimen/view_space"
+                    android:layout_marginTop="@dimen/_50dp"
+                    android:layout_marginBottom="@dimen/view_space"
+                    android:visibility="gone"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <include layout="@layout/layout_nodata" />
+
+</LinearLayout>

@@ -55,7 +55,7 @@ hideProgressDialog();
                                     .append(strphone.substring(strphone.length()-4));
                             mTV_friend_phone.setText(sb.toString());
                         }else{
-                            mTV_friend_phone.setText("");
+                            mTV_friend_phone.setText("无");
                         }
 
                     }

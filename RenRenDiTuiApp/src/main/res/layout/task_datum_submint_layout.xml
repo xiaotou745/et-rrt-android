@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/layout_bg_color"
+    android:background="@color/layout_view_bg"
     >
     <!-- title-->
     <include
@@ -163,7 +163,7 @@
             android:padding="@dimen/view_space"
             android:textColor="@color/tv_order_color_1"
             android:textSize="16sp"
-            android:background="@color/layout_bg_color"
+            android:background="@color/layout_view_bg"
             />
 
         <View

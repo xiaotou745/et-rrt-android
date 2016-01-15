@@ -6,6 +6,7 @@ import java.util.Map;
 import com.user.model.HttpRequest.HttpRequestListener;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class ImageUploadAsyncTask extends AsyncTask<Integer, Integer, String> {  
 

@@ -30,7 +30,7 @@ import com.renrentui.util.ApiNames;
 import com.renrentui.util.ApiUtil;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
-import com.task.service.GetInvalidTaskAdapter;
+import com.task.adapter.GetInvalidTaskAdapter;
 
 /**
  * 过期失效任务fragment

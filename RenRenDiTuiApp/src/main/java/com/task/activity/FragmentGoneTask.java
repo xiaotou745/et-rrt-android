@@ -1,6 +1,5 @@
 package com.task.activity;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -26,8 +25,7 @@ import com.renrentui.util.ApiNames;
 import com.renrentui.util.ApiUtil;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
-import com.task.model.LayoutMainTopmenu;
-import com.task.service.GetOnGoneAdapter;
+import com.task.adapter.GetOnGoneAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,10 +2,7 @@ package com.task.activity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -15,25 +12,19 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+
 import base.BaseFragment;
 import base.BaseFragmentActivity;
 
 import com.renrentui.app.R;
-import com.renrentui.interfaces.IBack;
 import com.renrentui.tools.ExitApplication;
 import com.renrentui.util.ToMainPage;
 import com.renrentui.util.Utils;
 import com.task.model.LayoutMainTopmenu;
-import com.task.service.MyFragmentPagerAdapter;
-import com.user.activity.PersonalCenterActivity;
-
-import org.w3c.dom.Text;
+import com.task.adapter.MyFragmentPagerAdapter;
 
 /**
- * 我的任务资料信息列表
+ * 任务的资料审核详情列表
  * @author llp
  * 
  */
@@ -51,10 +42,9 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 	private int topage = ToMainPage.审核中.getValue();// intent指向要显示的页面
 	public String str_taskId = "";//任务id
 	public String str_taskName = "";//任务名称
+	public String str_taskType= "";//任务类型
 	public String str_userId = "";//用户id
 	public String str_ctId = "";//地推关系id
-	public boolean isShowSubmitBtn =false;//是否显示提交按钮
-	public String str_taskStatus="";//任务的装填
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,23 +54,12 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 		ExitApplication.getInstance().addActivity(this);
 		topage = getIntent().getIntExtra("topage", topage);
 		str_taskId = getIntent().getStringExtra("TASK_ID");
-		if(TextUtils.isEmpty(str_taskId)){
-			str_taskId = "0";
-		}
 		str_taskName = getIntent().getStringExtra("TASK_NAME");
 		str_userId = Utils.getUserDTO(context).data.userId;
 		str_ctId = getIntent().getStringExtra("ctId");
-		isShowSubmitBtn = getIntent().getBooleanExtra("isShowSubmitBtn", false);
-		str_taskStatus = getIntent().getStringExtra("taskStatus");
+		str_taskType = getIntent().getStringExtra("TASK_TYPENAME");
 		initView();
 		initViewPager(topage);
-
-		if(isShowSubmitBtn && "1".equals(str_taskStatus)){
-			mBtn_submit_taskTemple.setVisibility(View.VISIBLE);
-		}else{
-			mBtn_submit_taskTemple.setVisibility(View.GONE);
-		}
-
 	}
 
 	@Override
@@ -110,7 +89,7 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 			mIV_title_left.setOnClickListener(this);
 		}
 		if(mTV_title_content!=null){
-			mTV_title_content.setText("资料审核列表");
+			mTV_title_content.setText(str_taskName+str_taskType+"资料审核");
 		}
 
 		vp_task_main = (ViewPager) findViewById(R.id.vp_task_main);
@@ -118,9 +97,6 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 		layoutTopMenu.setOnClickListener(this);
 		mBtn_submit_taskTemple = (Button)findViewById(R.id.btn_submit_taskTemple);
 		mBtn_submit_taskTemple.setOnClickListener(this);
-		if(!str_taskId.equals("0")) {
-			mTV_title_content.setText(str_taskName);
-		}
 	}
 
 	public void initViewPager(int index) {

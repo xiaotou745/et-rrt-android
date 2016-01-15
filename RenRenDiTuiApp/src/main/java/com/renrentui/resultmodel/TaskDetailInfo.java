@@ -12,8 +12,11 @@ import java.util.List;
 public class TaskDetailInfo implements Serializable {
 	public TaskBeanInfo task;
 	public ArrayList<TaskSpecBeanInfo> taskSetps;
-
+	public TaskDetailInfo() {
+		super();
+	}
 	public TaskDetailInfo(TaskBeanInfo task, ArrayList<TaskSpecBeanInfo> taskSetps) {
+		super();
 		this.task = task;
 		this.taskSetps = taskSetps;
 	}

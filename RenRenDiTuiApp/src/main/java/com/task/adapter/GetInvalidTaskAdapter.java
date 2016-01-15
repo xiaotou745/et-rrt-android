@@ -1,16 +1,12 @@
-package com.task.service;
+package com.task.adapter;
 
 import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.Spannable;
 import android.text.SpannableStringBuilder;
-import android.text.style.BackgroundColorSpan;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -20,16 +16,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.renrentui.app.R;
-import com.renrentui.resultmodel.FinishedTaskInfo;
 import com.renrentui.resultmodel.MyTaskContentBean;
-import com.renrentui.tools.DateUtils;
 import com.renrentui.tools.Util;
 import com.renrentui.util.ImageLoadManager;
 import com.renrentui.util.ToMainPage;
 import com.renrentui.util.UIHelper;
 import com.renrentui.util.Utils;
 import com.task.activity.MyTaskMaterialActivity;
-import com.task.activity.ShareViewActivity;
 import com.task.activity.TaskDetailInfoActivity;
 
 /**

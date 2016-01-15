@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.task.activity.TaskDetailInfoActivity;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.KeyEvent;

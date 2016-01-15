@@ -11,12 +11,10 @@ import java.util.Map;
 
 import android.app.Dialog;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.InputType;
 import android.util.Log;
@@ -34,7 +32,6 @@ import base.BaseActivity;
 
 import com.google.gson.Gson;
 import com.lidroid.xutils.BitmapUtils;
-import com.renrentui.app.MyApplication;
 import com.renrentui.app.R;
 import com.renrentui.interfaces.IRqHandlerMsg;
 import com.renrentui.requestmodel.RQBaseModel;
@@ -42,9 +39,8 @@ import com.renrentui.requestmodel.RQHandler;
 import com.renrentui.requestmodel.RQUpdateUserinfo;
 import com.renrentui.requestmodel.RQUserId;
 import com.renrentui.requestmodel.RequestType;
-import com.renrentui.resultmodel.ImageInfo;
-import com.renrentui.resultmodel.RQUploadImage;
 import com.renrentui.resultmodel.RSBase;
+import com.renrentui.resultmodel.RSUploadImage;
 import com.renrentui.resultmodel.RSUserInfo;
 import com.renrentui.tools.FileUtils;
 import com.renrentui.tools.SDCardUtils;
@@ -87,7 +83,7 @@ public class PersonalDataActivity extends BaseActivity implements
 	Button carema, album, give_up;// 点击用户头像弹出层按钮
 	public static String fileName;
 	private BitmapUtils bitmapUtils;
-	RQUploadImage rq;
+	public String str_pickPath = "";
 	private boolean networknotvalide = true;// 判断网络是否正常
 
 	private RQHandler<RSUserInfo> rqHandler_userinfo = new RQHandler<RSUserInfo>(
@@ -107,10 +103,8 @@ public class PersonalDataActivity extends BaseActivity implements
 				@SuppressWarnings("deprecation")
 				@Override
 				public void onSuccess(RSUserInfo t) {
-					rq = new RQUploadImage();
-					rq.Result = new ImageInfo();
 					if (Util.IsNotNUll(t.data.fullHeadImage)) {
-						rq.Result.RelativePath = t.data.headImage;
+						str_pickPath= t.data.headImage;
 						ImageLoadManager.getLoaderInstace().disPlayNormalImg(
 								t.data.fullHeadImage, iv_user_icon_show,
 								R.drawable.icon_user_default);
@@ -346,7 +340,7 @@ public class PersonalDataActivity extends BaseActivity implements
 			}
 			ApiUtil.Request(new RQBaseModel<RQUpdateUserinfo, RSBase>(context,
 					new RQUpdateUserinfo(Utils.getUserDTO(context).data.userId,
-							userName, sex, age, rq.Result.RelativePath),
+							userName, sex, age, str_pickPath),
 					new RSBase(), ApiNames.修改用户信息.getValue(), RequestType.POST,
 					rqHandler_updateUserInfo));
 			break;
@@ -496,11 +490,12 @@ public class PersonalDataActivity extends BaseActivity implements
 			try {
 				FileOutputStream fos = new FileOutputStream(file);
 				Map<String, String> params = new HashMap<String, String>();
+				params.put("uploadFrom","2");
 				Map<String, File> files = new HashMap<String, File>();
 				files.put("file", file);
 				ImageUploadAsyncTask iua = new ImageUploadAsyncTask(params,
 						files, ApiConstants.uploadImgApiUrl
-								+ "upload/uploadimg?uploadfrom=3", this);
+								+ "upload/fileupload/uploadimg?uploadFrom=2", this);
 				iua.execute(3);
 				bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
 			} catch (FileNotFoundException e) {
@@ -512,14 +507,17 @@ public class PersonalDataActivity extends BaseActivity implements
 
 	@Override
 	public void httpError() {
-		// TODO Auto-generated method stub
 		ToastUtil.show(context, "图片上传失败");
 	}
 
 	@Override
 	public void httpSuccess(String msg) {
 		Gson gson = new Gson();
-		rq = gson.fromJson(msg, RQUploadImage.class);
+		Log.e("---------",msg);
+		RSUploadImage rs_new = gson.fromJson(msg, RSUploadImage.class);
+		if(rs_new!=null && rs_new.getData()!=null){
+			str_pickPath = rs_new.getData().getRelativePath();
+		}
 		ToastUtil.show(context, "图片上传成功");
 	}
 }

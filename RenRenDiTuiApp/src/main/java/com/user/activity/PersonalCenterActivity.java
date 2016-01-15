@@ -1,9 +1,7 @@
 package com.user.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,7 +32,9 @@ import com.renrentui.util.ApiUtil;
 import com.renrentui.util.ImageLoadManager;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
+import com.task.activity.MyMaterialTaskTeamActivity;
 import com.task.activity.MyTaskFramentActivity;
+import com.task.activity.MyTaskFramentNewActivity;
 import com.task.activity.MyTaskMaterialActivity;
 import com.task.activity.NoGoingTaskActicity;
 import com.user.service.CustomerServiceDialog;
@@ -285,7 +285,7 @@ public class PersonalCenterActivity extends BaseActivity implements
 				break;
 			case R.id.rl_datum_task:
 				//资料审核详情
-				intent = new Intent(context, MyTaskMaterialActivity.class);
+				intent = new Intent(context, MyMaterialTaskTeamActivity.class);
 				break;
 			case R.id.rl_help:// 帮助中心
 				intent = new Intent(context, HelpCenterActivity.class);
@@ -310,7 +310,8 @@ public class PersonalCenterActivity extends BaseActivity implements
 			case R.id.tab_02:
 				//我的任务
 				if(isLogin()){
-					intent = new Intent(context, MyTaskFramentActivity.class);
+					//intent = new Intent(context, MyTaskFramentActivity.class);
+					intent = new Intent(context,MyTaskFramentNewActivity.class);
 					isFinish = true;
 				}else{
 					intent = new Intent(context, LoginActivity.class);

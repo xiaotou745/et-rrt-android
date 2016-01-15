@@ -1,64 +1,36 @@
-package com.task.service;
-
-import java.nio.channels.GatheringByteChannel;
-import java.util.Date;
-import java.util.List;
+package com.task.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.Spannable;
 import android.text.SpannableStringBuilder;
-import android.text.style.BackgroundColorSpan;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.Gallery;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.renrentui.app.R;
-import com.renrentui.interfaces.IRqHandlerMsg;
-import com.renrentui.requestmodel.RQBaseModel;
-import com.renrentui.requestmodel.RQHandler;
-import com.renrentui.requestmodel.RQReceiveTask;
-import com.renrentui.requestmodel.RequestType;
-import com.renrentui.resultmodel.RSReceiveTask;
 import com.renrentui.resultmodel.TaskMetarialContent;
-import com.renrentui.tools.DateUtils;
-import com.renrentui.tools.Util;
-import com.renrentui.util.ApiNames;
-import com.renrentui.util.ApiUtil;
-import com.renrentui.util.ImageLoadManager;
 import com.renrentui.util.TimeUtils;
-import com.renrentui.util.ToMainPage;
-import com.renrentui.util.ToastUtil;
 import com.renrentui.util.UIHelper;
-import com.renrentui.util.Utils;
-import com.task.activity.MyTaskMaterialActivity;
 import com.task.activity.MyTaskMaterialDetailActivity;
-import com.task.activity.TaskDetailInfoActivity;
-import com.task.service.SuccessDialog.ExitDialogListener;
 
-import org.w3c.dom.Text;
+import java.util.List;
 
 /**
- * 审核中资料适配器
+ * 审核通过资料适配器
  * 
  * @author llp
  * 
  */
-public class GetOnGoingAdapter extends BaseAdapter {
+public class GetOnGoneAdapter extends BaseAdapter {
 	private Context context;
 	private List<TaskMetarialContent> noGoingTaskInfos;
 
-	public GetOnGoingAdapter(Context context,
-			List<TaskMetarialContent> noGoingTaskInfos) {
+	public GetOnGoneAdapter(Context context,
+							List<TaskMetarialContent> noGoingTaskInfos) {
 		this.context = context;
 		this.noGoingTaskInfos = noGoingTaskInfos;
 	}
@@ -70,20 +42,19 @@ public class GetOnGoingAdapter extends BaseAdapter {
 
 	@Override
 	public int getItemViewType(int type) {
-		int itype = 0;
 		if (type == 1) {
 			//文本
-			itype=0;
+			type=0;
 		} else if (type == 2) {
 			//图片
-			itype=1;
+			type=1;
 		} else if(type==3) {
 			//图片组
-			itype=2;
+			type=2;
 		}else{
-			itype = 0;
+			type = 0;
 		}
-		return itype;
+		return type;
 	}
 
 	@Override
@@ -107,6 +78,7 @@ public class GetOnGoingAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+
 		 ViewHolder_1 viewholder_1=null;
 		ViewHolder_2 viewHolder_2 = null;
 		ViewHolder_3 viewHolder_3 = null;
@@ -214,7 +186,6 @@ public class GetOnGoingAdapter extends BaseAdapter {
 				viewHolder_2.tv_task_status.setText(beanContent.taskStatusName);
 				viewHolder_2.tv_task_status.setTextColor(context.getResources().getColor(R.color.tv_order_color_5));
 				viewHolder_2.tv_task_amount.setText(String.valueOf(beanContent.getAmount()));
-//
 				viewHolder_2.tv_task_name.setText(style);
 				viewHolder_2.gridView_task_pic.setAdapter(new GriveiwTaskPicAdapter(context,beanContent.titlesList));
 				break;
@@ -223,7 +194,6 @@ public class GetOnGoingAdapter extends BaseAdapter {
 				viewHolder_3.tv_task_status.setText(beanContent.taskStatusName);
 				viewHolder_3.tv_task_status.setTextColor(context.getResources().getColor(R.color.tv_order_color_5));
 				viewHolder_3.tv_task_amount.setText(String.valueOf(beanContent.getAmount()));
-
 				viewHolder_3.tv_task_name.setText(style);
 				viewHolder_3.gridView_task_pic.setAdapter(new GriveiwTaskPicAdapter(context,beanContent.titlesList));
 				break;

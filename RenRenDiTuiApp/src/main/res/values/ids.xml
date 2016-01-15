@@ -8,5 +8,8 @@
     <item type="id" name="listview_multiple_type_six_layout"></item>
     <item type="id" name="listview_multiple_type_seven_layout"></item>
     <item type="id" name="listview_multiple_type_eight_layout"></item>
-
+    <item type="id" name="listview_multiple_type_nine_layout"></item>
+    <item type="id" name="listview_multiple_type_ten_layout"></item>
+    <item type="id" name="listview_multiple_type_eleven_layout"></item>
+    <item type="id" name="listview_multiple_type_twelve_layout"></item>
 </resources>

@@ -1,11 +1,10 @@
-package com.task.service;
+package com.task.adapter;
+
+import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.Spannable;
 import android.text.SpannableStringBuilder;
-import android.text.style.BackgroundColorSpan;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,20 +19,18 @@ import com.renrentui.util.TimeUtils;
 import com.renrentui.util.UIHelper;
 import com.task.activity.MyTaskMaterialDetailActivity;
 
-import java.util.List;
-
 /**
- * 未通过资料适配器
+ * 审核中资料适配器
  * 
  * @author llp
  * 
  */
-public class GetOnFinishAdapter extends BaseAdapter {
+public class GetOnGoingAdapter extends BaseAdapter {
 	private Context context;
 	private List<TaskMetarialContent> noGoingTaskInfos;
 
-	public GetOnFinishAdapter(Context context,
-							  List<TaskMetarialContent> noGoingTaskInfos) {
+	public GetOnGoingAdapter(Context context,
+			List<TaskMetarialContent> noGoingTaskInfos) {
 		this.context = context;
 		this.noGoingTaskInfos = noGoingTaskInfos;
 	}
@@ -45,19 +42,20 @@ public class GetOnFinishAdapter extends BaseAdapter {
 
 	@Override
 	public int getItemViewType(int type) {
+		int itype = 0;
 		if (type == 1) {
 			//文本
-			type=0;
+			itype=0;
 		} else if (type == 2) {
 			//图片
-			type=1;
+			itype=1;
 		} else if(type==3) {
 			//图片组
-			type=2;
+			itype=2;
 		}else{
-			type = 0;
+			itype = 0;
 		}
-		return type;
+		return itype;
 	}
 
 	@Override
@@ -188,6 +186,7 @@ public class GetOnFinishAdapter extends BaseAdapter {
 				viewHolder_2.tv_task_status.setText(beanContent.taskStatusName);
 				viewHolder_2.tv_task_status.setTextColor(context.getResources().getColor(R.color.tv_order_color_5));
 				viewHolder_2.tv_task_amount.setText(String.valueOf(beanContent.getAmount()));
+//
 				viewHolder_2.tv_task_name.setText(style);
 				viewHolder_2.gridView_task_pic.setAdapter(new GriveiwTaskPicAdapter(context,beanContent.titlesList));
 				break;
@@ -196,27 +195,27 @@ public class GetOnFinishAdapter extends BaseAdapter {
 				viewHolder_3.tv_task_status.setText(beanContent.taskStatusName);
 				viewHolder_3.tv_task_status.setTextColor(context.getResources().getColor(R.color.tv_order_color_5));
 				viewHolder_3.tv_task_amount.setText(String.valueOf(beanContent.getAmount()));
+
 				viewHolder_3.tv_task_name.setText(style);
 				viewHolder_3.gridView_task_pic.setAdapter(new GriveiwTaskPicAdapter(context,beanContent.titlesList));
 				break;
 		}
-		convertView.setOnClickListener(new View.OnClickListener() {
+		convertView.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View view) {
 				//审核资料详情
 				Intent mIntent = new Intent();
-				mIntent.setClass(context, MyTaskMaterialDetailActivity.class);
+				mIntent.setClass(context,MyTaskMaterialDetailActivity.class);
 				mIntent.putExtra("TaskMaterialId", beanContent.taskDatumId);
-				mIntent.putExtra("TaskId", beanContent.taskId);
-				mIntent.putExtra("Status", beanContent.auditStatus);
-				mIntent.putExtra("Title_content", beanContent.taskName);
-				mIntent.putExtra("VO", beanContent);
+				mIntent.putExtra("TaskId",beanContent.taskId);
+				mIntent.putExtra("Status",beanContent.auditStatus);
+				mIntent.putExtra("Title_content",beanContent.taskName);
+				mIntent.putExtra("VO",beanContent);
 				mIntent.putExtra("ctId",beanContent.ctId);
 				mIntent.putExtra("taskStatus",beanContent.taskStatus);
 				context.startActivity(mIntent);
 			}
 		});
-
 		return convertView;
 
 //

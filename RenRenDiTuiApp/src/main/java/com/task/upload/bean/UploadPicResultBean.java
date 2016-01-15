@@ -7,7 +7,7 @@ package com.task.upload.bean;
 public class UploadPicResultBean {
    private int Status ;//状态 1 成功,其它失败
     private String Message;// Message 提示信息
-    private  DataBean  Result;// Result 返回的文件信息
+    private  DataBean  data;// Result 返回的文件信息
 
     public void setStatus(int status) {
         Status = status;
@@ -17,9 +17,6 @@ public class UploadPicResultBean {
         Message = message;
     }
 
-    public void setResult(DataBean result) {
-        Result = result;
-    }
 
     public int getStatus() {
         return Status;
@@ -29,46 +26,68 @@ public class UploadPicResultBean {
         return Message;
     }
 
-    public DataBean getResult() {
-        return Result;
+    public void setData(DataBean data) {
+        this.data = data;
+    }
+
+    public DataBean getData() {
+        return data;
     }
 
     public class DataBean{
-        private String FileUrl  ;//文件的访问地址(http://192.168.1.38/edsuploadapi/Business/2015/10/13/13/322547f79e.jpg)
-        private String RelativePath;// 保存到数据库的相对路径(edsuploadapi/Business/2015/10/13/13/322547f79e.jpg)
-        private String OriginalName ;//上传的文件名称 abc.jpg
-        private String ModifyOriginalName ;//上传的文件名称修改后的 322547f79e_0_0.jpg
+        private String remark;//返回的异常信息（为空时表示成功）
+        private String fileUrl  ;//文件的访问地址(http://192.168.1.38/edsuploadapi/Business/2015/10/13/13/322547f79e.jpg)
+        private String relativePath;// 保存到数据库的相对路径(edsuploadapi/Business/2015/10/13/13/322547f79e.jpg)
+        private String originalName ;//上传的文件名称 abc.jpg
+        private String modifyOriginalName ;//上传的文件名称修改后的 322547f79e_0_0.jpg
 
-        public void setFileUrl(String fileUrl) {
-            FileUrl = fileUrl;
+        public DataBean(String remark, String fileUrl, String relativePath, String originalName, String modifyOriginalName) {
+            super();
+            this.remark = remark;
+            this.fileUrl = fileUrl;
+            this.relativePath = relativePath;
+            this.originalName = originalName;
+            this.modifyOriginalName = modifyOriginalName;
         }
 
-        public void setRelativePath(String relativePath) {
-            RelativePath = relativePath;
-        }
-
-        public void setOriginalName(String originalName) {
-            OriginalName = originalName;
-        }
-
-        public void setModifyOriginalName(String modifyOriginalName) {
-            ModifyOriginalName = modifyOriginalName;
+        public String getRemark() {
+            return remark;
         }
 
         public String getFileUrl() {
-            return FileUrl;
+            return fileUrl;
         }
 
         public String getRelativePath() {
-            return RelativePath;
+            return relativePath;
         }
 
         public String getOriginalName() {
-            return OriginalName;
+            return originalName;
         }
 
         public String getModifyOriginalName() {
-            return ModifyOriginalName;
+            return modifyOriginalName;
+        }
+
+        public void setRemark(String remark) {
+            this.remark = remark;
+        }
+
+        public void setFileUrl(String fileUrl) {
+            this.fileUrl = fileUrl;
+        }
+
+        public void setRelativePath(String relativePath) {
+            this.relativePath = relativePath;
+        }
+
+        public void setOriginalName(String originalName) {
+            this.originalName = originalName;
+        }
+
+        public void setModifyOriginalName(String modifyOriginalName) {
+            this.modifyOriginalName = modifyOriginalName;
         }
     }
 
