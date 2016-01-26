@@ -86,6 +86,15 @@ public class MyTaskMaterialDetailActivity extends BaseActivity implements
      * 初始化控件
      */
     private void initControl() {
+        if(mIV_title_left!=null){
+            mIV_title_left.setVisibility(View.VISIBLE);
+            mIV_title_left.setOnClickListener(this);
+        }
+        if(mTV_title_content!=null){
+            mTV_title_content.setText("任务资料审核详情");
+        }
+
+
         mRL_top = (RelativeLayout)findViewById(R.id.rl_flow_top);
         mIV_top_icon = (ImageView)findViewById(R.id.iv_top_icon);
         mView_top_line = findViewById(R.id.view_top_line);
@@ -217,6 +226,9 @@ public class MyTaskMaterialDetailActivity extends BaseActivity implements
                 break;
             case R.id.btn_right:
                     getTaskAgain();
+                break;
+            case R.id.iv_title_left:
+                finish();
                 break;
         }
 

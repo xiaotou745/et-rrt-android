@@ -61,6 +61,7 @@ private Result data;
         private String recordTypeName; //账单类型描述文本
         private String operateTime ;//入账时间
         private String remark ;//账单描述
+        private String relationNo;//关联单号
 
         public DataList() {
         }
@@ -72,6 +73,16 @@ private Result data;
             this.recordTypeName = recordTypeName;
             this.operateTime = operateTime;
             this.remark = remark;
+        }
+
+        public DataList(String id, double amount, String recordType, String recordTypeName, String operateTime, String remark, String relationNo) {
+            this.id = id;
+            this.amount = amount;
+            this.recordType = recordType;
+            this.recordTypeName = recordTypeName;
+            this.operateTime = operateTime;
+            this.remark = remark;
+            this.relationNo = relationNo;
         }
 
         public String getId() {
@@ -98,6 +109,10 @@ private Result data;
 
         public String getRemark() {
             return remark;
+        }
+
+        public String getRelationNo() {
+            return relationNo;
         }
     }
 }

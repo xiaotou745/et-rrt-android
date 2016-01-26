@@ -62,9 +62,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 				@Override
 				public void onSuccess(RSUser t) {
 					Utils.setUserDTO(context, t);
-					Intent intent = new Intent(context,
-							NoGoingTaskActicity.class);
-					startActivity(intent);
+//					Intent intent = new Intent(context,
+//							NoGoingTaskActicity.class);
+//					startActivity(intent);
 					finish();
 				}
 
@@ -138,8 +138,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			break;
 			case R.id.iv_title_left:
 				//返回
-				Intent mIntent = new Intent(context, NoGoingTaskActicity.class);
-				startActivity(mIntent);
+//				Intent mIntent = new Intent(context, NoGoingTaskActicity.class);
+//				startActivity(mIntent);
 				finish();
 				break;
 		}

@@ -1,17 +1,13 @@
 package com.renrentui.app;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.widget.ImageView;
+
 import base.BaseActivity;
 
 import com.renrentui.tools.FileUtils;
-import com.renrentui.util.GetCity;
 import com.task.activity.NoGoingTaskActicity;
 
 /**
@@ -39,7 +35,7 @@ public class WelcomeActivity extends BaseActivity {
 				if (iWhate == TAG_HANDLER_START_ACTIVITY) {
 					this.removeMessages(TAG_HANDLER_START_ACTIVITY);
 					Intent mIntent = new Intent();
-					mIntent.setClass(WelcomeActivity.this, NoGoingTaskActicity.class);
+					mIntent.setClass(WelcomeActivity.this,NoGoingTaskActicity.class);
 					startActivity(mIntent);
 					finish();
 				} else {

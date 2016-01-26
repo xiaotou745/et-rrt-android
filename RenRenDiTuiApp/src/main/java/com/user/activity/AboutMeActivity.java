@@ -21,7 +21,6 @@ import com.user.service.CustomerServiceDialog;
  * 
  */
 public class AboutMeActivity extends BaseActivity implements OnClickListener {
-	private Context context;
 	private TextView tv_version;// 版本号控件
 	private TextView tv_help;// 帮助
 	private RelativeLayout tv_version_update;// 版本更新
@@ -39,7 +38,13 @@ public class AboutMeActivity extends BaseActivity implements OnClickListener {
 	 * 初始化控件
 	 */
 	private void initControl() {
-		context = this;
+		if(mIV_title_left!=null){
+			mIV_title_left.setVisibility(View.VISIBLE);
+			mIV_title_left.setOnClickListener(this);
+		}
+		if(mTV_title_content!=null){
+			mTV_title_content.setText("关于我们");
+		}
 		tv_version = (TextView) findViewById(R.id.tv_version);
 		tv_version.setText("V" + Utils.getVersion(context));
 		tv_help = (TextView) findViewById(R.id.tv_help);
@@ -64,7 +69,9 @@ public class AboutMeActivity extends BaseActivity implements OnClickListener {
 			CustomerServiceDialog dialog = new CustomerServiceDialog(context);
 			dialog.show();
 			break;
-
+			case R.id.iv_title_left:
+				finish();
+				break;
 		default:
 			break;
 		}

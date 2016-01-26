@@ -18,7 +18,7 @@ import java.util.zip.Inflater;
  */
 public class TaskSorAdapter extends BaseAdapter {
     private Context context;
-    String[] strings_sort ={"佣金最高","审核最快","预计用时最短","参数人数最多","发布时间最新"};
+    private String[] strings_sort ={"佣金最高","审核最快","预计用时最短","参数人数最多","发布时间最新"};
     int is_selection=0;//选中那个
     public TaskSorAdapter(Context con) {
         context = con;

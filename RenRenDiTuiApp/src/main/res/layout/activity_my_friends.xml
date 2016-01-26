@@ -31,7 +31,7 @@
         <TextView
             android:id="@+id/tv_friend_money_01"
             android:layout_width="match_parent"
-            android:layout_height="87dip"
+            android:layout_height="80dip"
             android:textSize="60sp"
             android:gravity="center"
             android:textColor="@color/red_bg"
@@ -43,7 +43,7 @@
             ></View>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="65dip"
+            android:layout_height="60dip"
             android:orientation="horizontal"
             android:weightSum="2"
 
@@ -67,7 +67,7 @@
         android:id="@+id/tv_friend_num"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/tv_order_color_1"
+        android:textColor="@color/tv_order_color_5"
         android:textSize="@dimen/_16sp"
         android:text="5人"
         android:paddingTop="@dimen/_5dp"
@@ -98,7 +98,7 @@
                     android:id="@+id/tv_friend_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/tv_order_color_1"
+                    android:textColor="@color/tv_order_color_5"
                     android:textSize="@dimen/_16sp"
                     android:text="13811247642"
                     android:paddingTop="@dimen/_5dp"
@@ -115,7 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="@dimen/_20dp"
+            android:paddingTop="@dimen/_10dp"
             >
             <TextView
                 android:layout_width="match_parent"
@@ -133,14 +133,22 @@
                 android:text="合伙人所获奖励你都可以得分红"
                 android:gravity="center_horizontal"
                 ></TextView>
-            <ImageView
-                android:layout_width="230dip"
-                android:layout_height="230dip"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00bcd5"
+                android:padding="1dip"
                 android:layout_marginTop="28dip"
                 android:layout_marginBottom="28dip"
                 android:layout_gravity="center_horizontal"
+                >
+            <ImageView
+                android:layout_width="230dip"
+                android:layout_height="230dip"
+                android:layout_gravity="center_horizontal"
                 android:background="@drawable/my_friend_src"
                 />
+            </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

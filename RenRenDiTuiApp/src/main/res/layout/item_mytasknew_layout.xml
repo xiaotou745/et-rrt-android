@@ -126,7 +126,9 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="@drawable/bg_shape_square"
-            android:text="继续提交"
+            android:text="继续任务"
+            android:layout_marginTop="@dimen/view_space_half"
+            android:layout_marginBottom="@dimen/view_space_half"
             />
 
     </RelativeLayout>
@@ -157,6 +159,8 @@
             android:layout_centerVertical="true"
             android:background="@drawable/bg_shape_square"
             android:text="分享二维码"
+            android:layout_marginTop="@dimen/view_space_half"
+            android:layout_marginBottom="@dimen/view_space_half"
             />
 
     </RelativeLayout>
@@ -186,8 +190,10 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="@drawable/bg_shape_square"
-            android:text="继续提交"
+            android:text="继续任务"
             android:visibility="invisible"
+            android:layout_marginTop="@dimen/view_space_half"
+            android:layout_marginBottom="@dimen/view_space_half"
             />
 
     </RelativeLayout>
@@ -217,8 +223,10 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="@drawable/bg_shape_square"
-            android:text="继续提交"
+            android:text="分享二维码"
             android:visibility="invisible"
+            android:layout_marginTop="@dimen/view_space_half"
+            android:layout_marginBottom="@dimen/view_space_half"
             />
     </RelativeLayout>
 </LinearLayout>

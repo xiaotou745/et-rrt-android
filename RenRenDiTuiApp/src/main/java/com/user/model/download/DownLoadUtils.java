@@ -65,7 +65,7 @@ public class DownLoadUtils {
 			IHttpRequest httpRequest = new HttpRequestDigestImpl();
 			try {
 				strResult = HttpRequest.sendPostJSON(mContext,
-						ApiConstants.ApiUrl + "/common/versioncheck",
+						ApiConstants.checkVersionUrl + "common/versioncheck",
 						checkVersion);
 				if(strResult==null){
 					strResult = "";

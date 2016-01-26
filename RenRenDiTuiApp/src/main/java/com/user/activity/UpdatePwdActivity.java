@@ -28,7 +28,6 @@ import base.BaseActivity;
  */
 public class UpdatePwdActivity extends BaseActivity implements OnClickListener {
 
-	private Context context;
 	private EditText et_old_password;// 旧密码
 	private EditText et_password;// 新密码
 	private EditText et_password2;// 再次输入新密码
@@ -89,7 +88,13 @@ public class UpdatePwdActivity extends BaseActivity implements OnClickListener {
 	 * 初始化控件
 	 */
 	private void initControl() {
-		context = this;
+		if(mIV_title_left!=null){
+			mIV_title_left.setVisibility(View.VISIBLE);
+			mIV_title_left.setOnClickListener(this);
+		}
+		if(mTV_title_content!=null){
+			mTV_title_content.setText("修改密码");
+		}
 		et_old_password = (EditText) findViewById(R.id.et_old_password);
 		et_password = (EditText) findViewById(R.id.et_password);
 		et_password2 = (EditText) findViewById(R.id.et_password2);
@@ -100,6 +105,9 @@ public class UpdatePwdActivity extends BaseActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+			case R.id.iv_title_left:
+				finish();
+				break;
 		case R.id.btn_submit:
 			oldP = et_old_password.getText().toString().trim();
 			newP = et_password.getText().toString().trim();

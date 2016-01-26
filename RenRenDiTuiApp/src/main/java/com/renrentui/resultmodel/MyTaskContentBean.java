@@ -21,7 +21,7 @@ public class MyTaskContentBean implements Serializable {
     public String   auditWaitNum ;//待审核的资料数量(签约类任务才有效)
     public String   auditPassNum ;//审核通过的资料数量(签约类任务才有效)
     public String   auditRefuseNum ;//审核不通过的资料数量(签约类任务才有效)
-    public String   complateNum ;//完成数量(分享类和下载类任务才有效)
+    public String   completeNum ;//完成数量(分享类和下载类任务才有效)
     public String   ctId;//地推关系
     public String downUrl ;//非签约任务 时 下载地址
     public String scanTip ;//非签约任务 时 扫码说明
@@ -55,11 +55,11 @@ public class MyTaskContentBean implements Serializable {
             return auditRefuseNum;
         }
     }
-    public String getComplateNum(){
-        if(TextUtils.isEmpty(complateNum)){
+    public String getCompleteNum(){
+        if(TextUtils.isEmpty(completeNum)){
             return "0";
         }else{
-            return complateNum;
+            return completeNum;
         }
     }
 
@@ -77,7 +77,7 @@ public class MyTaskContentBean implements Serializable {
                 ", auditWaitNum='" + auditWaitNum + '\'' +
                 ", auditPassNum='" + auditPassNum + '\'' +
                 ", auditRefuseNum='" + auditRefuseNum + '\'' +
-                ", complateNum='" + complateNum + '\'' +
+                ", complateNum='" + completeNum + '\'' +
                 ", status='" + status + '\'' +
                 '}';
     }

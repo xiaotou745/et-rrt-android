@@ -7,6 +7,7 @@
     <color name = "layout_view_bg">#e8e8e8</color>
     <color name="layout_view_content_bg">#ffffff</color>
     <color name="layout_view_content_other_bg">#F8F8F8</color>
+    <color name="layout_view_content_three_bg">#F7F7F7</color>
 
     <color name="text_color_light">#999999</color>
     <color name="text_color_nor">#404040</color>
@@ -39,6 +40,8 @@
     <color name="gray_line">#e8e8e8</color>
     <color name="gray_space">#E6E7EB</color>
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+
     <color name="transparent">#000000</color>
     <color name="white_pre">#f0f0f0</color>
     <color name="line_stroke">#BBC0C7</color>

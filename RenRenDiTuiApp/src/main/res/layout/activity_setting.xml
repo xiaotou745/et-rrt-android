@@ -5,18 +5,9 @@
     android:gravity="center_horizontal"
     android:orientation="vertical" >
 
-    <LinearLayout style="@style/activity_headlayout" >
-
-        <LinearLayout style="@style/activity_headlayout_left" >
-
-            <include layout="@layout/layout_back" />
-        </LinearLayout>
-
-        <TextView
-            style="@style/activity_headlayout_left_centertext"
-            android:layout_marginLeft="@dimen/_8dp"
-            android:text="@string/systemSetting" />
-    </LinearLayout>
+    <include
+        layout="@layout/main_title_home_layout"
+        ></include>
 
     <RelativeLayout
         android:id="@+id/ll_update_password"

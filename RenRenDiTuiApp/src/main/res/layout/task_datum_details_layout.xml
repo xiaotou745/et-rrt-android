@@ -22,82 +22,78 @@
         <!-- top 1-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+            android:layout_height="80dp">
             <!-- icon-->
             <ImageView
                 android:id="@+id/icon_pusher"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
                 android:src="@drawable/pusher_logo"
-                android:layout_centerVertical="true"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
+                android:layout_marginTop="@dimen/_12.5dp"
+                android:layout_marginBottom="@dimen/_12.5dp"
+                android:layout_marginLeft="@dimen/_12.5dp"
                 />
             <!-- 金额-->
             <LinearLayout
                 android:id="@+id/ll_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="74dip"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="￥"
-                    android:textColor="@color/tv_order_money_color_1"
-                    android:textSize="11sp" />
-
+                android:background="@color/layout_view_content_other_bg"
+                android:paddingRight="@dimen/_12.5dp" >
                 <TextView
                     android:id="@+id/tv_amount"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/tv_order_money_color_1"
-                    android:text="1234"
-                    android:textSize="16sp" />
-
+                    android:text="1880.00"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/red_bg"
+                    android:textSize="@dimen/_16sp"
+                    android:layout_marginTop="@dimen/_30dp"
+                    ></TextView>
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=" /次"
-                    android:textColor="@color/tv_order_color_3"
-                    android:textSize="@dimen/_10sp" />
+                    android:layout_centerVertical="true"
+                    android:text="元/条"
+                    android:textColor="@color/tv_order_color_2"
+                    android:gravity="center_horizontal"
+                    android:textSize="@dimen/_10sp"
+                    ></TextView>
             </LinearLayout>
             <!-- 商户名称-->
             <TextView
                 android:id="@+id/tv_pusher_taskName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
                 android:textColor="@color/tv_order_color_1"
                 android:textSize="@dimen/_16sp"
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@id/ll_amount"
                 android:layout_toRightOf="@id/icon_pusher"
                 android:text="测试商都"
-                android:layout_margin="@dimen/view_space"
+                android:layout_margin="@dimen/_15dp"
+                android:layout_marginTop="@dimen/_12.5dp"
+                android:layout_marginBottom="@dimen/_12.5dp"
+                android:maxLines="3"
+                android:ellipsize="end"
                 />
-            <!--类型 和内容 -->
-            <TextView
-                android:id="@+id/tv_pusher_taskType_content"
+            <ImageView
+                android:id="@+id/iv_flag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_16sp"
-                android:textColor="@color/tv_order_color_4"
-                android:layout_toLeftOf="@id/ll_amount"
-                android:layout_below="@id/tv_pusher_taskName"
-                android:layout_alignLeft="@id/tv_pusher_taskName"
-                android:text="签约谁放你哦按佛山发生的丰富撒打发士大夫"
-                android:gravity="left"
-                android:maxLines="2"
-                android:layout_marginRight="@dimen/view_space"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/team_down"
                 />
         </RelativeLayout>
         <View
             style="@style/line_height_1"
-            android:layout_marginTop="@dimen/view_space"
-            android:layout_marginBottom="@dimen/view_space"
+            android:layout_marginLeft="@dimen/_12.5dp"
+            android:layout_marginRight="@dimen/_12.5dp"
             />
 
         <LinearLayout
@@ -105,6 +101,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="2"
+            android:layout_margin="@dimen/_12.5dp"
             >
             <!--审核-->
             <LinearLayout
@@ -119,7 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/icon_examine"
-                    android:drawablePadding="10dp" />
+                    android:drawablePadding="5dp" />
 
                 <TextView
                     android:id="@+id/tv_task_tel"
@@ -127,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5dp"
                     android:drawableLeft="@drawable/icon_tel"
-                    android:drawablePadding="10dp" />
+                    android:drawablePadding="5dp" />
             </LinearLayout>
             <TextView
                 android:id="@+id/tv_deadline_time"
@@ -136,9 +133,9 @@
                 android:layout_gravity="top"
                 android:gravity="top"
                 android:layout_weight="1"
-                android:layout_marginTop="@dimen/_5dp"
                 android:drawableLeft="@drawable/icon_finish"
-                android:drawablePadding="10dp" />
+                android:singleLine="true"
+                android:drawablePadding="5dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -160,7 +157,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="开始填写"
+            android:text="资料信息"
             android:padding="@dimen/view_space"
             android:textColor="@color/tv_order_color_1"
             android:textSize="16sp"

@@ -140,7 +140,7 @@ public class BaseFragment extends Fragment {
 	 * 隐藏加载动画
 	 */
 	public void hideProgressDialog() {
-		if (getActivity().isFinishing()) {
+		if (getActivity()==null || getActivity().isFinishing()) {
 			return;
 		}
 		if (progersssDialog != null) {

@@ -78,7 +78,14 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city_layout);
-        init();
+        super.init();
+        if(mIV_title_left!=null){
+            mIV_title_left.setVisibility(View.VISIBLE);
+            mIV_title_left.setOnClickListener(this);
+        }
+        if(mTV_title_content!=null){
+            mTV_title_content.setText("切换城市");
+        }
         mCityDBManager = new CityDBManager(context);
         personList = (ListView) findViewById(R.id.list_view);
         allCity_lists = new ArrayList<CityDBBean>();
@@ -359,12 +366,12 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
                 if(isLocation){
                     //定位成功
                     city.setText(MyApplication.getmLocalLocation().name);
-                    title.setClickable(true);
+                    city.setClickable(true);
                 }else{
                     city.setText("定位中...");
-                    title.setClickable(false);
+                    city.setClickable(false);
                 }
-                title.setOnClickListener(new View.OnClickListener(){
+                city.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View view) {
 
@@ -634,8 +641,8 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.layout_back:
-                ShowCityActivity.this.finish();
+            case R.id.iv_title_left:
+                finish();
                 break;
         }
 
@@ -679,6 +686,9 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
                 CityRegionModel localLocation = new CityRegionModel();
                 String StrName = location.getCity();
                 String strCode = mCityDBManager.getCityCodeByName(StrName);
+                if(TextUtils.isEmpty(strCode)){
+                    strCode =  location.getCityCode();
+                }
                 localLocation.code = strCode;
                 localLocation.name = StrName;
                 MyApplication.setmLocalLocation(localLocation);

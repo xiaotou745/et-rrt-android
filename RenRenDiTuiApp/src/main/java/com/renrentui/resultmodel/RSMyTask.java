@@ -1,7 +1,5 @@
 package com.renrentui.resultmodel;
 
-import com.task.activity.MyTaskFramentActivity;
-
 /**
  * Created by Administrator on 2015/12/9 0009.
  * 我的任务列表返回接口

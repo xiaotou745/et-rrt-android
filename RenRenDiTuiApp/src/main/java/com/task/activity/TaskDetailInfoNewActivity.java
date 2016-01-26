@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -41,6 +42,7 @@ import com.task.adapter.TaskExplainAdapter;
 import com.task.adapter.TaskFlowPathAdapter;
 import com.task.adapter.TaskFriendGridAdapter;
 import com.task.adapter.TaskLinksAdapter;
+import com.user.activity.LoginActivity;
 
 
 import java.util.ArrayList;
@@ -58,6 +60,7 @@ public class TaskDetailInfoNewActivity extends BaseActivity implements
 		OnClickListener, INodata {
 public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName();
 
+	private View mContentView;//内容展示部分
 	private ImageView icon_pusher;// 任务发布商logo
 	private LinearLayout ll_amount;//任务单价
 	private TextView tv_Amount;// 任务单价
@@ -77,7 +80,13 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 	private View mLine_detail_link_top;
 	private ListView lv_task_detail_link;//详情连接list
 
+
+	//咨询电话
+	private View mLine_task_detail_tel_top;
+	private  LinearLayout mLL_task_tel;
 	//参与人
+	private View mLine_task_detail_friend_top;
+	private LinearLayout mLL_detail_friends;
 	private TextView mTV_task_friend_flag;
 	private GridView mTaskFriendGridView;//参与人集合
 
@@ -98,7 +107,7 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 //	基础数据
 	private String userId;// 用户id
 	private String taskId;// 任务id
-	private boolean isShareTask =false;//是否是分享型任务
+	private boolean isShareTask =false;//是否是分享型任务(1:签约  2和3 是分享型)
 	private String str_shareContent ="";//分享的内容
 	private String str_taskName;//任务名称
 	private String str_ctId = "";//地推关系id
@@ -119,12 +128,15 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 
 				@Override
 				public void onNetworknotvalide() {
+					mContentView.setVisibility(View.GONE);
+					btn_receive_task.setVisibility(View.GONE);
 					TaskDetailInfoNewActivity.this.onNodata(
 							ResultMsgType.NetworkNotValide, null, null, null);
 				}
 
 				@Override
 				public void onSuccess(RSGetTaskDetailInfoNew t) {
+					mContentView.setVisibility(View.VISIBLE);
 					rsGetTaskDetailInfo = t;
 					initData(rsGetTaskDetailInfo.data);
 					hideProgressDialog();
@@ -132,6 +144,8 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 
 				@Override
 				public void onSericeErr(RSGetTaskDetailInfoNew t) {
+					mContentView.setVisibility(View.GONE);
+					btn_receive_task.setVisibility(View.GONE);
 					TaskDetailInfoNewActivity.this.onNodata(
 							ResultMsgType.ServiceErr, "刷新", "数据加载失败！",
 							TaskDetailInfoNewActivity.this);
@@ -139,6 +153,8 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 
 				@Override
 				public void onSericeExp() {
+					mContentView.setVisibility(View.GONE);
+					btn_receive_task.setVisibility(View.GONE);
 					TaskDetailInfoNewActivity.this.onNodata(
 							ResultMsgType.ServiceExp, "刷新", "数据加载失败！",
 							TaskDetailInfoNewActivity.this);
@@ -168,10 +184,10 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 					i_isHad =1;
 					if(isShareTask){
 					//分享 ，下载
-						btn_receive_task.setText("继续任务");
+						btn_receive_task.setText("分享二维码");
 					}else{
 						//签约
-						btn_receive_task.setText("分享二维码");
+						btn_receive_task.setText("继续任务");
 					}
 					ToastUtil.show(context,"领取成功");
 				}
@@ -194,23 +210,32 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 		setContentView(R.layout.activity_task_detail_new_layout);
 		super.init();
 		Intent intent = getIntent();
-		userId = Utils.getUserDTO(context).data.userId;
 		taskId = intent.getStringExtra("TaskId");
 		str_taskName = intent.getStringExtra("TaskName");
 		str_ctId = intent.getStringExtra("ctId");
 		initControl();
-		getInitData();
+		//getInitData();
 	}
-
 	@Override
-	protected void onResume() {
-		super.onResume();
-		if (Utils.getUserDTO(context) != null){
+	protected void onStart() {
+		super.onStart();
+		if (Utils.getUserDTO(context) != null && Utils.getUserDTO(context).data!=null){
 			userId = Utils.getUserDTO(context).data.userId;
 		}
 		else {
 			userId = "0";
 		}
+		getInitData();
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+//		if (Utils.getUserDTO(context) != null){
+//			userId = Utils.getUserDTO(context).data.userId;
+//		}
+//		else {
+//			userId = "0";
+//		}
 	}
 
 	@Override
@@ -241,7 +266,7 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 		if(mTV_title_content!=null){
 			mTV_title_content.setText("任务详情");
 		}
-
+		mContentView = findViewById(R.id.layout_data);
 		icon_pusher = (ImageView) findViewById(R.id.icon_pusher);
 		ll_amount =(LinearLayout)findViewById(R.id.ll_amount);
 		tv_Amount = (TextView)findViewById(R.id.tv_amount);
@@ -262,8 +287,7 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 		mLine_detail_link_top = findViewById(R.id.line_detail_link_top);
 		lv_task_detail_link = (ListView)findViewById(R.id.lv_task_detail_link);
 
-		mTV_task_friend_flag = (TextView)findViewById(R.id.tv_task_friend_flag);
-		mTaskFriendGridView = (GridView)findViewById(R.id.gv_task_friend);
+
 
 		btn_receive_task = (Button) findViewById(R.id.btn_task_get);
 		btn_receive_task.setOnClickListener(this);
@@ -276,13 +300,26 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 		lv_task_explain.setAdapter(mTaskExplainAdapter);
 		lv_task_detail_link.setAdapter(mTaskLinkAdapter);
 
+		mLine_task_detail_tel_top = findViewById(R.id.line_detail_tel_top);
+		mLL_task_tel = (LinearLayout)findViewById(R.id.ll_detal_tel);
+
+		mLine_task_detail_friend_top = findViewById(R.id.line_detail_friend_top);
+		mTV_task_friend_flag = (TextView)findViewById(R.id.tv_task_friend_flag);
+		mTaskFriendGridView = (GridView)findViewById(R.id.gv_task_friend);
+		mLL_detail_friends = (LinearLayout)findViewById(R.id.ll_detail_friend);
+
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()){
 			case R.id.btn_task_get:
-				submitTaskDetail(rsGetTaskDetailInfo.data.task.taskType,i_isHad);
+				if(isLogin()){
+					submitTaskDetail(rsGetTaskDetailInfo.data.task.taskType,i_isHad);
+				}else{
+					Intent intent = new Intent(context,LoginActivity.class);
+                    context.startActivity(intent);
+				}
 				break;
 			case R.id.tv_task_tel:
 				//电话
@@ -324,6 +361,20 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 		str_reminder = taskBean.task.reminder;
 		str_taskStatus = taskBean.task.status;
 
+		if(taskBean.task.taskType==1){
+//签约
+			mIV_pusher_type_flag.setImageResource(R.drawable.team_qianyue);
+
+		}else if(taskBean.task.taskType==2){
+			//分享
+			mIV_pusher_type_flag.setImageResource(R.drawable.team_share);
+		}else if(taskBean.task.taskType==3){
+			// 下载
+			mIV_pusher_type_flag.setImageResource(R.drawable.team_down);
+		}else{
+			mIV_pusher_type_flag.setImageResource(R.drawable.team_qianyue);
+		}
+
 //		SpannableStringBuilder style = null;
 //		switch (taskBean.task.taskType){
 //			case 1:
@@ -354,8 +405,12 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 		//tel
 		if(TextUtils.isEmpty(taskBean.task.hotLine)){
 			tv_task_tel.setVisibility(View.GONE);
+			mLine_task_detail_tel_top.setVisibility(View.GONE);
+			mLL_task_tel.setVisibility(View.GONE);
 		}else {
 			tv_task_tel.setVisibility(View.VISIBLE);
+			mLine_task_detail_tel_top.setVisibility(View.VISIBLE);
+			mLL_task_tel.setVisibility(View.VISIBLE);
 			tv_task_tel.setText(Html.fromHtml(context.getResources().getString(R.string.task_detail_tel_format, taskBean.task.hotLine)));
 			tv_task_tel.setOnClickListener(this);
 		}
@@ -418,23 +473,27 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 			//无流程描述性信息
 			ll_task_description.setVisibility(View.GONE);
 		}else{
-			btn_receive_task.setVisibility(View.VISIBLE);
 			ll_task_description.setVisibility(View.VISIBLE);
+		}
+		if("1".equals(str_taskStatus)){
+			btn_receive_task.setVisibility(View.VISIBLE);
+		}else{
+			btn_receive_task.setVisibility(View.GONE);
 		}
 
 		if(i_isHad==0){
 			//未领取
 			if(taskBean.task.taskType==1){
 				//签约
-				btn_receive_task.setText("领取任务");
+				btn_receive_task.setText("立即领取");
 				isShareTask = false;
 			}else if(taskBean.task.taskType==2){
 				//分享
-				btn_receive_task.setText("领取任务");
+				btn_receive_task.setText("立即领取");
 				isShareTask = true;
 			}else  if(taskBean.task.taskType==3){
 				//下载
-				btn_receive_task.setText("领取任务");
+				btn_receive_task.setText("立即领取");
 				isShareTask = true;
 			}
 		}else if(taskBean.task.isHad==1){
@@ -458,13 +517,15 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 		//解析任务参与人
 		List<PartnerList>  mPartnerList = taskBean.partnerList;
 		if(mPartnerList==null || mPartnerList.size()==0){
-			 mTV_task_friend_flag.setText("还没有地推参与该任务~");
+			 mTV_task_friend_flag.setText("还没有地推员参与该任务~");
+			mTV_task_friend_flag.setTextColor(context.getResources().getColor(R.color.tv_order_color_3));
 			mTaskFriendGridView.setVisibility(View.GONE);
 		}else{
 			//数据正常
-			mTV_task_friend_flag.setText(context.getResources().getString(R.string.my_tasknew_friend_flag,mPartnerList.size()));
+			mTV_task_friend_flag.setText(context.getResources().getString(R.string.my_tasknew_friend_flag, taskBean.getPartnerTotal()));
 			mTaskFriendGridView.setVisibility(View.VISIBLE);
 			mTaskFriendGridAdapter = new TaskFriendGridAdapter(context,0);
+			mTaskFriendGridAdapter.setTaskFriendTaskId(taskId);
 			mTaskFriendGridView.setAdapter(mTaskFriendGridAdapter);
 			mTaskFriendGridAdapter.setData(mPartnerList);
 			mTaskFriendGridAdapter.setTaskDetailInfoNewData(rsGetTaskDetailInfo.data);
@@ -478,7 +539,7 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 	 */
 private  void submitTaskDetail(int type,int isHad){
 	if(isHad==0){
-		//为领取
+		//未领取
 		//单纯领取任务
 		submitTask_1();
 	}else{
@@ -561,19 +622,19 @@ private  void submitTaskDetail(int type,int isHad){
 //			finish();
 //
 //	}
-//资料提交页面
-private  void goToTaskMaterialActivity(){
-	Intent mIntent = new Intent();
-	mIntent.setClass(context, MyTaskMaterialActivity.class);
-	mIntent.putExtra("TASK_ID", taskId);
-	mIntent.putExtra("topage",ToMainPage.审核中.getValue());
-	mIntent.putExtra("TASK_NAME",str_taskName);
-	mIntent.putExtra("isShowSubmitBtn",true);
-	mIntent.putExtra("ctId",str_ctId);
-	mIntent.putExtra("taskStatus",str_taskStatus);
-	startActivity(mIntent);
-	finish();
-}
+////资料提交页面
+//private  void goToTaskMaterialActivity(){
+//	Intent mIntent = new Intent();
+//	mIntent.setClass(context, MyTaskMaterialActivity.class);
+//	mIntent.putExtra("TASK_ID", taskId);
+//	mIntent.putExtra("topage",ToMainPage.审核中.getValue());
+//	mIntent.putExtra("TASK_NAME",str_taskName);
+//	mIntent.putExtra("isShowSubmitBtn",true);
+//	mIntent.putExtra("ctId",str_ctId);
+//	mIntent.putExtra("taskStatus",str_taskStatus);
+//	startActivity(mIntent);
+//	finish();
+//}
 	@Override
 	public void onNoData() {
 		getInitData();

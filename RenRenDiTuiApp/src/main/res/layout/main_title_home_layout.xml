@@ -12,13 +12,13 @@
     <TextView
         android:id="@+id/tv_title_left"
         style="@style/activity_headlayout_left"
+        android:layout_width="@dimen/_100dp"
         android:drawableLeft="@drawable/icon_user_address"
         android:drawablePadding="@dimen/layout_padding_nor"
-        android:text="城市"
-        android:visibility="gone"
+        android:text="北京市"
         android:singleLine="true"
-        android:maxLength="4"
         android:ellipsize="end"
+        android:visibility="gone"
          />
 
 <!--title-->
@@ -27,7 +27,9 @@
         style="@style/activity_headlayout_center_centertext"
         android:text="@string/can_receive_task"
         android:layout_centerInParent="true"
-
+        android:gravity="center"
+        android:layout_marginLeft="110dip"
+        android:layout_marginRight="110dip"
         />
 <!--排序-->
     <TextView

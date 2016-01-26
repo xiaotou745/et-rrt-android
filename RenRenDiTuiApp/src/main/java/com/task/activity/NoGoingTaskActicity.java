@@ -21,6 +21,7 @@ import com.renrentui.requestmodel.RQBaseModel;
 import com.renrentui.requestmodel.RQGetCityMode;
 import com.renrentui.requestmodel.RQGetMyMessage;
 import com.renrentui.requestmodel.RQGetNoGoingTask;
+import com.renrentui.requestmodel.RQGetNoGoingTaskNew;
 import com.renrentui.requestmodel.RQHandler;
 import com.renrentui.requestmodel.RequestType;
 import com.renrentui.requestmodel.ResultMsgType;
@@ -94,8 +95,6 @@ public class NoGoingTaskActicity extends BaseActivity implements
 	private GetNoGoingAdapter getNoGoingAdapter;// 待领取任务适配器
 	private PullToRefreshView pulltorefresh_nogoing_taskList;// 上拉刷新，下拉加载
 	private List<NoGoingTaskInfo> noGoingTaskInfos;// 待领取任务信息集合
-	private String nextId = "";
-	private int pageindex = 1;
 	private boolean isQuit = false; // 退出标识
 	//定位
 	public MyLocationListenner myListener = new MyLocationListenner();
@@ -107,9 +106,10 @@ public class NoGoingTaskActicity extends BaseActivity implements
 
 
 	private PopupWindow mMenuPopupWindow;
-	private int is_selection = 1;
+	private int is_selection = 5;
 	private TaskSorAdapter msortAdapter;
 	private ListView menuListView;
+	private int currentPage = 1;
 
 	private RQHandler<RSGetNoGoingTask> rqHandler_getNoGoingTask = new RQHandler<>(
 			new IRqHandlerMsg<RSGetNoGoingTask>() {
@@ -124,6 +124,7 @@ public class NoGoingTaskActicity extends BaseActivity implements
 				@Override
 				public void onNetworknotvalide() {
 					//网络无效
+					currentPage = currentPage-1;
 					hideProgressDialog();
 					pulltorefresh_nogoing_taskList.setVisibility(View.GONE);
 					NoGoingTaskActicity.this.onNodata(
@@ -135,7 +136,7 @@ public class NoGoingTaskActicity extends BaseActivity implements
 					hideProgressDialog();
 					NoGoingTaskActicity.this.hideLayoutNoda();
 					pulltorefresh_nogoing_taskList.setVisibility(View.VISIBLE);
-					if (pageindex == 1) {
+					if (currentPage == 1) {
 						if (t.data.count == 0) {
 							pulltorefresh_nogoing_taskList
 									.setVisibility(View.GONE);
@@ -144,15 +145,14 @@ public class NoGoingTaskActicity extends BaseActivity implements
 									NoGoingTaskActicity.this);
 						} else {
 							noGoingTaskInfos.clear();
-							nextId = t.data.nextId;
 							noGoingTaskInfos.addAll(t.data.content);
 							getNoGoingAdapter.notifyDataSetChanged();
 						}
 					} else {
 						if (t.data.count == 0) {
+							currentPage = currentPage-1;
 							ToastUtil.show(context, "暂无更多数据");
 						} else {
-							nextId = t.data.nextId;
 							noGoingTaskInfos.addAll(t.data.content);
 							getNoGoingAdapter.notifyDataSetChanged();
 						}
@@ -162,6 +162,7 @@ public class NoGoingTaskActicity extends BaseActivity implements
 				@Override
 				public void onSericeErr(RSGetNoGoingTask t) {
 					//服务器返回错误
+					currentPage = currentPage-1;
 					hideProgressDialog();
 					pulltorefresh_nogoing_taskList.setVisibility(View.GONE);
 					NoGoingTaskActicity.this.onNodata(ResultMsgType.ServiceErr,
@@ -172,6 +173,7 @@ public class NoGoingTaskActicity extends BaseActivity implements
 				public void onSericeExp() {
 					//服务器返回为空
 					hideProgressDialog();
+					currentPage = currentPage-1;
 					pulltorefresh_nogoing_taskList.setVisibility(View.GONE);
 					NoGoingTaskActicity.this.onNodata(ResultMsgType.ServiceExp,
 							"刷新", "数据加载失败！", null);
@@ -211,7 +213,7 @@ public class NoGoingTaskActicity extends BaseActivity implements
 				public void onSericeExp() {
 					//服务器返回为空
 					isGetCity = 1;
-					ToastUtil.show(context, "onSericeExp");
+					//ToastUtil.show(context, "");
 				}
 			});
 
@@ -363,11 +365,11 @@ private RQHandler<RSGetMyMessage> rqHandler_getMyMessage = new RQHandler<>(
 	public void getInitData() {
 		showProgressDialog();
 		setCityInfo();
-		ApiUtil.Request(new RQBaseModel<RQGetNoGoingTask, RSGetNoGoingTask>(
-				context, new RQGetNoGoingTask(strUserId, "0", MyApplication.getmCurrentLocation().code,is_selection),
+		currentPage = 1;
+		ApiUtil.Request(new RQBaseModel<RQGetNoGoingTaskNew, RSGetNoGoingTask>(
+				context, new RQGetNoGoingTaskNew(strUserId,currentPage,10, MyApplication.getmCurrentLocation().code,is_selection),
 				new RSGetNoGoingTask(), ApiNames.获取所有可领取任务.getValue(),
 				RequestType.POST, rqHandler_getNoGoingTask));
-		pageindex = 1;
 	}
 	public  void setCityInfo(){
 		String strLocationCode = "";//定位城市
@@ -426,11 +428,11 @@ private RQHandler<RSGetMyMessage> rqHandler_getMyMessage = new RQHandler<>(
 	 * 获取更多数据
 	 */
 	private void getMoreData() {
-		ApiUtil.Request(new RQBaseModel<RQGetNoGoingTask, RSGetNoGoingTask>(
-				context, new RQGetNoGoingTask(strUserId, nextId,MyApplication.getmCurrentLocation().code,is_selection),
+		currentPage = currentPage+1;
+		ApiUtil.Request(new RQBaseModel<RQGetNoGoingTaskNew, RSGetNoGoingTask>(
+				context, new RQGetNoGoingTaskNew(strUserId,currentPage ,10,MyApplication.getmCurrentLocation().code,is_selection),
 				new RSGetNoGoingTask(), ApiNames.获取所有可领取任务.getValue(),
 				RequestType.POST, rqHandler_getNoGoingTask));
-		pageindex++;
 	}
 
 	@Override
@@ -459,7 +461,6 @@ private RQHandler<RSGetMyMessage> rqHandler_getMyMessage = new RQHandler<>(
 			case R.id.tab_02:
 				//我的任务
 				if(isLogin()){
-					//intent = new Intent(context, MyTaskFramentActivity.class);
 					intent = new Intent(context,MyTaskFramentNewActivity.class);
 					isFinish = true;
 				}else{
@@ -624,6 +625,9 @@ public class MyLocationListenner implements BDLocationListener {
 			CityRegionModel localLocation = new CityRegionModel();
 			String StrName = location.getCity();
 			String strCode = mCityDBManager.getCityCodeByName(StrName);
+			if(TextUtils.isEmpty(strCode)){
+				strCode =  location.getCityCode();
+			}
 			localLocation.code = strCode;
 			localLocation.name = StrName;
 			MyApplication.setmLocalLocation(localLocation);
@@ -677,6 +681,7 @@ public class MyLocationListenner implements BDLocationListener {
 				mMenuPopupWindow.dismiss();
 				is_selection = position+1;
 				mMenuPopupWindow.dismiss();
+				getInitData();
 			}
 		});
 		menuListView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
@@ -690,13 +695,14 @@ public class MyLocationListenner implements BDLocationListener {
 		mMenuPopupWindow.setContentView(view);
 		mMenuPopupWindow.setOutsideTouchable(true);
 		mMenuPopupWindow.setFocusable(true);
-		mMenuPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-
-			@Override
-			public void onDismiss() {
-				getInitData();
-			}
-		});
+//		mMenuPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+//
+//			@Override
+//			public void onDismiss() {
+//				Log.e("<<<<>>>",is_selection+"?");
+//				getInitData();
+//			}
+//		});
 		mMenuPopupWindow.update();
 	}
 	/**

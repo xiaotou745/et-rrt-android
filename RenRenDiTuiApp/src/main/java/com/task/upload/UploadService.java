@@ -213,7 +213,7 @@ public class UploadService extends Service {
                                 String result = new String(b, "UTF-8");
                                 Gson gson = new Gson();
                                 UploadPicResultBean obj = gson.fromJson(result, UploadPicResultBean.class);
-                                if (obj != null && obj.getStatus()==1 && obj.getData() != null) {
+                                if (obj != null && obj.getCode()==200 && obj.getData() != null) {
                                     vo.setUploadStatus(TASK_STATE_COMPLETE);
                                     vo.setNetwork_path(obj.getData().getRelativePath());//上传返回的图片地址
                                     vo.setTicket_property(Constants.TYPE_NET);

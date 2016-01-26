@@ -33,9 +33,7 @@ import com.renrentui.util.ImageLoadManager;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
 import com.task.activity.MyMaterialTaskTeamActivity;
-import com.task.activity.MyTaskFramentActivity;
 import com.task.activity.MyTaskFramentNewActivity;
-import com.task.activity.MyTaskMaterialActivity;
 import com.task.activity.NoGoingTaskActicity;
 import com.user.service.CustomerServiceDialog;
 
@@ -310,7 +308,6 @@ public class PersonalCenterActivity extends BaseActivity implements
 			case R.id.tab_02:
 				//我的任务
 				if(isLogin()){
-					//intent = new Intent(context, MyTaskFramentActivity.class);
 					intent = new Intent(context,MyTaskFramentNewActivity.class);
 					isFinish = true;
 				}else{

@@ -69,7 +69,7 @@ public class MoreActivity extends BaseActivity implements OnClickListener {
 				finish();
 				break;
 		case R.id.rl_version_update:// 点击版本更新
-			DownLoadUtils.checkoutAppVersion(this, true);
+			DownLoadUtils.checkoutAppVersion(this, true,"",true);
 			break;
 		case R.id.rl_cache:// 点击清楚缓存
 			QuitDialog clearDialog = new QuitDialog(context, "确定要清理缓存吗？", "确定",

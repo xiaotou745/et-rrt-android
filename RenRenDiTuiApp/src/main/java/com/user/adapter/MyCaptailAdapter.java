@@ -98,9 +98,13 @@ switch (iTypeIndex) {
        final  RSMyCaptailModel.DataList dataBean = (RSMyCaptailModel.DataList)this.getItem(index);
         switch (iTypeIndex){
             case 0:
-                //收入
-                mHolderView.mTV_0.setText( Html.fromHtml(context.getResources().getString(R.string.captail_add, dataBean.getAmount())));
-                mHolderView.mTV_1.setText(dataBean.getRecordTypeName());
+                //收入(1:任务奖励)
+                mHolderView.mTV_0.setText(Html.fromHtml(context.getResources().getString(R.string.captail_add, dataBean.getAmount())));
+               if("1".equals(dataBean.getRecordType())){
+                   mHolderView.mTV_1.setText(dataBean.getRecordTypeName()+"-"+dataBean.getRemark());
+               }else{
+                   mHolderView.mTV_1.setText(dataBean.getRecordTypeName());
+               }
                 mHolderView.mTV_2.setText(dataBean.getOperateTime());
                 break;
             case 1:

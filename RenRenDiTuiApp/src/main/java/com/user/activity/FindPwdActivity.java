@@ -3,7 +3,6 @@ package com.user.activity;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,7 +32,6 @@ import com.renrentui.util.ToastUtil;
  */
 public class FindPwdActivity extends BaseActivity implements OnClickListener {
 
-	private Context context;
 	private EditText et_phone;// 用户手机号
 	private Button btn_get_code;// 获取验证码按钮
 	private EditText et_code;// 手机验证码
@@ -61,7 +59,7 @@ public class FindPwdActivity extends BaseActivity implements OnClickListener {
 					time = 60;
 					timer = new Timer();
 					// 设置自动播放时间
-					timer.schedule(new MyTimerTask(), 1000, 1000);
+					timer.schedule(new MyTimerTask(), 0, 1000);
 					btn_get_code.setEnabled(false);
 				}
 
@@ -190,7 +188,7 @@ public class FindPwdActivity extends BaseActivity implements OnClickListener {
 			ApiUtil.Request(new RQBaseModel<RQBase, RSBase>(context,
 					new RQFindPwd(context, phone1, MD5.GetMD5Code(password), code),
 					new RSBase(), ApiNames.忘记密码.getValue(), RequestType.POST,
-					rqHandler_FindUserPwd));//504239
+					rqHandler_FindUserPwd));//
 			break;
 		}
 	}
@@ -206,7 +204,6 @@ public class FindPwdActivity extends BaseActivity implements OnClickListener {
 						btn_get_code.setText("("+time + ")重新发送");
 					} else {
 						btn_get_code.setText("获取验证码");
-
 						btn_get_code.setEnabled(true);
 						timer.cancel();
 

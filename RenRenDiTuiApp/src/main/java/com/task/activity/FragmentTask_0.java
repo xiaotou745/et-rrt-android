@@ -25,7 +25,6 @@ import com.renrentui.util.ApiNames;
 import com.renrentui.util.ApiUtil;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
-import com.task.adapter.GetThroughTaskAdapter;
 import com.task.adapter.MyFragmentTaskAdapter;
 
 import java.util.ArrayList;
@@ -79,6 +78,7 @@ public FragmentTask_0(){
 					mMyTaskListener.showMyTaskCount(t.data.passTotal,t.data.refuseTotal);
 					pulltorefresh_taskList.setVisibility(View.VISIBLE);
 					if (pageindex == 1) {
+						//刷新
 						if (t.data.count == 0) {
 							pulltorefresh_taskList.setVisibility(View.GONE);
 							FragmentTask_0.this.onNodata(
@@ -91,10 +91,11 @@ public FragmentTask_0(){
 							}else{
 								finishedTaskInfos = new ArrayList<MyTaskContentBean>();
 							}
-							finishedTaskInfos.addAll(t.data.content);
+							finishedTaskInfos=t.data.content;
 							taskAdapter_0.setThroughTaskData(finishedTaskInfos);
 						}
 					} else {
+						//更多数据
 						if (t.data.count == 0) {
 							ToastUtil.show(context, "暂无更多数据");
 						} else {

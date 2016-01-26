@@ -179,7 +179,7 @@
             android:id="@+id/btn_right"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:text="再次参与"
+            android:text="再次提交"
             android:layout_weight="1"
             style="@style/style_btn_blue_shape_fill"
             android:gravity="center"

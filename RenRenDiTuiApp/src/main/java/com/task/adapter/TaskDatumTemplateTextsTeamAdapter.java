@@ -128,6 +128,14 @@ public class TaskDatumTemplateTextsTeamAdapter extends BaseAdapter {
             mHolderView.mTextView.setVisibility(View.GONE);
             mHolderView.mEitText.setHint(taskDean.controlTitle);
             mHolderView.mEitText.setTag(str_tag + String.valueOf("_" + iTeam_num + "_") + String.valueOf(i));
+            mHolderView.mEitText.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if(hasFocus){
+                        index = position;
+                    }
+                }
+            });
             mHolderView.mEitText.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {

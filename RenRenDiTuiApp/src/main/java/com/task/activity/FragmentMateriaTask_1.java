@@ -195,7 +195,7 @@ public class FragmentMateriaTask_1 extends BaseFragment implements
 	 */
 	public void getMoreData() {
         ApiUtil.Request(new RQBaseModel<RQMyMaterialTaskTeamModel, RSMyMaterialTaskTeamModel>(
-                context, new RQMyMaterialTaskTeamModel(Utils.getUserDTO(context).data.userId,"0",nextId,"2"),
+                context, new RQMyMaterialTaskTeamModel(Utils.getUserDTO(context).data.userId,nextId,"10","2"),
                 new RSMyMaterialTaskTeamModel(), ApiNames.资料审核详情分组后列表.getValue(),
                 RequestType.POST, rqHandler_teamTask));
 		pageindex++;

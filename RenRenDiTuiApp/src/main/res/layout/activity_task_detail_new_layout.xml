@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
+    android:background="@color/layout_view_bg"
     android:orientation="vertical" >
 <!--title-->
    <include
+       android:id="@+id/in_title_view"
        layout="@layout/main_title_home_layout"
+       android:layout_width="match_parent"
+       android:layout_height="@dimen/unify_title_height"
+       android:layout_alignParentTop="true"
        ></include>
-
+    <!-- 操作按钮-->
+    <Button
+        android:id="@+id/btn_task_get"
+        style="@style/style_btn_blue_fill"
+        android:text="领取任务"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        />
     <ScrollView
         android:id="@+id/layout_data"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fadingEdge="none"
         android:scrollbars="none"
+        android:layout_below="@id/in_title_view"
+        android:layout_above="@id/btn_task_get"
         >
 
         <LinearLayout
@@ -226,10 +239,13 @@
                 >
             </com.renrentui.view.MyListView>
 
+                <!-- 咨询电话-->
                 <View
+                    android:id="@+id/line_detail_tel_top"
                     style="@style/line_height_10">
                 </View>
 <LinearLayout
+    android:id="@+id/ll_detal_tel"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_50dp"
     android:orientation="horizontal"
@@ -259,51 +275,47 @@
 
 </LinearLayout>
                 <View
+                    android:id="@+id/line_detail_friend_top"
                     style="@style/line_height_10">
                 </View>
                 <!-- 参与人-->
                 <LinearLayout
+                    android:id="@+id/ll_detail_friend"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="@dimen/_12.5dp"
+                    android:background="@color/white"
                     >
                     <TextView
                         android:id="@+id/tv_task_friend_flag"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="任务参与人(10)"
+                        android:text="任务参与人(188880)"
                         android:textColor="@color/tv_order_color_1"
                         android:textSize="@dimen/_14sp"
                         android:gravity="left|top"
                         android:layout_marginBottom="@dimen/_5dp"
+                        android:paddingLeft="@dimen/_12.5dp"
+                        android:paddingTop="@dimen/_12.5dp"
                         />
                   <GridView
                       android:id="@+id/gv_task_friend"
                       android:layout_width="match_parent"
-                      android:layout_height="match_parent"
+                      android:layout_height="wrap_content"
                       android:horizontalSpacing="@dimen/_5dp"
                       android:listSelector="@null"
                       android:numColumns="5"
                       android:cacheColorHint="@null"
+                      android:paddingRight="@dimen/_12.5dp"
+                      android:paddingBottom="@dimen/_12.5dp"
                       ></GridView>
 
                 </LinearLayout>
-            <!-- 操作按钮-->
-                <Button
-                    android:id="@+id/btn_task_get"
-                    style="@style/style_btn_blue_fill"
-                    android:text="领取任务"
-                    android:layout_marginLeft="@dimen/view_space"
-                    android:layout_marginRight="@dimen/view_space"
-                    android:layout_marginTop="@dimen/_50dp"
-                    android:layout_marginBottom="@dimen/view_space"
-                    android:visibility="gone"
-                    />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
+
     <include layout="@layout/layout_nodata" />
 
-</LinearLayout>
+</RelativeLayout>

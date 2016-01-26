@@ -6,11 +6,16 @@ import java.util.TimerTask;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ToggleButton;
+
 import base.BaseActivity;
 
 import com.renrentui.app.R;
@@ -48,6 +53,10 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	private Button btnSubmit;// 确定按钮
 	private Button btnGetCode;// 获取验证码按钮
 
+
+	private ToggleButton mSwitchWorkBtn;// 上下班开关
+	private static boolean isWorkingStatus = false;// 工作状态
+
 	private RQHandler<RSBase> rqHandler_getPhoneCode = new RQHandler<RSBase>(
 			new IRqHandlerMsg<RSBase>() {
 
@@ -59,15 +68,12 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 				@Override
 				public void onNetworknotvalide() {
 					// TODO Auto-generated method stub
+					stopTimerTaskCode();
 				}
 
 				@Override
 				public void onSuccess(RSBase t) {
-					time = 60;
-					timer = new Timer();
-					// 设置自动播放时间
-					timer.schedule(new MyTimerTask(), 1000, 1000);
-					btnGetCode.setEnabled(false);
+					ToastUtil.show(context,"短信发送成功!");
 				}
 
 				@Override
@@ -75,11 +81,13 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 					// TODO Auto-generated method stub
 					ToastUtil.show(context, t.msg);
 					// Log.i("llp", t.Msg);
+					stopTimerTaskCode();
 				}
 
 				@Override
 				public void onSericeExp() {
 					// TODO Auto-generated method stub
+					stopTimerTaskCode();
 				}
 			});
 
@@ -152,6 +160,21 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		etRefereePhone= (EditText)findViewById(R.id.et_phone_referee);
 		btnGetCode = (Button) findViewById(R.id.btn_get_code);
 		btnGetCode.setOnClickListener(this);
+
+
+		mSwitchWorkBtn = (ToggleButton) findViewById(R.id.tb_swithc_work);
+		mSwitchWorkBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				isWorkingStatus = !isWorkingStatus;
+				mSwitchWorkBtn.setChecked(isWorkingStatus);
+				if (isWorkingStatus) {
+					etPasssword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+				} else {
+					etPasssword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+				}
+			}
+		});
 	}
 
 	@Override
@@ -172,6 +195,8 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 						new RQSendCode(phone1, 1), new RSBase(),
 						ApiNames.获取手机验证码.getValue(), RequestType.POST,
 						rqHandler_getPhoneCode));
+				//开启定时器
+				starTimerTaskCode();
 			} else {
 				ToastUtil.show(context, "请输入正确的手机号码!");
 			}
@@ -185,7 +210,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	private void submitUserInfo() {
 		String phone = etPhone.getText().toString();
 		String password = etPasssword.getText().toString().trim();
-		String password2 = etPassword2.getText().toString().trim();
+		//String password2 = etPassword2.getText().toString().trim();
 		String code = etCode.getText().toString();
 		String recommendPhone = etRefereePhone.getText().toString().trim();
 		if (phone.length() != 11 || !phone.substring(0, 1).equals("1")) {
@@ -200,10 +225,10 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			ToastUtil.show(context, "请输入6到12位的密码");
 			return;
 		}
-		if (!password2.equals(password)) {
-			ToastUtil.show(context, "两次密码不一致");
-			return;
-		}
+//		if (!password2.equals(password)) {
+//			ToastUtil.show(context, "两次密码不一致");
+//			return;
+//		}
 		if(!TextUtils.isEmpty(recommendPhone)){
 			if(!Util.isMobileNO(recommendPhone)){
 				ToastUtil.show(context, "请输入正确的推荐人手机号");
@@ -218,6 +243,26 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 				rqHandler_registerUser));
 	}
 
+	private void starTimerTaskCode(){
+		time = 60;
+		if(timer!=null){
+			timer.cancel();
+			timer=null;
+		}
+		timer = new Timer();
+		// 设置自动播放时间
+		timer.schedule(new MyTimerTask(), 1000, 1000);
+		btnGetCode.setEnabled(false);
+	}
+	private void stopTimerTaskCode(){
+		if(timer!=null){
+			timer.cancel();
+			timer=null;
+		}
+		btnGetCode.setEnabled(true);
+	}
+
+
 	private class MyTimerTask extends TimerTask {
 		@Override
 		public void run() {
@@ -231,7 +276,6 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 						btnGetCode.setText("获取验证码");
 						btnGetCode.setEnabled(true);
 						timer.cancel();
-
 					}
 
 				}

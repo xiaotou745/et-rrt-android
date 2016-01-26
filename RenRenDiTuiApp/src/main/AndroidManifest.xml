@@ -52,11 +52,13 @@
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppThemeNoAction"
+        android:screenOrientation="portrait"
+        >
         <activity
             android:name=".WelcomeActivity"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -68,7 +70,6 @@
             android:name="com.task.activity.MyTaskMaterialActivity"
             android:launchMode="singleTop" />
         <activity android:name="com.task.activity.NoGoingTaskActicity" />
-        <activity android:name="com.task.activity.MyTaskFramentActivity" />
         <activity android:name="com.user.activity.FindPwdActivity" />
         <activity android:name="com.user.activity.RegisterActivity" />
         <activity android:name="com.user.activity.UpdatePwdActivity" />
@@ -82,7 +83,11 @@
         <activity android:name="com.task.activity.WebViewActivity" />
         <activity android:name="com.task.activity.ShareViewActivity" />
         <activity android:name="com.task.activity.MyTaskMaterialDetailActivity" />
-        <activity android:name="com.task.activity.TaskDatumSubmitActiviyt" />
+        <!-- 资料录入 -->
+        <activity
+            android:name="com.task.activity.TaskDatumSubmitActiviyt"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
         <activity android:name="com.task.activity.ShowTaskMatailDetailActivity" />
         <activity android:name="com.task.activity.ShowCityActivity" />
         <activity android:name="com.user.activity.MyMessageActivity" />
@@ -101,7 +106,6 @@
         <activity android:name="com.task.activity.TaskDetailInfoNewActivity" />
         <activity android:name="com.task.activity.TaskMyFriendListViewActivity" >
         </activity>
-
 
         <service
             android:name="com.user.model.download.DownLoadService"
@@ -133,7 +137,6 @@
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
-
 
     </application>
 

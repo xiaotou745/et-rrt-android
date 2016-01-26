@@ -71,6 +71,19 @@ public class GetNoGoingAdapter extends BaseAdapter {
         viewholder.mTV_1.setText(noGoingTaskInfo.getAmount());
         viewholder.mTV_2.setText(noGoingTaskInfo.taskName);
         viewholder.mTV_3.setText(noGoingTaskInfo.taskGeneralInfo);
+        if(noGoingTaskInfo.taskType==1){
+//签约
+            viewholder.mIV_4.setImageResource(R.drawable.team_qianyue);
+
+        }else if(noGoingTaskInfo.taskType==2){
+            //分享
+            viewholder.mIV_4.setImageResource(R.drawable.team_share);
+        }else if(noGoingTaskInfo.taskType==3){
+            // 下载
+            viewholder.mIV_4.setImageResource(R.drawable.team_down);
+        }else{
+            viewholder.mIV_4.setImageResource(R.drawable.team_qianyue);
+        }
 
 //        SpannableStringBuilder style = null;
 //        switch (noGoingTaskInfo.taskType){
@@ -96,17 +109,17 @@ public class GetNoGoingAdapter extends BaseAdapter {
 
             @Override
             public void onClick(View v) {
-                if(Utils.getUserDTO(context)==null || Utils.getUserDTO(context).data.userId==""||Utils.getUserDTO(context).data.userId=="0") {
-                    Intent intent = new Intent(context,
-                            LoginActivity.class);
-                    context.startActivity(intent);
-                }else{
+//                if(Utils.getUserDTO(context)==null || Utils.getUserDTO(context).data.userId==""||Utils.getUserDTO(context).data.userId=="0") {
+//                    Intent intent = new Intent(context,
+//                            LoginActivity.class);
+//                    context.startActivity(intent);
+//                }else{
                     Intent intent = new Intent(context,
                             TaskDetailInfoNewActivity.class);
                     intent.putExtra("TaskId", noGoingTaskInfo.taskId);
                     intent.putExtra("TaskName", noGoingTaskInfo.taskName);
                     context.startActivity(intent);
-                }
+               // }
             }
         });
         return convertView;

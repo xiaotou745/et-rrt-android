@@ -89,7 +89,8 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
     private TextView tv_Amount;// 任务单价
 
     private TextView tv_pusher_taskName;// 任务名称
-    private TextView tv_pusher_type_content;//任务类型及内容
+    private ImageView mIV_pusher_type_flag;//任务类型
+   // private TextView tv_pusher_type_content;//任务类型及内容
     private TextView tv_task_examine;//审核
     private TextView tv_deadline_time;// 截止日期
     private TextView tv_task_tel;//咨询电话
@@ -208,6 +209,7 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
         taskName = getIntent().getStringExtra("taskName");
         ctId = getIntent().getStringExtra("ctId");//地推关系id
         initControl();
+        //initViewValue();
         mTaskDatumTemplePIcManager = new TaskDatumTemplePIcManager(context,context,this,this,userId,taskId);
         mTaskTempleDBManager = new TaskTempleDBManager(context);
        // mTaskTempleDBManager.delTaskTempleInfoByUserId(userId);//清空模板数据表
@@ -224,7 +226,7 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.layout_back:
+            case R.id.iv_title_left:
                 showCancleTaskDatum();
                 break;
             case R.id.btn_submit:
@@ -256,11 +258,21 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
      * 初始化view
      */
     private void initControl() {
+
+        if(mIV_title_left!=null){
+            mIV_title_left.setVisibility(View.VISIBLE);
+            mIV_title_left.setOnClickListener(this);
+        }
+        if(mTV_title_content!=null){
+            mTV_title_content.setText("资料录入");
+        }
+
         icon_pusher = (ImageView) findViewById(R.id.icon_pusher);
         ll_amount = (LinearLayout) findViewById(R.id.ll_amount);
         tv_Amount = (TextView) findViewById(R.id.tv_amount);
         tv_pusher_taskName = (TextView) findViewById(R.id.tv_pusher_taskName);
-        tv_pusher_type_content = (TextView) findViewById(R.id.tv_pusher_taskType_content);
+        mIV_pusher_type_flag = (ImageView)findViewById(R.id.iv_flag);
+        //tv_pusher_type_content = (TextView) findViewById(R.id.tv_pusher_taskType_content);
         tv_task_examine = (TextView) findViewById(R.id.tv_task_examine);
         tv_deadline_time = (TextView) findViewById(R.id.tv_deadline_time);
         tv_task_tel = (TextView) findViewById(R.id.tv_task_tel);
@@ -273,13 +285,13 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
         mScrollView = (ScrollView)findViewById(R.id.scrollview_view);
     }
 
-    /**
-     * 初始化view 默认值
-     * @return
-     */
-    private  void initViewValue(){
-        mTV_title_content.setText(taskName);
-    }
+//    /**
+//     * 初始化view 默认值
+//     * @return
+//     */
+//    private  void initViewValue(){
+//        mTV_title_content.setText(taskName);
+//    }
 
     /**
      * 获取模板信息
@@ -309,27 +321,41 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
 
         tv_pusher_taskName.setText(taskBean.taskTitle);
 
-        //简介
-        SpannableStringBuilder style = null;
-        switch (taskBean.taskType){
-            case 1:
-                //签约
-                style =  UIHelper.setStyleColorByColor(context, taskBean.taskTypeName.toString(), taskBean.taskGeneralInfo.toString(), R.color.white, R.color.tv_bg_color_1);
-                break;
-            case 2:
-                //分享
-                style =  UIHelper.setStyleColorByColor(context,taskBean.taskTypeName.toString(),taskBean.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_3);
-                break;
-            case 3:
-                //下载
-                style =  UIHelper.setStyleColorByColor(context,taskBean.taskTypeName.toString(),taskBean.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_2);
-                break;
-            default:
-                style =  UIHelper.setStyleColorByColor(context,taskBean.taskTypeName.toString(),taskBean.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_1);
-                break;
+        if(taskBean.taskType==1){
+//签约
+            mIV_pusher_type_flag.setImageResource(R.drawable.team_qianyue);
+
+        }else if(taskBean.taskType==2){
+            //分享
+            mIV_pusher_type_flag.setImageResource(R.drawable.team_share);
+        }else if(taskBean.taskType==3){
+            // 下载
+            mIV_pusher_type_flag.setImageResource(R.drawable.team_down);
+        }else{
+            mIV_pusher_type_flag.setImageResource(R.drawable.team_qianyue);
         }
 
-        tv_pusher_type_content.setText(style);
+//        //简介
+//        SpannableStringBuilder style = null;
+//        switch (taskBean.taskType){
+//            case 1:
+//                //签约
+//                style =  UIHelper.setStyleColorByColor(context, taskBean.taskTypeName.toString(), taskBean.taskGeneralInfo.toString(), R.color.white, R.color.tv_bg_color_1);
+//                break;
+//            case 2:
+//                //分享
+//                style =  UIHelper.setStyleColorByColor(context,taskBean.taskTypeName.toString(),taskBean.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_3);
+//                break;
+//            case 3:
+//                //下载
+//                style =  UIHelper.setStyleColorByColor(context,taskBean.taskTypeName.toString(),taskBean.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_2);
+//                break;
+//            default:
+//                style =  UIHelper.setStyleColorByColor(context,taskBean.taskTypeName.toString(),taskBean.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_1);
+//                break;
+//        }
+//
+//        tv_pusher_type_content.setText(style);
 
         //审核
         tv_task_examine.setText(context.getResources().getString(R.string.task_detail_examine_format, taskBean.auditCycle));

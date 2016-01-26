@@ -5,21 +5,12 @@
     android:background="@color/layout_view_bg"
     android:orientation="vertical" >
 <!--title-->
-    <RelativeLayout
-        android:id="@+id/rr_title"
-        style="@style/activity_headlayout" >
-
-        <LinearLayout style="@style/activity_headlayout_left" >
-
-            <include layout="@layout/layout_back" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_title"
-            style="@style/activity_headlayout_center_centertext"
-            android:layout_marginLeft="@dimen/_45dp"
-            android:text="切换城市" />
-    </RelativeLayout>
+   <include
+       android:id="@+id/rr_title"
+       layout="@layout/main_title_home_layout"
+       android:layout_height="@dimen/unify_title_height"
+       android:layout_width="match_parent"
+       ></include>
     <!-- 数据展示-->
     <EditText
         android:id="@+id/sh"

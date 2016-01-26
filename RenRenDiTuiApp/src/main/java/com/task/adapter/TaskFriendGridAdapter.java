@@ -2,6 +2,7 @@ package com.task.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import com.renrentui.util.ImageLoadManager;
 import com.renrentui.util.Utils;
 import com.task.activity.TaskMyFriendListViewActivity;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +32,13 @@ public class TaskFriendGridAdapter extends BaseAdapter {
     private List<PartnerList> mData = new ArrayList<PartnerList>();
     private TaskDeatailInfoNew mTaskDetailInfoNew =null;
     private int iType=0;//0:gridView 1:listview
+    private String strTaskID;//任务id
     public TaskFriendGridAdapter(Context context ,int iType){
         this.context = context;
         this.iType = iType;
+    }
+    public void setTaskFriendTaskId(String id){
+        strTaskID= id;
     }
     public void setData(List<PartnerList> data){
         if(mData==null){
@@ -99,8 +106,13 @@ public class TaskFriendGridAdapter extends BaseAdapter {
                 mHolderView = (HoldView) convertView.getTag(R.id.listview_multiple_type_twelve_layout);
             }
         }
-        PartnerList bean  = (PartnerList)getItem(position);
-        mHolderView.mTV_1.setText(bean.getClienterName());
+        final PartnerList bean  = (PartnerList)getItem(position);
+        if(TextUtils.isEmpty(bean.getClienterName())){
+            mHolderView.mTV_1.setText("某推手");
+        }else {
+            mHolderView.mTV_1.setText(bean.getClienterName());
+        }
+
         if(iType==0){
             //gridview
             if(position==4){
@@ -110,7 +122,8 @@ public class TaskFriendGridAdapter extends BaseAdapter {
                 convertView.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         Intent mIntent = new Intent(context, TaskMyFriendListViewActivity.class);
-                        mIntent.putExtra("VO", mTaskDetailInfoNew);
+                        //mIntent.putExtra("VO", mTaskDetailInfoNew);
+                        mIntent.putExtra("TASK_ID",strTaskID);
                         context.startActivity(mIntent);
                     }
                 });

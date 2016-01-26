@@ -89,7 +89,7 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 			mIV_title_left.setOnClickListener(this);
 		}
 		if(mTV_title_content!=null){
-			mTV_title_content.setText(str_taskName+str_taskType+"资料审核");
+			mTV_title_content.setText(str_taskName);
 		}
 
 		vp_task_main = (ViewPager) findViewById(R.id.vp_task_main);

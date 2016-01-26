@@ -21,6 +21,7 @@ public class MyCapialDetailActivity extends BaseActivity implements View.OnClick
     private TextView mTV_type;
     private TextView mTV_content;
     private TextView mTV_time;
+    private TextView mTV_trader_num;//交易号
     private boolean isAdd;
 
     @Override
@@ -47,18 +48,27 @@ public class MyCapialDetailActivity extends BaseActivity implements View.OnClick
         mTV_type = (TextView)findViewById(R.id.bill_type);
         mTV_content = (TextView)findViewById(R.id.bill_detail);
         mTV_time = (TextView)findViewById(R.id.bill_create_time);
+        mTV_trader_num = (TextView)findViewById(R.id.bill_trade_num);
     }
     private void initViewValue(){
         if(mDataList!=null){
+
             mTV_money.setText(mDataList.getAmount());
             mTV_type.setText(mDataList.getRecordTypeName());
-            mTV_content.setText(mDataList.getRemark());
+            if("1".equals(mDataList.getRecordType())){
+                mTV_content.setText("成功完成-"+mDataList.getRemark());
+            }else{
+                mTV_content.setText(mDataList.getRemark());
+            }
+           // mTV_content.setText(mDataList.getRemark());
             mTV_time.setText(mDataList.getOperateTime());
             if(isAdd){
+                mTV_money_flag.setVisibility(View.VISIBLE);
                 mTV_money_flag.setText("+");
             }else{
                 mTV_money_flag.setText("-");
             }
+            mTV_trader_num.setText(mDataList.getRelationNo());
         }else{
             mTV_money.setText("");
             mTV_type.setText("");

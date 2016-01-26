@@ -9,7 +9,12 @@ import java.util.List;
  * 任务详情 bean -new
  */
 public class TaskDeatailInfoNew extends TaskDetailInfo {
+    public int partnerTotal;//任务参与人总素
     public List<PartnerList> partnerList;
+
+    public int getPartnerTotal() {
+        return partnerTotal;
+    }
 
     public TaskDeatailInfoNew() {
         super();
@@ -20,6 +25,17 @@ public class TaskDeatailInfoNew extends TaskDetailInfo {
 
     public TaskDeatailInfoNew(TaskBeanInfo task, ArrayList<TaskSpecBeanInfo> taskSetps, List<PartnerList> partnerList) {
         super(task, taskSetps);
+        this.partnerList = partnerList;
+    }
+
+    public TaskDeatailInfoNew(int partnerTotal, List<PartnerList> partnerList) {
+        this.partnerTotal = partnerTotal;
+        this.partnerList = partnerList;
+    }
+
+    public TaskDeatailInfoNew(TaskBeanInfo task, ArrayList<TaskSpecBeanInfo> taskSetps, int partnerTotal, List<PartnerList> partnerList) {
+        super(task, taskSetps);
+        this.partnerTotal = partnerTotal;
         this.partnerList = partnerList;
     }
 

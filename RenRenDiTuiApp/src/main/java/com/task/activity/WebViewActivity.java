@@ -64,13 +64,20 @@ public class WebViewActivity extends BaseActivity implements
         mWebSettings.setJavaScriptEnabled(true);
         mWebSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         mWebSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        if(mIV_title_left!=null){
+            mIV_title_left.setVisibility(View.VISIBLE);
+            mIV_title_left.setOnClickListener(this);
+        }
+        if(mTV_title_content!=null){
+            mTV_title_content.setText(strTitle);
+        }
 
     }
 
     private void getIntentData() {
         strTitle = this.getIntent().getStringExtra(STR_TITLE);
         strContentUrl = this.getIntent().getStringExtra(STR_CONTENT_URL);
-        mTV_title_content.setText(strTitle);
+
     }
 
     private void loadWebViewInfo() {
@@ -105,13 +112,21 @@ public class WebViewActivity extends BaseActivity implements
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.layout_back:
+//            case R.id.layout_back:
+//                if (mWebView.canGoBack()) {
+//                    mWebView.goBack();// 返回上一页面
+//                } else {
+//                    WebViewActivity.this.finish();
+//                }
+//                break;
+            case R.id.iv_title_left:
                 if (mWebView.canGoBack()) {
                     mWebView.goBack();// 返回上一页面
                 } else {
                     WebViewActivity.this.finish();
                 }
                 break;
+
         }
     }
 

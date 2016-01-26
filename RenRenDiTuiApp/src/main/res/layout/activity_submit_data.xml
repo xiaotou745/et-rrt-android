@@ -4,21 +4,12 @@
     android:layout_height="match_parent"
     android:background="#e8e8e8" >
 
-    <RelativeLayout
-        android:id="@+id/heard"
-        style="@style/activity_headlayout" >
-
-        <LinearLayout style="@style/activity_headlayout_left" >
-
-            <include layout="@layout/layout_back" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_title"
-            style="@style/activity_headlayout_center_centertext"
-            android:layout_marginLeft="@dimen/_45dp"
-            android:text="@string/contractSubmission" />
-    </RelativeLayout>
+   <include
+       android:id="@+id/heard"
+       layout="@layout/main_title_home_layout"
+       android:layout_width="match_parent"
+       android:layout_height="@dimen/unify_title_height"
+       ></include>
 
     <Button
         android:id="@+id/btn_submit"

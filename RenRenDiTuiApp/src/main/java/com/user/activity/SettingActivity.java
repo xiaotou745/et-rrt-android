@@ -24,7 +24,6 @@ import com.user.service.QuitDialog.ExitDialogListener;
  */
 public class SettingActivity extends BaseActivity implements OnClickListener {
 
-	private Context context;
 	private RelativeLayout ll_update_password;//修改密码
 	private RelativeLayout ll_clear_cache;//清楚缓存
 	private Button btn_sign_out;//退出登录
@@ -41,7 +40,13 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
 	 * 初始化控件
 	 */
 	private void initControl() {
-		context = this;
+		if(mIV_title_left!=null){
+			mIV_title_left.setVisibility(View.VISIBLE);
+			mIV_title_left.setOnClickListener(this);
+		}
+		if(mTV_title_content!=null){
+			mTV_title_content.setText("系统设置");
+		}
 		ll_update_password = (RelativeLayout) findViewById(R.id.ll_update_password);
 		ll_clear_cache = (RelativeLayout) findViewById(R.id.ll_clear_cache);
 		btn_sign_out = (Button) findViewById(R.id.btn_sign_out);
@@ -99,6 +104,9 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
 			dialog.show();
 			dialog.setCanceledOnTouchOutside(true); 
 			break;
+			case R.id.iv_title_left:
+				finish();
+				break;
 		default:
 			break;
 		}

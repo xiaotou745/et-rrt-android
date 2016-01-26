@@ -94,12 +94,26 @@ public class RQGetNoGoingTask extends RQBase {
 		this.orderBy = orderBy;
 	}
 
+//	@Override
+//	public String toString() {
+//		return "RQGetNoGoingTask[userId=" + userId + ",longitude=" + longitude
+//				+ ",latitude=" + latitude + ",itemsCount=" + itemsCount
+//				+ ",nextId=" + nextId + ",cityCode=" + cityCode + ",cityName="
+//				+ cityName + "]";
+//	}
+
+
 	@Override
 	public String toString() {
-		return "RQGetNoGoingTask[userId=" + userId + ",longitude=" + longitude
-				+ ",latitude=" + latitude + ",itemsCount=" + itemsCount
-				+ ",nextId=" + nextId + ",cityCode=" + cityCode + ",cityName="
-				+ cityName + "]";
+		return "RQGetNoGoingTask{" +
+				"userId='" + userId + '\'' +
+				", longitude=" + longitude +
+				", latitude=" + latitude +
+				", itemsCount=" + itemsCount +
+				", nextId='" + nextId + '\'' +
+				", cityCode='" + cityCode + '\'' +
+				", cityName='" + cityName + '\'' +
+				", orderBy=" + orderBy +
+				'}';
 	}
-
 }

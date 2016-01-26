@@ -40,6 +40,7 @@
         android:layout_below="@id/gridview_task_pic"
         android:layout_marginTop="@dimen/_10dp"
         android:layout_marginBottom="@dimen/_10dp"
+        android:visibility="gone"
         ></View>
     <!-- 状态-->
     <TextView
@@ -50,6 +51,7 @@
         android:layout_below="@id/line_1"
         android:text="进行中"
         android:textSize="@dimen/_14sp"
+        android:visibility="gone"
         android:textColor="@color/tv_order_color_5"
         />
     <!--金额-->
@@ -62,12 +64,14 @@
         android:orientation="horizontal"
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
+        android:visibility="gone"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="￥"
             android:textColor="#f7585d"
+            android:visibility="gone"
             android:textSize="11sp" />
         <TextView
             android:id="@+id/tv_task_amount"
@@ -75,11 +79,13 @@
             android:layout_height="wrap_content"
             android:textColor="#f7585d"
             android:text="1000"
+            android:visibility="gone"
             android:textSize="18sp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="/次"
+            android:visibility="gone"
             android:textColor="#f7585d"
             android:textSize="10sp" />
     </LinearLayout>
@@ -95,5 +101,6 @@
         android:layout_alignLeft="@id/tv_pusher_time"
         android:layout_marginRight="@dimen/_10dp"
         android:text="任务名称"
+        android:visibility="gone"
         android:textSize="@dimen/_14sp" />
 </RelativeLayout>

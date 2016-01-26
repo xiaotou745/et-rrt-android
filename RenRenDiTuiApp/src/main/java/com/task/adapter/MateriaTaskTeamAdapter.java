@@ -87,7 +87,7 @@ public class MateriaTaskTeamAdapter extends BaseAdapter {
 		}
 
 		mViewHolder.mTV_1.setText(Html.fromHtml(context.getResources().getString(R.string.my_material_task_team_num, beanContent.getTaskDatumCount())));
-		mViewHolder.mTV_2.setText(beanContent.getTaskStatusName());
+		mViewHolder.mTV_2.setText(beanContent.getTaskName());
 		mViewHolder.mTV_3.setText(Html.fromHtml(context.getResources().getString(R.string.my_material_task_team_content,beanContent.getAmount())));
 
 		if (Util.IsNotNUll(beanContent.getLogo()) && Utils.checkUrl(beanContent.getLogo())) {

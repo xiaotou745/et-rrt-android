@@ -26,7 +26,6 @@ import com.renrentui.util.ApiNames;
 import com.renrentui.util.ApiUtil;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
-import com.task.adapter.GetInvalidTaskAdapter;
 import com.task.adapter.MyFragmentTaskAdapter;
 
 import java.util.ArrayList;

@@ -5,26 +5,28 @@ package com.task.upload.bean;
  * 图片上传结果类
  */
 public class UploadPicResultBean {
-   private int Status ;//状态 1 成功,其它失败
-    private String Message;// Message 提示信息
+  // private int Status ;//状态 1 成功,其它失败
+    private int code;//状态
+    private String msg;//信息
+  //  private String Message;// Message 提示信息
     private  DataBean  data;// Result 返回的文件信息
 
-    public void setStatus(int status) {
-        Status = status;
-    }
+//    public void setStatus(int status) {
+//        Status = status;
+//    }
+//
+//    public void setMessage(String message) {
+//        Message = message;
+//    }
 
-    public void setMessage(String message) {
-        Message = message;
-    }
-
-
-    public int getStatus() {
-        return Status;
-    }
-
-    public String getMessage() {
-        return Message;
-    }
+//
+//    public int getStatus() {
+//        return Status;
+//    }
+//
+//    public String getMessage() {
+//        return Message;
+//    }
 
     public void setData(DataBean data) {
         this.data = data;
@@ -32,6 +34,22 @@ public class UploadPicResultBean {
 
     public DataBean getData() {
         return data;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public class DataBean{

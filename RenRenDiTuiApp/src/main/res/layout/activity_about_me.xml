@@ -5,18 +5,9 @@
     android:background="@android:color/white"
     android:orientation="vertical" >
 
-    <LinearLayout style="@style/activity_headlayout" >
-
-        <LinearLayout style="@style/activity_headlayout_left" >
-
-            <include layout="@layout/layout_back" />
-        </LinearLayout>
-
-        <TextView
-            style="@style/activity_headlayout_left_centertext"
-            android:layout_marginLeft="@dimen/_8dp"
-            android:text="@string/aboutme" />
-    </LinearLayout>
+    <include
+        layout="@layout/main_title_home_layout"
+        ></include>
 
     <TextView
         android:id="@+id/tv_help"

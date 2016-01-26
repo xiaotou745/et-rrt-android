@@ -83,8 +83,8 @@
     <!-- 订单详情-->
     <string name="task_detail_examine_format" formatted="false">审核: %1$s天</string>
     <string name="task_detail_dealtime_format" formatted="false">截止日期: %1$s</string>
-    <string name="task_detail_forecasttime_format" formatted="false">预计用时: %1$s 时</string>
-    <string name="task_detail_tel_format" formatted="false">咨询:<![CDATA[<font color="#00bcd5"> %1$s</font>]]></string>
+    <string name="task_detail_forecasttime_format" formatted="false">预计用时: %1$s 分钟</string>
+    <string name="task_detail_tel_format" formatted="false"><![CDATA[<font color="#00bcd5"> %1$s</font>]]></string>
 
     <!-- 拍照或选取图片失败 -->
     <string name="get_image_by_camera_or_pic_error">请稍后重试...</string>
@@ -100,7 +100,7 @@
     <string name="my_task_list_itemt_1" formatted="false">审核中(%1$s)</string>
     <string name="my_task_list_itemt_2" formatted="false">已通过(%1$s)</string>
     <string name="my_task_list_itemt_3" formatted="false">未通过(%1$s)</string>
-    <string name="my_task_list_itemt_4" formatted="false">成功分享(%1$s)次</string>
+    <string name="my_task_list_itemt_4" formatted="false">成功分享%1$s次</string>
     <string name="my_task_list_itemt_5" formatted="false">任务进行中</string>
     <string name="my_task_list_itemt_6" formatted="false">任务已过期</string>
     <!-- 个人中心-->
@@ -120,4 +120,5 @@
 
     <string name="my_tasknew_qianyue_flag" formatted="false">提交资料 %1$s 条</string>
     <string name="my_tasknew_friend_flag" formatted="false">任务参与人(%1$s)</string>
+    <string name="title_activity_test">testActivity</string>
 </resources>

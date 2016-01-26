@@ -3,6 +3,7 @@ package com.task.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +20,10 @@ import com.renrentui.util.ImageLoadManager;
 import com.renrentui.util.Utils;
 import com.task.activity.MyTaskMaterialActivity;
 import com.task.activity.ShareViewActivity;
+import com.task.activity.TaskDatumSubmitActiviyt;
 import com.task.activity.TaskDetailInfoNewActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,13 +37,18 @@ public class MyFragmentTaskAdapter extends BaseAdapter {
 	private List<MyTaskContentBean> finishedTaskInfos;
 	private int itype= 0;//0: 进行张 1：过期
 	public MyFragmentTaskAdapter(Context context,
-								 List<MyTaskContentBean> finishedTaskInfos,int itype) {
+								 List<MyTaskContentBean> finishedTaskInfos,int type) {
 		this.context = context;
 		this.finishedTaskInfos = finishedTaskInfos;
-		this.itype = itype;
+		this.itype = type;
 	}
-public void setThroughTaskData(List<MyTaskContentBean> finishedTaskInfos){
-	this.finishedTaskInfos = finishedTaskInfos;
+public void setThroughTaskData(List<MyTaskContentBean> data){
+	if(finishedTaskInfos==null){
+		finishedTaskInfos = new ArrayList<MyTaskContentBean>();
+	}else{
+		finishedTaskInfos.clear();
+	}
+	this.finishedTaskInfos.addAll(data);
 	this.notifyDataSetChanged();
 }
 
@@ -101,43 +109,46 @@ public void setThroughTaskData(List<MyTaskContentBean> finishedTaskInfos){
 				mViewHolder.mIV_4.setImageResource(R.drawable.team_down);
 				break;
 		}
+		mViewHolder.mRL_bottom_0.setVisibility(View.GONE);
+		mViewHolder.mRL_bottom_1.setVisibility(View.GONE);
+		mViewHolder.mRL_bottom_2.setVisibility(View.GONE);
+		mViewHolder.mRL_bottom_3.setVisibility(View.GONE);
 		switch (itype){
 			case 0:
 				//进行中
 				if(beanContent.taskType==1){
 					//签约
 					mViewHolder.mRL_bottom_0.setVisibility(View.VISIBLE);
-					if(!TextUtils.isEmpty(beanContent.complateNum) && !beanContent.complateNum.equals("0")) {
-						mViewHolder.mTV_bottom_0.setText(context.getResources().getString(R.string.my_tasknew_qianyue_flag, beanContent.complateNum));
+					if(!TextUtils.isEmpty(beanContent.completeNum) && !beanContent.completeNum.equals("0")) {
+						mViewHolder.mTV_bottom_0.setText(context.getResources().getString(R.string.my_tasknew_qianyue_flag, beanContent.completeNum));
 					}else{
 						mViewHolder.mTV_bottom_0.setText(context.getResources().getString(R.string.my_task_list_itemt_5));
 					}
-
 				}else if(beanContent.taskType==2){
 					//分享
 					mViewHolder.mRL_bottom_1.setVisibility(View.VISIBLE);
-					if(!TextUtils.isEmpty(beanContent.complateNum) && !beanContent.complateNum.equals("0")) {
-						mViewHolder.mTV_bottom_1.setText(context.getResources().getString(R.string.my_task_list_itemt_4, beanContent.complateNum));
+					if(!TextUtils.isEmpty(beanContent.completeNum) && !beanContent.completeNum.equals("0")) {
+						mViewHolder.mTV_bottom_1.setText(context.getResources().getString(R.string.my_task_list_itemt_4, beanContent.completeNum));
 					}else{
 						mViewHolder.mTV_bottom_1.setText(context.getResources().getString(R.string.my_task_list_itemt_5));
 					}
 				}else if(beanContent.taskType==3) {
 					//下载
-					mViewHolder.mRL_bottom_0.setVisibility(View.VISIBLE);
-					if(!TextUtils.isEmpty(beanContent.complateNum) && !beanContent.complateNum.equals("0")) {
-						mViewHolder.mTV_bottom_0.setText(context.getResources().getString(R.string.my_tasknew_qianyue_flag, beanContent.complateNum));
+					mViewHolder.mRL_bottom_1.setVisibility(View.VISIBLE);
+					if(!TextUtils.isEmpty(beanContent.completeNum) && !beanContent.completeNum.equals("0")) {
+						mViewHolder.mTV_bottom_1.setText(context.getResources().getString(R.string.my_tasknew_qianyue_flag, beanContent.completeNum));
 					}else{
-						mViewHolder.mTV_bottom_0.setText(context.getResources().getString(R.string.my_task_list_itemt_5));
+						mViewHolder.mTV_bottom_1.setText(context.getResources().getString(R.string.my_task_list_itemt_5));
 					}
 				}
 				//继续提交
-				mViewHolder.mTV_bottom_0.setOnClickListener(new View.OnClickListener(){
+				mViewHolder.mBtn_bottom_0.setOnClickListener(new View.OnClickListener(){
 					public void onClick(View v) {
 						setTaskDetailListActivity(beanContent.taskId, beanContent.taskName, beanContent.ctId,beanContent.status);
 					}
 				});
 				//分享
-				mViewHolder.mTV_bottom_1.setOnClickListener(new View.OnClickListener(){
+				mViewHolder.mBtn_bottom_1.setOnClickListener(new View.OnClickListener(){
 					public void onClick(View v) {
 						setShareActivity(beanContent);
 					}
@@ -148,24 +159,24 @@ public void setThroughTaskData(List<MyTaskContentBean> finishedTaskInfos){
 				if(beanContent.taskType==1){
 					//签约
 					mViewHolder.mRL_bottom_2.setVisibility(View.VISIBLE);
-					if(!TextUtils.isEmpty(beanContent.complateNum) && !beanContent.complateNum.equals("0")) {
-						mViewHolder.mTV_bottom_2.setText(context.getResources().getString(R.string.my_tasknew_qianyue_flag, beanContent.complateNum));
+					if(!TextUtils.isEmpty(beanContent.completeNum) && !beanContent.completeNum.equals("0")) {
+						mViewHolder.mTV_bottom_2.setText(context.getResources().getString(R.string.my_tasknew_qianyue_flag, beanContent.completeNum));
 					}else{
 						mViewHolder.mTV_bottom_2.setText(context.getResources().getString(R.string.my_task_list_itemt_6));
 					}
 				}else if(beanContent.taskType==2){
 					//分享
 					mViewHolder.mRL_bottom_3.setVisibility(View.VISIBLE);
-					if(!TextUtils.isEmpty(beanContent.complateNum) && !beanContent.complateNum.equals("0")) {
-						mViewHolder.mTV_bottom_3.setText(context.getResources().getString(R.string.my_task_list_itemt_4,beanContent.complateNum));
+					if(!TextUtils.isEmpty(beanContent.completeNum) && !beanContent.completeNum.equals("0")) {
+						mViewHolder.mTV_bottom_3.setText(context.getResources().getString(R.string.my_task_list_itemt_4,beanContent.completeNum));
 					}else{
-						mViewHolder.mTV_bottom_2.setText(context.getResources().getString(R.string.my_task_list_itemt_6));
+						mViewHolder.mTV_bottom_3.setText(context.getResources().getString(R.string.my_task_list_itemt_6));
 					}
 				}else if(beanContent.taskType==3) {
 					//下载
 					mViewHolder.mRL_bottom_2.setVisibility(View.VISIBLE);
-					if(!TextUtils.isEmpty(beanContent.complateNum) && !beanContent.complateNum.equals("0")) {
-						mViewHolder.mTV_bottom_2.setText(context.getResources().getString(R.string.my_tasknew_qianyue_flag,beanContent.complateNum));
+					if(!TextUtils.isEmpty(beanContent.completeNum) && !beanContent.completeNum.equals("0")) {
+						mViewHolder.mTV_bottom_2.setText(context.getResources().getString(R.string.my_tasknew_qianyue_flag,beanContent.completeNum));
 					}else{
 						mViewHolder.mTV_bottom_2.setText(context.getResources().getString(R.string.my_task_list_itemt_6));
 					}
@@ -205,8 +216,14 @@ public void setThroughTaskData(List<MyTaskContentBean> finishedTaskInfos){
 		mIntent.putExtra("TASK_ID", taskId);
 		mIntent.putExtra("TASK_NAME",taskName);
 		mIntent.putExtra("ctId",ctid);
-		mIntent.putExtra("taskStatus",taskStatus);
+		mIntent.putExtra("taskStatus", taskStatus);
 		mIntent.putExtra("isShowSubmitBtn",true);
+
+//		mIntent.setClass(context, TaskDatumSubmitActiviyt.class);
+//		mIntent.putExtra("taskId", str_taskId);
+//		mIntent.putExtra("taskName", str_taskName);
+//		mIntent.putExtra("ctId",str_ctId);
+
 		context.startActivity(mIntent);
 	}
 
@@ -217,18 +234,21 @@ public void setThroughTaskData(List<MyTaskContentBean> finishedTaskInfos){
 		private TextView mTV_3;//content
 		private ImageView mIV_4;//icon flag
 
+		//通过 签约
 		private RelativeLayout mRL_bottom_0;
 		private TextView mTV_bottom_0;
 		private Button mBtn_bottom_0;
 
+		//通过 分享
 		private RelativeLayout mRL_bottom_1;
 		private TextView mTV_bottom_1;
 		private Button mBtn_bottom_1;
 
+		//未通过 签约
 		private RelativeLayout mRL_bottom_2;
 		private TextView mTV_bottom_2;
 		private Button mBtn_bottom_2;
-
+		//未通过 分享
 		private RelativeLayout mRL_bottom_3;
 		private TextView mTV_bottom_3;
 		private Button mBtn_bottom_3;
@@ -257,6 +277,7 @@ public void setThroughTaskData(List<MyTaskContentBean> finishedTaskInfos){
 
 			mRL_bottom_3 = (RelativeLayout)view.findViewById(R.id.rl_task_pass_3);
 			mTV_bottom_3 = (TextView)view.findViewById(R.id.tv_bottom_3);
+			mBtn_bottom_3 = (Button)view.findViewById(R.id.btn_bottom_3);
 		}
 
 	}
