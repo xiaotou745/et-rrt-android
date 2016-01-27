@@ -15,6 +15,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 
 import com.renrentui.resultmodel.RSUser;
 import com.renrentui.tools.GsonTools;
@@ -271,6 +272,52 @@ public final class Utils {
 		return isNum.matches();
 	}
 
+	/**
+	 * 获取当前任务id
+	 * @param context
+	 * @return
+	 */
+	public static String getCurrentTaskId(Context context) {
+		String strTaskId = null;
+		try {
+			strTaskId = SharedPreferencesTools.getSPInstance(context)
+					.getSharedPreferences().get("CurrentTaskId");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return strTaskId;
+	}
 
+	/**
+	 * 设置当前任务id
+	 * @param context
+	 * @param taskId
+	 */
+	public static void setCurrentTaskId(Context context, String taskId) {
+		try {
+			if (!TextUtils.isEmpty(taskId)) {
+				Map<String, String> map = new HashMap<>();
+				map.put("CurrentTaskId",taskId);
+					SharedPreferencesTools.getSPInstance(context)
+							.setSharedPreferences(map);
+
+			}
+		} catch (Exception e) {
+		}
+	}
+
+	/**
+	 * 清除当前任务id
+	 * @param context
+	 */
+	public static void clearCurrentTaskId(Context context) {
+		try {
+				Map<String, String> map = new HashMap<>();
+				map.put("CurrentTaskId","");
+				SharedPreferencesTools.getSPInstance(context)
+						.setSharedPreferences(map);
+		} catch (Exception e) {
+		}
+	}
 }
 

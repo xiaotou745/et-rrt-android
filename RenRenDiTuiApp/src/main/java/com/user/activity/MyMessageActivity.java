@@ -127,7 +127,7 @@ public class MyMessageActivity extends BaseActivity implements
             mIV_title_left.setOnClickListener(this);
         }
         if(mTV_title_content!=null){
-            mTV_title_content.setText("个人中心");
+            mTV_title_content.setText("消息中心");
         }
         mPullMyMessageListView = (PullToRefreshView)findViewById(R.id.pulltorefresh_message_taskList);
         mPullMyMessageListView.setOnHeaderRefreshListener(this);

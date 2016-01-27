@@ -247,7 +247,7 @@ public class MyCapitalFramen_2 extends BaseFragment implements PullToRefreshView
      */
     public void getMoreData() {
         ApiUtil.Request(new RQBaseModel<RQMyCaptailModel, RSMyCaptailModel>(
-                context, new RQMyCaptailModel(Utils.getUserDTO(context).data.userId,"2"),
+                context, new RQMyCaptailModel(Utils.getUserDTO(context).data.userId,nextId,"2"),
                 new RSMyCaptailModel(), ApiNames.获取资金明细列表.getValue(),
                 RequestType.POST, rqHandler_getMyCaptial));
         pageindex++;

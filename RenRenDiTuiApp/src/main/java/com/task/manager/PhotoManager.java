@@ -105,7 +105,7 @@ public class PhotoManager {
         Uri mUri = act.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
         TEMP_PATH = getPath(act, mUri);
         if (TextUtils.isEmpty(TEMP_PATH)) {
-            TEMP_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "superc"
+            TEMP_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "renrentui"
                     + File.separator + "TEMP" + File.separator;
             TEMP_PATH = showStorageToast(act) ? TEMP_PATH : getPath(act,
                     act.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values));
@@ -192,7 +192,7 @@ public class PhotoManager {
             e.printStackTrace();
         }
         if (!isCreateFile) {
-            TEMP_PATH = Environment.getDownloadCacheDirectory().getAbsolutePath() + File.separator + "superc"
+            TEMP_PATH = Environment.getDownloadCacheDirectory().getAbsolutePath() + File.separator + "renrentui"
                     + File.separator + "TEMP" + File.separator;
             if (TEMP_PATH.indexOf(".") == -1)
                 TEMP_PATH += fileName;

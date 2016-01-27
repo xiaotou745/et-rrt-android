@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -24,6 +25,7 @@ import com.renrentui.resultmodel.RSMyInCome;
 import com.renrentui.tools.Util;
 import com.renrentui.util.ApiNames;
 import com.renrentui.util.ApiUtil;
+import com.renrentui.util.ImageLoadManager;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
 import com.user.service.WithdrawalsDialog;
@@ -85,17 +87,46 @@ public class WithdrawalsActivity extends BaseActivity implements
 				@Override
 				public void onSericeErr(RSBase t) {
 					// TODO Auto-generated method stub
-					ToastUtil.show(context, t.msg);
+					ToastUtil.show(context, "提现失败");
 				}
 
 				@Override
 				public void onSericeExp() {
 					// TODO Auto-generated method stub
+					ToastUtil.show(context, "提现失败");
 				}
 			});
 
 
+	private RQHandler<RSMyInCome> rqHandler_myincome = new RQHandler<RSMyInCome>(
+			new IRqHandlerMsg<RSMyInCome>() {
 
+				@Override
+				public void onBefore() {
+					// TODO Auto-generated method stub
+				}
+
+				@Override
+				public void onNetworknotvalide() {
+				}
+
+				@SuppressWarnings("deprecation")
+				@Override
+				public void onSuccess(RSMyInCome t) {
+					mMyInComeData = t.data;
+					initViewData();
+				}
+
+				@Override
+				public void onSericeErr(RSMyInCome t) {
+					ToastUtil.show(context,"数据错误");
+				}
+
+				@Override
+				public void onSericeExp() {
+					ToastUtil.show(context,"数据错误");
+				}
+			});
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -109,10 +140,19 @@ public class WithdrawalsActivity extends BaseActivity implements
 	@Override
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
-		getData();
+		getInitData();
 		initViewData();
-	}
 
+	}
+	/**
+	 * 初始化数据
+	 */
+	public void getInitData() {
+		ApiUtil.Request(new RQBaseModel<RQUserId, RSMyInCome>(context,
+				new RQUserId(Utils.getUserDTO(context).data.userId),
+				new RSMyInCome(), ApiNames.获取用户信息.getValue(), RequestType.POST,
+				rqHandler_myincome));
+	}
 	/**
 	 * 获取传递数据
 	 */
@@ -207,14 +247,14 @@ private  void getData(){
 				String strStart = content.substring(iBankNo);
 				int i = strStart.length() >= 3 ? 3 : strStart.length();
 				sb.append(content.substring(0, i));
-				sb.append("****").append(content.substring(i));
+				sb.append("****").append(content.substring(iBankNo));
 			} else {
 				// 手机号
-				if(content.length()<=3){
+				if(content.length()<=4){
 					return content;
 				}
 				sb.append(content.substring(0, 3));
-				sb.append("****").append(content.substring(content.length() - 3));
+				sb.append("****").append(content.substring(content.length() - 4));
 			}
 		}
 		return sb.toString();

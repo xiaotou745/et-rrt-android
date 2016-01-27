@@ -158,6 +158,16 @@
             android:layout_below="@id/tv_task_material_bottom_content"
             android:layout_alignLeft="@id/tv_task_material_bottom_content"
            />
+        <TextView
+            android:id="@+id/tv_task_material_bottom_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="拒绝原因:"
+            android:textSize="@dimen/_16sp"
+            android:textColor="@color/tv_order_color_1"
+            android:layout_below="@id/tv_task_material_bottom_time"
+            android:layout_alignLeft="@id/tv_task_material_bottom_content"
+            />
     </RelativeLayout>
     <!-- 操作-->
     <LinearLayout

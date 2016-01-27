@@ -15,18 +15,22 @@ public class TaskMetarialBean implements Serializable {
     public  int waitTotal;//申请中的数量
     public  int passTotal;//通过的数量
     public int refuseTotal;//没有通过的数量
+    public int taskStatus;//1是进行中，3是过期，4是终止
+    public String taskStatusName ;//任务状态描述：1是进行中，3是过期，4是终止
     public ArrayList<TaskMetarialContent> content;// 数据集合 可能为null
 
     public TaskMetarialBean() {
         super();
     }
 
-    public TaskMetarialBean(String title, int count, String nextId, ArrayList<TaskMetarialContent> content) {
+    public TaskMetarialBean(String title, int count, String nextId, ArrayList<TaskMetarialContent> content,int taskStatus,String taskStatusName) {
         super();
         this.title = title;
         this.count = count;
         this.nextId = nextId;
         this.content = content;
+        this.taskStatus = taskStatus;
+        this.taskStatusName = taskStatusName;
     }
 
     @Override

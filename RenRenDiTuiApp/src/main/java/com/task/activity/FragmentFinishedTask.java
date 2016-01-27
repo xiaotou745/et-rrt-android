@@ -57,8 +57,10 @@ public class FragmentFinishedTask extends BaseFragment implements
 		//this.layoutTopMenu = layoutTopMenu;
 		taskId = strTaskId;
 	}
-//	public FragmentFinishedTask() {
-//	}
+	public FragmentFinishedTask() {
+
+	}
+
 	private RQHandler<RSTaskMaterial> rqHandler_getOnGoingTask = new RQHandler<>(
 			new IRqHandlerMsg<RSTaskMaterial>() {
 
@@ -82,7 +84,13 @@ public class FragmentFinishedTask extends BaseFragment implements
 //					layoutTopMenu.setShenhezhong(t.data.waitTotal);
 //					layoutTopMenu.setYtongguo(t.data.passTotal);
 //					layoutTopMenu.setWeitongguo(t.data.refuseTotal);
-					myTaskMaterialListener.showMyTaskMateriaCount(t.data.waitTotal,t.data.passTotal,t.data.refuseTotal);
+					boolean isFinish = false;
+					if(t.data!=null && t.data.taskStatus==1){
+						isFinish = false;
+					}else{
+						isFinish =true;
+					}
+					myTaskMaterialListener.showMyTaskMateriaCount(t.data.waitTotal,t.data.passTotal,t.data.refuseTotal,isFinish);
 					pulltorefresh_taskList.setVisibility(View.VISIBLE);
 					if (pageindex == 1) {
 						if (t.data.count == 0) {
@@ -128,6 +136,7 @@ public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		context = activity;
 		myTaskMaterialListener = (MyTaskMaterialActivity) activity;
+	taskId = Utils.getCurrentTaskId(context);
 		}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

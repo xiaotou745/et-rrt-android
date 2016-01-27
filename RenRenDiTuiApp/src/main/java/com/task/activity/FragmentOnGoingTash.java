@@ -52,9 +52,9 @@ public class FragmentOnGoingTash extends BaseFragment implements
 	public MyTaskMaterialActivity myTaskMaterialListener;
 	//private LayoutMainTopmenu layoutTopMenu;// 顶部按钮
 
-//	public FragmentOnGoingTash(){
-//
-//	}
+	public FragmentOnGoingTash(){
+
+	}
 	@SuppressLint("ValidFragment")
 	public FragmentOnGoingTash(String strTaskId){
 		taskId = strTaskId;
@@ -85,7 +85,13 @@ public class FragmentOnGoingTash extends BaseFragment implements
 //					layoutTopMenu.setShenhezhong(t.data.waitTotal);
 //					layoutTopMenu.setYtongguo(t.data.passTotal);
 //					layoutTopMenu.setWeitongguo(t.data.refuseTotal);
-					myTaskMaterialListener.showMyTaskMateriaCount(t.data.waitTotal,t.data.passTotal,t.data.refuseTotal);
+					boolean isFinish = false;
+					if(t.data!=null && t.data.taskStatus==1){
+						isFinish = false;
+					}else{
+						isFinish =true;
+					}
+					myTaskMaterialListener.showMyTaskMateriaCount(t.data.waitTotal,t.data.passTotal,t.data.refuseTotal,isFinish);
 					pulltorefresh_taskList.setVisibility(View.VISIBLE);
 					if (pageindex == 1) {
 						if (t.data.count == 0) {
@@ -130,6 +136,7 @@ public class FragmentOnGoingTash extends BaseFragment implements
 		super.onAttach(activity);
 		context = activity;
 		myTaskMaterialListener = (MyTaskMaterialActivity) activity;
+		taskId = Utils.getCurrentTaskId(context);
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

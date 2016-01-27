@@ -58,6 +58,7 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 		str_userId = Utils.getUserDTO(context).data.userId;
 		str_ctId = getIntent().getStringExtra("ctId");
 		str_taskType = getIntent().getStringExtra("TASK_TYPENAME");
+		Utils.setCurrentTaskId(context,str_taskId);
 		initView();
 		initViewPager(topage);
 	}
@@ -198,10 +199,15 @@ public class MyTaskMaterialActivity extends BaseFragmentActivity implements
 //	========================数值调整========================
 
 	@Override
-	public void showMyTaskMateriaCount(int num1, int num2, int num3) {
+	public void showMyTaskMateriaCount(int num1, int num2, int num3,boolean isFinish) {
 		layoutTopMenu.setShenhezhong(num1);
 		layoutTopMenu.setYtongguo(num2);
 		layoutTopMenu.setWeitongguo(num3);
+		if(isFinish){
+			mBtn_submit_taskTemple.setVisibility(View.GONE);
+		}else{
+			mBtn_submit_taskTemple.setVisibility(View.VISIBLE);
+		}
 	}
 
 }

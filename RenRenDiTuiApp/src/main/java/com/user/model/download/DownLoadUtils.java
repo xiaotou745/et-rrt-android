@@ -65,7 +65,7 @@ public class DownLoadUtils {
 			IHttpRequest httpRequest = new HttpRequestDigestImpl();
 			try {
 				strResult = HttpRequest.sendPostJSON(mContext,
-						ApiConstants.checkVersionUrl + "common/versioncheck",
+						ApiConstants.checkVersionUrl + "common/services/common/versioncheck",
 						checkVersion);
 				if(strResult==null){
 					strResult = "";
@@ -78,40 +78,44 @@ public class DownLoadUtils {
 
 		@Override
 		protected void onPostExecute(String result) {
-			if (Util.IsNotNUll(result)) {
-				Gson gson = new Gson();
-				RSCheckVersion checkVersion = gson.fromJson(result,
-						RSCheckVersion.class);
-				if (checkVersion == null) {
-					ToastUtil.show(mContext, "网络异常");
-				} else if (checkVersion.data == null) {
-					ToastUtil.show(mContext, "网络异常");
-				} else {
-					String t = checkVersion.data.version;
-					String[] v = t.split("\\.");
-					String str = "";
-					for (int i = 0; i < v.length; i++) {
-						str += v[i];
-					}
-					int version = Integer.parseInt(str);
-					int mCurrentVersion = com.renrentui.util.Utils
-							.getVersionId(mContext);
-					if (version > mCurrentVersion) {
-						DownLoadDialog mUpdateDialog = new DownLoadDialog(
-								mContext, String.valueOf(version),
-								checkVersion.data.updateUrl,
-								checkVersion.data.isMust,
-								checkVersion.data.message);
-						mUpdateDialog.show();
+			try {
+				if (Util.IsNotNUll(result)) {
+					Gson gson = new Gson();
+					RSCheckVersion checkVersion = gson.fromJson(result,
+							RSCheckVersion.class);
+					if (checkVersion == null) {
+						ToastUtil.show(mContext, "网络异常");
+					} else if (checkVersion.data == null) {
+						ToastUtil.show(mContext, "网络异常");
 					} else {
-						if(isShowToast){
-							ToastUtil.show(mContext, "已为最新版本");
+						String t = checkVersion.data.version;
+						String[] v = t.split("\\.");
+						String str = "";
+						for (int i = 0; i < v.length; i++) {
+							str += v[i];
 						}
+						int version = Integer.parseInt(str);
+						int mCurrentVersion = com.renrentui.util.Utils
+								.getVersionId(mContext);
+						if (version > mCurrentVersion) {
+							DownLoadDialog mUpdateDialog = new DownLoadDialog(
+									mContext, String.valueOf(version),
+									checkVersion.data.updateUrl,
+									checkVersion.data.isMust,
+									checkVersion.data.message);
+							mUpdateDialog.show();
+						} else {
+							if (isShowToast) {
+								ToastUtil.show(mContext, "已为最新版本");
+							}
 
+						}
 					}
+				} else {
+					//ToastUtil.show(mContext, "升级错误");
 				}
-			}else{
-				//ToastUtil.show(mContext, "升级错误");
+			}catch (Exception e){
+
 			}
 		}
 	}

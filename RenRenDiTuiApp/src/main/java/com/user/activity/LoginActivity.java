@@ -42,6 +42,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	private String SSID="";
 	private String operSystemModel="";//手机具体型号
 	private String phoneType="";//手机类型
+	private boolean isGoToMain = true;
 
 
 	private RQHandler<RSUser> rqHandler_userLogin = new RQHandler<RSUser>(
@@ -62,10 +63,14 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 				@Override
 				public void onSuccess(RSUser t) {
 					Utils.setUserDTO(context, t);
-//					Intent intent = new Intent(context,
-//							NoGoingTaskActicity.class);
-//					startActivity(intent);
-					finish();
+					if(isGoToMain){
+					Intent intent = new Intent(context,NoGoingTaskActicity.class);
+					startActivity(intent);
+						finish();
+					}else{
+						finish();
+					}
+
 				}
 
 				@Override
@@ -91,6 +96,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		SSID = Utils.getMobileDevieceId(context);
 		operSystemModel = Utils.getModelSysVersion(context);
 		phoneType = Utils.getModel(context);
+		isGoToMain = this.getIntent().getBooleanExtra("gotomain",true);
+
 		initControl();
 	}
 

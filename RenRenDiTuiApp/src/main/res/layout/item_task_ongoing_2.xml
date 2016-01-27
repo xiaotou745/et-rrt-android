@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/item_task_main_bg"
+    android:descendantFocusability="blocksDescendants"
     android:padding="@dimen/view_space_half_3_multiple" >
 
 
@@ -18,7 +19,6 @@
         android:textColor="@color/tv_order_color_4"
         android:textSize="@dimen/_12sp"
         android:text="2015-10-23 11:14"
-
         />
     <!-- 图片展示-->
     <GridView
@@ -32,6 +32,7 @@
         android:numColumns="5"
         android:gravity="left"
         android:horizontalSpacing="@dimen/view_space"
+        android:focusable="false"
         ></GridView>
 
     <View

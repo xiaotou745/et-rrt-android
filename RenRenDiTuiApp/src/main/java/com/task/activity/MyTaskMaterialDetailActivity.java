@@ -2,6 +2,7 @@ package com.task.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,6 +20,8 @@ import com.renrentui.app.R;
 import com.renrentui.util.ApiNames;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by Administrator on 2015/12/2 0002.
@@ -45,6 +48,7 @@ public class MyTaskMaterialDetailActivity extends BaseActivity implements
     private TextView mTV_bottom_time;
     private TextView mTV_bottom_content;
     private ImageView mIV_bottom_icon;
+    private TextView mTV_bottom_message;//拒绝原因
 
     private Button mBtn_left;
     private Button mBtn_right;
@@ -112,7 +116,8 @@ public class MyTaskMaterialDetailActivity extends BaseActivity implements
         mView_bottom_line = findViewById(R.id.view_bottom_line);
         mTV_bottom_content = (TextView)findViewById(R.id.tv_task_material_bottom_content);
         mTV_bottom_time = (TextView)findViewById(R.id.tv_task_material_bottom_time);
-
+        mTV_bottom_message =(TextView) findViewById(R.id.tv_task_material_bottom_msg);
+        mTV_bottom_message.setVisibility(View.GONE);
 
         mBtn_left = (Button)findViewById(R.id.btn_left);
         mBtn_left.setOnClickListener(this);
@@ -181,6 +186,11 @@ public class MyTaskMaterialDetailActivity extends BaseActivity implements
                 mView_bottom_line.setBackgroundColor(context.getResources().getColor(R.color.red_bg));
                 mTV_bottom_content.setText("审核未通过");
                 mTV_bottom_time.setText(beanContent.auditTime);
+            if(!TextUtils.isEmpty(beanContent.refuReason)){
+                mTV_bottom_message.setText("拒绝原因:"+beanContent.refuReason);
+                mTV_bottom_message.setVisibility(View.VISIBLE);
+                }
+
                 mBtn_left.setVisibility(View.VISIBLE);
                 mBtn_right.setVisibility(View.VISIBLE);
                 mBtn_left.setText("查看资料");

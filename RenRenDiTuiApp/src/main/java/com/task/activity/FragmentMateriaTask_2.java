@@ -70,7 +70,7 @@ public class FragmentMateriaTask_2 extends BaseFragment implements
 				@Override
 				public void onSuccess(RSMyMaterialTaskTeamModel t) {
 					FragmentMateriaTask_2.this.hideLayoutNoda();
-					myTaskMaterialListener.showMyTaskMateriaCount(t.getData().getWaitTotal(),t.getData().getPassTotal(),t.getData().getRefuseTotal());
+					myTaskMaterialListener.showMyTaskMateriaCount(t.getData().getWaitTotal(),t.getData().getPassTotal(),t.getData().getRefuseTotal(),true);
 					pulltorefresh_taskList.setVisibility(View.VISIBLE);
 					if (pageindex == 1) {
 						if (t.getData().getCount() == 0) {

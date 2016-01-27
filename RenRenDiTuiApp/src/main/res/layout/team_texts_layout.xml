@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/view_space"
+    android:background="@color/white"
     >
 
     <TextView
@@ -13,15 +13,23 @@
         android:gravity="left"
         android:textColor="@color/tv_order_color_1"
         android:textSize="@dimen/_15sp"
-        android:layout_marginBottom="@dimen/view_space"
+        android:layout_marginBottom="@dimen/view_space_half"
+        android:background="#F3F3F3"
+        android:paddingLeft="@dimen/view_space"
+        android:paddingRight="@dimen/view_space"
+        android:paddingTop="@dimen/view_space_half"
+        android:paddingBottom="@dimen/view_space_half"
+
         />
     <com.renrentui.view.MyListView
         android:id="@+id/ll_team_texts_data"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:listSelector="@color/white"
-        android:divider="@color/transparent"
-        android:dividerHeight="0dip"
+        android:divider="@color/line_bg_color"
+        android:dividerHeight="1dip"
+        android:layout_marginLeft="@dimen/view_space_2_multiple"
+        android:layout_marginRight="@dimen/view_space_2_multiple"
         ></com.renrentui.view.MyListView>
 
 </LinearLayout>

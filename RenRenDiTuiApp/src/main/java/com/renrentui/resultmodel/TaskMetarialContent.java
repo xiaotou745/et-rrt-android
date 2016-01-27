@@ -24,7 +24,7 @@ public class TaskMetarialContent  implements Serializable {
     public int  groupType;// 模板组的类型id（1是文本组，2是图片组，3是多图组）
     public String ctId;//地推关系id
     public ArrayList<String > titlesList;// 资料的展示信息集合，集合中元素类型是字符串（groupType是文本组时，集合中是资料描述，否则是图片地址）
-
+    public String refuReason;//拒绝原因
     public String getAmount() {
 
         DecimalFormat df = new DecimalFormat("0.00");
@@ -35,7 +35,7 @@ public class TaskMetarialContent  implements Serializable {
     public TaskMetarialContent(){
         super();
     }
-    public TaskMetarialContent(String taskId, String taskName, double amount,
+    public TaskMetarialContent(String refuReason,String taskId, String taskName, double amount,
                             int taskType, String taskTypeName, String taskStatus,
                             String auditCycle, String taskDatumId, String auditStatus,
                             String createDate, String auditTime, int groupType,
@@ -56,6 +56,7 @@ public class TaskMetarialContent  implements Serializable {
         this.titlesList = titlesList;
         this.ctId =ciId;
         this.taskStatusName = taskStatusName;
+        this.refuReason = refuReason;
     }
 
     @Override

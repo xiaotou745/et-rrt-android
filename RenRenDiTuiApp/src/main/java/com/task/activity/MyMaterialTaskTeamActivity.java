@@ -152,7 +152,7 @@ public class MyMaterialTaskTeamActivity extends BaseFragmentActivity implements
 //	========================数值调整========================
 
 	@Override
-	public void showMyTaskMateriaCount(int num1, int num2, int num3) {
+	public void showMyTaskMateriaCount(int num1, int num2, int num3,boolean isFinish) {
 		layoutTopMenu.setShenhezhong(num1);
 		layoutTopMenu.setYtongguo(num2);
 		layoutTopMenu.setWeitongguo(num3);

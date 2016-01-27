@@ -24,6 +24,7 @@
             android:dividerHeight="@dimen/_10dp"
             android:fadingEdge="none"
             android:listSelector="@color/white"
+            android:cacheColorHint="@color/transparent"
             android:scrollbars="none" >
         </ListView>
     </com.renrentui.controls.PullToRefreshView>

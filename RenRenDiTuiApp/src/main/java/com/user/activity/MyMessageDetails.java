@@ -62,6 +62,7 @@ public class MyMessageDetails extends BaseActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_message_details);
+        super.init();
         initView();
         initViewData();
         getMyMessageData();
@@ -72,7 +73,7 @@ public class MyMessageDetails extends BaseActivity implements View.OnClickListen
             mIV_title_left.setOnClickListener(this);
         }
         if(mTV_title_content!=null){
-            mTV_title_content.setText("消息中心");
+            mTV_title_content.setText("消息详情");
         }
         strMessageContent = this.getIntent().getStringExtra("content");
         strMessageId = this.getIntent().getStringExtra("id");

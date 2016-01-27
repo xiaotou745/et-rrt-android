@@ -5,6 +5,7 @@
     android:layout_height="125dip"
     android:background="@color/layout_view_content_bg"
     android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants"
     >
 <RelativeLayout
     android:layout_width="match_parent"
@@ -127,6 +128,7 @@
             android:layout_centerVertical="true"
             android:background="@drawable/bg_shape_square"
             android:text="继续任务"
+            android:focusable="false"
             android:layout_marginTop="@dimen/view_space_half"
             android:layout_marginBottom="@dimen/view_space_half"
             />
@@ -159,6 +161,7 @@
             android:layout_centerVertical="true"
             android:background="@drawable/bg_shape_square"
             android:text="分享二维码"
+            android:focusable="false"
             android:layout_marginTop="@dimen/view_space_half"
             android:layout_marginBottom="@dimen/view_space_half"
             />
@@ -191,6 +194,7 @@
             android:layout_centerVertical="true"
             android:background="@drawable/bg_shape_square"
             android:text="继续任务"
+            android:focusable="false"
             android:visibility="invisible"
             android:layout_marginTop="@dimen/view_space_half"
             android:layout_marginBottom="@dimen/view_space_half"
@@ -224,6 +228,7 @@
             android:layout_centerVertical="true"
             android:background="@drawable/bg_shape_square"
             android:text="分享二维码"
+            android:focusable="false"
             android:visibility="invisible"
             android:layout_marginTop="@dimen/view_space_half"
             android:layout_marginBottom="@dimen/view_space_half"

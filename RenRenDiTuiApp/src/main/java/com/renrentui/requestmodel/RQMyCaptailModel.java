@@ -26,7 +26,12 @@ public class RQMyCaptailModel extends RQBase {
         this.userId = userId;
         this.recordType = recordType;
     }
-
+    public RQMyCaptailModel(String userId,int nextId, String recordType) {
+        super();
+        this.userId = userId;
+        this.nextId = nextId;
+        this.recordType = recordType;
+    }
     @Override
     public String toString() {
         return "RQMyCaptailModel{" +

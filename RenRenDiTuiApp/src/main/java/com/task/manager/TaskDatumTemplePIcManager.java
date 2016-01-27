@@ -128,7 +128,7 @@ public class TaskDatumTemplePIcManager {
         }
         try {
             Bitmap bitmap = photoMgr.onActivityResult(act, requestCode, resultCode, data);
-            if (!photoMgr.isImageType(photoMgr.getFilePath())) {
+            if ( bitmap==null || !photoMgr.isImageType(photoMgr.getFilePath())) {
                 Toast.makeText(actContext, R.string.add_order_img_type_error, Toast.LENGTH_SHORT).show();
                 return;
             }

@@ -55,10 +55,9 @@ public class UpdatePwdActivity extends BaseActivity implements OnClickListener {
 					hideProgressDialog();
 					ToastUtil.show(context, "密码修改成功");
 					Utils.quitUser(context);
-					Intent intent = new Intent(context,
-							LoginActivity.class);
+					Intent intent = new Intent(context,	LoginActivity.class);
 					startActivity(intent);
-					finish();
+					UpdatePwdActivity.this.finish();
 				}
 
 				@Override

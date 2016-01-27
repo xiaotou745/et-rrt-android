@@ -267,7 +267,7 @@ public class PersonalCenterActivity extends BaseActivity implements
 				intent = new Intent(this, PersonalDataActivity.class);
 				break;
 			case R.id.tv_withdrawals:// 提现
-				if(mMyInComeData==null || Double.parseDouble(mMyInComeData.getBalance())<=10){
+				if(mMyInComeData==null || Double.parseDouble(mMyInComeData.getBalance())<10){
 					intent = null;
 					ToastUtil.show(context,"余额不足10元,暂时不能提现");
 				}else {

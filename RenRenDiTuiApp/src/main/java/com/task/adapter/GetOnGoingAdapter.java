@@ -123,7 +123,7 @@ public class GetOnGoingAdapter extends BaseAdapter {
 					viewHolder_3 = new ViewHolder_3();
 					convertView = LayoutInflater.from(context).inflate(R.layout.item_task_ongoing_2,parent,false);
 					viewHolder_3.tv_push_time = (TextView)convertView.findViewById(R.id.tv_pusher_time);
-					viewHolder_3.gridView_task_pic = (GridView)convertView.findViewById(R.id.gridview_task_pic);
+					viewHolder_3.gridViews_task_pic = (GridView)convertView.findViewById(R.id.gridview_task_pic);
 					viewHolder_3.tv_task_status = (TextView)convertView.findViewById(R.id.tv_task_status);
 					viewHolder_3.tv_task_name = (TextView)convertView.findViewById(R.id.tv_task_name);
 					viewHolder_3.ll_amount = (LinearLayout)convertView.findViewById(R.id.ll_amount);
@@ -188,7 +188,11 @@ public class GetOnGoingAdapter extends BaseAdapter {
 				viewHolder_2.tv_task_amount.setText(String.valueOf(beanContent.getAmount()));
 //
 				viewHolder_2.tv_task_name.setText(style);
-				viewHolder_2.gridView_task_pic.setAdapter(new GriveiwTaskPicAdapter(context,beanContent.titlesList));
+				viewHolder_2.gridView_task_pic.setAdapter(new GriveiwTaskPicAdapter(context, beanContent.titlesList));
+
+				viewHolder_2.gridView_task_pic.setClickable(false);
+				viewHolder_2.gridView_task_pic.setEnabled(false);
+				viewHolder_2.gridView_task_pic.setFocusable(false);
 				break;
 			case 2:
 				viewHolder_3.tv_push_time.setText("提交时间  "+ TimeUtils.StringPattern(beanContent.createDate,"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm"));
@@ -197,7 +201,10 @@ public class GetOnGoingAdapter extends BaseAdapter {
 				viewHolder_3.tv_task_amount.setText(String.valueOf(beanContent.getAmount()));
 
 				viewHolder_3.tv_task_name.setText(style);
-				viewHolder_3.gridView_task_pic.setAdapter(new GriveiwTaskPicAdapter(context,beanContent.titlesList));
+				viewHolder_3.gridViews_task_pic.setAdapter(new GriveiwTaskPicAdapter(context,beanContent.titlesList));
+				viewHolder_3.gridViews_task_pic.setClickable(false);
+				viewHolder_3.gridViews_task_pic.setEnabled(false);
+				viewHolder_3.gridViews_task_pic.setFocusable(false);
 				break;
 		}
 		convertView.setOnClickListener(new View.OnClickListener(){
@@ -349,7 +356,7 @@ public class GetOnGoingAdapter extends BaseAdapter {
 	}
 	public class ViewHolder_3 {
 		public  TextView tv_push_time;
-		public GridView gridView_task_pic;
+		public GridView gridViews_task_pic;
 		public TextView tv_task_status;
 		public LinearLayout ll_amount;
 		public TextView tv_task_amount;

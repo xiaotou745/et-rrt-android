@@ -35,8 +35,8 @@ public class BaseFragmentActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//		requestWindowFeature(Window.FEATURE_NO_TITLE);
+//		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		context =this;
 		initImageLoader(getApplicationContext());
 	}
@@ -121,6 +121,6 @@ public class BaseFragmentActivity extends FragmentActivity {
 		 * @param num2   通过
 		 * @param num3    拒绝
 		 */
-		void showMyTaskMateriaCount(int num1, int num2, int num3);
+		void showMyTaskMateriaCount(int num1, int num2, int num3,boolean isFinish);
 	}
 }

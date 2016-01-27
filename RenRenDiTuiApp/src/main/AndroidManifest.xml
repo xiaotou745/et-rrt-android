@@ -78,7 +78,8 @@
         <activity android:name="com.user.activity.PersonalDataActivity" />
         <activity
             android:name="com.user.activity.WithdrawalsActivity"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTask"
+             />
         <activity android:name="com.user.activity.MoreActivity" />
         <activity android:name="com.task.activity.WebViewActivity" />
         <activity android:name="com.task.activity.ShareViewActivity" />

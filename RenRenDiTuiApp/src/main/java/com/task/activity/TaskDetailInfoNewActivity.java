@@ -318,6 +318,7 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 					submitTaskDetail(rsGetTaskDetailInfo.data.task.taskType,i_isHad);
 				}else{
 					Intent intent = new Intent(context,LoginActivity.class);
+					intent.putExtra("gotomain",false);
                     context.startActivity(intent);
 				}
 				break;
@@ -475,43 +476,78 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 		}else{
 			ll_task_description.setVisibility(View.VISIBLE);
 		}
-		if("1".equals(str_taskStatus)){
+//		if("1".equals(str_taskStatus)){
 			btn_receive_task.setVisibility(View.VISIBLE);
-		}else{
-			btn_receive_task.setVisibility(View.GONE);
+//		}else{
+//			btn_receive_task.setVisibility(View.GONE);
+//		}
+if("1".equals(str_taskStatus)) {
+	//任务非终止
+	if (i_isHad == 0) {
+		//未领取
+		if (taskBean.task.taskType == 1) {
+			//签约
+			btn_receive_task.setText("立即领取");
+			isShareTask = false;
+		} else if (taskBean.task.taskType == 2) {
+			//分享
+			btn_receive_task.setText("立即领取");
+			isShareTask = true;
+		} else if (taskBean.task.taskType == 3) {
+			//下载
+			btn_receive_task.setText("立即领取");
+			isShareTask = true;
 		}
-
-		if(i_isHad==0){
-			//未领取
-			if(taskBean.task.taskType==1){
-				//签约
-				btn_receive_task.setText("立即领取");
-				isShareTask = false;
-			}else if(taskBean.task.taskType==2){
-				//分享
-				btn_receive_task.setText("立即领取");
-				isShareTask = true;
-			}else  if(taskBean.task.taskType==3){
-				//下载
-				btn_receive_task.setText("立即领取");
-				isShareTask = true;
-			}
-		}else if(taskBean.task.isHad==1){
-			//已领取
-			if(taskBean.task.taskType==1){
-				//签约
-				btn_receive_task.setText("继续任务");
-				isShareTask = false;
-			}else if(taskBean.task.taskType==2){
-				//分享
-				btn_receive_task.setText("分享二维码");
-				isShareTask = true;
-			}else  if(taskBean.task.taskType==3){
-				//下载
-				btn_receive_task.setText("分享二维码");
-				isShareTask = true;
-			}
+	} else if (taskBean.task.isHad == 1) {
+		//已领取
+		if (taskBean.task.taskType == 1) {
+			//签约
+			btn_receive_task.setText("继续任务");
+			isShareTask = false;
+		} else if (taskBean.task.taskType == 2) {
+			//分享
+			btn_receive_task.setText("分享二维码");
+			isShareTask = true;
+		} else if (taskBean.task.taskType == 3) {
+			//下载
+			btn_receive_task.setText("分享二维码");
+			isShareTask = true;
 		}
+	}
+}else{
+//终止
+	if (i_isHad == 0) {
+		//未领取
+		if (taskBean.task.taskType == 1) {
+			//签约
+			btn_receive_task.setText("立即领取");
+			isShareTask = false;
+		} else if (taskBean.task.taskType == 2) {
+			//分享
+			btn_receive_task.setText("立即领取");
+			isShareTask = true;
+		} else if (taskBean.task.taskType == 3) {
+			//下载
+			btn_receive_task.setText("立即领取");
+			isShareTask = true;
+		}
+	} else if (taskBean.task.isHad == 1) {
+		//已领取
+		if (taskBean.task.taskType == 1) {
+			//签约
+			btn_receive_task.setText("历史资料");
+			isShareTask = false;
+		} else if (taskBean.task.taskType == 2) {
+			//分享
+			btn_receive_task.setText("分享二维码");
+			isShareTask = true;
+		} else if (taskBean.task.taskType == 3) {
+			//下载
+			btn_receive_task.setText("分享二维码");
+			isShareTask = true;
+		}
+	}
+}
 		str_shareContent = taskBean.task.downUrl;
 
 		//解析任务参与人
