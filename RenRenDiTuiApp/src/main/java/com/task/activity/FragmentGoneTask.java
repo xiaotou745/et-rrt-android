@@ -86,11 +86,7 @@ public class FragmentGoneTask extends BaseFragment implements
 //					layoutTopMenu.setYtongguo(t.data.passTotal);
 //					layoutTopMenu.setWeitongguo(t.data.refuseTotal);
 					boolean isFinish = false;
-					if(t.data!=null && t.data.taskStatus==1){
-						isFinish = false;
-					}else{
-						isFinish =true;
-					}
+					isFinish = !(t.data != null && t.data.taskStatus == 1);
 					myTaskMaterialListener.showMyTaskMateriaCount(t.data.waitTotal,t.data.passTotal,t.data.refuseTotal,isFinish);
 					pulltorefresh_taskList.setVisibility(View.VISIBLE);
 					if (pageindex == 1) {

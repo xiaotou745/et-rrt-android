@@ -12,8 +12,8 @@ android {
         applicationId "com.renrentui.app"
         minSdkVersion 11
         targetSdkVersion 11
-        versionCode 111
-        versionName "1.1.1"
+        versionCode 112
+        versionName '1.1.2'
 //        java 版本
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_7
