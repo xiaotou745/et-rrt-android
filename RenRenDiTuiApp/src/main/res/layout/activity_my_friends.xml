@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/tv_order_color_5"
         android:textSize="@dimen/_16sp"
-        android:text="5人"
+        android:text=""
         android:paddingTop="@dimen/_5dp"
         android:gravity="center_horizontal"
 
@@ -100,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/tv_order_color_5"
                     android:textSize="@dimen/_16sp"
-                    android:text="13811247642"
+                    android:text=""
                     android:paddingTop="@dimen/_5dp"
                     android:gravity="center_horizontal"
 

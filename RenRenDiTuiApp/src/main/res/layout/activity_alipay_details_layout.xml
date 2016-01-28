@@ -42,7 +42,7 @@
             android:gravity="left|center_vertical"
             android:textColor="@color/tv_order_color_5"
             android:textSize="@dimen/_14sp"
-            android:text="11111111111111111"
+            android:text=""
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/tv_key_01"
             />
@@ -64,7 +64,7 @@
             android:gravity="left|center_vertical"
             android:textColor="@color/tv_order_color_5"
             android:textSize="@dimen/_14sp"
-            android:text="3333333333333333333"
+            android:text=""
             android:layout_below="@id/tv_key_02"
             android:layout_toRightOf="@id/tv_key_03"
             />

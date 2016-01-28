@@ -303,9 +303,9 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 		mLine_task_detail_tel_top = findViewById(R.id.line_detail_tel_top);
 		mLL_task_tel = (LinearLayout)findViewById(R.id.ll_detal_tel);
 
-		mLine_task_detail_friend_top = findViewById(R.id.line_detail_friend_top);
 		mTV_task_friend_flag = (TextView)findViewById(R.id.tv_task_friend_flag);
 		mTaskFriendGridView = (GridView)findViewById(R.id.gv_task_friend);
+		mLine_task_detail_friend_top = findViewById(R.id.line_detail_friend_top);
 		mLL_detail_friends = (LinearLayout)findViewById(R.id.ll_detail_friend);
 
 	}
@@ -454,15 +454,27 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 				mLinksData.add(index,bean);
 			}
 		}
+		//流程步骤
+		if(mFlowpathData==null || mFlowpathData.size()==0){
+			lv_task_flowpath.setVisibility(View.GONE);
+		}else{
+			lv_task_flowpath.setVisibility(View.VISIBLE);
+		}
+		//补充说明
 		if(mExplainData==null ||mExplainData.size()==0){
 			mLine_task_explain_top.setVisibility(View.GONE);
+			lv_task_explain.setVisibility(View.GONE);
 		}else{
 			mLine_task_explain_top.setVisibility(View.VISIBLE);
+			lv_task_explain.setVisibility(View.VISIBLE);
 		}
+		//连接
 		if(mLinksData==null ||mLinksData.size()==0){
 			mLine_detail_link_top.setVisibility(View.GONE);
+			lv_task_detail_link.setVisibility(View.GONE);
 		}else{
 			mLine_detail_link_top.setVisibility(View.VISIBLE);
+			lv_task_detail_link.setVisibility(View.VISIBLE);
 		}
 		//适配数据
 		mTaskFlowPathAdapter.setTaskData(mFlowpathData);
@@ -481,6 +493,8 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 //		}else{
 //			btn_receive_task.setVisibility(View.GONE);
 //		}
+
+
 if("1".equals(str_taskStatus)) {
 	//任务非终止
 	if (i_isHad == 0) {
@@ -552,8 +566,10 @@ if("1".equals(str_taskStatus)) {
 
 		//解析任务参与人
 		List<PartnerList>  mPartnerList = taskBean.partnerList;
+		mLine_task_detail_friend_top.setVisibility(View.VISIBLE);
+		mLL_detail_friends.setVisibility(View.VISIBLE);
 		if(mPartnerList==null || mPartnerList.size()==0){
-			 mTV_task_friend_flag.setText("还没有地推员参与该任务~");
+			mTV_task_friend_flag.setText("还没有地推员参与该任务~");
 			mTV_task_friend_flag.setTextColor(context.getResources().getColor(R.color.tv_order_color_3));
 			mTaskFriendGridView.setVisibility(View.GONE);
 		}else{

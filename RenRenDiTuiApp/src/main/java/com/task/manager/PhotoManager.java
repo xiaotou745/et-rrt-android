@@ -53,7 +53,7 @@ import com.renrentui.app.R;
  */
 public class PhotoManager {
     /**
-     * 图片保存路径
+     * 图片保存路径(外界)
      */
     public static String TEMP_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
             + "DCIM" + File.separator + "Camera" + File.separator;

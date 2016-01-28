@@ -41,7 +41,7 @@
         android:id="@+id/tv_captail_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="2015-12-31"
+        android:text=""
         android:textSize="@dimen/_14sp"
         android:textColor="@color/tv_order_color_4"
         android:singleLine="true"

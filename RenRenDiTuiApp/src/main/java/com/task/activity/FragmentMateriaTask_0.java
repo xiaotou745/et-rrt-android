@@ -128,7 +128,7 @@ public class FragmentMateriaTask_0 extends BaseFragment implements
 		lv_task_main = (ListView) view.findViewById(R.id.lv_task_team_main);
 		lv_task_main.setOverScrollMode(View.OVER_SCROLL_NEVER);
 		taskMetarialContents = new ArrayList<RSMyMaterialTaskTeamModel.Content>();
-		mTeamAdapter = new MateriaTaskTeamAdapter(context,1);
+		mTeamAdapter = new MateriaTaskTeamAdapter(context,0);
 		lv_task_main.setAdapter(mTeamAdapter);
 		return view;
 	}

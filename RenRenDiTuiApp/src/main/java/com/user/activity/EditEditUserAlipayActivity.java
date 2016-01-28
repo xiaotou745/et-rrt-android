@@ -154,7 +154,7 @@ private TextView mTV_phone;
             mTV_title_content.setText("绑定支付宝");
         }
         mTV_phone = (TextView)findViewById(R.id.tv_alipay_phone_value);
-        if(!TextUtils.isEmpty(strUserPhone) && strUserName.length()>=4){
+        if(!TextUtils.isEmpty(strUserPhone) && strUserPhone.length()>=4){
             StringBuffer sb = new StringBuffer();
             sb.append(strUserPhone.substring(0, 3));
             sb.append("****").append(strUserPhone.substring(strUserPhone.length() - 4));

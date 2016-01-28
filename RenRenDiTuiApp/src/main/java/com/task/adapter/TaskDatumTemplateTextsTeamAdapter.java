@@ -128,12 +128,13 @@ public class TaskDatumTemplateTextsTeamAdapter extends BaseAdapter {
             mHolderView.mTextView.setVisibility(View.GONE);
             mHolderView.mEitText.setHint(taskDean.controlTitle);
             mHolderView.mEitText.setTag(str_tag + String.valueOf("_" + iTeam_num + "_") + String.valueOf(i));
-            mHolderView.mEitText.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+            mHolderView.mEitText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
-                    if(hasFocus){
+                    if (hasFocus) {
                         index = position;
                     }
+                    Log.e("ffffffffffffffffffffffffffff","<<<<"+hasFocus);
                 }
             });
             mHolderView.mEitText.setOnTouchListener(new View.OnTouchListener() {
@@ -142,12 +143,13 @@ public class TaskDatumTemplateTextsTeamAdapter extends BaseAdapter {
 //                    if(motionEvent.getAction()==MotionEvent.ACTION_UP){
 //                        index = position;
 //                    }
-                    if(motionEvent.getAction()== MotionEvent.ACTION_DOWN){
+                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                         index = position;
                     }
                     return false;
                 }
             });
+            final  EditText mEditText= mHolderView.mEitText;
             mHolderView.mEitText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -163,8 +165,9 @@ public class TaskDatumTemplateTextsTeamAdapter extends BaseAdapter {
                 @Override
                 public void afterTextChanged(Editable s) {
                     //将editText中保存到数据库中
-                    String strContent = s.toString();
                     if(index!=-1 && index==position){
+                        String strContent = s.toString();
+                        strContent = mEditText.getText().toString();
                         hashMap.put(position, strContent);
                         TaskTempleDBBean beanD = new TaskTempleDBBean();
                         beanD.setUSER_ID(str_userId);
@@ -179,6 +182,7 @@ public class TaskDatumTemplateTextsTeamAdapter extends BaseAdapter {
                     }
                 }
             });
+
 //            /如果hashMap不为空，就设置的editText
             if(hashMap.get(position) != null){
                 index=-1;
@@ -193,4 +197,11 @@ public class TaskDatumTemplateTextsTeamAdapter extends BaseAdapter {
         public TextView mTextView;
     }
 
+    public String getLastContent(EditText mEditText){
+        if(mEditText!=null){
+            return mEditText.getText().toString().trim();
+        }else{
+            return "";
+        }
+    }
 }

@@ -73,7 +73,7 @@
                             android:id="@+id/tv_amount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="1880.00"
+                            android:text="0.00"
                             android:gravity="center_horizontal"
                             android:textColor="@color/red_bg"
                             android:textSize="@dimen/_16sp"
@@ -99,7 +99,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_toLeftOf="@id/ll_amount"
                         android:layout_toRightOf="@id/icon_pusher"
-                        android:text="测试商都"
+                        android:text=""
                         android:layout_margin="@dimen/_15dp"
                         android:layout_marginTop="@dimen/_12.5dp"
                         android:layout_marginBottom="@dimen/_12.5dp"
@@ -203,10 +203,12 @@
                         android:divider="@null"
                         android:paddingTop="@dimen/_5dp"
                         android:paddingBottom="@dimen/_5dp"
+                        android:visibility="gone"
                         />
                 <View
                     android:id="@+id/line_task_explain_top"
-                        style="@style/line_height_1">
+                    android:visibility="gone"
+                    style="@style/line_height_1">
                 </View>
                     <!-- 当前任务的补充说明-->
                     <com.renrentui.view.MyListView
@@ -218,12 +220,14 @@
                         android:listSelector="@color/white"
                         android:dividerHeight="0dip"
                         android:divider="@null"
+                        android:visibility="gone"
                         >
                     </com.renrentui.view.MyListView>
 
 
             <View
                 android:id="@+id/line_detail_link_top"
+                android:visibility="gone"
                 style="@style/line_height_10">
             </View>
             <!--详情页面链接 -->
@@ -236,12 +240,14 @@
                 android:dividerHeight="10dip"
                 android:divider="@color/line_bg_color"
                 android:background="@color/white"
+                android:visibility="gone"
                 >
             </com.renrentui.view.MyListView>
 
                 <!-- 咨询电话-->
                 <View
                     android:id="@+id/line_detail_tel_top"
+                    android:visibility="gone"
                     style="@style/line_height_10">
                 </View>
 <LinearLayout
@@ -251,6 +257,7 @@
     android:orientation="horizontal"
     android:paddingLeft="@dimen/_12.5dp"
     android:paddingRight="@dimen/_12.5dp"
+    android:visibility="gone"
     >
     <TextView
         android:layout_width="wrap_content"
@@ -264,7 +271,7 @@
         android:id="@+id/tv_task_tel"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="010-110"
+        android:text=""
         android:textColor="@color/tv_order_color_5"
         android:textSize="@dimen/_14sp"
         android:gravity="center_vertical"
@@ -276,6 +283,7 @@
 </LinearLayout>
                 <View
                     android:id="@+id/line_detail_friend_top"
+                    android:visibility="gone"
                     style="@style/line_height_10">
                 </View>
                 <!-- 参与人-->
@@ -285,12 +293,12 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:background="@color/white"
+                    android:visibility="gone"
                     >
                     <TextView
                         android:id="@+id/tv_task_friend_flag"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="任务参与人(188880)"
                         android:textColor="@color/tv_order_color_1"
                         android:textSize="@dimen/_14sp"
                         android:gravity="left|top"
@@ -308,6 +316,7 @@
                       android:cacheColorHint="@null"
                       android:paddingRight="@dimen/_12.5dp"
                       android:paddingBottom="@dimen/_12.5dp"
+                      android:visibility="gone"
                       ></GridView>
 
                 </LinearLayout>

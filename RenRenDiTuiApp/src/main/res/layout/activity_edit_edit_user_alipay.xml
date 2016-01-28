@@ -43,7 +43,6 @@
                 android:singleLine="true"
                 android:textColor="@color/tv_order_color_2"
                 android:textSize="@dimen/_14sp"
-                android:text="13811247642"
                 android:maxLength="20" >
             </TextView>
             <Button
