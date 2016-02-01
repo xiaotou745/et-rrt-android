@@ -43,6 +43,7 @@
                 android:orientation="vertical"
                 android:layout_alignParentRight="true"
                 android:background="@color/layout_view_content_other_bg"
+                android:visibility="invisible"
                 android:paddingRight="@dimen/_12.5dp" >
                 <TextView
                     android:id="@+id/tv_amount"
@@ -86,6 +87,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/team_down"
+                android:visibility="invisible"
                 />
         </RelativeLayout>
         <View
@@ -114,6 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/icon_examine"
+                    android:visibility="invisible"
                     android:drawablePadding="5dp" />
 
                 <TextView
@@ -121,6 +124,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5dp"
+                    android:visibility="invisible"
                     android:drawableLeft="@drawable/icon_tel"
                     android:drawablePadding="5dp" />
             </LinearLayout>
@@ -133,6 +137,7 @@
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/icon_finish"
                 android:singleLine="true"
+                android:visibility="invisible"
                 android:drawablePadding="5dp" />
         </LinearLayout>
     </LinearLayout>

@@ -33,6 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:focusable="false"
         android:visibility="gone" >
 
         <ListView
@@ -43,7 +44,6 @@
             android:divider="#e8e8e8"
             android:dividerHeight="@dimen/_8dp"
             android:fadingEdge="none"
-            android:listSelector="@color/listview_selector_color"
             android:scrollbars="none" >
         </ListView>
     </com.renrentui.controls.PullToRefreshView>

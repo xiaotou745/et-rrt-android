@@ -89,119 +89,222 @@ public class TaskDatumTemplateTextsTeamAdapter extends BaseAdapter {
     private int index = -1;
    private HashMap<Integer, String> hashMap = new HashMap<Integer, String>();
 
+
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int position, View view, ViewGroup viewGroup) {
         HolderView mHolderView = null;
-        final int position  = i;
         if(view==null){
             view = LayoutInflater.from(mContext).inflate(R.layout.item_team_texts_layout,viewGroup,false);
             mHolderView = new HolderView();
             mHolderView.mEitText = (EditText)view.findViewById(R.id.ed_team_texts_content_item);
             mHolderView.mTextView =(TextView) view.findViewById(R.id.tv_team_texts_content_item);
-            view.setTag(mHolderView);
-        }else {
-            mHolderView = (HolderView)view.getTag();
-        }
-        final TaskDatumControlBean taskDean = (TaskDatumControlBean) getItem(i);
-        if(showContentType==1){
-            //展示数据
-            mHolderView.mEitText.setVisibility(View.GONE);
-            mHolderView.mTextView.setVisibility(View.VISIBLE);
-            mHolderView.mTextView.setText(taskDean.controlValue);
-        }else {
-            //编辑数据
-
-            //添加空数据
-            TaskTempleDBBean beanD = new TaskTempleDBBean();
-            beanD.setUSER_ID(str_userId);
-            beanD.setTASK_ID(str_taskId);
-            beanD.setTEAM_TYPE(String.valueOf(iTeam_type));
-            beanD.setTEAM_NUM(String.valueOf(iTeam_num));
-            beanD.setTEAM_NUM_INDEX(String.valueOf(position));
-            beanD.setTEAM_CONTENT_TYPE(taskDean.controlTypeId);
-            beanD.setTEAM_CONTENT_KEY(taskDean.controlKey);
-            beanD.setTEAM_CONTENT_VALUE("");
-            mTaskTempleManager.AddTaskTemplateEmptyValue(beanD);
-
-
-            mHolderView.mEitText.setVisibility(View.VISIBLE);
-            mHolderView.mTextView.setVisibility(View.GONE);
-            mHolderView.mEitText.setHint(taskDean.controlTitle);
-            mHolderView.mEitText.setTag(str_tag + String.valueOf("_" + iTeam_num + "_") + String.valueOf(i));
-            mHolderView.mEitText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-                    if (hasFocus) {
-                        index = position;
+            if(showContentType!=1) {
+                //设置tag标识
+                mHolderView.mEitText.setTag(position);
+                //按下事件
+                mHolderView.mEitText.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        if (event.getAction() == MotionEvent.ACTION_UP) {
+                            index = (Integer) v.getTag();
+                        }
+                        return false;
                     }
-                    Log.e("ffffffffffffffffffffffffffff","<<<<"+hasFocus);
-                }
-            });
-            mHolderView.mEitText.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-//                    if(motionEvent.getAction()==MotionEvent.ACTION_UP){
-//                        index = position;
-//                    }
-                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                        index = position;
+                });
+
+                class MyTextWatcher implements TextWatcher {
+                    private HolderView mHolder_d;
+
+                    public MyTextWatcher(HolderView holder) {
+                        mHolder_d = holder;
                     }
-                    return false;
-                }
-            });
-            final  EditText mEditText= mHolderView.mEitText;
-            mHolderView.mEitText.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                }
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                @Override
-                public void beforeTextChanged(CharSequence s, int start,
-                                              int count, int after) {
+                    }
 
-                }
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                @Override
-                public void afterTextChanged(Editable s) {
-                    //将editText中保存到数据库中
-                    if(index!=-1 && index==position){
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        //   if(index!=-1 && index==position){
                         String strContent = s.toString();
-                        strContent = mEditText.getText().toString();
-                        hashMap.put(position, strContent);
+                        int position_d= (Integer)mHolder_d.mEitText.getTag();
+                        TaskDatumControlBean taskDean_d = (TaskDatumControlBean) getItem(position_d);
+
+                        // strContent = mEditText.getText().toString();
+                        hashMap.put(position_d, strContent);
                         TaskTempleDBBean beanD = new TaskTempleDBBean();
                         beanD.setUSER_ID(str_userId);
                         beanD.setTASK_ID(str_taskId);
                         beanD.setTEAM_TYPE(String.valueOf(iTeam_type));
                         beanD.setTEAM_NUM(String.valueOf(iTeam_num));
-                        beanD.setTEAM_NUM_INDEX(String.valueOf(position));
-                        beanD.setTEAM_CONTENT_TYPE(taskDean.controlTypeId);
-                        beanD.setTEAM_CONTENT_KEY(taskDean.controlKey);
+                        beanD.setTEAM_NUM_INDEX(String.valueOf(position_d));
+                        beanD.setTEAM_CONTENT_TYPE(taskDean_d.controlTypeId);
+                        beanD.setTEAM_CONTENT_KEY(taskDean_d.controlKey);
                         beanD.setTEAM_CONTENT_VALUE(strContent);
                         mTaskTempleManager.updateOrAddTaskTemplate(beanD);
+                        //  }
                     }
                 }
-            });
-
-//            /如果hashMap不为空，就设置的editText
-            if(hashMap.get(position) != null){
-                index=-1;
-                mHolderView.mEitText.setText(hashMap.get(position));
+                mHolderView.mEitText.addTextChangedListener(new MyTextWatcher(mHolderView));
             }
-
+            view.setTag(mHolderView);
+        }else {
+            mHolderView = (HolderView)view.getTag();
+            mHolderView.mEitText.setTag(position);
         }
+        if(showContentType==1){
+            //展示数据
+            mHolderView.mEitText.setVisibility(View.GONE);
+            mHolderView.mTextView.setVisibility(View.VISIBLE);
+            TaskDatumControlBean taskDean_1 = (TaskDatumControlBean) getItem(position);
+            mHolderView.mTextView.setText(taskDean_1.controlValue);
+        }else {
+            //编辑数据
+            //添加空数据
+            int position_2 = (Integer)mHolderView.mEitText.getTag();
+            TaskDatumControlBean taskDean_2 = (TaskDatumControlBean) getItem(position_2);
+            TaskTempleDBBean beanD = new TaskTempleDBBean();
+            beanD.setUSER_ID(str_userId);
+            beanD.setTASK_ID(str_taskId);
+            beanD.setTEAM_TYPE(String.valueOf(iTeam_type));
+            beanD.setTEAM_NUM(String.valueOf(iTeam_num));
+            beanD.setTEAM_NUM_INDEX(String.valueOf(position_2));
+            beanD.setTEAM_CONTENT_TYPE(taskDean_2.controlTypeId);
+            beanD.setTEAM_CONTENT_KEY(taskDean_2.controlKey);
+            beanD.setTEAM_CONTENT_VALUE("");
+            mTaskTempleManager.AddTaskTemplateEmptyValue(beanD);
+
+            mHolderView.mEitText.setVisibility(View.VISIBLE);
+            mHolderView.mTextView.setVisibility(View.GONE);
+            mHolderView.mEitText.setHint(taskDean_2.controlTitle);
+            //            /如果hashMap不为空，就设置的editText
+            if(hashMap.get(position_2) != null){
+                index=-1;
+                mHolderView.mEitText.setText(hashMap.get(position_2));
+            }
+            if(index!=-1 && index==position_2){
+                mHolderView.mEitText.requestFocus();
+            }
+        }
+
         return view;
     }
+
+    //2016-01-29 备份版
+//    @Override
+//    public View getView(int i, View view, ViewGroup viewGroup) {
+//        HolderView mHolderView = null;
+//        final int position  = i;
+//        if(view==null){
+//            view = LayoutInflater.from(mContext).inflate(R.layout.item_team_texts_layout,viewGroup,false);
+//            mHolderView = new HolderView();
+//            mHolderView.mEitText = (EditText)view.findViewById(R.id.ed_team_texts_content_item);
+//            mHolderView.mTextView =(TextView) view.findViewById(R.id.tv_team_texts_content_item);
+//            view.setTag(mHolderView);
+//        }else {
+//            mHolderView = (HolderView)view.getTag();
+//        }
+//        final TaskDatumControlBean taskDean = (TaskDatumControlBean) getItem(i);
+//        if(showContentType==1){
+//            //展示数据
+//            mHolderView.mEitText.setVisibility(View.GONE);
+//            mHolderView.mTextView.setVisibility(View.VISIBLE);
+//            mHolderView.mTextView.setText(taskDean.controlValue);
+//        }else {
+//            //编辑数据
+//            //添加空数据
+//            TaskTempleDBBean beanD = new TaskTempleDBBean();
+//            beanD.setUSER_ID(str_userId);
+//            beanD.setTASK_ID(str_taskId);
+//            beanD.setTEAM_TYPE(String.valueOf(iTeam_type));
+//            beanD.setTEAM_NUM(String.valueOf(iTeam_num));
+//            beanD.setTEAM_NUM_INDEX(String.valueOf(position));
+//            beanD.setTEAM_CONTENT_TYPE(taskDean.controlTypeId);
+//            beanD.setTEAM_CONTENT_KEY(taskDean.controlKey);
+//            beanD.setTEAM_CONTENT_VALUE("");
+//            mTaskTempleManager.AddTaskTemplateEmptyValue(beanD);
+//
+//
+//            mHolderView.mEitText.setVisibility(View.VISIBLE);
+//            mHolderView.mTextView.setVisibility(View.GONE);
+//            mHolderView.mEitText.setHint(taskDean.controlTitle);
+//            mHolderView.mEitText.setTag(str_tag + String.valueOf("_" + iTeam_num + "_") + String.valueOf(i));
+//            mHolderView.mEitText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//                @Override
+//                public void onFocusChange(View v, boolean hasFocus) {
+//                    if (hasFocus) {
+//                        index = position;
+//                    }
+//                }
+//            });
+//            mHolderView.mEitText.setOnTouchListener(new View.OnTouchListener() {
+//                @Override
+//                public boolean onTouch(View view, MotionEvent motionEvent) {
+////                    if(motionEvent.getAction()==MotionEvent.ACTION_UP){
+////                        index = position;
+////                    }
+//                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+//                        index = position;
+//                    }
+//                    return false;
+//                }
+//            });
+//            final  EditText mEditText= mHolderView.mEitText;
+//            mHolderView.mEitText.addTextChangedListener(new TextWatcher() {
+//                @Override
+//                public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//                }
+//
+//                @Override
+//                public void beforeTextChanged(CharSequence s, int start,
+//                                              int count, int after) {
+//
+//                }
+//
+//                @Override
+//                public void afterTextChanged(Editable s) {
+//                    //将editText中保存到数据库中
+//                    if(index!=-1 && index==position){
+//                        String strContent = s.toString();
+//                        strContent = mEditText.getText().toString();
+//                        hashMap.put(position, strContent);
+//                        TaskTempleDBBean beanD = new TaskTempleDBBean();
+//                        beanD.setUSER_ID(str_userId);
+//                        beanD.setTASK_ID(str_taskId);
+//                        beanD.setTEAM_TYPE(String.valueOf(iTeam_type));
+//                        beanD.setTEAM_NUM(String.valueOf(iTeam_num));
+//                        beanD.setTEAM_NUM_INDEX(String.valueOf(position));
+//                        beanD.setTEAM_CONTENT_TYPE(taskDean.controlTypeId);
+//                        beanD.setTEAM_CONTENT_KEY(taskDean.controlKey);
+//                        beanD.setTEAM_CONTENT_VALUE(strContent);
+//                        mTaskTempleManager.updateOrAddTaskTemplate(beanD);
+//                    }
+//                }
+//            });
+//
+////            /如果hashMap不为空，就设置的editText
+//            if(hashMap.get(position) != null){
+//                index=-1;
+//                mHolderView.mEitText.setText(hashMap.get(position));
+//            }
+//
+//        }
+//        return view;
+//    }
+
+
+
     public class HolderView{
         public EditText mEitText;
         public TextView mTextView;
     }
 
-    public String getLastContent(EditText mEditText){
-        if(mEditText!=null){
-            return mEditText.getText().toString().trim();
-        }else{
-            return "";
-        }
-    }
+
 }

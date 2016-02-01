@@ -250,6 +250,7 @@ public class ShowTaskMatailDetailActivity extends BaseActivity implements
             icon_pusher.setImageResource(R.drawable.pusher_logo);
         }
         tv_Amount.setText(taskBean.getAmount());
+        ll_amount.setVisibility(View.VISIBLE);
 
         tv_pusher_taskName.setText(taskBean.taskTitle);
 
@@ -266,7 +267,7 @@ public class ShowTaskMatailDetailActivity extends BaseActivity implements
         }else{
             mIV_pusher_type_flag.setImageResource(R.drawable.team_qianyue);
         }
-
+        mIV_pusher_type_flag.setVisibility(View.VISIBLE);
         //简介
 //        SpannableStringBuilder style = null;
 //        switch (taskBean.taskType){
@@ -291,8 +292,10 @@ public class ShowTaskMatailDetailActivity extends BaseActivity implements
 
         //审核
         tv_task_examine.setText(context.getResources().getString(R.string.task_detail_examine_format, taskBean.auditCycle));
+        tv_task_examine.setVisibility(View.VISIBLE);
         //截止日期
         tv_deadline_time.setText(context.getResources().getString(R.string.task_detail_dealtime_format, TimeUtils.StringPattern(taskBean.endTime, "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd")));
+        tv_deadline_time.setVisibility(View.VISIBLE);
 
         //tel
         if(TextUtils.isEmpty(taskBean.hotLine)){

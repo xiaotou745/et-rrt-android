@@ -109,17 +109,11 @@ public class GetNoGoingAdapter extends BaseAdapter {
 
             @Override
             public void onClick(View v) {
-//                if(Utils.getUserDTO(context)==null || Utils.getUserDTO(context).data.userId==""||Utils.getUserDTO(context).data.userId=="0") {
-//                    Intent intent = new Intent(context,
-//                            LoginActivity.class);
-//                    context.startActivity(intent);
-//                }else{
                     Intent intent = new Intent(context,
                             TaskDetailInfoNewActivity.class);
                     intent.putExtra("TaskId", noGoingTaskInfo.taskId);
                     intent.putExtra("TaskName", noGoingTaskInfo.taskName);
                     context.startActivity(intent);
-               // }
             }
         });
         return convertView;

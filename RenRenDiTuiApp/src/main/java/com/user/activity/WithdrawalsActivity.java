@@ -244,7 +244,7 @@ private  void getData(){
 			int iBankNo = content.lastIndexOf("@");
 			if (iBankNo > 0) {
 				// 邮箱
-				String strStart = content.substring(iBankNo);
+				String strStart = content.substring(0,iBankNo);
 				int i = strStart.length() >= 3 ? 3 : strStart.length();
 				sb.append(content.substring(0, i));
 				sb.append("****").append(content.substring(iBankNo));
