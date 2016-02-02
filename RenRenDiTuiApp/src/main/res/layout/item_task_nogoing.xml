@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="80dip"
     android:background="@drawable/item_task_main_bg"
-    android:descendantFocusability="beforeDescendants"
     >
         <ImageView
             android:id="@+id/iv_team_0"

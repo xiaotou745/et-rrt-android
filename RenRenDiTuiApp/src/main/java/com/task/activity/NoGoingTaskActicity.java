@@ -347,15 +347,6 @@ private RQHandler<RSGetMyMessage> rqHandler_getMyMessage = new RQHandler<>(
 		pulltorefresh_nogoing_taskList.setOnHeaderRefreshListener(this);
 		pulltorefresh_nogoing_taskList.setOnFooterRefreshListener(this);
 		lv_no_going_task = (ListView) findViewById(R.id.lv_no_going_task);
-//		lv_no_going_task.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-//			@Override
-//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//				Intent intent = new Intent(context,TaskDetailInfoNewActivity.class);
-//                    intent.putExtra("TaskId", noGoingTaskInfos.get(position).taskId);
-//                    intent.putExtra("TaskName", noGoingTaskInfos.get(position).taskName);
-//                    context.startActivity(intent);
-//			}
-//		});
 	}
 	/**
 	 * 获取数据

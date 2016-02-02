@@ -306,7 +306,7 @@ public class PullToRefreshView extends LinearLayout {
 	            	deltaY= 0 ;
                 }
             }
-			if (isRefreshViewScroll(deltaY)) {
+			if (isRefreshViewScroll(deltaY)  && Math.abs(deltaY)>10) {
 				return true;
 			}
 			break;
@@ -385,7 +385,6 @@ public class PullToRefreshView extends LinearLayout {
 		if (mAdapterView != null) {
 			// 子view(ListView or GridView)滑动到最顶端
 			if (deltaY > 0) {
-
 				View child = mAdapterView.getChildAt(0);
 				if (child == null) {
 					// 如果mAdapterView中没有数据,不拦截
