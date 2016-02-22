@@ -93,13 +93,15 @@ public class HttpDigestRequest {
 					.getDefaultType());
 			trustStore.load(null, null);
 
+			//使用指定证书创建安全套接字
 			SSLSocketFactory sf = new SSLSocketFactoryEx(trustStore);
 			sf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
 
-			HttpParams params = new BasicHttpParams();
+			HttpParams params = new BasicHttpParams();//组件参数
 			HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
 			HttpProtocolParams.setContentCharset(params, HTTP.UTF_8);
 
+			//协议集合
 			SchemeRegistry registry = new SchemeRegistry();
 			registry.register(new Scheme("http", PlainSocketFactory
 					.getSocketFactory(), 80));

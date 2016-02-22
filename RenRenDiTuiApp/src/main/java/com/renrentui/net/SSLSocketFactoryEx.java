@@ -2,7 +2,6 @@ package com.renrentui.net;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -20,14 +19,14 @@ import org.apache.http.conn.ssl.SSLSocketFactory;
  *
  */
 public class SSLSocketFactoryEx extends SSLSocketFactory {
-
+	//获取 SSLContext 实例使用 tls 协议
 	SSLContext sslContext = SSLContext.getInstance("TLS");
 
-	public SSLSocketFactoryEx(KeyStore truststore)
-			throws NoSuchAlgorithmException, KeyManagementException,
+	public SSLSocketFactoryEx(KeyStore truststore) throws NoSuchAlgorithmException, KeyManagementException,
 			KeyStoreException, UnrecoverableKeyException {
 		super(truststore);
 
+		//创建一个 验证远程安全套接字管理
 		TrustManager tm = new X509TrustManager() {
 
 			public java.security.cert.X509Certificate[] getAcceptedIssuers() {
@@ -49,6 +48,7 @@ public class SSLSocketFactoryEx extends SSLSocketFactory {
 			}
 		};
 
+		//初始化 sslContext 实例
 		sslContext.init(null, new TrustManager[] { tm }, null);
 	}
 

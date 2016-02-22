@@ -101,7 +101,7 @@ public class HttpRequestDigestImpl implements IHttpRequest {
 		if (requestModel != null) {
 			paramJson = GsonTools.objectToJson(requestModel);
 //			paramJson = "{param:"+Security.aesEncrypt(paramJson)+"}";
-			System.out.println(paramJson);
+//			System.out.println(paramJson);
 		}
 		return post(context, paramJson, path, connectTimeOut, soTimeout);
 	}
@@ -112,7 +112,7 @@ public class HttpRequestDigestImpl implements IHttpRequest {
 		String paramJson = "";
 		if (param != null) {
 			paramJson = GsonTools.objectToJson(param);
-			System.out.println(paramJson);
+			//System.out.println(paramJson);
 		}
 		return post(context, paramJson, path, files, connectTimeOut, soTimeout);
 	}
@@ -134,7 +134,7 @@ public class HttpRequestDigestImpl implements IHttpRequest {
 		String paramJson = "";
 		if (requestModel != null) {
 			paramJson = GsonTools.objectToJson(requestModel);
-			System.out.println(paramJson);
+			//System.out.println(paramJson);
 		}
 		return post(context, paramJson, path, files, connectTimeOut, soTimeout);
 	}
