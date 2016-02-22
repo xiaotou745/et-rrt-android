@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="4" />
+  </component>
   <component name="AndroidConfiguredLogFilters">
     <filters>
       <filter>
@@ -23,27 +26,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc16c387-daf1-4b92-a6c6-5352e6e49cca" name="Default" comment="">
-      <change type="DELETED" beforePath="D:\StudioProjectsWorkSpace\renrenditui_androidApp\.idea\libraries\BaiduLBS_Android.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\StudioProjectsWorkSpace\renrenditui_androidApp\.idea\libraries\apache_mime4j_0_6.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\StudioProjectsWorkSpace\renrenditui_androidApp\.idea\libraries\effects_android_19.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\StudioProjectsWorkSpace\renrenditui_androidApp\.idea\libraries\gson_2_2_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\StudioProjectsWorkSpace\renrenditui_androidApp\.idea\libraries\maps_android_19.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\StudioProjectsWorkSpace\renrenditui_androidApp\.idea\libraries\multidex_1_0_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\StudioProjectsWorkSpace\renrenditui_androidApp\.idea\libraries\support_v4_19_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\StudioProjectsWorkSpace\renrenditui_androidApp\.idea\libraries\umeng_analytics_v5_6_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\StudioProjectsWorkSpace\renrenditui_androidApp\.idea\libraries\universal_image_loader_1_9_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\StudioProjectsWorkSpace\renrenditui_androidApp\.idea\libraries\usb_android_19.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\StudioProjectsWorkSpace\renrenditui_androidApp\.idea\libraries\xUtils_2_6_14.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\StudioProjectsWorkSpace\renrenditui_androidApp\.idea\libraries\zxing.xml" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/util/SharedPreferencesUtil.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/user/service/SwitchCityDialog.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/layout/dialog_switch_city_layout.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/outputFileStates.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/util/ApiUtil.java" afterPath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/util/ApiUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/net/HttpDigestRequest.java" afterPath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/net/HttpDigestRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/net/HttpRequestDigestImpl.java" afterPath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/net/HttpRequestDigestImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/net/SSLSocketFactoryEx.java" afterPath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/net/SSLSocketFactoryEx.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/base/BaseActivity.java" afterPath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/base/BaseActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/util/GetCity.java" afterPath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/util/GetCity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/app/MyApplication.java" afterPath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/app/MyApplication.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/activity/NoGoingTaskActicity.java" afterPath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/activity/NoGoingTaskActicity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/activity/ShowCityActivity.java" afterPath="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/activity/ShowCityActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -85,7 +79,91 @@
     <favorites_list name="renrenditui_androidApp" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="NoGoingTaskActicity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/activity/NoGoingTaskActicity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.70934254">
+              <caret line="773" column="0" selection-start-line="773" selection-start-column="0" selection-end-line="773" selection-end-column="0" />
+              <folding>
+                <element signature="e#10316#10366#0" expanded="true" />
+                <element signature="e#15032#15033#0" expanded="true" />
+                <element signature="e#15052#15053#0" expanded="true" />
+                <element signature="e#23019#23412#0" expanded="true" />
+                <element signature="e#23411#23412#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CityDBManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/db/CityDBManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="235" column="17" selection-start-line="235" selection-start-column="17" selection-end-line="235" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CityRegionModel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/resultmodel/CityRegionModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ShowCityActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/activity/ShowCityActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="375" column="29" selection-start-line="375" selection-start-column="29" selection-end-line="375" selection-end-column="29" />
+              <folding>
+                <element signature="e#6838#6978#0" expanded="true" />
+                <element signature="e#6977#6978#0" expanded="true" />
+                <element signature="e#14313#14314#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HttpRequest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/user/model/HttpRequest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="39" column="34" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MyApplication.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/app/MyApplication.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="66" column="57" selection-start-line="66" selection-start-column="51" selection-end-line="66" selection-end-column="70" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SharedPreferencesUtil.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/util/SharedPreferencesUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+              <folding>
+                <element signature="e#2341#2342#0" expanded="true" />
+                <element signature="e#2398#2399#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -29384,7 +29462,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="D:\StudioProjectsWorkSpace\renrenditui_androidApp" value="4357993204127" />
+        <entry key="D:\StudioProjectsWorkSpace\renrenditui_androidApp" value="4358252345587" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -29708,12 +29786,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/activity/FragmentGoneTask.java" />
-        <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/activity/FragmentOnGoingTash.java" />
-        <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/activity/MyTaskMaterialDetailActivity.java" />
-        <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/user/activity/MyMessageDetails.java" />
-        <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/requestmodel/RQMyCaptailModel.java" />
-        <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/user/activity/MyCapitalFramen_1.java" />
         <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/user/activity/MyCapitalFramen_2.java" />
         <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/user/model/download/DownLoadUtils.java" />
         <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/layout/item_team_texts_layout.xml" />
@@ -29750,8 +29822,6 @@
         <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/layout/item_task_nogoing.xml" />
         <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/layout/activity_nogoing_task.xml" />
         <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/controls/PullToRefreshView.java" />
-        <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/activity/NoGoingTaskActicity.java" />
-        <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/base/BaseActivity.java" />
         <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/user/model/HttpRequest.java" />
         <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/util/ApiConstants.java" />
@@ -29759,6 +29829,14 @@
         <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/net/SSLSocketFactoryEx.java" />
         <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/net/HttpDigestRequest.java" />
         <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/net/HttpRequestDigestImpl.java" />
+        <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/util/GetCity.java" />
+        <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/util/SharedPreferencesUtil.java" />
+        <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/layout/dialog_switch_city_layout.xml" />
+        <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/user/service/SwitchCityDialog.java" />
+        <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/app/MyApplication.java" />
+        <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/base/BaseActivity.java" />
+        <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/activity/ShowCityActivity.java" />
+        <option value="$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/activity/NoGoingTaskActicity.java" />
       </list>
     </option>
   </component>
@@ -29794,6 +29872,32 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="renrenditui_androidApp" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Gradle Scripts" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="renrenditui_androidApp" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RenRenDiTuiApp" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -29808,8 +29912,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -29919,105 +30021,13 @@
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="task" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="renrenditui_androidApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="renrenditui_androidApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RenRenDiTuiApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="renrentui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="renrenditui_androidApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="renrenditui_androidApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RenRenDiTuiApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="renrenditui_androidApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Gradle Scripts" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="renrenditui_androidApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RenRenDiTuiApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="settings.editor.splitter.proportion" value="0.21645446" />
     <property name="android.sdk.path" value="D:/AndroidStudio_SDK/LocalSdk" />
     <property name="recentsLimit" value="5" />
@@ -30049,8 +30059,8 @@
       <recent name="D:\StudioProjectsWorkSpace\renrenditui_androidApp\RenRenDiTuiApp\src\main\res\drawable-xhdpi" />
     </key>
     <key name="android.template.packageName">
-      <recent name="com.task" />
       <recent name="com.renrentui.app" />
+      <recent name="com.task" />
       <recent name="com.task.activity" />
       <recent name="com.user.activity" />
     </key>
@@ -30269,46 +30279,46 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="30" y="30" width="1631" height="973" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2152381" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41676793" sideWeight="0.48126984" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19612591" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19927096" sideWeight="0.47492063" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19562575" sideWeight="0.60698414" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928804" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.064164646" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19927096" sideWeight="0.52507937" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19562575" sideWeight="0.39301586" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.08140948" sideWeight="0.4952381" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1944107" sideWeight="0.5168254" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47387606" sideWeight="0.38349205" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.11057108" sideWeight="0.47047618" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13396825" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.53705955" sideWeight="0.45015875" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292978" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1320635" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21142857" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1752381" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5285541" sideWeight="0.4952381" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.55690074" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.067301586" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.08716707" sideWeight="0.49745223" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24058323" sideWeight="0.4821656" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1944107" sideWeight="0.51174605" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1944107" sideWeight="0.5168254" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1944107" sideWeight="0.5168254" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292978" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25079367" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.55690074" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -30349,18 +30359,6 @@
           <properties />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/activity/NoGoingTaskActicity.java</url>
-          <line>439</line>
-          <properties />
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/activity/NoGoingTaskActicity.java</url>
-          <line>423</line>
-          <properties />
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/adapter/MyFragmentPagerAdapter.java</url>
           <line>33</line>
           <properties />
@@ -30397,161 +30395,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/layout/task_datum_details_layout.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61671925">
-          <caret line="130" column="21" selection-start-line="130" selection-start-column="21" selection-end-line="130" selection-end-column="21" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/drawable/item_task_main_bg_pre.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/drawable/item_task_main_bg_nor.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/values/color.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7285068">
-          <caret line="66" column="17" selection-start-line="66" selection-start-column="17" selection-end-line="66" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/layout/main_menu_layout.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13043478">
-          <caret line="94" column="42" selection-start-line="94" selection-start-column="42" selection-end-line="94" selection-end-column="42" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/drawable-hdpi/icon_order_sort.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://D:/AndroidStudio_SDK/LocalSdk/sources/android-19/android/widget/TextView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33240613">
-          <caret line="227" column="13" selection-start-line="227" selection-start-column="13" selection-end-line="227" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/drawable/item_task_main_bg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13908206">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/layout/pull_to_refresh_header.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2173913">
-          <caret line="35" column="42" selection-start-line="35" selection-start-column="42" selection-end-line="35" selection-end-column="42" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/layout/pull_to_refresh_footer.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13043478">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/activity/TaskDatumSubmitActiviyt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33936024">
-          <caret line="323" column="33" selection-start-line="323" selection-start-column="33" selection-end-line="323" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/activity/ShowTaskMatailDetailActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2906815">
-          <caret line="290" column="48" selection-start-line="290" selection-start-column="48" selection-end-line="290" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/layout/activity_find_password.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46376812">
-          <caret line="16" column="43" selection-start-line="16" selection-start-column="43" selection-end-line="16" selection-end-column="43" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://D:/AndroidStudio_SDK/LocalSdk/sources/android-19/android/view/ViewGroup.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44367176">
-          <caret line="3393" column="7" selection-start-line="3393" selection-start-column="7" selection-end-line="3393" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/layout/layout_nodata.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/layout/item_task_nogoing.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.59859157">
-          <caret line="17" column="21" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/adapter/GetNoGoingAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="51" selection-start-line="29" selection-start-column="51" selection-end-line="29" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/layout/activity_nogoing_task.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="38" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/controls/PullToRefreshView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18115942">
-          <caret line="429" column="48" selection-start-line="429" selection-start-column="48" selection-end-line="429" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/AndroidStudio_SDK/LocalSdk/sources/android-19/java/io/UnsupportedEncodingException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -30595,13 +30438,6 @@
       </provider>
       <provider editor-type-id="android-designer">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/base/BaseActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.72125983">
-          <caret line="71" column="40" selection-start-line="71" selection-start-column="40" selection-end-line="71" selection-end-column="40" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/RenRenDiTuiApp.iml">
@@ -30655,20 +30491,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/util/GetCity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/util/ImageLoadManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/util/MD5.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.3693181">
@@ -30719,14 +30541,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/activity/NoGoingTaskActicity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="355" column="19" selection-start-line="355" selection-start-column="19" selection-end-line="355" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://D:/AndroidStudio_SDK/LocalSdk/platforms/android-19/android.jar!/org/apache/http/impl/client/DefaultHttpClient.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.19971469">
@@ -30739,13 +30553,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="59" column="20" selection-start-line="59" selection-start-column="12" selection-end-line="59" selection-end-column="29" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2229#2230#0" expanded="true" />
-            <element signature="e#2257#2258#0" expanded="true" />
-            <element signature="e#2425#2426#0" expanded="true" />
-            <element signature="e#2448#2449#0" expanded="true" />
-            <element signature="e#2593#2594#0" expanded="true" />
-            <element signature="e#2632#2633#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#2229#2230#0" expanded="false" />
+            <element signature="e#2257#2258#0" expanded="false" />
+            <element signature="e#2425#2426#0" expanded="false" />
+            <element signature="e#2448#2449#0" expanded="false" />
+            <element signature="e#2593#2594#0" expanded="false" />
+            <element signature="e#2632#2633#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -30755,7 +30569,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="130" column="15" selection-start-line="130" selection-start-column="15" selection-end-line="130" selection-end-column="15" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -30765,14 +30579,14 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="58" column="26" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="26" />
           <folding>
-            <element signature="e#781#782#0" expanded="true" />
-            <element signature="e#801#802#0" expanded="true" />
-            <element signature="e#841#842#0" expanded="true" />
-            <element signature="e#863#864#0" expanded="true" />
-            <element signature="e#893#894#0" expanded="true" />
-            <element signature="e#914#915#0" expanded="true" />
-            <element signature="e#956#957#0" expanded="true" />
-            <element signature="e#980#981#0" expanded="true" />
+            <element signature="e#781#782#0" expanded="false" />
+            <element signature="e#801#802#0" expanded="false" />
+            <element signature="e#841#842#0" expanded="false" />
+            <element signature="e#863#864#0" expanded="false" />
+            <element signature="e#893#894#0" expanded="false" />
+            <element signature="e#914#915#0" expanded="false" />
+            <element signature="e#956#957#0" expanded="false" />
+            <element signature="e#980#981#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -30801,11 +30615,238 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/util/ImageLoadManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.56534094">
+          <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/util/ToastUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39772728">
+          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/AndroidStudio_SDK/LocalSdk/sources/android-19/android/location/Geocoder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7386364">
+          <caret line="50" column="38" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/util/GetCity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39772728">
+          <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/resultmodel/NoGoingTaskInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48295453">
+          <caret line="18" column="7" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/requestmodel/RQGetNoGoingTaskNew.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="59" selection-start-line="5" selection-start-column="59" selection-end-line="5" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/layout/progress_dialog.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26666668">
+          <caret line="9" column="30" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/controls/MyProgersssDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="48" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/AndroidStudio_SDK/LocalSdk/sources/android-19/android/os/Message.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36079547">
+          <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/AndroidStudio_SDK/LocalSdk/sources/android-19/android/app/Dialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.7586207">
+          <caret line="1191" column="33" selection-start-line="1191" selection-start-column="19" selection-end-line="1191" selection-end-column="33" />
+          <folding>
+            <element signature="e#37760#37761#0" expanded="false" />
+            <element signature="e#37796#37797#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/controls/PullToRefreshView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="639" column="13" selection-start-line="639" selection-start-column="13" selection-end-line="639" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/layout/quit_dialog_layout.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="77" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/res/layout/dialog_switch_city_layout.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4962963">
+          <caret line="66" column="51" selection-start-line="66" selection-start-column="51" selection-end-line="66" selection-end-column="51" />
+          <folding>
+            <element signature="e#371#384#0" expanded="true" />
+            <element signature="e#420#433#0" expanded="true" />
+            <element signature="e#1368#1382#0" expanded="true" />
+            <element signature="e#1507#1521#0" expanded="true" />
+            <element signature="e#2001#2015#0" expanded="true" />
+            <element signature="e#2054#2068#0" expanded="true" />
+            <element signature="e#2210#2224#0" expanded="true" />
+            <element signature="e#2422#2436#0" expanded="true" />
+            <element signature="e#2760#2774#0" expanded="true" />
+            <element signature="e#2813#2827#0" expanded="true" />
+            <element signature="e#2970#2984#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/user/service/QuitDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="76" column="5" selection-start-line="44" selection-start-column="4" selection-end-line="76" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/user/activity/MoreActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="83" column="17" selection-start-line="83" selection-start-column="17" selection-end-line="83" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/user/service/SwitchCityDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="72" column="49" selection-start-line="72" selection-start-column="49" selection-end-line="72" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/base/BaseActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="227" column="31" selection-start-line="227" selection-start-column="31" selection-end-line="227" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/activity/ShowCityActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="375" column="29" selection-start-line="375" selection-start-column="29" selection-end-line="375" selection-end-column="29" />
+          <folding>
+            <element signature="e#6838#6978#0" expanded="true" />
+            <element signature="e#6977#6978#0" expanded="true" />
+            <element signature="e#14313#14314#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/app/MyApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="66" column="57" selection-start-line="66" selection-start-column="51" selection-end-line="66" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/util/SharedPreferencesUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+          <folding>
+            <element signature="e#2341#2342#0" expanded="true" />
+            <element signature="e#2398#2399#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/resultmodel/CityRegionModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/renrentui/db/CityDBManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="235" column="17" selection-start-line="235" selection-start-column="17" selection-end-line="235" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/user/model/HttpRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.77812994">
-          <caret line="123" column="0" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="34" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenRenDiTuiApp/src/main/java/com/task/activity/NoGoingTaskActicity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.70934254">
+          <caret line="773" column="0" selection-start-line="773" selection-start-column="0" selection-end-line="773" selection-end-column="0" />
+          <folding>
+            <element signature="e#10316#10366#0" expanded="true" />
+            <element signature="e#15032#15033#0" expanded="true" />
+            <element signature="e#15052#15053#0" expanded="true" />
+            <element signature="e#23019#23412#0" expanded="true" />
+            <element signature="e#23411#23412#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

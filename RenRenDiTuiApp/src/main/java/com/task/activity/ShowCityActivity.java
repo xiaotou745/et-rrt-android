@@ -72,6 +72,7 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
     private boolean isLocation = false;
     public MyLocationListenner myListener = new MyLocationListenner();
     public Handler mShwoLocationHandler;
+    CityRegionModel mCurrentlocalLocation;//当前定位城市
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,7 +147,7 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
                     CityRegionModel bean = new CityRegionModel();
                     bean.code=strCode;
                     bean.name = strName;
-                    MyApplication.setmCurrentLocation(bean);
+                    MyApplication.setCurrentCity(bean);
                     ShowCityActivity.this.finish();
                 }
             }
@@ -365,7 +366,7 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
 
                 if(isLocation){
                     //定位成功
-                    city.setText(MyApplication.getmLocalLocation().name);
+                    city.setText(mCurrentlocalLocation.name);
                     city.setClickable(true);
                 }else{
                     city.setText("定位中...");
@@ -375,7 +376,7 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
                     @Override
                     public void onClick(View view) {
 
-                        MyApplication.setmCurrentLocation(MyApplication.getmLocalLocation());
+                        MyApplication.setCurrentCity(mCurrentlocalLocation);
                         ShowCityActivity.this.finish();
                     }
                 });
@@ -407,7 +408,7 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
                         CityRegionModel bean = new CityRegionModel();
                         bean.code=strCode;
                         bean.name = strName;
-                        MyApplication.setmCurrentLocation(bean);
+                        MyApplication.setCurrentCity(bean);
                         ShowCityActivity.this.finish();
                     }
                 });
@@ -683,15 +684,14 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
                 //定位成功
                 isLocation  =true;
                 mMyApplication.getmLocClient().stop();
-                CityRegionModel localLocation = new CityRegionModel();
+                mCurrentlocalLocation = new CityRegionModel();
                 String StrName = location.getCity();
                 String strCode = mCityDBManager.getCityCodeByName(StrName);
                 if(TextUtils.isEmpty(strCode)){
                     strCode =  location.getCityCode();
                 }
-                localLocation.code = strCode;
-                localLocation.name = StrName;
-                MyApplication.setmLocalLocation(localLocation);
+                mCurrentlocalLocation.code = strCode;
+                mCurrentlocalLocation.name = StrName;
                 mShwoLocationHandler.sendEmptyMessageDelayed(0,2*1000);
             }else{
                 //定位失败

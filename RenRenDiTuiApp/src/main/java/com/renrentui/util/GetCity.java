@@ -1,27 +1,18 @@
 package com.renrentui.util;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.renrentui.tools.SharedPreferencesTools;
-
 import android.content.Context;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
+
+import com.renrentui.tools.SharedPreferencesTools;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class GetCity {
 

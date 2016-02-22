@@ -170,9 +170,7 @@ public class BaseActivity extends Activity {
 		if (progersssDialog == null) {
 			progersssDialog = new MyProgersssDialog(this);
 		}
-		if (!progersssDialog.isShowing()) {
-			progersssDialog.show();
-		}
+		progersssDialog.show();
 	}
 
 	/**
@@ -186,7 +184,17 @@ public class BaseActivity extends Activity {
 			progersssDialog.hide();
 		}
 	}
-
+	/**
+	 * 销毁加载动画
+	 */
+	public void dismissProgressDialog() {
+		if (this.isFinishing()) {
+			return;
+		}
+		if (progersssDialog != null) {
+			progersssDialog.cancel();
+		}
+	}
 //	/**
 //	 * 返回操作统一处理或者定制处理
 //	 *
@@ -231,10 +239,7 @@ public class BaseActivity extends Activity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		if (progersssDialog != null) {
-			progersssDialog.dismiss();
-			progersssDialog = null;
-		}
+		dismissProgressDialog();
 	}
 
 	/**
