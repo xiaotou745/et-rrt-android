@@ -1,7 +1,10 @@
 package com.user.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,6 +38,14 @@ import com.renrentui.util.Utils;
 import com.task.activity.MyMaterialTaskTeamActivity;
 import com.task.activity.MyTaskFramentNewActivity;
 import com.task.activity.NoGoingTaskActicity;
+import com.umeng.socialize.Config;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.ShareContent;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.shareboard.SnsPlatform;
+import com.umeng.socialize.utils.ShareBoardlistener;
 import com.user.service.CustomerServiceDialog;
 
 import java.util.Timer;
@@ -254,7 +265,6 @@ public class PersonalCenterActivity extends BaseActivity implements
 		 rl_customer_service_center = (RelativeLayout) findViewById(R.id.rl_customer_service_center);
 		rl_customer_service_center.setOnClickListener(this);
 		 mTV_customer_service_tel = (TextView) findViewById(R.id.tv_customer_service_center);
-
 	}
 
 	@Override
@@ -355,5 +365,4 @@ public class PersonalCenterActivity extends BaseActivity implements
 		}
 		return true;
 	}
-
 }

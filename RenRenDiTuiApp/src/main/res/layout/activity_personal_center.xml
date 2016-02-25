@@ -342,7 +342,6 @@
                     android:layout_marginRight="13dp"
                     android:src="@drawable/go" />
             </RelativeLayout>
-
             <!-- 客服电话-->
             <RelativeLayout
                 android:id="@+id/rl_customer_service_center"

@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import com.baidu.location.LocationClient;
 import com.renrentui.resultmodel.CityRegionModel;
 import com.renrentui.util.SharedPreferencesUtil;
+import com.share.ShareUtils;
 
 /**
  * Created by Administrator on 2015/12/11 0011.
@@ -32,6 +33,8 @@ public class MyApplication extends Application{
         //initCurrentLocation();
         initCurrentCity();
        // initLocationCity();
+        //分享信息初始化
+        ShareUtils.initUMShareControl();
     }
 
 //    /**
@@ -85,6 +88,8 @@ public class MyApplication extends Application{
     public LocationClient getmLocClient() {
         return mLocClient;
     }
+
+
 
 
 }
