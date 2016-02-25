@@ -27,14 +27,14 @@ public class HttpRequestDigestImpl implements IHttpRequest {
 		super();
 		this.httpDigestRequest = new HttpDigestRequest();
 	}
-
+	//====================setTimeOut=======================
 	@Override
 	public void setTimeOut(int connectTimeOut, int soTimeout) {
 		// TODO Auto-generated method stub
 		httpDigestRequest.setConnectTimeOut(connectTimeOut);
 		httpDigestRequest.setSoTimeout(soTimeout);
 	}
-
+//===========================get Method===========================================
 	@Override
 	public String get(Context context, String param, String path,
 			int connectTimeOut, int soTimeout) {
@@ -68,113 +68,6 @@ public class HttpRequestDigestImpl implements IHttpRequest {
 		}
 		requestUrl = buildRequest(path, requestModel);
 		return get(context, requestUrl, connectTimeOut, soTimeout);
-	}
-
-	@Override
-	public String post(Context context, Map<String, Object> param, String path,
-			int connectTimeOut, int soTimeout) {
-		// TODO Auto-generated method stub
-		String paramJson = "";
-		if (param != null) {
-			paramJson = GsonTools.objectToJson(param);
-			System.out.println(paramJson);
-		}
-		return post(context, paramJson, path, connectTimeOut, soTimeout);
-	}
-
-	@Override
-	public String post(Context context, String paramJson, String path,
-			int connectTimeOut, int soTimeout) {
-		// TODO Auto-generated method stub
-		if (path == null || path.trim() == "") {
-			return "";
-		}
-		return streamToStr(httpDigestRequest.sendhttpPost(context, path,
-				paramJson, connectTimeOut, soTimeout));
-	}
-
-	@Override
-	public <T> String post(Context context, T requestModel, String path,
-			int connectTimeOut, int soTimeout) {
-		// TODO Auto-generated method stub
-		String paramJson = "";
-		if (requestModel != null) {
-			paramJson = GsonTools.objectToJson(requestModel);
-//			paramJson = "{param:"+Security.aesEncrypt(paramJson)+"}";
-//			System.out.println(paramJson);
-		}
-		return post(context, paramJson, path, connectTimeOut, soTimeout);
-	}
-
-	@Override
-	public String post(Context context, Map<String, Object> param, String path,
-			List<String> files, int connectTimeOut, int soTimeout) {
-		String paramJson = "";
-		if (param != null) {
-			paramJson = GsonTools.objectToJson(param);
-			//System.out.println(paramJson);
-		}
-		return post(context, paramJson, path, files, connectTimeOut, soTimeout);
-	}
-
-	@Override
-	public String post(Context context, String paramJson, String path,
-			List<String> files, int connectTimeOut, int soTimeout) {
-		// TODO Auto-generated method stub
-		if (path == null || path.trim() == "") {
-			return "";
-		}
-		return streamToStr(httpDigestRequest.sendhttpPost(context, path,
-				paramJson, files, connectTimeOut, soTimeout));
-	}
-
-	@Override
-	public <T> String post(Context context, T requestModel, String path,
-			List<String> files, int connectTimeOut, int soTimeout) {
-		String paramJson = "";
-		if (requestModel != null) {
-			paramJson = GsonTools.objectToJson(requestModel);
-			//System.out.println(paramJson);
-		}
-		return post(context, paramJson, path, files, connectTimeOut, soTimeout);
-	}
-
-	@Override
-	public String post(Context context, Map<String, Object> param, String path,
-			List<String> files, ProgressListener progressListener,
-			int connectTimeOut, int soTimeout) {
-		String paramJson = "";
-		if (param != null) {
-			paramJson = GsonTools.objectToJson(param);
-			System.out.println(paramJson);
-		}
-		return post(context, paramJson, path, files, progressListener,
-				connectTimeOut, soTimeout);
-	}
-
-	@Override
-	public String post(Context context, String paramJson, String path,
-			List<String> files, ProgressListener progressListener,
-			int connectTimeOut, int soTimeout) {
-		// TODO Auto-generated method stub
-		if (path == null || path.trim() == "") {
-			return "";
-		}
-		return streamToStr(httpDigestRequest.sendhttpPost(context, path,
-				paramJson, files, connectTimeOut, soTimeout, progressListener));
-	}
-
-	@Override
-	public <T> String post(Context context, T requestModel, String path,
-			List<String> files, ProgressListener progressListener,
-			int connectTimeOut, int soTimeout) {
-		String paramJson = "";
-		if (requestModel != null) {
-			paramJson = GsonTools.objectToJson(requestModel);
-			System.out.println(paramJson);
-		}
-		return post(context, paramJson, path, files, progressListener,
-				connectTimeOut, soTimeout);
 	}
 
 	@Override
@@ -231,7 +124,112 @@ public class HttpRequestDigestImpl implements IHttpRequest {
 		requestUrl = buildRequest(path, requestModel);
 		return get(context, requestUrl);
 	}
+//================================post method=============================================
 
+	@Override
+	public String post(Context context, Map<String, Object> param, String path,
+					   int connectTimeOut, int soTimeout) {
+		// TODO Auto-generated method stub
+		String paramJson = "";
+		if (param != null) {
+			paramJson = GsonTools.objectToJson(param);
+			System.out.println(paramJson);
+		}
+		return post(context, paramJson, path, connectTimeOut, soTimeout);
+	}
+
+	@Override
+	public String post(Context context, String paramJson, String path,
+					   int connectTimeOut, int soTimeout) {
+		// TODO Auto-generated method stub
+		if (path == null || path.trim() == "") {
+			return "";
+		}
+		return streamToStr(httpDigestRequest.sendhttpPost(context, path,
+				paramJson, connectTimeOut, soTimeout));
+	}
+
+	@Override
+	public <T> String post(Context context, T requestModel, String path,
+						   int connectTimeOut, int soTimeout) {
+		// TODO Auto-generated method stub
+		String paramJson = "";
+		if (requestModel != null) {
+			paramJson = GsonTools.objectToJson(requestModel);
+		}
+		return post(context, paramJson, path, connectTimeOut, soTimeout);
+	}
+
+	@Override
+	public String post(Context context, Map<String, Object> param, String path,
+					   List<String> files, int connectTimeOut, int soTimeout) {
+		String paramJson = "";
+		if (param != null) {
+			paramJson = GsonTools.objectToJson(param);
+			//System.out.println(paramJson);
+		}
+		return post(context, paramJson, path, files, connectTimeOut, soTimeout);
+	}
+
+	@Override
+	public String post(Context context, String paramJson, String path,
+					   List<String> files, int connectTimeOut, int soTimeout) {
+		// TODO Auto-generated method stub
+		if (path == null || path.trim() == "") {
+			return "";
+		}
+		return streamToStr(httpDigestRequest.sendhttpPost(context, path,
+				paramJson, files, connectTimeOut, soTimeout));
+	}
+
+	@Override
+	public <T> String post(Context context, T requestModel, String path,
+						   List<String> files, int connectTimeOut, int soTimeout) {
+		String paramJson = "";
+		if (requestModel != null) {
+			paramJson = GsonTools.objectToJson(requestModel);
+			//System.out.println(paramJson);
+		}
+		return post(context, paramJson, path, files, connectTimeOut, soTimeout);
+	}
+
+	@Override
+	public String post(Context context, Map<String, Object> param, String path,
+					   List<String> files, ProgressListener progressListener,
+					   int connectTimeOut, int soTimeout) {
+		String paramJson = "";
+		if (param != null) {
+			paramJson = GsonTools.objectToJson(param);
+			System.out.println(paramJson);
+		}
+		return post(context, paramJson, path, files, progressListener,
+				connectTimeOut, soTimeout);
+	}
+
+	@Override
+	public String post(Context context, String paramJson, String path,
+					   List<String> files, ProgressListener progressListener,
+					   int connectTimeOut, int soTimeout) {
+		// TODO Auto-generated method stub
+		if (path == null || path.trim() == "") {
+			return "";
+		}
+		return streamToStr(httpDigestRequest.sendhttpPost(context, path,
+				paramJson, files, connectTimeOut, soTimeout, progressListener));
+	}
+
+	@Override
+	public <T> String post(Context context, T requestModel, String path,
+						   List<String> files, ProgressListener progressListener,
+						   int connectTimeOut, int soTimeout) {
+		String paramJson = "";
+		if (requestModel != null) {
+			paramJson = GsonTools.objectToJson(requestModel);
+			System.out.println(paramJson);
+		}
+		return post(context, paramJson, path, files, progressListener,
+				connectTimeOut, soTimeout);
+	}
 	@Override
 	public String post(Context context, Map<String, Object> param, String path) {
 		// TODO Auto-generated method stub
@@ -326,7 +324,7 @@ public class HttpRequestDigestImpl implements IHttpRequest {
 			return null;
 		}
 	}
-
+//=============================个性化=============================
 	/**
 	 * map<String,Object> 转换 map<String,String>
 	 */
@@ -422,5 +420,15 @@ public class HttpRequestDigestImpl implements IHttpRequest {
 		}
 		return new String(sb.toString());
 	}
-
+	//===========================数据加密==================================
+	//post
+	public <T> String postSecurity(Context context, T requestModel, String path,
+								   int connectTimeOut, int soTimeout) {
+		String paramJson = "";
+		if (requestModel != null) {
+			paramJson = GsonTools.objectToJson(requestModel);
+			paramJson = "{param:"+Security.aesEncrypt(paramJson)+"}";
+		}
+		return post(context, paramJson, path, connectTimeOut, soTimeout);
+	}
 }

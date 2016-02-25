@@ -1,9 +1,15 @@
 package com.renrentui.util;
 
+import android.text.TextUtils;
+import android.util.Base64;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Map;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-
-import android.util.Base64;
 
 /**
  * 数据加密类
@@ -53,4 +59,45 @@ public class Security {
 		}
 		return str;
 	}
+
+	/**
+	 * 数据加密
+	 * @param data
+	 * @return
+	 */
+	public static JSONObject securityMapToJSON(Map<String, String> data) {
+		JSONObject resultObj = new JSONObject();
+		try {
+			JSONObject object = new JSONObject();
+			for (Map.Entry<String, String> entry : data.entrySet()) {
+				object.put(entry.getKey(), entry.getValue());
+			}
+			resultObj.put("data", Security.aesEncrypt(object.toString()));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		return resultObj;
+	}
+
+	/**
+	 * 结果数据解密
+	 * @param key
+	 * @param sercurityResult
+	 * @return
+	 */
+	public static String securityResultToResult (String key,String sercurityResult){
+			String strResult = "";
+		try{
+			if(TextUtils.isEmpty(key)){
+				key = "data";
+			}
+			JSONObject jsonObject = new JSONObject(sercurityResult);
+			strResult = aesDecrypt(jsonObject.getString(key));
+		}catch (Exception e){
+
+		}
+return strResult;
+	}
+
 }

@@ -203,7 +203,6 @@ public class HttpDigestRequest {
 				if (isrun >= 3)
 					setHost(context, client);
 				setTimeOut(connectTimeOut, soTimeout);// 超时设置
-				System.out.println("path="+path);
 				if (post==null) {
 					post = new HttpPost(path);
 				}else {
@@ -213,7 +212,6 @@ public class HttpDigestRequest {
 				post.setEntity(httpEntity);
 				HttpResponse httpResponse = client.execute(post);
 				int code = httpResponse.getStatusLine().getStatusCode();
-				System.out.print("code============"+String.valueOf(code));
 				if (code == 200) {
 					cookieStore = client.getCookieStore();
 					is = httpResponse.getEntity().getContent();

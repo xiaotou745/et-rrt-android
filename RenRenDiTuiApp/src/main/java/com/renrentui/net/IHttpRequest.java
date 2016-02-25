@@ -131,6 +131,8 @@ public interface IHttpRequest {
 	<T> String post(Context context, T requestModel, String path,
 					int connectTimeOut, int soTimeout);
 	<T> String post(Context context, T requestModel, String path);
+	<T> String postSecurity(Context context, T requestModel, String path,
+					int connectTimeOut, int soTimeout);
 
 	/**
 	 * post请求 传基本数据以及文件（图片，视频，音频）
@@ -254,4 +256,5 @@ public interface IHttpRequest {
 					int connectTimeOut, int soTimeout);
 	<T> String post(Context context, T requestModel, String path,
 					List<String> files, ProgressListener progressListener);
+
 }
