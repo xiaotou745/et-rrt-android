@@ -196,6 +196,23 @@
             android:exported="false" >
         </service>
 
+
+        <!-- 客服部分-->
+        <activity
+            android:name="com.sobot.chat.activity.SobotChatActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <activity
+            android:name="com.sobot.chat.activity.SobotPhotoActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:hardwareAccelerated="false"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.sobot.chat.activity.WebViewActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

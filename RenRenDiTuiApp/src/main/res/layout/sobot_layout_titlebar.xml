@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sobot_layout_titlebar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/sobot_DIMEN_108PX"
+    android:background="@color/sobot_color_title_bar_bg" >
+
+    <TextView
+        android:id="@+id/sobot_text_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:ellipsize="marquee"
+        android:gravity="center_horizontal|center"
+        android:singleLine="true"
+        android:textColor="@color/sobot_color_title_bar_title"
+        android:textSize="@dimen/sobot_text_title" />
+
+    <LinearLayout
+        android:id="@+id/sobot_back"
+        android:layout_width="100dp"
+        android:layout_height="@dimen/sobot_DIMEN_108PX"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/sobot_tv_backward"
+            android:layout_width="100dp"
+            android:layout_height="@dimen/sobot_DIMEN_108PX"
+            android:text="@string/sobot_colse"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:onClick="onClick"
+            android:textColor="@color/sobot_bg_white"
+            android:textSize="@dimen/sobot_text_title"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/sobot_button_forward"
+        android:layout_width="@dimen/sobot_DIMEN_144PX"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/sobot_title_button_selector"
+        android:drawablePadding="@dimen/sobot_DIMEN_15PX"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:paddingLeft="@dimen/sobot_DIMEN_12PX"
+        android:singleLine="true"
+        android:text="@string/sobot_submit"
+        android:textColor="#ffffffff"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+</RelativeLayout>
