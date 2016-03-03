@@ -4,11 +4,13 @@ import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMVideo;
 import com.umeng.socialize.media.UMusic;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2016/2/24 0024.
  *  分享数据bean
  */
-public class ShareBean {
+public class ShareBean implements Serializable{
     private String strTitle;
     private String strText;
     private String strTargetUrl;

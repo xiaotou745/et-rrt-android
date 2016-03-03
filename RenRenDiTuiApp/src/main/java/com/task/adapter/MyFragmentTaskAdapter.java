@@ -2,6 +2,7 @@ package com.task.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -95,20 +96,25 @@ public void setThroughTaskData(List<MyTaskContentBean> data){
 		} else {
 			mViewHolder.mIV_0.setImageResource(R.drawable.pusher_logo);
 		}
-		switch (beanContent.taskType){
-			case 1:
-				//签约任务
-				mViewHolder.mIV_4.setImageResource(R.drawable.team_qianyue);
-				break;
-			case 2:
-				//分享
-				mViewHolder.mIV_4.setImageResource(R.drawable.team_share);
-				break;
-			case 3:
-				//下载
-				mViewHolder.mIV_4.setImageResource(R.drawable.team_down);
-				break;
+//		switch (beanContent.taskType){
+//			case 1:
+//				//签约任务
+//				mViewHolder.mIV_4.setImageResource(R.drawable.team_qianyue);
+//				break;
+//			case 2:
+//				//分享
+//				mViewHolder.mIV_4.setImageResource(R.drawable.team_share);
+//				break;
+//			case 3:
+//				//下载
+//				mViewHolder.mIV_4.setImageResource(R.drawable.team_down);
+//				break;
+//		}
+		mViewHolder.mIV_4.setText(beanContent.tagName);
+		if(!TextUtils.isEmpty(beanContent.tagColorCode)){
+			mViewHolder.mIV_4.setBackgroundColor(Color.parseColor(beanContent.tagColorCode));
 		}
+
 		mViewHolder.mRL_bottom_0.setVisibility(View.GONE);
 		mViewHolder.mRL_bottom_1.setVisibility(View.GONE);
 		mViewHolder.mRL_bottom_2.setVisibility(View.GONE);
@@ -232,7 +238,7 @@ public void setThroughTaskData(List<MyTaskContentBean> data){
 		private TextView mTV_1;//金额
 		private TextView mTV_2;//title
 		private TextView mTV_3;//content
-		private ImageView mIV_4;//icon flag
+		private TextView mIV_4;//icon flag
 
 		//通过 签约
 		private RelativeLayout mRL_bottom_0;
@@ -261,7 +267,7 @@ public void setThroughTaskData(List<MyTaskContentBean> data){
 			mTV_1 = (TextView)view.findViewById(R.id.tv_team_1);
 			mTV_2 = (TextView)view.findViewById(R.id.tv_team_2);
 			mTV_3 = (TextView)view.findViewById(R.id.tv_team_3);
-			mIV_4 = (ImageView)view.findViewById(R.id.iv_team_4);
+			mIV_4 = (TextView)view.findViewById(R.id.iv_team_4);
 
 			mRL_bottom_0 = (RelativeLayout)view.findViewById(R.id.rl_task_pass_0);
 			mTV_bottom_0 = (TextView)view.findViewById(R.id.tv_bottom_0);

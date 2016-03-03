@@ -47,7 +47,7 @@ public class MyMessageActivity extends BaseActivity implements
                 public void onNetworknotvalide() {
                     mPullMyMessageListView.setVisibility(View.GONE);
                     MyMessageActivity.this.onNodata(
-                            ResultMsgType.NetworkNotValide, null, null, null);
+                            ResultMsgType.NetworkNotValide, R.drawable.icon_no_message,0,"", null);
                 }
 
                 @Override
@@ -59,7 +59,7 @@ public class MyMessageActivity extends BaseActivity implements
                         if (t.data.content==null || t.data.content.size()==0) {
                             mPullMyMessageListView.setVisibility(View.GONE);
                             MyMessageActivity.this.onNodata(
-                                    ResultMsgType.Success, "刷新", "暂无消息信息",
+                                    ResultMsgType.Success,0,R.string.message_no_data, "",
                                     MyMessageActivity.this);
                         } else {
                             if(myMessageList==null){
@@ -86,14 +86,16 @@ public class MyMessageActivity extends BaseActivity implements
                 public void onSericeErr(RSMyMessage t) {
                     mPullMyMessageListView.setVisibility(View.GONE);
                     MyMessageActivity.this.onNodata(
-                            ResultMsgType.ServiceErr, "刷新", "信息加载失败！", null);
+                            ResultMsgType.Success,R.drawable.icon_no_message,R.string.every_no_data_error, "",
+                            MyMessageActivity.this);
                 }
 
                 @Override
                 public void onSericeExp() {
                     mPullMyMessageListView.setVisibility(View.GONE);
                     MyMessageActivity.this.onNodata(
-                            ResultMsgType.ServiceExp, "刷新", "数据加载失败！", null);
+                            ResultMsgType.Success,R.drawable.icon_no_message,R.string.every_no_data_error, "",
+                            MyMessageActivity.this);
 
                 }
             });

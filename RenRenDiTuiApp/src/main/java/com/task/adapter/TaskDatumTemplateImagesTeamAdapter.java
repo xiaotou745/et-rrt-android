@@ -1,6 +1,7 @@
 package com.task.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.renrentui.db.TaskTempleDBManager;
 import com.renrentui.resultmodel.TaskDatumControlBean;
 import com.renrentui.util.ImageLoadManager;
 import com.renrentui.util.ViewHolderUtil;
+import com.task.activity.ShowTaskMateriaBitPic;
 import com.task.manager.TaskDatumTemplePIcManager;
 import com.task.upload.Views.LoadingView;
 import com.task.upload.bean.uploadPicBean;
@@ -41,6 +43,7 @@ public class TaskDatumTemplateImagesTeamAdapter extends BaseAdapter {
     private int iShowContentType = 0;//0：编辑  1：展示
     private TaskDatumTemplePIcManager mTaskDatumTemplePIcManager = null;//拍照管理类
     private TaskTempleDBManager mTaskTempleManager;
+    private ArrayList<String > picData = new ArrayList<String>();
     public TaskDatumTemplateImagesTeamAdapter(Context con, ArrayList<TaskDatumControlBean> data, int iShowContentType ,
                                               String userId,String str_taskId,String tag,int iTeam_type,int iTeam_num){
         mContext = con;
@@ -56,6 +59,14 @@ public class TaskDatumTemplateImagesTeamAdapter extends BaseAdapter {
     public void  setTaskDatumTemplePIcManager(TaskDatumTemplePIcManager mObj){
         if(mTaskDatumTemplePIcManager==null){
             mTaskDatumTemplePIcManager = mObj;
+        }
+    }
+    private void getPicData(){
+        if(mData!=null && mData.size()>0){
+            int isize = mData.size();
+            for (int i=0;i<isize;i++){
+                picData.add(mData.get(i).controlValue);
+            }
         }
     }
     public void setData(ArrayList<TaskDatumControlBean> data){
@@ -113,6 +124,17 @@ public class TaskDatumTemplateImagesTeamAdapter extends BaseAdapter {
             }
             ImageLoadManager.getLoaderInstace().disPlayNormalImg(taskDean.controlValue,
                     mLoadingImage, R.drawable.pusher_logo);
+            //图片展示
+            mLoadingImage.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    getPicData();
+                    Intent mIntent = new Intent(mContext,ShowTaskMateriaBitPic.class);
+                    mIntent.putExtra(ShowTaskMateriaBitPic.STR_STATE_POSIION,position);
+                    mIntent.putExtra(ShowTaskMateriaBitPic.STR_STATE_URLS,picData);
+                    mContext.startActivity(mIntent);
+                }
+            });
         }else{
             //编辑
             //添加空数据

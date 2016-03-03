@@ -8,7 +8,6 @@ import android.text.SpannableStringBuilder;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 
-import com.renrentui.app.R;
 
 public class UIHelper {
 

@@ -39,127 +39,114 @@
             />
         <View
             android:id="@+id/view_line_01"
-            style="@style/line_height_1"
-            ></View>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dip"
-            android:orientation="horizontal"
-            android:weightSum="2"
-
-            >
-<LinearLayout
-    android:layout_width="0dip"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_weight="1"
-    android:gravity="center_vertical"
-    >
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/tv_order_color_3"
-        android:textSize="@dimen/_16sp"
-        android:text="我的合伙人"
-        android:gravity="center_horizontal"
-        />
-    <TextView
-        android:id="@+id/tv_friend_num"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/tv_order_color_5"
-        android:textSize="@dimen/_16sp"
-        android:text=""
-        android:paddingTop="@dimen/_5dp"
-        android:gravity="center_horizontal"
-
-    />
-</LinearLayout>
-            <View
-                android:layout_width="1dip"
-                android:layout_height="match_parent"
-                android:background="@color/line_bg_color"></View>
-            <LinearLayout
-                android:layout_width="0dip"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                >
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/tv_order_color_3"
-                    android:textSize="@dimen/_16sp"
-                    android:text="推荐人手机号"
-                    android:gravity="center_horizontal"
-                    />
-                <TextView
-                    android:id="@+id/tv_friend_phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/tv_order_color_5"
-                    android:textSize="@dimen/_16sp"
-                    android:text=""
-                    android:paddingTop="@dimen/_5dp"
-                    android:gravity="center_horizontal"
-
-                    />
-            </LinearLayout>
-        </LinearLayout>
-        <View
             style="@style/line_height_10"
             ></View>
+        <!-- 合伙人-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_f_1"
+                android:layout_width="120dip"
+                android:layout_height="60dip"
+                android:text="我的合伙人"
+                android:gravity="center"
+                android:textColor="@color/tv_order_color_1"
+                android:textSize="@dimen/_16sp"
+                android:layout_alignParentLeft="true"
+                />
+            <TextView
+                android:id="@+id/tv_f_2"
+                android:layout_width="150dip"
+                android:layout_height="60dip"
+                android:text="5人"
+                android:gravity="left|center_vertical"
+                android:textColor="@color/tv_order_color_5"
+                android:textSize="@dimen/_16sp"
+                android:layout_toRightOf="@id/tv_f_1"
+                />
+            <TextView
+                android:id="@+id/tv_f_3"
+                android:layout_width="60dip"
+                android:layout_height="60dip"
+                android:text="查看"
+                android:gravity="center"
+                android:textColor="@color/tv_order_color_1"
+                android:textSize="@dimen/_14sp"
+                android:layout_alignParentRight="true"
+                android:drawableEnd="@drawable/go"
+                android:layout_marginRight="@dimen/_10dp"
+                />
+            <View
+                android:id="@+id/view_line_02"
+                style="@style/line_height_10"
+                android:layout_below="@id/tv_f_1"
+                ></View>
+            <TextView
+                android:id="@+id/tv_m_1"
+                android:layout_width="120dip"
+                android:layout_height="60dip"
+                android:text="我的招募人"
+                android:gravity="center"
+                android:textColor="@color/tv_order_color_1"
+                android:textSize="@dimen/_16sp"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/view_line_02"
+                />
+            <TextView
+                android:id="@+id/tv_m_2"
+                android:layout_width="match_parent"
+                android:layout_height="60dip"
+                android:text="13811247642"
+                android:gravity="left|center_vertical"
+                android:textColor="@color/tv_order_color_5"
+                android:textSize="@dimen/_16sp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/tv_f_1"
+                android:layout_below="@id/view_line_02"
+                />
+        </RelativeLayout>
+        <View
+            android:id="@+id/view_line_03"
+            style="@style/line_height_10"
+            ></View>
+
+
         <!-- 招募合伙人-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="@dimen/_10dp"
+            android:paddingTop="@dimen/_20dp"
+            android:paddingBottom="@dimen/_20dp"
+            android:paddingLeft="@dimen/view_space"
+            android:paddingRight="@dimen/view_space"
             >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/tv_order_color_1"
-                android:textSize="@dimen/_16sp"
+                android:textSize="@dimen/_18sp"
+                android:text="招募合伙人，分红拿不停!"
+                android:gravity="center_horizontal"
+                ></TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tv_order_color_3"
+                android:textSize="@dimen/_14sp"
+                android:text="合伙人所获奖励你都可以得分红\n合伙人越多,收益越多哦!"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_10dp"
+                ></TextView>
+
+            <Button
+                android:id="@+id/btn_find_friend"
+                style="@style/style_btn_blue_shape_fill"
                 android:text="招募合伙人"
-                android:gravity="center_horizontal"
-                ></TextView>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/tv_order_color_3"
-                android:textSize="@dimen/_12sp"
-                android:text="合伙人所获奖励你都可以得分红"
-                android:gravity="center_horizontal"
-                ></TextView>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00bcd5"
-                android:padding="1dip"
-                android:layout_marginTop="28dip"
-                android:layout_marginBottom="28dip"
-                android:layout_gravity="center_horizontal"
-                >
-            <ImageView
-                android:layout_width="230dip"
-                android:layout_height="230dip"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/my_friend_src"
+                android:layout_marginTop="@dimen/_20dp"
                 />
-            </LinearLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/tv_order_color_3"
-                android:textSize="@dimen/_12sp"
-                android:text="@string/notice_my_friend"
-                android:gravity="center_horizontal"
-                android:layout_marginBottom="21dip"
-                android:paddingLeft="@dimen/_40dp"
-                android:paddingRight="@dimen/_40dp"
-                ></TextView>
+
         </LinearLayout>
 
     </LinearLayout>

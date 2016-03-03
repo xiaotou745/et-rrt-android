@@ -73,7 +73,7 @@ public class FragmentTask_1 extends BaseFragment implements
 					pulltorefresh_taskList.setVisibility(View.GONE);
 
 					FragmentTask_1.this.onNodata(
-							ResultMsgType.NetworkNotValide, null, null, null);
+							ResultMsgType.NetworkNotValide, R.drawable.icon_not_task, 0, "",null);
 				}
 
 				@Override
@@ -87,7 +87,7 @@ public class FragmentTask_1 extends BaseFragment implements
 						if (t.data.count == 0) {
 							pulltorefresh_taskList.setVisibility(View.GONE);
 							FragmentTask_1.this.onNodata(
-									ResultMsgType.Success, "刷新", "暂无过期任务！",
+									ResultMsgType.Success, R.drawable.icon_not_task,R.string.task_over_no_data,"",
 									FragmentTask_1.this);
 						} else {
 							finishedTaskInfos.clear();
@@ -110,14 +110,14 @@ public class FragmentTask_1 extends BaseFragment implements
 				public void onSericeErr(RSMyTask t) {
 					pulltorefresh_taskList.setVisibility(View.GONE);
 					FragmentTask_1.this.onNodata(
-							ResultMsgType.ServiceErr, "刷新", "数据加载失败！", null);
+							ResultMsgType.ServiceErr, R.drawable.icon_not_task,R.string.every_no_data_error, "", FragmentTask_1.this);
 				}
 
 				@Override
 				public void onSericeExp() {
 					pulltorefresh_taskList.setVisibility(View.GONE);
 					FragmentTask_1.this.onNodata(
-							ResultMsgType.ServiceExp, "刷新", "数据加载失败！", null);
+							ResultMsgType.ServiceErr, R.drawable.icon_not_task,R.string.every_no_data_error, "", FragmentTask_1.this);
 
 				}
 			});

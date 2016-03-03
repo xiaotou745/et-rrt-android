@@ -38,10 +38,13 @@ public class BaseActivity extends Activity {
 	//无数据
 	public View layout_nodata;
 	public Button btn_nodata;
-	public TextView tv_nodata;
+	public TextView tv_nodata;//content
+	public TextView tv_ondata_notice;//notice
+	public ImageView iv_nodata;//图片
 
 	public MyProgersssDialog progersssDialog;
 	public Context context;
+	public Context lastContext;//上一个actvity 对象
 	//title
 	public ImageView mIV_title_left;
 	public TextView mTV_title_left;
@@ -87,6 +90,8 @@ public class BaseActivity extends Activity {
 		layout_nodata = findViewById(R.id.layout_nodata);
 		btn_nodata = (Button) findViewById(R.id.btn_nodata);
 		tv_nodata = (TextView) findViewById(R.id.tv_nodata);
+		tv_ondata_notice = (TextView)findViewById(R.id.tv_nodate_notice);
+		iv_nodata =(ImageView) findViewById(R.id.iv_nodata);
 		progersssDialog = new MyProgersssDialog(this);
 		progersssDialog.setCancelable(false);
 		mIV_title_left = (ImageView)findViewById(R.id.iv_title_left);
@@ -98,16 +103,15 @@ public class BaseActivity extends Activity {
 	}
 
 
-
 	/**
-	 * 页面没有数据时的统一处理
+	 * 页面没有数据时的统一处理(作废)
 	 * @param resultMsgType
 	 * @param btnText 按钮上面显示的文字
 	 * @param tvText	没有数据对应的后续操作
 	 * @param iNodata
 	 */
-	public void onNodata(int resultMsgType, String btnText, String tvText,
-			final INodata iNodata) {
+	public void onNodata_over(int resultMsgType, String btnText, String tvText,
+						 final INodata iNodata) {
 		layout_nodata.setVisibility(View.VISIBLE);
 		if (Util.IsNotNUll(tvText)) {
 			tv_nodata.setText(tvText);
@@ -130,11 +134,66 @@ public class BaseActivity extends Activity {
 			});
 		}
 		switch (resultMsgType) {
-		case ResultMsgType.NetworkNotValide:
-			tv_nodata.setText("网络无连接！");
-			btn_nodata.setText("设置");
-			btn_nodata.setOnClickListener(new OnClickListener() {
+			case ResultMsgType.NetworkNotValide:
+				tv_nodata.setText("网络无连接！");
+				btn_nodata.setText("设置");
+				btn_nodata.setOnClickListener(new OnClickListener() {
 
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(Settings.ACTION_SETTINGS);
+						startActivity(intent);
+					}
+				});
+				break;
+			case ResultMsgType.ServiceErr:
+				break;
+			case ResultMsgType.ServiceExp:
+				break;
+			case ResultMsgType.Success:
+				break;
+			default:
+				break;
+		}
+	}
+
+	/**
+	 * 无数据时页面统一处理
+	 * @param resultMsgType  错误类型
+	 * @param ivResId    无数据时图片id
+	 * @param tvNodataId   无数据时内容提示
+	 * @param tvNoDataNotice   无数据时提示信息
+	 * @param iNodata
+	 */
+	public void onNodata(int resultMsgType,int ivResId,int tvNodataId, String tvNoDataNotice,
+			final INodata iNodata) {
+		layout_nodata.setVisibility(View.VISIBLE);
+		if( ivResId!=0){
+			iv_nodata.setImageResource(ivResId);
+		}
+		if(tvNodataId!=0){
+			tv_nodata.setText(tvNodataId);
+		}
+		if(!TextUtils.isEmpty(tvNoDataNotice)){
+			tv_ondata_notice.setText(tvNoDataNotice);
+		}
+		if(iNodata!=null){
+			layout_nodata.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					iNodata.onNoData();
+				}
+			});
+		}
+		tv_ondata_notice.setVisibility(View.VISIBLE);
+		btn_nodata.setVisibility(View.GONE);
+		switch (resultMsgType) {
+		case ResultMsgType.NetworkNotValide:
+			btn_nodata.setVisibility(View.VISIBLE);
+			tv_ondata_notice.setVisibility(View.GONE);
+			tv_nodata.setText("网络无连接！");
+			btn_nodata.setText("设置网络");
+			btn_nodata.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					Intent intent = new Intent(Settings.ACTION_SETTINGS);

@@ -27,7 +27,8 @@ public class MyTaskContentBean implements Serializable {
     public String scanTip ;//非签约任务 时 扫码说明
     public String reminder ;//非签约任务 时 温馨提示
     public String status;//任务状态,1是审核通过，3是过期，4是终止
-
+    public String tagName;//标签名称
+    public String tagColorCode;//标签颜色值
 
     public String getAmount() {
         DecimalFormat df = new DecimalFormat("0.00");
@@ -63,6 +64,29 @@ public class MyTaskContentBean implements Serializable {
         }
     }
 
+    public MyTaskContentBean() {
+    }
+
+    public MyTaskContentBean(String taskId, String taskGeneralInfo, String taskName, double amount, int taskType, String taskTypeName, String logo, String auditWaitNum, String auditPassNum, String auditRefuseNum, String completeNum, String ctId, String downUrl, String scanTip, String reminder, String status, String tagName, String tagColorCode) {
+        this.taskId = taskId;
+        this.taskGeneralInfo = taskGeneralInfo;
+        this.taskName = taskName;
+        this.amount = amount;
+        this.taskType = taskType;
+        this.taskTypeName = taskTypeName;
+        this.logo = logo;
+        this.auditWaitNum = auditWaitNum;
+        this.auditPassNum = auditPassNum;
+        this.auditRefuseNum = auditRefuseNum;
+        this.completeNum = completeNum;
+        this.ctId = ctId;
+        this.downUrl = downUrl;
+        this.scanTip = scanTip;
+        this.reminder = reminder;
+        this.status = status;
+        this.tagName = tagName;
+        this.tagColorCode = tagColorCode;
+    }
 
     @Override
     public String toString() {

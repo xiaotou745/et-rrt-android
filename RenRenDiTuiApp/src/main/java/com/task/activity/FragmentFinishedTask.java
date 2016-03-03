@@ -75,15 +75,12 @@ public class FragmentFinishedTask extends BaseFragment implements
 				public void onNetworknotvalide() {
 					pulltorefresh_taskList.setVisibility(View.GONE);
 					FragmentFinishedTask.this.onNodata(
-							ResultMsgType.NetworkNotValide, null, null, null);
+							ResultMsgType.NetworkNotValide, 0, 0, "",null);
 				}
 
 				@Override
 				public void onSuccess(RSTaskMaterial t) {
 					FragmentFinishedTask.this.hideLayoutNoda();
-//					layoutTopMenu.setShenhezhong(t.data.waitTotal);
-//					layoutTopMenu.setYtongguo(t.data.passTotal);
-//					layoutTopMenu.setWeitongguo(t.data.refuseTotal);
 					boolean isFinish = false;
 					isFinish = !(t.data != null && t.data.taskStatus == 1);
 					myTaskMaterialListener.showMyTaskMateriaCount(t.data.waitTotal,t.data.passTotal,t.data.refuseTotal,isFinish);
@@ -92,7 +89,7 @@ public class FragmentFinishedTask extends BaseFragment implements
 						if (t.data.count == 0) {
 							pulltorefresh_taskList.setVisibility(View.GONE);
 							FragmentFinishedTask.this.onNodata(
-									ResultMsgType.Success, "刷新", "暂无审核未通过资料！",
+									ResultMsgType.Success, 0, R.string.material_over_no_data,"",
 									FragmentFinishedTask.this);
 						} else {
 							taskMetarialContents.clear();
@@ -115,14 +112,14 @@ public class FragmentFinishedTask extends BaseFragment implements
 				public void onSericeErr(RSTaskMaterial t) {
 					pulltorefresh_taskList.setVisibility(View.GONE);
 					FragmentFinishedTask.this.onNodata(
-							ResultMsgType.ServiceErr, "刷新", "数据加载失败！", null);
+							ResultMsgType.ServiceErr, 0,R.string.every_no_data_error ,"", FragmentFinishedTask.this);
 				}
 
 				@Override
 				public void onSericeExp() {
 					pulltorefresh_taskList.setVisibility(View.GONE);
 					FragmentFinishedTask.this.onNodata(
-							ResultMsgType.ServiceExp, "刷新", "数据加载失败！", null);
+							ResultMsgType.ServiceErr, 0,R.string.every_no_data_error ,"", FragmentFinishedTask.this);
 
 				}
 			});

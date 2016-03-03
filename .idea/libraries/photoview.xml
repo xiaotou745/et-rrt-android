@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="photoview">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/RenRenDiTuiApp/libs/photoview.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

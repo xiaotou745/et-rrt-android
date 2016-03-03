@@ -81,12 +81,12 @@
             ></TextView>
     </LinearLayout>
 
-    <ImageView
+    <TextView
         android:id="@+id/iv_team_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_toLeftOf="@id/ll_team_0"
-        android:src="@drawable/team_down"
+        android:layout_width="45dip"
+        android:layout_height="20dip"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
         />
 </RelativeLayout>

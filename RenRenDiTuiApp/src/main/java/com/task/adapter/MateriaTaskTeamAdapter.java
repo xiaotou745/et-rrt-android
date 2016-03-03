@@ -2,8 +2,10 @@ package com.task.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,19 +99,23 @@ public class MateriaTaskTeamAdapter extends BaseAdapter {
 		} else {
 			mViewHolder.mIV_0.setImageResource(R.drawable.pusher_logo);
 		}
-		switch (beanContent.getTaskType()){
-			case 1:
-				//签约任务
-				mViewHolder.mIV_4.setImageResource(R.drawable.team_qianyue);
-				break;
-			case 2:
-				//分享
-				mViewHolder.mIV_4.setImageResource(R.drawable.team_share);
-				break;
-			case 3:
-				//下载
-				mViewHolder.mIV_4.setImageResource(R.drawable.team_down);
-				break;
+//		switch (beanContent.getTaskType()){
+//			case 1:
+//				//签约任务
+//				mViewHolder.mIV_4.setImageResource(R.drawable.team_qianyue);
+//				break;
+//			case 2:
+//				//分享
+//				mViewHolder.mIV_4.setImageResource(R.drawable.team_share);
+//				break;
+//			case 3:
+//				//下载
+//				mViewHolder.mIV_4.setImageResource(R.drawable.team_down);
+//				break;
+//		}
+		mViewHolder.mIV_4.setText(beanContent.tagName);
+		if(!TextUtils.isEmpty(beanContent.tagColorCode)){
+			mViewHolder.mIV_4.setBackgroundColor(Color.parseColor(beanContent.tagColorCode));
 		}
 		convertView.setOnClickListener(new View.OnClickListener(){
 			@Override
@@ -133,7 +139,7 @@ public class MateriaTaskTeamAdapter extends BaseAdapter {
 		private TextView mTV_1;
 		private TextView mTV_2;
 		private TextView mTV_3;
-		private ImageView mIV_4;
+		private TextView mIV_4;
 		ViewHolder(){
 
 		}
@@ -143,7 +149,7 @@ public class MateriaTaskTeamAdapter extends BaseAdapter {
 			mTV_1 = (TextView)view.findViewById(R.id.tv_team_1);
 			mTV_2 = (TextView)view.findViewById(R.id.tv_team_2);
 			mTV_3 = (TextView)view.findViewById(R.id.tv_team_3);
-			mIV_4 = (ImageView)view.findViewById(R.id.iv_team_4);
+			mIV_4 = (TextView)view.findViewById(R.id.iv_team_4);
 		}
 
 	}

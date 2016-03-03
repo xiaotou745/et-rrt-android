@@ -3,6 +3,7 @@ package com.task.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import com.renrentui.resultmodel.TaskMetarialContent;
 import com.renrentui.util.TimeUtils;
 import com.renrentui.util.UIHelper;
 import com.task.activity.MyTaskMaterialDetailActivity;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -95,6 +98,8 @@ public class GetOnFinishAdapter extends BaseAdapter {
 					viewholder_1.tv_task_name = (TextView)convertView.findViewById(R.id.tv_task_name);
 					viewholder_1.ll_amount = (LinearLayout)convertView.findViewById(R.id.ll_amount);
 					viewholder_1.tv_task_amount = (TextView)convertView.findViewById(R.id.tv_task_amount);
+					viewholder_1.tv_task_refuse = (TextView)convertView.findViewById(R.id.tv_refuReason);
+					viewholder_1.mlineView = convertView.findViewById(R.id.line_1);
 					convertView.setTag(R.id.listview_multiple_type_first_layout,viewholder_1);
 				}else{
 					viewholder_1 = (ViewHolder_1)convertView.getTag(R.id.listview_multiple_type_first_layout);
@@ -111,6 +116,8 @@ public class GetOnFinishAdapter extends BaseAdapter {
 					viewHolder_2.tv_task_name = (TextView)convertView.findViewById(R.id.tv_task_name);
 					viewHolder_2.ll_amount = (LinearLayout)convertView.findViewById(R.id.ll_amount);
 					viewHolder_2.tv_task_amount = (TextView)convertView.findViewById(R.id.tv_task_amount);
+					viewHolder_2.tv_task_refuse = (TextView)convertView.findViewById(R.id.tv_refuReason);
+					viewHolder_2.mlineView = convertView.findViewById(R.id.line_1);
 					convertView.setTag(R.id.listview_multiple_type_second_layout,viewHolder_2);
 				}else{
 					viewHolder_2 = (ViewHolder_2)convertView.getTag(R.id.listview_multiple_type_second_layout);
@@ -127,6 +134,8 @@ public class GetOnFinishAdapter extends BaseAdapter {
 					viewHolder_3.tv_task_name = (TextView)convertView.findViewById(R.id.tv_task_name);
 					viewHolder_3.ll_amount = (LinearLayout)convertView.findViewById(R.id.ll_amount);
 					viewHolder_3.tv_task_amount = (TextView)convertView.findViewById(R.id.tv_task_amount);
+					viewHolder_3.tv_task_refuse = (TextView)convertView.findViewById(R.id.tv_refuReason);
+					viewHolder_3.mlineView = convertView.findViewById(R.id.line_1);
 					convertView.setTag(R.id.listview_multiple_type_three_layout,viewHolder_3);
 				}else{
 					viewHolder_3 = (ViewHolder_3)convertView.getTag(R.id.listview_multiple_type_three_layout);
@@ -142,6 +151,8 @@ public class GetOnFinishAdapter extends BaseAdapter {
 					viewholder_1.tv_task_name = (TextView)convertView.findViewById(R.id.tv_task_name);
 					viewholder_1.ll_amount = (LinearLayout)convertView.findViewById(R.id.ll_amount);
 					viewholder_1.tv_task_amount = (TextView)convertView.findViewById(R.id.tv_task_amount);
+					viewholder_1.tv_task_refuse = (TextView)convertView.findViewById(R.id.tv_refuReason);
+					viewholder_1.mlineView = convertView.findViewById(R.id.line_1);
 					convertView.setTag(R.id.listview_multiple_type_first_layout,viewholder_1);
 				}else{
 					viewholder_1 = (ViewHolder_1)convertView.getTag(R.id.listview_multiple_type_first_layout);
@@ -179,6 +190,14 @@ public class GetOnFinishAdapter extends BaseAdapter {
 				viewholder_1.tv_task_status.setTextColor(context.getResources().getColor(R.color.tv_order_color_5));
 				viewholder_1.tv_task_amount.setText(String.valueOf(beanContent.getAmount()));
 				viewholder_1.tv_task_name.setText(style);
+				if(!TextUtils.isEmpty(beanContent.refuReason)){
+					viewholder_1.mlineView.setVisibility(View.VISIBLE);
+					viewholder_1.tv_task_refuse.setVisibility(View.VISIBLE);
+					viewholder_1.tv_task_refuse.setText("拒绝原因:"+beanContent.refuReason);
+				}else{
+					viewholder_1.mlineView.setVisibility(View.GONE);
+					viewholder_1.tv_task_refuse.setVisibility(View.GONE);
+				}
 				break;
 			case 1:
 				viewHolder_2.tv_push_time.setText("提交时间  "+ TimeUtils.StringPattern(beanContent.createDate,"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm"));
@@ -191,6 +210,14 @@ public class GetOnFinishAdapter extends BaseAdapter {
 				viewHolder_2.gridView_task_pic.setClickable(false);
 				viewHolder_2.gridView_task_pic.setEnabled(false);
 				viewHolder_2.gridView_task_pic.setFocusable(false);
+				if(!TextUtils.isEmpty(beanContent.refuReason)){
+					viewHolder_2.mlineView.setVisibility(View.VISIBLE);
+					viewHolder_2.tv_task_refuse.setVisibility(View.VISIBLE);
+					viewHolder_2.tv_task_refuse.setText("拒绝原因:"+beanContent.refuReason);
+				}else{
+					viewHolder_2.mlineView.setVisibility(View.GONE);
+					viewHolder_2.tv_task_refuse.setVisibility(View.GONE);
+				}
 				break;
 			case 2:
 				viewHolder_3.tv_push_time.setText("提交时间  "+ TimeUtils.StringPattern(beanContent.createDate,"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm"));
@@ -203,6 +230,15 @@ public class GetOnFinishAdapter extends BaseAdapter {
 				viewHolder_3.gridViews_task_pic.setClickable(false);
 				viewHolder_3.gridViews_task_pic.setEnabled(false);
 				viewHolder_3.gridViews_task_pic.setFocusable(false);
+				//拒绝原因
+				if(!TextUtils.isEmpty(beanContent.refuReason)){
+					viewHolder_3.mlineView.setVisibility(View.VISIBLE);
+					viewHolder_3.tv_task_refuse.setVisibility(View.VISIBLE);
+					viewHolder_3.tv_task_refuse.setText("拒绝原因:"+beanContent.refuReason);
+				}else{
+					viewHolder_3.mlineView.setVisibility(View.GONE);
+					viewHolder_3.tv_task_refuse.setVisibility(View.GONE);
+				}
 				break;
 		}
 		convertView.setOnClickListener(new View.OnClickListener() {
@@ -224,117 +260,6 @@ public class GetOnFinishAdapter extends BaseAdapter {
 
 		return convertView;
 
-//
-//		if (convertView == null) {
-//			convertView = LayoutInflater.from(context).inflate(
-//					R.layout.item_task_ongoing_1, null);
-//			viewholder = new ViewHolder(convertView);
-//			convertView.setTag(viewholder);
-//		} else {
-//			viewholder = (ViewHolder) convertView.getTag();
-//		}
-//		final FinishedTaskInfo noGoingTaskInfo = noGoingTaskInfos.get(position);
-//		if (Util.IsNotNUll(noGoingTaskInfo.logo)) {
-//			ImageLoadManager.getLoaderInstace().disPlayNormalImg(
-//					noGoingTaskInfo.logo, viewholder.icon_pusher,
-//					R.drawable.pusher_logo);
-//		} else {
-//			viewholder.icon_pusher.setImageResource(R.drawable.pusher_logo);
-//		}
-//		String title = noGoingTaskInfo.taskName;
-//		if(title.length()>10)
-//			title = title.substring(0,10)+"...";
-//		viewholder.tv_Pusher.setText(title);
-//		viewholder.tv_TaskGeneralInfo.setText(noGoingTaskInfo.taskGeneralInfo);
-//		String now = DateUtils.ft.format(new Date());
-//		viewholder.tv_Amount.setText(noGoingTaskInfo.getAmount());
-//		viewholder.tv_AvailableCount.setText("领取时间  "
-//				+ DateUtils.getTime(noGoingTaskInfo.receivedTime));
-//
-//		if (noGoingTaskInfo.isAgainPickUp == 1) {
-//			viewholder.btn_collect_again.setVisibility(View.VISIBLE);
-//			final RQHandler<RSReceiveTask> rqHandler_receiveTask = new RQHandler<>(
-//					new IRqHandlerMsg<RSReceiveTask>() {
-//
-//						@Override
-//						public void onBefore() {
-//						}
-//
-//						@Override
-//						public void onNetworknotvalide() {
-//							ToastUtil.show(
-//									context,
-//									context.getResources().getString(
-//											R.string.networknotconnect));
-//						}
-//
-//						@Override
-//						public void onSuccess(RSReceiveTask t) {
-//							final String orderId = t.data;
-//							SuccessDialog dialog = new SuccessDialog(context, "请在"
-//									+ noGoingTaskInfo.taskCycle
-//									+ "小时内完成\n提示：完成之后不要忘记提交审核哦");
-//							dialog.addListener(new ExitDialogListener() {
-//
-//								@Override
-//								public void clickCommit() {
-//									Intent intent = new Intent(context,
-//											TaskDetailInfoActivity.class);
-//									intent.putExtra("TaskId", noGoingTaskInfo.taskId);
-//									intent.putExtra("OrderId",orderId);
-//									intent.putExtra("isList", 5);
-//									context.startActivity(intent);
-//								}
-//
-//								@Override
-//								public void clickCancel() {
-//									((MyTaskMaterialActivity) context).vp_task_main.setCurrentItem(ToMainPage.审核中.getValue());
-//								}
-//							});
-//							dialog.show();
-//							dialog.setCancelable(false);
-//						}
-//
-//						@Override
-//						public void onSericeErr(RSReceiveTask t) {
-//							ToastUtil.show(context, t.msg);
-//						}
-//
-//						@Override
-//						public void onSericeExp() {
-//
-//						}
-//					});
-//
-//			viewholder.btn_collect_again
-//					.setOnClickListener(new OnClickListener() {
-//
-//						@Override
-//						public void onClick(View v) {
-//							ApiUtil.Request(new RQBaseModel<RQReceiveTask, RSReceiveTask>(
-//									context, new RQReceiveTask(
-//											Utils.getUserDTO(context).data.userId, noGoingTaskInfo.taskId),
-//									new RSReceiveTask(), ApiNames.领取任务.getValue(),
-//									RequestType.POST, rqHandler_receiveTask));
-//						}
-//					});
-//		} else {
-//			viewholder.btn_collect_again.setVisibility(View.GONE);
-//		}
-//
-//		convertView.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				Intent intent = new Intent(context,
-//						TaskDetailInfoActivity.class);
-//				intent.putExtra("TaskId", noGoingTaskInfo.taskId);
-//				intent.putExtra("OrderId", noGoingTaskInfo.myReceivedTaskId);
-//				intent.putExtra("isList", 6);
-//				context.startActivity(intent);
-//			}
-//		});
-//		return convertView;
 	}
 
 	public class ViewHolder_1 {
@@ -344,6 +269,8 @@ public class GetOnFinishAdapter extends BaseAdapter {
 		public LinearLayout ll_amount;
 		public TextView tv_task_amount;
 		public TextView tv_task_name;
+		public TextView tv_task_refuse;
+		public View mlineView;
 	}
 	public class ViewHolder_2 {
 		public  TextView tv_push_time;
@@ -352,6 +279,9 @@ public class GetOnFinishAdapter extends BaseAdapter {
 		public LinearLayout ll_amount;
 		public TextView tv_task_amount;
 		public TextView tv_task_name;
+		public TextView tv_task_refuse;
+		public View mlineView;
+
 	}
 	public class ViewHolder_3 {
 		public  TextView tv_push_time;
@@ -360,5 +290,8 @@ public class GetOnFinishAdapter extends BaseAdapter {
 		public LinearLayout ll_amount;
 		public TextView tv_task_amount;
 		public TextView tv_task_name;
+		public TextView tv_task_refuse;
+		public View mlineView;
+
 	}
 }

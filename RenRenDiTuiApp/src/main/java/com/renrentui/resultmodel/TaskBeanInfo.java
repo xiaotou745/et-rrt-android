@@ -35,7 +35,8 @@ public class TaskBeanInfo implements Serializable {
     public  String reminder ;//非签约任务 时 温馨提示
     public String status;//任务状态,1是审核通过，3是过期，4是终止
     public String estimatedTime;//预计用时，int类型
-
+    public String tagName;//标签名称
+    public String tagColorCode;//标签颜色值
 
     public String getAmount() {
 
@@ -48,7 +49,7 @@ public  TaskBeanInfo(){
 }
     public TaskBeanInfo(String taskTitle,double amount,String endTime,String taskGeneralInfo,
                         int isHad,String logo,String auditCycle,int taskType,
-                        String taskTypeName,String hotLine ,int ctId,String downUrl,String scanTip,String reminder,String  status,String estimatedTime) {
+                        String taskTypeName,String hotLine ,int ctId,String downUrl,String scanTip,String reminder,String  status,String estimatedTime,String tagName,String tagColorCode) {
 super();
         this.taskTitle =taskTitle;
         this.amount =amount;
@@ -66,6 +67,8 @@ super();
         this.reminder = reminder;
         this.status =status;
         this.estimatedTime = estimatedTime;
+        this.tagName = tagName;
+        this.tagColorCode = tagColorCode;
     }
 
     @Override

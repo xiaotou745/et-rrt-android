@@ -1,6 +1,7 @@
 package com.task.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import com.renrentui.app.R;
 import com.renrentui.tools.Util;
 import com.renrentui.util.ImageLoadManager;
+import com.task.activity.ShowTaskMateriaBitPic;
 
 import java.util.ArrayList;
 
@@ -46,6 +48,7 @@ public class GriveiwTaskPicAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder mViewHolder = new ViewHolder();
+        final int position = i;
         if(view==null){
             view = LayoutInflater.from(context).inflate(R.layout.item_task_pic_layout,viewGroup,false);
             mViewHolder.mImageView = (ImageView)view.findViewById(R.id.img_pic);
@@ -59,6 +62,15 @@ public class GriveiwTaskPicAdapter extends BaseAdapter {
         } else {
             mViewHolder.mImageView.setImageResource(R.drawable.pusher_logo);
         }
+        view.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent mIntent = new Intent(context,ShowTaskMateriaBitPic.class);
+                mIntent.putExtra(ShowTaskMateriaBitPic.STR_STATE_POSIION,position);
+                mIntent.putExtra(ShowTaskMateriaBitPic.STR_STATE_URLS,picData);
+                context.startActivity(mIntent);
+            }
+        });
         return view;
     }
     public  class ViewHolder{

@@ -71,7 +71,7 @@ public class MyCapitalFramen_2 extends BaseFragment implements PullToRefreshView
                     hideProgressDialog();
                     pulltorefresh＿captailsist.setVisibility(View.GONE);
                     MyCapitalFramen_2.this.onNodata(
-                            ResultMsgType.NetworkNotValide, null, null, null);
+                            ResultMsgType.NetworkNotValide, R.drawable.icon_no_income, 0,"", null);
                 }
 
                 @Override
@@ -83,7 +83,7 @@ public class MyCapitalFramen_2 extends BaseFragment implements PullToRefreshView
                         if (t.getData()==null || t.getData().getCount()<=0) {
                             pulltorefresh＿captailsist.setVisibility(View.GONE);
                             MyCapitalFramen_2.this.onNodata(
-                                    ResultMsgType.Success, "刷新", "暂无支出明细信息",
+                                    ResultMsgType.Success, R.drawable.icon_no_income,R.string.fund_no_data, "",
                                     MyCapitalFramen_2.this);
                         } else {
                             dataLists.clear();
@@ -107,7 +107,7 @@ public class MyCapitalFramen_2 extends BaseFragment implements PullToRefreshView
                     hideProgressDialog();
                     pulltorefresh＿captailsist.setVisibility(View.GONE);
                     MyCapitalFramen_2.this.onNodata(
-                            ResultMsgType.ServiceErr, "刷新", "数据加载失败！3", null);
+                            ResultMsgType.ServiceErr, R.drawable.icon_no_income,R.string.every_no_data_error, "", MyCapitalFramen_2.this);
                 }
 
                 @Override
@@ -115,7 +115,7 @@ public class MyCapitalFramen_2 extends BaseFragment implements PullToRefreshView
                     hideProgressDialog();
                     pulltorefresh＿captailsist.setVisibility(View.GONE);
                     MyCapitalFramen_2.this.onNodata(
-                            ResultMsgType.ServiceExp, "刷新", "数据加载失败！4", null);
+                            ResultMsgType.ServiceErr, R.drawable.icon_no_income,R.string.every_no_data_error, "", MyCapitalFramen_2.this);
 
                 }
             });

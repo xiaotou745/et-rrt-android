@@ -83,12 +83,14 @@ public class RSMyMaterialTaskTeamModel extends RSBase {
         private String logo ;//商家logo图片完整地址
         private String  taskDatumCount ;//当前状态下资料的总数
         private String ctId;//地推关系id
+        public String tagName;//标签名称
+        public String tagColorCode;//标签颜色值
 
         public Content() {
             super();
         }
 
-        public Content(String taskId, String taskName, String amount, int taskType, String taskTypeName, String taskStatus, String taskStatusName, String logo, String taskDatumCount, String ctId) {
+        public Content(String taskId, String taskName, String amount, int taskType, String taskTypeName, String taskStatus, String taskStatusName, String logo, String taskDatumCount, String ctId,String tagName,String tagColorCode) {
             this.taskId = taskId;
             this.taskName = taskName;
             this.amount = amount;
@@ -99,6 +101,8 @@ public class RSMyMaterialTaskTeamModel extends RSBase {
             this.logo = logo;
             this.taskDatumCount = taskDatumCount;
             this.ctId = ctId;
+            this.tagName = tagName;
+            this.tagColorCode = tagColorCode;
         }
 
         public String getCtId() {

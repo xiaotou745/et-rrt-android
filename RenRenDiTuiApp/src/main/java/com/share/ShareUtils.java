@@ -5,13 +5,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.renrentui.util.ToastUtil;
 import com.share.bean.ShareBean;
+import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.shareboard.SnsPlatform;
+import com.umeng.socialize.utils.Log;
 import com.umeng.socialize.utils.ShareBoardlistener;
 
 /**
@@ -24,6 +27,7 @@ public class ShareUtils {
     private Activity act;
     private ShareBean mShareBean;
     private UMShareAPI mShareAPI;
+    private Class mObj;
 
     /**
      * 初始化友盟分享设置
@@ -32,11 +36,11 @@ public class ShareUtils {
     public static void initUMShareControl(){
 
         //微信 appid appsecret
-        PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
+        PlatformConfig.setWeixin("wx372230899f9b558e", "06b4552fd896c6616d41d2c2d1cd168f");
         //新浪微博 appkey appsecret
-        PlatformConfig.setSinaWeibo("3921700954","04b48b094faeb16683c32669824ebdad");
+        PlatformConfig.setSinaWeibo("2925603791","dbbda94f1cc82d52ec10c597209af946");
         // QQ和Qzone appid appkey
-        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
+        PlatformConfig.setQQZone("1105086358", "AWh9dDtypExUAPXm");
 //
 //        //支付宝 appid
 //        PlatformConfig.setAlipay("2015111700822536");
@@ -50,12 +54,15 @@ public class ShareUtils {
 //        PlatformConfig.setPinterest("1439206");
 //        //来往 appid appkey
 //        PlatformConfig.setLaiwang("laiwangd497e70d4", "d497e70d4c3e4efeab1381476bac4c5e");
+        Log.LOG= false;//不显示日志
+        Config.IsToastTip = false;//不显示友盟 的 toast
 
     }
 
-    public ShareUtils(Context context,Activity act){
+    public ShareUtils(Context context,Activity act,ShareBean bean){
         this.context = context;
         this.act = act;
+        mShareBean = bean;
         mShareAPI =  UMShareAPI.get(context);
     }
 
@@ -97,19 +104,39 @@ public class ShareUtils {
             ShareAction mShareAction =new ShareAction(act);
             if(share_media.equals(SHARE_MEDIA.WEIXIN_CIRCLE)){
                 //微信朋友圈
-                mShareAction.setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE);
+                if(mShareAPI.isInstall(act,SHARE_MEDIA.WEIXIN_CIRCLE)) {
+                    mShareAction.setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE);
+                }else{
+                    ToastUtil.show(context,"请安装微信客户端");
+                    return;
+                }
             }else if(share_media.equals(SHARE_MEDIA.WEIXIN)){
                 //微信
-                mShareAction.setPlatform(SHARE_MEDIA.WEIXIN);
+                if(mShareAPI.isInstall(act,SHARE_MEDIA.WEIXIN)) {
+                    mShareAction.setPlatform(SHARE_MEDIA.WEIXIN);
+                }else{
+                    ToastUtil.show(context,"请安装微信客户端");
+                    return;
+                }
             }else if(share_media.equals(SHARE_MEDIA.QQ)){
                 //qq
-                mShareAction.setPlatform(SHARE_MEDIA.QQ);
+                if(mShareAPI.isInstall(act,SHARE_MEDIA.QQ)) {
+                    mShareAction.setPlatform(SHARE_MEDIA.QQ);
+                }else{
+                    ToastUtil.show(context,"请安装QQ客户端");
+                    return;
+                }
             } else if(share_media.equals(SHARE_MEDIA.QZONE)){
                 //qq 控件
-                mShareAction.setPlatform(SHARE_MEDIA.QZONE);
+                if(mShareAPI.isInstall(act,SHARE_MEDIA.QZONE)) {
+                    mShareAction.setPlatform(SHARE_MEDIA.QZONE);
+                }else{
+                    ToastUtil.show(context,"请安装QQ客户端");
+                    return;
+                }
             }else  if(share_media.equals(SHARE_MEDIA.SINA)){
                 //新浪微博
-                mShareAction.setPlatform(SHARE_MEDIA.SINA);
+                    mShareAction.setPlatform(SHARE_MEDIA.SINA);
             }
             if(mShareBean!=null) {
                 mShareAction.withTitle(mShareBean.getStrTitle());
@@ -141,6 +168,77 @@ public class ShareUtils {
         @Override
         public void onCancel(SHARE_MEDIA platform) {
             Toast.makeText(act,platform + " 分享取消了", Toast.LENGTH_SHORT).show();
+        }
+    };
+    //个人中心招募合伙人
+
+    /**
+     * 招募合伙人分享页
+     * @param arrs
+     */
+    public  void  showFindFriendsShareBoard(SHARE_MEDIA[] arrs,Class obj ){
+        if(arrs==null || arrs.length<=0 ){
+            return;
+        }
+        mObj = obj;
+        ShareAction mShareAction = new ShareAction(act).setDisplayList(arrs);
+        mShareAction.setShareboardclickCallback(findFriendsShareBoardlistener);
+        mShareAction.open();
+
+    }
+
+    /**
+     * 招募合伙人
+     */
+    private ShareBoardlistener findFriendsShareBoardlistener = new ShareBoardlistener() {
+
+        @Override
+        public void onclick(SnsPlatform snsPlatform,SHARE_MEDIA share_media) {
+            ShareAction mShareAction =new ShareAction(act);
+            Intent mIntent = new Intent();
+            mIntent.setClass(context,mObj);
+            if(share_media.equals(SHARE_MEDIA.WEIXIN_CIRCLE)){
+                //微信朋友圈
+                if(mShareAPI.isInstall(act,SHARE_MEDIA.WEIXIN_CIRCLE)) {
+                    mIntent.putExtra("SHARE_TYPE","WEIXIN_CIRCLE");
+                }else{
+                    ToastUtil.show(context,"请安装微信客户端");
+                    return;
+                }
+            }else if(share_media.equals(SHARE_MEDIA.WEIXIN)){
+                //微信
+                if(mShareAPI.isInstall(act,SHARE_MEDIA.WEIXIN)) {
+                    mIntent.putExtra("SHARE_TYPE", "WEIXIN");
+                }else{
+                    ToastUtil.show(context,"请安装微信客户端");
+                    return;
+                }
+            }else if(share_media.equals(SHARE_MEDIA.QQ)){
+                //qq
+                if(mShareAPI.isInstall(act,SHARE_MEDIA.QQ)) {
+                    mIntent.putExtra("SHARE_TYPE", "QQ");
+                }else{
+                    ToastUtil.show(context,"请安装QQ客户端");
+                    return;
+                }
+            } else if(share_media.equals(SHARE_MEDIA.QZONE)){
+                //qq 控件
+                if(mShareAPI.isInstall(act,SHARE_MEDIA.QZONE)) {
+                    mIntent.putExtra("SHARE_TYPE", "QZONE");
+                }else{
+                    ToastUtil.show(context,"请安装QQ客户端");
+                    return;
+                }
+            }else  if(share_media.equals(SHARE_MEDIA.SINA)){
+                //新浪微博
+                mIntent.putExtra("SHARE_TYPE","SINA");
+            }else {
+                return;
+            }
+            if(mShareBean!=null) {
+               mIntent.putExtra("SHARE_CONTENT",mShareBean);
+            }
+            context.startActivity(mIntent);
         }
     };
 

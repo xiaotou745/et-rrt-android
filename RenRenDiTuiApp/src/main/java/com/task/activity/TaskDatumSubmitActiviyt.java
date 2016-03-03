@@ -89,7 +89,7 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
     private TextView tv_Amount;// 任务单价
 
     private TextView tv_pusher_taskName;// 任务名称
-    private ImageView mIV_pusher_type_flag;//任务类型
+    private TextView mIV_pusher_type_flag;//任务类型
    // private TextView tv_pusher_type_content;//任务类型及内容
     private TextView tv_task_examine;//审核
     private TextView tv_deadline_time;// 截止日期
@@ -141,7 +141,7 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
                 @Override
                 public void onNetworknotvalide() {
                     TaskDatumSubmitActiviyt.this.onNodata(
-                            ResultMsgType.NetworkNotValide, null, null, null);
+                            ResultMsgType.NetworkNotValide, 0,0, "",null);
                 }
 
                 @Override
@@ -155,15 +155,16 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
                 @Override
                 public void onSericeErr(RSTaskDatum t) {
                     TaskDatumSubmitActiviyt.this.onNodata(
-                            ResultMsgType.ServiceErr, "刷新", "数据加载失败！",
+                            ResultMsgType.ServiceErr, 0,R.string.every_no_data_error,"",
                             TaskDatumSubmitActiviyt.this);
                 }
 
                 @Override
                 public void onSericeExp() {
                     TaskDatumSubmitActiviyt.this.onNodata(
-                            ResultMsgType.ServiceExp, "刷新", "数据加载失败！",
+                            ResultMsgType.ServiceErr, 0,R.string.every_no_data_error,"",
                             TaskDatumSubmitActiviyt.this);
+
                 }
             });
     //====================提交任务模板============================
@@ -271,7 +272,7 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
         ll_amount = (LinearLayout) findViewById(R.id.ll_amount);
         tv_Amount = (TextView) findViewById(R.id.tv_amount);
         tv_pusher_taskName = (TextView) findViewById(R.id.tv_pusher_taskName);
-        mIV_pusher_type_flag = (ImageView)findViewById(R.id.iv_flag);
+        mIV_pusher_type_flag = (TextView)findViewById(R.id.iv_flag);
         //tv_pusher_type_content = (TextView) findViewById(R.id.tv_pusher_taskType_content);
         tv_task_examine = (TextView) findViewById(R.id.tv_task_examine);
         tv_deadline_time = (TextView) findViewById(R.id.tv_deadline_time);
@@ -321,19 +322,23 @@ public class TaskDatumSubmitActiviyt extends BaseActivity implements
         ll_amount.setVisibility(View.VISIBLE);
 
         tv_pusher_taskName.setText(taskBean.taskTitle);
-        if(taskBean.taskType==1){
-            //签约
-            mIV_pusher_type_flag.setImageResource(R.drawable.team_qianyue);
-        }else if(taskBean.taskType==2){
-            //分享
-            mIV_pusher_type_flag.setImageResource(R.drawable.team_share);
-        }else if(taskBean.taskType==3){
-            // 下载
-            mIV_pusher_type_flag.setImageResource(R.drawable.team_down);
-        }else{
-            mIV_pusher_type_flag.setImageResource(R.drawable.team_qianyue);
-        }
+//        if(taskBean.taskType==1){
+//            //签约
+//            mIV_pusher_type_flag.setImageResource(R.drawable.team_qianyue);
+//        }else if(taskBean.taskType==2){
+//            //分享
+//            mIV_pusher_type_flag.setImageResource(R.drawable.team_share);
+//        }else if(taskBean.taskType==3){
+//            // 下载
+//            mIV_pusher_type_flag.setImageResource(R.drawable.team_down);
+//        }else{
+//            mIV_pusher_type_flag.setImageResource(R.drawable.team_qianyue);
+//        }
         mIV_pusher_type_flag.setVisibility(View.VISIBLE);
+        mIV_pusher_type_flag.setText(taskBean.tagName);
+        if(!TextUtils.isEmpty(taskBean.tagColorCode)){
+            mIV_pusher_type_flag.setBackgroundColor(Color.parseColor(taskBean.tagColorCode));
+        }
 
 //        //简介
 //        SpannableStringBuilder style = null;

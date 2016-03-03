@@ -67,6 +67,9 @@ public class NoGoingTaskInfo implements Serializable{
 	 */
 	public String taskTypeName;
 
+	public String tagName;//标签名称
+	public String tagColorCode;//标签颜色值
+
 	public String getAmount() {
 		DecimalFormat df = new DecimalFormat("0.00");
 		String db = df.format(amount);
@@ -77,7 +80,7 @@ public class NoGoingTaskInfo implements Serializable{
 
 	public NoGoingTaskInfo(String taskId, String taskGeneralInfo,
 			String pusher, String taskName, double amount, int availableCount,
-			String beginTime, String endTime, String paymentMethod, String logo,String status,String auditStatus,int taskType,String taskTypeName) {
+			String beginTime, String endTime, String paymentMethod, String logo,String status,String auditStatus,int taskType,String taskTypeName,String tagName,String tagColorCode) {
 		super();
 		this.taskId = taskId;
 		this.taskGeneralInfo = taskGeneralInfo;
@@ -93,6 +96,8 @@ public class NoGoingTaskInfo implements Serializable{
 		this.auditStatus = auditStatus;
 		this.taskType = taskType;
 		this.taskTypeName = taskTypeName;
+		this.tagName = tagName;
+		this.tagColorCode = tagColorCode;
 	}
 
 	@Override

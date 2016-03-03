@@ -182,6 +182,7 @@ public class GetOnGoingAdapter extends BaseAdapter {
 				viewholder_1.tv_task_name.setText(style);
 				break;
 			case 1:
+				//图片
 				viewHolder_2.tv_push_time.setText("提交时间  "+ TimeUtils.StringPattern(beanContent.createDate,"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm"));
 				viewHolder_2.tv_task_status.setText(beanContent.taskStatusName);
 				viewHolder_2.tv_task_status.setTextColor(context.getResources().getColor(R.color.tv_order_color_5));
@@ -195,6 +196,7 @@ public class GetOnGoingAdapter extends BaseAdapter {
 				viewHolder_2.gridView_task_pic.setFocusable(false);
 				break;
 			case 2:
+				//多图片
 				viewHolder_3.tv_push_time.setText("提交时间  "+ TimeUtils.StringPattern(beanContent.createDate,"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm"));
 				viewHolder_3.tv_task_status.setText(beanContent.taskStatusName);
 				viewHolder_3.tv_task_status.setTextColor(context.getResources().getColor(R.color.tv_order_color_5));

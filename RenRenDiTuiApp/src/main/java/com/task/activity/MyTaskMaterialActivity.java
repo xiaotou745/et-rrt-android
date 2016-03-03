@@ -24,8 +24,9 @@ import com.task.model.LayoutMainTopmenu;
 import com.task.adapter.MyFragmentPagerAdapter;
 
 /**
+ * 具体某个任务对应的资料情况
  * 任务的资料审核详情列表
- * @author llp
+ *
  * 
  */
 public class MyTaskMaterialActivity extends BaseFragmentActivity implements

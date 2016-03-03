@@ -104,4 +104,16 @@
         android:text="任务名称"
         android:visibility="gone"
         android:textSize="@dimen/_14sp" />
+    <!-- 拒绝原因-->
+    <TextView
+        android:id="@+id/tv_refuReason"
+        android:layout_width="match_parent"
+        android:layout_height="36dip"
+        android:text="拒绝原因:"
+        android:textSize="@dimen/_14sp"
+        android:textColor="@color/tv_order_color_1"
+        android:layout_below="@id/line_1"
+        android:paddingTop="@dimen/_10dp"
+        android:visibility="gone"
+        />
 </RelativeLayout>

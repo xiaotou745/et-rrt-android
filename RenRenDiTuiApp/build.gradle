@@ -156,4 +156,5 @@ dependencies {
     compile files('libs/android-support-v4.jar')
     compile files('libs/GifView.jar')
     compile files('libs/sobot_sdk_1.3.2.jar')
+    compile files('libs/photoview.jar')
 }

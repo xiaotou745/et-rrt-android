@@ -137,7 +137,7 @@ public class NoGoingTaskActicity extends BaseActivity implements
 					hideProgressDialog();
 					pulltorefresh_nogoing_taskList.setVisibility(View.GONE);
 					NoGoingTaskActicity.this.onNodata(
-							ResultMsgType.NetworkNotValide, null, null, null);
+							ResultMsgType.NetworkNotValide, R.drawable.icon_not_task,R.string.task_newn_no_data,"",null);
 				}
 
 				@Override
@@ -151,7 +151,7 @@ public class NoGoingTaskActicity extends BaseActivity implements
 							pulltorefresh_nogoing_taskList
 									.setVisibility(View.GONE);
 							NoGoingTaskActicity.this.onNodata(
-									ResultMsgType.Success, "刷新", "暂无待领取任务！",
+									ResultMsgType.Success, R.drawable.icon_not_task,R.string.task_newn_no_data, "",
 									NoGoingTaskActicity.this);
 						} else {
 							noGoingTaskInfos.clear();
@@ -177,7 +177,7 @@ public class NoGoingTaskActicity extends BaseActivity implements
 					isGetDataStatus = 0;
 					pulltorefresh_nogoing_taskList.setVisibility(View.GONE);
 					NoGoingTaskActicity.this.onNodata(ResultMsgType.ServiceErr,
-							"刷新", "数据加载失败！", null);
+							R.drawable.icon_not_task,R.string.every_no_data_error ,"", NoGoingTaskActicity.this);
 				}
 
 				@Override
@@ -187,8 +187,8 @@ public class NoGoingTaskActicity extends BaseActivity implements
 					isGetDataStatus = 0;
 					currentPage = currentPage-1;
 					pulltorefresh_nogoing_taskList.setVisibility(View.GONE);
-					NoGoingTaskActicity.this.onNodata(ResultMsgType.ServiceExp,
-							"刷新", "数据加载失败！", null);
+					NoGoingTaskActicity.this.onNodata(ResultMsgType.ServiceErr,
+							R.drawable.icon_not_task,R.string.every_no_data_error ,"", NoGoingTaskActicity.this);
 				}
 			});
 	//请求城市

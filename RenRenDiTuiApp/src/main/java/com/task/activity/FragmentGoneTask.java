@@ -76,15 +76,12 @@ public class FragmentGoneTask extends BaseFragment implements
 					// TODO Auto-generated method stub
 					pulltorefresh_taskList.setVisibility(View.GONE);
 					FragmentGoneTask.this.onNodata(
-							ResultMsgType.NetworkNotValide, null, null, null);
+							ResultMsgType.NetworkNotValide, 0, 0,"", null);
 				}
 
 				@Override
 				public void onSuccess(RSTaskMaterial t) {
 					FragmentGoneTask.this.hideLayoutNoda();
-//					layoutTopMenu.setShenhezhong(t.data.waitTotal);
-//					layoutTopMenu.setYtongguo(t.data.passTotal);
-//					layoutTopMenu.setWeitongguo(t.data.refuseTotal);
 					boolean isFinish = false;
 					isFinish = !(t.data != null && t.data.taskStatus == 1);
 					myTaskMaterialListener.showMyTaskMateriaCount(t.data.waitTotal,t.data.passTotal,t.data.refuseTotal,isFinish);
@@ -93,7 +90,7 @@ public class FragmentGoneTask extends BaseFragment implements
 						if (t.data.count == 0) {
 							pulltorefresh_taskList.setVisibility(View.GONE);
 							FragmentGoneTask.this.onNodata(
-									ResultMsgType.Success, "刷新", "暂无审核通过资料！",
+									ResultMsgType.Success, 0,R.string.material_finish_no_data, "",
 									FragmentGoneTask.this);
 						} else {
 							taskMetarialContents.clear();
@@ -121,14 +118,14 @@ public class FragmentGoneTask extends BaseFragment implements
 				public void onSericeErr(RSTaskMaterial t) {
 					pulltorefresh_taskList.setVisibility(View.GONE);
 					FragmentGoneTask.this.onNodata(ResultMsgType.ServiceErr,
-							"刷新", "数据加载失败！", null);
+							0,R.string.every_no_data_error,"", FragmentGoneTask.this);
 				}
 
 				@Override
 				public void onSericeExp() {
 					pulltorefresh_taskList.setVisibility(View.GONE);
-					FragmentGoneTask.this.onNodata(ResultMsgType.ServiceExp,
-							"刷新", "数据加载失败！", null);
+					FragmentGoneTask.this.onNodata(ResultMsgType.ServiceErr,
+							0,R.string.every_no_data_error,"", FragmentGoneTask.this);
 				}
 			});
 	@Override

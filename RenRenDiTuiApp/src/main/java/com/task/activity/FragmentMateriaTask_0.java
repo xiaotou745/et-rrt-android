@@ -64,7 +64,7 @@ public class FragmentMateriaTask_0 extends BaseFragment implements
 				public void onNetworknotvalide() {
 					pulltorefresh_taskList.setVisibility(View.GONE);
 					FragmentMateriaTask_0.this.onNodata(
-							ResultMsgType.NetworkNotValide, null, null, null);
+							ResultMsgType.NetworkNotValide, 0, 0,"", null);
 				}
 
 				@Override
@@ -76,7 +76,7 @@ public class FragmentMateriaTask_0 extends BaseFragment implements
 						if (t.getData().getCount() == 0) {
 							pulltorefresh_taskList.setVisibility(View.GONE);
 							FragmentMateriaTask_0.this.onNodata(
-									ResultMsgType.Success, "刷新", "暂无审核中资料！",
+									ResultMsgType.Success, 0,R.string.material_doing_no_data, "",
 									FragmentMateriaTask_0.this);
 						} else {
 							taskMetarialContents.clear();
@@ -99,14 +99,14 @@ public class FragmentMateriaTask_0 extends BaseFragment implements
 				public void onSericeErr(RSMyMaterialTaskTeamModel t) {
 					pulltorefresh_taskList.setVisibility(View.GONE);
 					FragmentMateriaTask_0.this.onNodata(
-							ResultMsgType.ServiceErr, "刷新", "数据加载失败！", null);
+							ResultMsgType.ServiceErr, 0,R.string.every_no_data_error, "", FragmentMateriaTask_0.this);
 				}
 
 				@Override
 				public void onSericeExp() {
 					pulltorefresh_taskList.setVisibility(View.GONE);
 					FragmentMateriaTask_0.this.onNodata(
-							ResultMsgType.ServiceExp, "刷新", "数据加载失败！", null);
+							ResultMsgType.ServiceErr, 0,R.string.every_no_data_error, "", FragmentMateriaTask_0.this);
 
 				}
 			});

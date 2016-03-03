@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.task.activity.TaskMyFriendListViewActivity"
+    android:orientation="vertical"
+    >
+    <include
+        layout="@layout/main_title_home_layout"
+        ></include>
+
+    <TextView
+        android:id="@+id/tv_myfriends_num"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:text="目前已有5个合伙人"
+        android:textColor="@color/tv_order_color_5"
+        android:drawableLeft="@drawable/icon_myfriends"
+        android:drawablePadding="@dimen/_10dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/_10dp"
+        android:textSize="@dimen/_14sp"
+        />
+    <com.renrentui.controls.PullToRefreshView
+        android:id="@+id/pulltorefresh_friendslist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone" >
+        <ListViews
+            android:id="@+id/lv_friends"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:listSelector="@null"
+            android:dividerHeight="1dp"
+            android:divider="@color/line_bg_color"
+            android:cacheColorHint="@null"
+            ></ListViews>
+    </com.renrentui.controls.PullToRefreshView>
+
+    <!-- no data-->
+    <include layout="@layout/layout_nodata"
+        />
+
+</LinearLayout>

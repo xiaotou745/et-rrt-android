@@ -4,6 +4,9 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,6 +19,7 @@ import com.renrentui.app.R;
 import com.renrentui.resultmodel.NoGoingTaskInfo;
 import com.renrentui.tools.Util;
 import com.renrentui.util.ImageLoadManager;
+import com.renrentui.util.UIHelper;
 import com.renrentui.util.Utils;
 import com.task.activity.TaskDetailInfoNewActivity;
 import com.user.activity.LoginActivity;
@@ -71,25 +75,29 @@ public class GetNoGoingAdapter extends BaseAdapter {
         viewholder.mTV_1.setText(noGoingTaskInfo.getAmount());
         viewholder.mTV_2.setText(noGoingTaskInfo.taskName);
         viewholder.mTV_3.setText(noGoingTaskInfo.taskGeneralInfo);
-        if(noGoingTaskInfo.taskType==1){
-//签约
-            viewholder.mIV_4.setImageResource(R.drawable.team_qianyue);
+//        if(noGoingTaskInfo.taskType==1){
+////签约
+//            viewholder.mIV_4.setImageResource(R.drawable.team_qianyue);
+//
+//        }else if(noGoingTaskInfo.taskType==2){
+//            //分享
+//            viewholder.mIV_4.setImageResource(R.drawable.team_share);
+//        }else if(noGoingTaskInfo.taskType==3){
+//            // 下载
+//            viewholder.mIV_4.setImageResource(R.drawable.team_down);
+//        }else{
+//            viewholder.mIV_4.setImageResource(R.drawable.team_qianyue);
+//        }
 
-        }else if(noGoingTaskInfo.taskType==2){
-            //分享
-            viewholder.mIV_4.setImageResource(R.drawable.team_share);
-        }else if(noGoingTaskInfo.taskType==3){
-            // 下载
-            viewholder.mIV_4.setImageResource(R.drawable.team_down);
-        }else{
-            viewholder.mIV_4.setImageResource(R.drawable.team_qianyue);
+        viewholder.mIV_4.setText(noGoingTaskInfo.tagName);
+        if(!TextUtils.isEmpty(noGoingTaskInfo.tagColorCode)){
+            viewholder.mIV_4.setBackgroundColor( Color.parseColor(noGoingTaskInfo.tagColorCode));
         }
-
 //        SpannableStringBuilder style = null;
 //        switch (noGoingTaskInfo.taskType){
 //            case 1:
-//                //签约
-//                style =  UIHelper.setStyleColorByColor(context,noGoingTaskInfo.taskTypeName.toString(),noGoingTaskInfo.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_1);
+//                //签约//
+ //               style =  UIHelper.setStyleColorByColor(context, noGoingTaskInfo.taskTypeName.toString(), noGoingTaskInfo.taskGeneralInfo.toString(), R.color.white, R.color.tv_bg_color_1);
 //                break;
 //            case 2:
 //                //分享
@@ -124,14 +132,14 @@ public class GetNoGoingAdapter extends BaseAdapter {
         private TextView mTV_1;//金额
         private TextView mTV_2;//title
         private TextView mTV_3;//content
-        private ImageView mIV_4;//icon flag
+        private TextView mIV_4;//icon flag
 
         public ViewHolder(View view) {
             mIV_0 = (ImageView)view.findViewById(R.id.iv_team_0);
             mTV_1 = (TextView)view.findViewById(R.id.tv_team_1);
             mTV_2 = (TextView)view.findViewById(R.id.tv_team_2);
             mTV_3 = (TextView)view.findViewById(R.id.tv_team_3);
-            mIV_4 = (ImageView)view.findViewById(R.id.iv_team_4);
+            mIV_4 = (TextView)view.findViewById(R.id.iv_team_4);
         }
     }
 }

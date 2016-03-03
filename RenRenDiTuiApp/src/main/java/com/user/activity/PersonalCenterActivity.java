@@ -1,5 +1,6 @@
 package com.user.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -35,6 +36,9 @@ import com.renrentui.util.ApiUtil;
 import com.renrentui.util.ImageLoadManager;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
+import com.share.ShareUtils;
+import com.share.activity.ShareContentEditActivity;
+import com.share.bean.ShareBean;
 import com.task.activity.MyMaterialTaskTeamActivity;
 import com.task.activity.MyTaskFramentNewActivity;
 import com.task.activity.NoGoingTaskActicity;
@@ -44,6 +48,7 @@ import com.umeng.socialize.ShareContent;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.shareboard.SnsPlatform;
 import com.umeng.socialize.utils.ShareBoardlistener;
 import com.user.service.CustomerServiceDialog;
@@ -83,6 +88,7 @@ public class PersonalCenterActivity extends BaseActivity implements
 	private RelativeLayout rl_datum_task;// 资料审核详情
 	private RelativeLayout rl_help;// 帮助中心
 	private RelativeLayout rl_more;// 更多
+	private RelativeLayout rl_share;//招募合伙人
 
 	private RelativeLayout rl_customer_service_center;// 客服支持
 	private TextView mTV_customer_service_tel;//客服电话
@@ -91,7 +97,8 @@ public class PersonalCenterActivity extends BaseActivity implements
 	private boolean isQuit = false;
 
 
-//	获取
+
+	//	获取
 	private RQHandler<RSMyInCome> rqHandler_myincome = new RQHandler<RSMyInCome>(
 			new IRqHandlerMsg<RSMyInCome>() {
 
@@ -261,6 +268,8 @@ public class PersonalCenterActivity extends BaseActivity implements
 		rl_help.setOnClickListener(this);
 		 rl_more = (RelativeLayout) findViewById(R.id.rl_more);
 		rl_more.setOnClickListener(this);
+		rl_share = (RelativeLayout)findViewById(R.id.rl_share);
+		rl_share.setOnClickListener(this);
 
 		 rl_customer_service_center = (RelativeLayout) findViewById(R.id.rl_customer_service_center);
 		rl_customer_service_center.setOnClickListener(this);
@@ -270,7 +279,6 @@ public class PersonalCenterActivity extends BaseActivity implements
 	@Override
 	public void onClick(View v) {
 		Intent intent = null;
-		Bundle mBundle1 = new Bundle();
 		boolean isFinish = false;
 		switch (v.getId()) {
 			case R.id.rl_to_user_info:// 点击用户头像，进入个人资料
@@ -326,6 +334,10 @@ public class PersonalCenterActivity extends BaseActivity implements
 				break;
 			case R.id.tab_03:
 				break;
+			case R.id.rl_share:
+				//招募合伙人
+				showShareDisplay(mMyInComeData.phoneNo);
+				break;
 		default:
 			break;
 		}
@@ -365,4 +377,23 @@ public class PersonalCenterActivity extends BaseActivity implements
 		}
 		return true;
 	}
+
+	/**
+	 * 招募合伙人
+	 */
+	public void showShareDisplay(String stContent){
+		ShareBean mShareBean = new ShareBean();
+		mShareBean.setStrTitle("人人推－全民地推");
+		mShareBean.setStrText("注册填写推荐人：" + stContent + "，成为我的合伙人，一起赚钱一起飞！");
+		mShareBean.setStrTargetUrl("http://m.renrentui.me");
+		ShareUtils mShareUtils = new ShareUtils(context,PersonalCenterActivity.this,mShareBean);
+		SHARE_MEDIA[] arrs =new SHARE_MEDIA[5];
+		arrs[0] = SHARE_MEDIA.WEIXIN;
+		arrs[1] =SHARE_MEDIA.WEIXIN_CIRCLE;
+		arrs[2] = SHARE_MEDIA.QQ;
+		arrs[3] = SHARE_MEDIA.QZONE;
+		arrs[4] = SHARE_MEDIA.SINA;
+		mShareUtils.showFindFriendsShareBoard(arrs, ShareContentEditActivity.class);
+	}
+
 }

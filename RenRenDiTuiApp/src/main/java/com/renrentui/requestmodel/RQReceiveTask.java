@@ -8,11 +8,13 @@ public class RQReceiveTask extends RQBase {
 	public String userId;
 	/** 任务ID */
 	public String taskId;
+	public String cityCode;//城市code
 
-	public RQReceiveTask(String userId, String taskId) {
+	public RQReceiveTask(String userId, String taskId,String cityCode) {
 		super();
 		this.userId = userId;
 		this.taskId = taskId;
+		this.cityCode = cityCode;
 	}
 
 	public RQReceiveTask() {

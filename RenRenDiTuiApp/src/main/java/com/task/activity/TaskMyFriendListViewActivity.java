@@ -62,7 +62,7 @@ public class TaskMyFriendListViewActivity extends BaseActivity implements PullTo
                     hideProgressDialog();
                     pulltorefresh_task_friendsList.setVisibility(View.GONE);
                     TaskMyFriendListViewActivity.this.onNodata(
-                            ResultMsgType.NetworkNotValide, null, null, null);
+                            ResultMsgType.NetworkNotValide, 0, 0,"", null);
 
                 }
 
@@ -75,7 +75,7 @@ public class TaskMyFriendListViewActivity extends BaseActivity implements PullTo
                         if (t.getData().getCount() == 0) {
                             pulltorefresh_task_friendsList.setVisibility(View.GONE);
                             TaskMyFriendListViewActivity.this.onNodata(
-                                    ResultMsgType.Success, "刷新", "",
+                                    ResultMsgType.Success, 0, R.string.every_no_data,"",
                                     TaskMyFriendListViewActivity.this);
                         } else {
                             nextId = t.getData().getNextId();
@@ -109,7 +109,7 @@ public class TaskMyFriendListViewActivity extends BaseActivity implements PullTo
                     hideProgressDialog();
                     pulltorefresh_task_friendsList.setVisibility(View.GONE);
                     TaskMyFriendListViewActivity.this.onNodata(ResultMsgType.ServiceErr,
-                            "刷新", "数据加载失败！", null);
+                            0,R.string.every_no_data_error, "", TaskMyFriendListViewActivity.this);
                 }
 
                 @Override
@@ -118,7 +118,7 @@ public class TaskMyFriendListViewActivity extends BaseActivity implements PullTo
                     hideProgressDialog();
                     pulltorefresh_task_friendsList.setVisibility(View.GONE);
                     TaskMyFriendListViewActivity.this.onNodata(ResultMsgType.ServiceErr,
-                            "刷新", "数据加载失败！", null);
+                            0,R.string.every_no_data_error,"", TaskMyFriendListViewActivity.this);
                 }
             });
 

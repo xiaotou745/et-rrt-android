@@ -1,15 +1,16 @@
 package base;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.renrentui.app.R;
 import com.renrentui.controls.MyProgersssDialog;
@@ -24,6 +25,9 @@ public class BaseFragment extends Fragment {
 	private Button btn_nodata;
 	private TextView tv_nodata;
 	private MyProgersssDialog progersssDialog;
+
+	public TextView tv_ondata_notice;//notice
+	public ImageView iv_nodata;//图片
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,11 +57,12 @@ public class BaseFragment extends Fragment {
 		btn_nodata = (Button) view.findViewById(R.id.btn_nodata);
 		tv_nodata = (TextView) view.findViewById(R.id.tv_nodata);
 		progersssDialog = new MyProgersssDialog(getActivity());
+		tv_ondata_notice = (TextView)view.findViewById(R.id.tv_nodate_notice);
+		iv_nodata =(ImageView) view.findViewById(R.id.iv_nodata);
 	}
-	
 	/**
 	 * 页面没有数据时的统一处理
-	 * 
+	 *
 	 * @param
 	 *            ：网络无连接，数据加载失败，数据没有
 	 * @param btnText
@@ -67,8 +72,8 @@ public class BaseFragment extends Fragment {
 	 * @param iNodata
 	 *            没有数据对应的后续操作
 	 */
-	public void onNodata(int resultMsgType, String btnText, String tvText,
-			final INodata iNodata) {
+	public void onNodata_over(int resultMsgType, String btnText, String tvText,
+						 final INodata iNodata) {
 		layout_nodata.setVisibility(View.VISIBLE);
 		if (Util.IsNotNUll(tvText)) {
 			tv_nodata.setText(tvText);
@@ -91,28 +96,82 @@ public class BaseFragment extends Fragment {
 			});
 		}
 		switch (resultMsgType) {
-		case ResultMsgType.NetworkNotValide:
-			tv_nodata.setText("网络无连接！");
-			btn_nodata.setText("设置");
-			btn_nodata.setOnClickListener(new OnClickListener() {
+			case ResultMsgType.NetworkNotValide:
+				tv_nodata.setText("网络无连接！");
+				btn_nodata.setText("设置");
+				btn_nodata.setOnClickListener(new OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(Settings.ACTION_SETTINGS);
-					startActivity(intent);
-				}
-			});
-			break;
-		case ResultMsgType.ServiceErr:
-			break;
-		case ResultMsgType.ServiceExp:
-			break;
-		case ResultMsgType.Success:
-			break;
-		default:
-			break;
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(Settings.ACTION_SETTINGS);
+						startActivity(intent);
+					}
+				});
+				break;
+			case ResultMsgType.ServiceErr:
+				break;
+			case ResultMsgType.ServiceExp:
+				break;
+			case ResultMsgType.Success:
+				break;
+			default:
+				break;
 		}
 	}
+	/**
+	 * 无数据时页面统一处理
+	 * @param resultMsgType  错误类型
+	 * @param ivResId    无数据时图片id
+	 * @param tvNodataId   无数据时内容提示
+	 * @param tvNoDataNotice   无数据时提示信息
+	 * @param iNodata
+	 */
+	public void onNodata(int resultMsgType,int ivResId,int tvNodataId, String tvNoDataNotice,
+						 final INodata iNodata) {
+		layout_nodata.setVisibility(View.VISIBLE);
+		if( ivResId!=0){
+			iv_nodata.setImageResource(ivResId);
+		}
+		if(tvNodataId!=0){
+			tv_nodata.setText(tvNodataId);
+		}
+		if(!TextUtils.isEmpty(tvNoDataNotice)){
+			tv_ondata_notice.setText(tvNoDataNotice);
+		}
+		if(iNodata!=null){
+			layout_nodata.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					iNodata.onNoData();
+				}
+			});
+		}
+		btn_nodata.setVisibility(View.GONE);
+		switch (resultMsgType) {
+			case ResultMsgType.NetworkNotValide:
+				btn_nodata.setVisibility(View.VISIBLE);
+				tv_ondata_notice.setVisibility(View.GONE);
+				tv_nodata.setText("网络无连接！");
+				btn_nodata.setText("设置网络");
+				btn_nodata.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(Settings.ACTION_SETTINGS);
+						startActivity(intent);
+					}
+				});
+				break;
+			case ResultMsgType.ServiceErr:
+				break;
+			case ResultMsgType.ServiceExp:
+				break;
+			case ResultMsgType.Success:
+				break;
+			default:
+				break;
+		}
+	}
+
 
 	/**
 	 * 页面有数据时隐藏没有数据的界面

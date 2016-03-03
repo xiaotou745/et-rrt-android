@@ -3,6 +3,7 @@ package com.task.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +70,7 @@ public FragmentTask_0(){
 				public void onNetworknotvalide() {
 					pulltorefresh_taskList.setVisibility(View.GONE);
 					FragmentTask_0.this.onNodata(
-							ResultMsgType.NetworkNotValide, null, null, null);
+							ResultMsgType.NetworkNotValide, R.drawable.icon_not_task, 0, "",null);
 				}
 
 				@Override
@@ -82,7 +83,7 @@ public FragmentTask_0(){
 						if (t.data.count == 0) {
 							pulltorefresh_taskList.setVisibility(View.GONE);
 							FragmentTask_0.this.onNodata(
-									ResultMsgType.Success, "刷新", "您还没有领取任务",
+									ResultMsgType.Success, R.drawable.icon_not_task,R.string.task_doing_no_data,"",
 									FragmentTask_0.this);
 						} else {
 							nextId = t.data.nextId;
@@ -113,14 +114,14 @@ public FragmentTask_0(){
 				public void onSericeErr(RSMyTask t) {
 					pulltorefresh_taskList.setVisibility(View.GONE);
 					FragmentTask_0.this.onNodata(
-							ResultMsgType.ServiceErr, "刷新", "数据加载失败！", null);
+							ResultMsgType.ServiceErr, R.drawable.icon_not_task,R.string.every_no_data_error,"", FragmentTask_0.this);
 				}
 
 				@Override
 				public void onSericeExp() {
 					pulltorefresh_taskList.setVisibility(View.GONE);
 					FragmentTask_0.this.onNodata(
-							ResultMsgType.ServiceExp, "刷新", "数据加载失败！", null);
+							ResultMsgType.ServiceExp, R.drawable.icon_not_task,R.string.every_no_data_error,"", FragmentTask_0.this);
 
 				}
 			});
@@ -197,7 +198,6 @@ public FragmentTask_0(){
 
 	@Override
 	public void onNoData() {
-		// TODO Auto-generated method stub
 		showProgressDialog();
 		getInitData();
 	}

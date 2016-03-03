@@ -1,11 +1,11 @@
 package com.task.activity;
 
-import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.renrentui.app.MyApplication;
 import com.renrentui.app.R;
 import com.renrentui.interfaces.INodata;
 import com.renrentui.interfaces.IRqHandlerMsg;
@@ -38,12 +39,18 @@ import com.renrentui.util.ToMainPage;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
 import com.renrentui.view.MyListView;
+import com.share.ShareUtils;
+import com.share.bean.ShareBean;
 import com.task.adapter.TaskExplainAdapter;
 import com.task.adapter.TaskFlowPathAdapter;
 import com.task.adapter.TaskFriendGridAdapter;
 import com.task.adapter.TaskLinksAdapter;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 import com.user.activity.LoginActivity;
 
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +73,7 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 	private TextView tv_Amount;// 任务单价
 
 	private TextView tv_pusher_taskName;// 任务名称
-	private ImageView mIV_pusher_type_flag;//任务类型
+	private TextView mIV_pusher_type_flag;//任务类型
 
 	private TextView tv_task_examine;//审核
 	private TextView tv_deadline_time;// 截止日期
@@ -115,6 +122,9 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 	private String str_scanTip;//扫码说明
 	private String str_reminder ;//温馨提示
 	private String str_taskStatus="";//状态信息
+	ShareUtils mShareUtils;
+	private  String strShare_title;
+	private String strShare_content;
 
 
 //	任务详情Handler
@@ -131,12 +141,13 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 					mContentView.setVisibility(View.GONE);
 					btn_receive_task.setVisibility(View.GONE);
 					TaskDetailInfoNewActivity.this.onNodata(
-							ResultMsgType.NetworkNotValide, null, null, null);
+							ResultMsgType.NetworkNotValide, R.drawable.icon_not_task, 0,"", null);
 				}
 
 				@Override
 				public void onSuccess(RSGetTaskDetailInfoNew t) {
 					mContentView.setVisibility(View.VISIBLE);
+					TaskDetailInfoNewActivity.this.hideLayoutNoda();
 					rsGetTaskDetailInfo = t;
 					initData(rsGetTaskDetailInfo.data);
 					hideProgressDialog();
@@ -147,7 +158,7 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 					mContentView.setVisibility(View.GONE);
 					btn_receive_task.setVisibility(View.GONE);
 					TaskDetailInfoNewActivity.this.onNodata(
-							ResultMsgType.ServiceErr, "刷新", "数据加载失败！",
+							ResultMsgType.ServiceErr, R.drawable.icon_not_task, R.string.every_no_data_error,"",
 							TaskDetailInfoNewActivity.this);
 				}
 
@@ -156,7 +167,7 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 					mContentView.setVisibility(View.GONE);
 					btn_receive_task.setVisibility(View.GONE);
 					TaskDetailInfoNewActivity.this.onNodata(
-							ResultMsgType.ServiceExp, "刷新", "数据加载失败！",
+							ResultMsgType.ServiceErr, R.drawable.icon_not_task, R.string.every_no_data_error,"",
 							TaskDetailInfoNewActivity.this);
 				}
 			});
@@ -266,13 +277,18 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 		if(mTV_title_content!=null){
 			mTV_title_content.setText("任务详情");
 		}
+		if(mTV_title_right!=null){
+			mTV_title_right.setVisibility(View.INVISIBLE);
+			mTV_title_right.setOnClickListener(this);
+			mTV_title_right.setText("分享");
+		}
 		mContentView = findViewById(R.id.layout_data);
 		icon_pusher = (ImageView) findViewById(R.id.icon_pusher);
 		ll_amount =(LinearLayout)findViewById(R.id.ll_amount);
 		tv_Amount = (TextView)findViewById(R.id.tv_amount);
 
 		tv_pusher_taskName = (TextView) findViewById(R.id.tv_pusher_taskName);
-		mIV_pusher_type_flag = (ImageView)findViewById(R.id.iv_flag);
+		mIV_pusher_type_flag = (TextView)findViewById(R.id.iv_flag);
 
 		tv_task_examine = (TextView)findViewById(R.id.tv_task_examine);
 		tv_deadline_time =(TextView) findViewById(R.id.tv_deadline_time);
@@ -329,6 +345,12 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 			case R.id.iv_title_left:
 				finish();
 				break;
+			case R.id.tv_title_right:
+				//分享
+				if(!TextUtils.isEmpty(rsGetTaskDetailInfo.data.task.taskTitle)){
+					showShareDisplay();
+				}
+				break;
 		}
 	}
 
@@ -340,6 +362,7 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 	@SuppressWarnings("deprecation")
 	private void initData(TaskDeatailInfoNew taskBean) {
 		//头像
+		mTV_title_right.setVisibility(View.VISIBLE);
 		if (Util.IsNotNUll(taskBean.task.logo )&& Utils.checkUrl(taskBean.task.logo)) {
 			ImageLoadManager.getLoaderInstace().disPlayNormalImg(taskBean.task.logo,
 					icon_pusher, R.drawable.pusher_logo);
@@ -349,6 +372,8 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 		tv_Amount.setText(taskBean.task.getAmount());
 
 		tv_pusher_taskName.setText(taskBean.task.taskTitle);
+		strShare_title = taskBean.task.taskTitle+"-"+taskBean.task.getAmount()+"元/次";
+		strShare_content="最靠谱的资源共享平台，用最少的时间，赚取最多的财富";
 		i_isHad = taskBean.task.isHad;
 		if(taskBean.task.isHad==1){
 			str_ctId = String.valueOf(taskBean.task.ctId);
@@ -362,40 +387,23 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 		str_reminder = taskBean.task.reminder;
 		str_taskStatus = taskBean.task.status;
 
-		if(taskBean.task.taskType==1){
-//签约
-			mIV_pusher_type_flag.setImageResource(R.drawable.team_qianyue);
-
-		}else if(taskBean.task.taskType==2){
-			//分享
-			mIV_pusher_type_flag.setImageResource(R.drawable.team_share);
-		}else if(taskBean.task.taskType==3){
-			// 下载
-			mIV_pusher_type_flag.setImageResource(R.drawable.team_down);
-		}else{
-			mIV_pusher_type_flag.setImageResource(R.drawable.team_qianyue);
-		}
-
-//		SpannableStringBuilder style = null;
-//		switch (taskBean.task.taskType){
-//			case 1:
-//				//签约
-//				style =  UIHelper.setStyleColorByColor(context, taskBean.task.taskTypeName.toString(), taskBean.task.taskGeneralInfo.toString(), R.color.white, R.color.tv_bg_color_1);
-//				break;
-//			case 2:
-//				//分享
-//				style =  UIHelper.setStyleColorByColor(context,taskBean.task.taskTypeName.toString(),taskBean.task.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_2);
-//				break;
-//			case 3:
-//				//下载
-//				style =  UIHelper.setStyleColorByColor(context,taskBean.task.taskTypeName.toString(),taskBean.task.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_3);
-//				break;
-//			default:
-//				style =  UIHelper.setStyleColorByColor(context,taskBean.task.taskTypeName.toString(),taskBean.task.taskGeneralInfo.toString(),R.color.white,R.color.tv_bg_color_1);
-//				break;
+//		if(taskBean.task.taskType==1){
+////签约
+//			mIV_pusher_type_flag.setImageResource(R.drawable.team_qianyue);
+//
+//		}else if(taskBean.task.taskType==2){
+//			//分享
+//			mIV_pusher_type_flag.setImageResource(R.drawable.team_share);
+//		}else if(taskBean.task.taskType==3){
+//			// 下载
+//			mIV_pusher_type_flag.setImageResource(R.drawable.team_down);
+//		}else{
+//			mIV_pusher_type_flag.setImageResource(R.drawable.team_qianyue);
 //		}
-//		tv_pusher_type_content.setText(style);
-
+		mIV_pusher_type_flag.setText(taskBean.task.tagName);
+		if(!TextUtils.isEmpty(taskBean.task.tagColorCode)){
+			mIV_pusher_type_flag.setBackgroundColor(Color.parseColor(taskBean.task.tagColorCode));
+		}
 		//审核
 		tv_task_examine.setText(context.getResources().getString(R.string.task_detail_examine_format,taskBean.task.auditCycle));
 		//截止日期
@@ -424,20 +432,6 @@ public static final String TAG = TaskDetailInfoNewActivity.class.getSimpleName()
 		if(mLinksData!=null){
 			mLinksData.clear();
 		}
-//		if("1".equals(taskBean.task.status)){
-//		//任务审核通过，可以提交
-//			btn_receive_task.setVisibility(View.VISIBLE);
-//		}else{
-//			//非合法任务信息
-//			btn_receive_task.setVisibility(View.GONE);
-//			String strUnMessage= "";
-//			if("3".equals(taskBean.task.status)){
-//				strUnMessage = "此任务已过期!";
-//			}else{
-//				strUnMessage = "此任务已被终止!";
-//			}
-//			ToastUtil.show(context,strUnMessage);
-//		}
 		//解析数据
 		int isize = taskBean.taskSetps==null ?0:taskBean.taskSetps.size();
 		for(int i=0;i<isize;i++){
@@ -567,6 +561,7 @@ if("1".equals(str_taskStatus)) {
 		//解析任务参与人
 		List<PartnerList>  mPartnerList = taskBean.partnerList;
 		mLine_task_detail_friend_top.setVisibility(View.VISIBLE);
+		mTaskFriendGridView.setVisibility(View.GONE);
 		mLL_detail_friends.setVisibility(View.VISIBLE);
 		if(mPartnerList==null || mPartnerList.size()==0){
 			mTV_task_friend_flag.setText("还没有地推员参与该任务~");
@@ -575,12 +570,21 @@ if("1".equals(str_taskStatus)) {
 		}else{
 			//数据正常
 			mTV_task_friend_flag.setText(context.getResources().getString(R.string.my_tasknew_friend_flag, taskBean.getPartnerTotal()));
-			mTaskFriendGridView.setVisibility(View.VISIBLE);
-			mTaskFriendGridAdapter = new TaskFriendGridAdapter(context,0);
-			mTaskFriendGridAdapter.setTaskFriendTaskId(taskId);
-			mTaskFriendGridView.setAdapter(mTaskFriendGridAdapter);
-			mTaskFriendGridAdapter.setData(mPartnerList);
-			mTaskFriendGridAdapter.setTaskDetailInfoNewData(rsGetTaskDetailInfo.data);
+			Drawable rightDrawable = context.getResources().getDrawable(R.drawable.go);
+			mTV_task_friend_flag.setCompoundDrawablesWithIntrinsicBounds(null,null,rightDrawable,null);
+			mTaskFriendGridView.setVisibility(View.GONE);
+			mTV_task_friend_flag.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
+					Intent mIntent = new Intent(context, TaskMyFriendListViewActivity.class);
+					mIntent.putExtra("TASK_ID", taskId);
+					context.startActivity(mIntent);
+				}
+			});
+//			mTaskFriendGridAdapter = new TaskFriendGridAdapter(context,0);
+//			mTaskFriendGridAdapter.setTaskFriendTaskId(taskId);
+//			mTaskFriendGridView.setAdapter(mTaskFriendGridAdapter);
+//			mTaskFriendGridAdapter.setData(mPartnerList);
+//			mTaskFriendGridAdapter.setTaskDetailInfoNewData(rsGetTaskDetailInfo.data);
 		}
 	}
 
@@ -634,62 +638,36 @@ private  void submitTaskDetail(int type,int isHad){
 			showProgressDialog();
 		ApiUtil.Request(new RQBaseModel<RQReceiveTask, RSReceiveTask>(
 				context, new RQReceiveTask(
-				Utils.getUserDTO(context).data.userId, taskId),
+				Utils.getUserDTO(context).data.userId, taskId, MyApplication.getCurrentCity().code),
 				new RSReceiveTask(), ApiNames.领取任务.getValue(),
 				RequestType.POST, rqHandler_receiveTask));
 	}
-
-//	/**
-//	 * 领取并分享任务
-//	 */
-//	private void submitTask_2(){
-//		showProgressDialog();
-//		ApiUtil.Request(new RQBaseModel<RQReceiveTask, RSReceiveTask>(
-//				context, new RQReceiveTask(
-//				Utils.getUserDTO(context).data.userId, taskId),
-//				new RSReceiveTask(), ApiNames.领取任务.getValue(),
-//				RequestType.POST, rqHandler_receiveTask));
-//	}
-//
-//	/**
-//	 * 再次提交新资料
-//	 */
-//	private void submitTask_3(){
-//		goToTaskMaterialActivity();
-//	}
-//	/**
-//	 * 再次分享二维码
-//	 */
-//	private void submitTask_4(){
-//			//分享型
-//			Intent mIntent = new Intent();
-//			mIntent.setClass(context,ShareViewActivity.class);
-//		mIntent.putExtra("TASK_ID", taskId);
-//			mIntent.putExtra("SHARE_CONTENT", str_shareContent);
-//			mIntent.putExtra("ctId",str_ctId);
-//		mIntent.putExtra("scanTip",str_scanTip);
-//		mIntent.putExtra("reminder",str_reminder);
-//		mIntent.putExtra("taskStatus",str_taskStatus);
-//			startActivity(mIntent);
-//			finish();
-//
-//	}
-////资料提交页面
-//private  void goToTaskMaterialActivity(){
-//	Intent mIntent = new Intent();
-//	mIntent.setClass(context, MyTaskMaterialActivity.class);
-//	mIntent.putExtra("TASK_ID", taskId);
-//	mIntent.putExtra("topage",ToMainPage.审核中.getValue());
-//	mIntent.putExtra("TASK_NAME",str_taskName);
-//	mIntent.putExtra("isShowSubmitBtn",true);
-//	mIntent.putExtra("ctId",str_ctId);
-//	mIntent.putExtra("taskStatus",str_taskStatus);
-//	startActivity(mIntent);
-//	finish();
-//}
 	@Override
 	public void onNoData() {
 		getInitData();
 	}
+	/**
+	 * 详细页分享
+	 */
+	public void showShareDisplay(){
+		ShareBean mShareBean = new ShareBean();
+		mShareBean.setStrTitle(strShare_title);
+		mShareBean.setStrText(strShare_content);
+		mShareBean.setStrTargetUrl("http://m.renrentui.me");
+		mShareBean.setUmImage(new UMImage(context, "http://m.renrentui.me/img/144_qs.png"));
+		mShareUtils = new ShareUtils(context,TaskDetailInfoNewActivity.this,mShareBean);
+		SHARE_MEDIA[] arrs =new SHARE_MEDIA[5];
+		arrs[0] = SHARE_MEDIA.WEIXIN;
+		arrs[1] =SHARE_MEDIA.WEIXIN_CIRCLE;
+		arrs[2] = SHARE_MEDIA.QQ;
+		arrs[3] = SHARE_MEDIA.QZONE;
+		arrs[4] = SHARE_MEDIA.SINA;
+		mShareUtils.showDefaultShareBoard(arrs, true);
+	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		mShareUtils.UMShareActivityResult(requestCode,resultCode,data);
+	}
 }

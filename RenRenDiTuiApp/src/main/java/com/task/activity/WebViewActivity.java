@@ -47,7 +47,7 @@ public class WebViewActivity extends BaseActivity implements
     protected void onResume() {
         super.onResume();
         if(!NetworkHelper.isNetworkConnected(context)){
-            onNodata(ResultMsgType.NetworkNotValide,"","",this);
+            onNodata(ResultMsgType.NetworkNotValide,0,0,"",null);
         }else {
             loadWebViewInfo();
         }

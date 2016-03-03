@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/layout_view_bg"
     >
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_pic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-    </android.support.v4.view.ViewPager>
+    <com.task.view.HackyViewPager
+        android:id="@+id/pic_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/layout_view_bg"
+        ></com.task.view.HackyViewPager>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:text="@string/viewpager_indicator"
+        android:background="@color/transparent"
+
+        />
+
+</FrameLayout>

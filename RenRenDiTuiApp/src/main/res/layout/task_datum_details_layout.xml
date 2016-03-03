@@ -80,14 +80,14 @@
                 android:maxLines="3"
                 android:ellipsize="end"
                 />
-            <ImageView
+            <TextView
                 android:id="@+id/iv_flag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_width="45dip"
+                android:layout_height="20dip"
+                android:gravity="center"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/team_down"
-                android:visibility="invisible"
                 />
         </RelativeLayout>
         <View
