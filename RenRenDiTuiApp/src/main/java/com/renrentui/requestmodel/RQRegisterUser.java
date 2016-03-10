@@ -29,6 +29,7 @@ public class RQRegisterUser extends RQBase {
 	 * 推荐人
 	 */
 	private String recommendPhone;
+	private String  operSystem="android";//
 
 	public RQRegisterUser() {
 		super();

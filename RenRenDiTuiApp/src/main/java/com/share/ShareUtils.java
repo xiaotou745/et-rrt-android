@@ -13,6 +13,7 @@ import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.shareboard.SnsPlatform;
 import com.umeng.socialize.utils.Log;
 import com.umeng.socialize.utils.ShareBoardlistener;
@@ -38,7 +39,7 @@ public class ShareUtils {
         //微信 appid appsecret
         PlatformConfig.setWeixin("wx372230899f9b558e", "06b4552fd896c6616d41d2c2d1cd168f");
         //新浪微博 appkey appsecret
-        PlatformConfig.setSinaWeibo("2925603791","dbbda94f1cc82d52ec10c597209af946");
+        PlatformConfig.setSinaWeibo("2925603791", "dbbda94f1cc82d52ec10c597209af946");
         // QQ和Qzone appid appkey
         PlatformConfig.setQQZone("1105086358", "AWh9dDtypExUAPXm");
 //
@@ -54,8 +55,8 @@ public class ShareUtils {
 //        PlatformConfig.setPinterest("1439206");
 //        //来往 appid appkey
 //        PlatformConfig.setLaiwang("laiwangd497e70d4", "d497e70d4c3e4efeab1381476bac4c5e");
-        Log.LOG= false;//不显示日志
-        Config.IsToastTip = false;//不显示友盟 的 toast
+        //Log.LOG= false;//不显示日志
+        //Config.IsToastTip = false;//不显示友盟 的 toast
 
     }
 
@@ -86,9 +87,7 @@ public class ShareUtils {
                 mShareAction.withFollow(mShareBean.getStrFollow());
                 mShareAction.withTargetUrl(mShareBean.getStrTargetUrl());
                 mShareAction.withText(mShareBean.getStrText());
-                mShareAction.withMedia(mShareBean.getUmImage());
-                mShareAction.withMedia(mShareBean.getUmVideo());
-                mShareAction.withMedia(mShareBean.getuMusic());
+                mShareAction.withMedia(new UMImage(context, "http://m.renrentui.me/img/144_qs.png"));
             }
         }
         mShareAction.open();
@@ -143,11 +142,9 @@ public class ShareUtils {
                 mShareAction.withFollow(mShareBean.getStrFollow());
                 mShareAction.withTargetUrl(mShareBean.getStrTargetUrl());
                 mShareAction.withText(mShareBean.getStrText());
-                mShareAction.withMedia(mShareBean.getUmImage());
-                mShareAction.withMedia(mShareBean.getUmVideo());
-                mShareAction.withMedia(mShareBean.getuMusic());
+                mShareAction.withMedia(new UMImage(context, "http://m.renrentui.me/img/144_qs.png"));
             }
-            mShareAction.setCallback(umShareListener);
+            mShareAction.setListenerList(umShareListener);
             mShareAction.share();
         }
     };

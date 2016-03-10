@@ -65,7 +65,7 @@ private TextView mTV_phone;
 
                 @Override
                 public void onBefore() {
-                    // TODO Auto-generated method stub
+                    hideProgressDialog();
                 }
 
                 @Override
@@ -74,7 +74,6 @@ private TextView mTV_phone;
 
                 @Override
                 public void onSuccess(RSBindAlipayModel t) {
-                    hideProgressDialog();
                     if("200".equals(t.code)){
                         Intent intent = new Intent(EditEditUserAlipayActivity.this,WithdrawalsActivity.class);
                         ToastUtil.show(context, "支付宝绑定成功!");
@@ -91,12 +90,11 @@ private TextView mTV_phone;
 
                 @Override
                 public void onSericeErr(RSBindAlipayModel t) {
-                    hideProgressDialog();
+                    ToastUtil.show(context,t.msg);
                 }
 
                 @Override
                 public void onSericeExp() {
-                    hideProgressDialog();
                 }
             });
 

@@ -2,6 +2,7 @@ package com.task.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,12 @@ public class GriveiwTaskPicAdapter extends BaseAdapter {
     private ArrayList<String> picData = new ArrayList<String>();
     GriveiwTaskPicAdapter(Context con,ArrayList<String> data){
     context = con;
-        picData = data;
+        if(picData!=null){
+            picData.clear();
+        }else{
+            picData = new ArrayList<String>();
+        }
+        picData.addAll(data);
     }
     @Override
     public int getCount() {

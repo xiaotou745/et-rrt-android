@@ -1,5 +1,6 @@
 package com.task.activity;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -90,6 +91,17 @@ public class ImageDetailFragment extends Fragment {
                 progressBar.setVisibility(View.VISIBLE);
                 mAttacher.update();
             }
+
+//            @Override
+//            public void onLoadingCancelled(String imageUri, View view) {
+//                super.onLoadingCancelled(imageUri, view);
+//            }
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                progressBar.setVisibility(View.GONE);
+                mAttacher.update();
+            }
+
         });
 
     }

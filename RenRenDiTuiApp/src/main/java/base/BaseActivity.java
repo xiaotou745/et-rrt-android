@@ -177,7 +177,7 @@ public class BaseActivity extends Activity {
 		if(!TextUtils.isEmpty(tvNoDataNotice)){
 			tv_ondata_notice.setText(tvNoDataNotice);
 		}
-		if(iNodata!=null){
+		if(iNodata!=null && layout_nodata!=null){
 			layout_nodata.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -280,6 +280,7 @@ public class BaseActivity extends Activity {
 	protected void onPause() {
 		super.onPause();
 		MobclickAgent.onPause(this);
+		hideProgressDialog();
 
 	}
 
@@ -296,7 +297,6 @@ public class BaseActivity extends Activity {
 	}
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		dismissProgressDialog();
 	}

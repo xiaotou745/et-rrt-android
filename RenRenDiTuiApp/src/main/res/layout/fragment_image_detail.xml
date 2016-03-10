@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:contentDescription="@string/app_name"
+        android:background="@color/black"
         android:scaleType="centerCrop" />
 
     <ProgressBar

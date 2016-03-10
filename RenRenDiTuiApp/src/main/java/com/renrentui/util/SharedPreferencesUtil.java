@@ -27,11 +27,8 @@ public class SharedPreferencesUtil {
         editor = sp.edit();
     }
 
-    /**
-     * 保存单签定位城市信息
-     * @param cityBean
-     */
-    public  void setCurrentLocadCity( CityRegionModel cityBean){
+
+    public  void setDataCity( CityRegionModel cityBean){
         if(cityBean==null){
             return;
         }
@@ -40,11 +37,8 @@ public class SharedPreferencesUtil {
         editor.commit();
     }
 
-    /**
-     * 设置前保存的定位城市信息
-     * @param cityName
-     */
-    public  void setCurrentLocadCityName( String cityName){
+
+    public  void setDataCityName( String cityName){
         if(TextUtils.isEmpty(cityName)){
             return;
         }
@@ -53,41 +47,52 @@ public class SharedPreferencesUtil {
     }
 
     /**
-     * 前保存的定位城市信息
+     * 设置当前数据城市
      * @param cityCode
      */
-    public  void setCurrentLocadCityCode( String cityCode){
+    public  void setDataCityCode( String cityCode){
         if(TextUtils.isEmpty(cityCode)){
             return;
         }
         editor.putString(STR_CITY_CODE_KEY,cityCode);
         editor.commit();
     }
+
+//    /**
+//     * 获取默认的城市信息
+//     * @return
+//     */
+//    public CityRegionModel getDefaultDataCity(){
+//        CityRegionModel bean = new CityRegionModel();
+//        bean.name  = "北京市";
+//        bean.code = "110100";
+//        return bean;
+//    }
     /**
-     * 获取当前保存的定位城市信息
+     * 获取默认的城市信息
      * @return
      */
-    public CityRegionModel getCurrentLocadCity(){
+    public CityRegionModel getDataCity(){
         CityRegionModel bean = new CityRegionModel();
-        bean.name = sp.getString(STR_CITY_NAME_KEY,"北京市");
-        bean.code = sp.getString(STR_CITY_CODE_KEY, "110100");
+        bean.name  =sp.getString(STR_CITY_NAME_KEY,"北京市");
+        bean.code =sp.getString(STR_CITY_CODE_KEY,"110100");
         return bean;
     }
-
     /**
-     * 获取当前保存的定位城市信息
+     * 获取当前数据城市name
      * @return
      */
-    public String getCurrentLocadCityName(){
+    public String getDataCityName(){
        return sp.getString(STR_CITY_NAME_KEY,"");
 
     }
 
+
     /**
-     * S获取当前保存的定位城市信息
+     * 获取当前数据城市code
      * @return
      */
-    public String getCurrentLocadCityCode(){
+    public String getDataCityCode(){
         return sp.getString(STR_CITY_CODE_KEY,"");
     }
 

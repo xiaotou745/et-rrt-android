@@ -58,7 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="元/条"
+                    android:text="元/次"
                     android:textColor="@color/tv_order_color_2"
                     android:gravity="center_horizontal"
                     android:textSize="@dimen/_10sp"

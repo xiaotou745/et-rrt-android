@@ -20,7 +20,7 @@ public class ApiUtil {
 
 	public static <RQ, RS> void Request(final RQBaseModel<RQ, RS> rqModel) {
 //		System.out.println(rqModel.toString());
-		//Log.e("requeset",rqModel.toString());
+//		Log.e("requeset",rqModel.toString());
 		try {
 			// 控制同一个接口的线程 同一时间只有一个在跑 当当前api对应的线程还没有跑或者已经结束时才能开始run
 			if (!apiThreadState.containsKey(rqModel.getApiName()) || apiThreadState.get(rqModel.getApiName())) {

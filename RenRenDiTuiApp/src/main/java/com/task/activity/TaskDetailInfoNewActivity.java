@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -40,6 +41,7 @@ import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
 import com.renrentui.view.MyListView;
 import com.share.ShareUtils;
+import com.share.activity.ShareContentEditActivity;
 import com.share.bean.ShareBean;
 import com.task.adapter.TaskExplainAdapter;
 import com.task.adapter.TaskFlowPathAdapter;
@@ -638,7 +640,7 @@ private  void submitTaskDetail(int type,int isHad){
 			showProgressDialog();
 		ApiUtil.Request(new RQBaseModel<RQReceiveTask, RSReceiveTask>(
 				context, new RQReceiveTask(
-				Utils.getUserDTO(context).data.userId, taskId, MyApplication.getCurrentCity().code),
+				Utils.getUserDTO(context).data.userId, taskId, MyApplication.mDataCity.code),
 				new RSReceiveTask(), ApiNames.领取任务.getValue(),
 				RequestType.POST, rqHandler_receiveTask));
 	}
@@ -653,8 +655,9 @@ private  void submitTaskDetail(int type,int isHad){
 		ShareBean mShareBean = new ShareBean();
 		mShareBean.setStrTitle(strShare_title);
 		mShareBean.setStrText(strShare_content);
-		mShareBean.setStrTargetUrl("http://m.renrentui.me");
-		mShareBean.setUmImage(new UMImage(context, "http://m.renrentui.me/img/144_qs.png"));
+		//mShareBean.setStrTargetUrl("http://m.renrentui.me/");
+		mShareBean.setStrTargetUrl("http://m.renrentui.me/clienter/sharetask?taskId=" + taskId);
+		mShareBean.setUmImage( "http://m.renrentui.me/img/144_qs.png");
 		mShareUtils = new ShareUtils(context,TaskDetailInfoNewActivity.this,mShareBean);
 		SHARE_MEDIA[] arrs =new SHARE_MEDIA[5];
 		arrs[0] = SHARE_MEDIA.WEIXIN;

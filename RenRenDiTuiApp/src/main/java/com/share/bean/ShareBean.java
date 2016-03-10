@@ -15,9 +15,9 @@ public class ShareBean implements Serializable{
     private String strText;
     private String strTargetUrl;
     private String strFollow;
-    private UMImage umImage;
-    private UMVideo umVideo;
-    private UMusic uMusic;
+    private String umImage;
+    private String umVideo;
+    private String uMusic;
 
     public ShareBean() {
     }
@@ -36,17 +36,6 @@ public class ShareBean implements Serializable{
         return strFollow;
     }
 
-    public UMImage getUmImage() {
-        return umImage;
-    }
-
-    public UMVideo getUmVideo() {
-        return umVideo;
-    }
-
-    public UMusic getuMusic() {
-        return uMusic;
-    }
 
     public void setStrTitle(String strTitle) {
         this.strTitle = strTitle;
@@ -68,14 +57,6 @@ public class ShareBean implements Serializable{
         this.strFollow = strFollow;
     }
 
-    public void setUmImage(UMImage umImage) {
-        this.umImage = umImage;
-    }
-
-    public void setUmVideo(String videourl) {
-       UMVideo umv = new UMVideo(videourl);
-        this.umVideo = umv;
-    }
 
     public void setuMusic(String mediaUrl,UMImage image,String author,String title,String targetUrl,String thumb) {
         UMusic mm = new UMusic(mediaUrl);
@@ -84,14 +65,29 @@ public class ShareBean implements Serializable{
         mm.setTitle(title);
         mm.setTargetUrl(targetUrl);
         mm.setThumb(thumb);
-        this.uMusic = mm;
     }
 
-    public void setUmVideo(UMVideo umVideo) {
+    public String getUmImage() {
+        return umImage;
+    }
+
+    public String getUmVideo() {
+        return umVideo;
+    }
+
+    public String getuMusic() {
+        return uMusic;
+    }
+
+    public void setUmImage(String umImage) {
+        this.umImage = umImage;
+    }
+
+    public void setUmVideo(String umVideo) {
         this.umVideo = umVideo;
     }
 
-    public void setuMusic(UMusic uMusic) {
+    public void setuMusic(String uMusic) {
         this.uMusic = uMusic;
     }
 }

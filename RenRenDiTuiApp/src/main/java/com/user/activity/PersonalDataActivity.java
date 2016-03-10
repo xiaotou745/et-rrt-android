@@ -11,13 +11,16 @@ import java.util.Map;
 
 import android.app.Dialog;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -26,6 +29,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import base.BaseActivity;
@@ -49,6 +53,7 @@ import com.renrentui.util.ApiConstants;
 import com.renrentui.util.ApiNames;
 import com.renrentui.util.ApiUtil;
 import com.renrentui.util.ImageLoadManager;
+import com.renrentui.util.TimeUtils;
 import com.renrentui.util.ToastUtil;
 import com.renrentui.util.Utils;
 import com.renrentui.view.city.CityMode;
@@ -58,6 +63,7 @@ import com.user.model.ImageUploadAsyncTask;
 import com.user.service.ChooseSexDialog;
 import com.user.service.EditDialog;
 import com.user.service.EditDialog.ExitDialogListener;
+import com.wheelUtils.TimePopwindow;
 
 /**
  * 个人资料界面
@@ -78,6 +84,8 @@ public class PersonalDataActivity extends BaseActivity implements
 	private TextView tv_user_sex_show;
 	private RelativeLayout layout_user_age;// 用户年龄
 	private TextView tv_user_age_show;
+	private RelativeLayout layout_user_birthday;// 用户年龄
+	private TextView tv_user_birthday_show;
 	private CityMode area;// 地址实体类对象
 
 	Button carema, album, give_up;// 点击用户头像弹出层按钮
@@ -122,6 +130,9 @@ public class PersonalDataActivity extends BaseActivity implements
 						tv_user_sex_show.setText("保密");
 					tv_user_age_show.setText(t.data.age);
 					networknotvalide = true;
+					if(!TextUtils.isEmpty(t.data.birthDay)){
+						tv_user_birthday_show.setText(TimeUtils.StringPattern(t.data.birthDay,"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd"));
+					}
 				}
 
 				@Override
@@ -181,6 +192,11 @@ public class PersonalDataActivity extends BaseActivity implements
 		bitmapUtils = new BitmapUtils(this);
 		super.init();
 		initControl();
+		//getData();
+	}
+	@Override
+	protected void onStart() {
+		super.onStart();
 		getData();
 	}
 
@@ -229,6 +245,9 @@ public class PersonalDataActivity extends BaseActivity implements
 		layout_user_age = (RelativeLayout) findViewById(R.id.layout_user_age);
 		layout_user_age.setOnClickListener(this);
 		tv_user_age_show = (TextView) findViewById(R.id.tv_user_age_show);
+		layout_user_birthday = (RelativeLayout) findViewById(R.id.layout_user_birthday);
+		layout_user_birthday.setOnClickListener(this);
+		tv_user_birthday_show = (TextView) findViewById(R.id.tv_user_brithday_show);
 
 	}
 
@@ -338,18 +357,53 @@ public class PersonalDataActivity extends BaseActivity implements
 				ToastUtil.show(context, "性别");
 				return;
 			}
+			String strBirthday= tv_user_birthday_show.getText().toString().trim();
+			if(TextUtils.isEmpty(strBirthday)){
+				ToastUtil.show(context, "出生日期不能为空");
+				return;
+			}
 			ApiUtil.Request(new RQBaseModel<RQUpdateUserinfo, RSBase>(context,
 					new RQUpdateUserinfo(Utils.getUserDTO(context).data.userId,
-							userName, sex, age, str_pickPath),
+							userName, sex, "", str_pickPath,strBirthday),
 					new RSBase(), ApiNames.修改用户信息.getValue(), RequestType.POST,
 					rqHandler_updateUserInfo));
 			break;
+			case R.id.layout_user_birthday:
+			//出生日期
+			final TimePopwindow popWindow = new TimePopwindow(PersonalDataActivity.this);
+			popWindow.setmSelectTimeMsgObj(new TimePopwindow.SelectTimeMsgListener() {
 
+				@Override
+				public void selectTimeMsg(String strTime) {
+					tv_user_birthday_show.setText(strTime);
+					popWindow.dismiss();
+				}
+			});
+			popWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+				@Override
+				public void onDismiss() {
+					backgroundAlpha(1f);
+				}
+			});
+			closeWindow();
+			popWindow.showAtLocation(layout_user_birthday, Gravity.BOTTOM, 0, 0);
+			backgroundAlpha(0.4f);
+			break;
 		default:
 			break;
 		}
 	}
+	// 隐藏键盘
+	private void closeWindow() {
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(tv_user_birthday_show.getWindowToken(), 0); // 强制隐藏键盘
+	}
 
+	public void backgroundAlpha(float bgAlpha) {
+		WindowManager.LayoutParams lp = getWindow().getAttributes();
+		lp.alpha = bgAlpha; // 0.0-1.0
+		getWindow().setAttributes(lp);
+	}
 	private static final int PHOTO_REQUEST_TAKEPHOTO = 1;// 拍照
 	private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
 	private static final int PHOTO_REQUEST_CUT = 3;// 结果
@@ -520,4 +574,5 @@ public class PersonalDataActivity extends BaseActivity implements
 		}
 		ToastUtil.show(context, "图片上传成功");
 	}
+
 }

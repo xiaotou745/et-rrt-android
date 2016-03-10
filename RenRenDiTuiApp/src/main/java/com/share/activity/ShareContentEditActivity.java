@@ -101,9 +101,6 @@ public class ShareContentEditActivity extends BaseActivity implements View.OnCli
             mShareAction.withFollow(mShareBean.getStrFollow());
             mShareAction.withTargetUrl(mShareBean.getStrTargetUrl());
             mShareAction.withText(mShareBean.getStrText());
-            mShareAction.withMedia(mShareBean.getUmImage());
-            mShareAction.withMedia(mShareBean.getUmVideo());
-            mShareAction.withMedia(mShareBean.getuMusic());
             mShareAction.withMedia(new UMImage(context, "http://m.renrentui.me/img/144_qs.png"));
         }
         mShareAction.setListenerList(umShareListener);

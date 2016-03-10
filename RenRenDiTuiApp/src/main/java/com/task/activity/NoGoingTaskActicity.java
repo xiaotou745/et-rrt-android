@@ -124,7 +124,6 @@ public class NoGoingTaskActicity extends BaseActivity implements
 
 				@Override
 				public void onBefore() {
-					hideProgressDialog();
 					pulltorefresh_nogoing_taskList.onHeaderRefreshComplete();
 					pulltorefresh_nogoing_taskList.onFooterRefreshComplete();
 				}
@@ -271,8 +270,11 @@ private RQHandler<RSGetMyMessage> rqHandler_getMyMessage = new RQHandler<>(
 		super.init();
 		initControl();
 		setPopupView();
-		checkoutGPSStatus();
-		initLocation();
+		if(MyApplication.isLocationCity){
+			checkoutGPSStatus();
+			initLocation();
+			MyApplication.isLocationCity = false;
+		}
 		initHandler();
 		lv_no_going_task.setOverScrollMode(View.OVER_SCROLL_NEVER);
 		noGoingTaskInfos = new ArrayList<NoGoingTaskInfo>();
@@ -300,11 +302,11 @@ private RQHandler<RSGetMyMessage> rqHandler_getMyMessage = new RQHandler<>(
 //			//地址信息不完整.
 //
 //		}
-		if(TextUtils.isEmpty(MyApplication.getCurrentCity().name) || TextUtils.isEmpty(MyApplication.getCurrentCity().code)){
+		if(TextUtils.isEmpty(MyApplication.mDataCity.name) || TextUtils.isEmpty(MyApplication.mDataCity.code)){
 			//数据不完整时，使用默认的城市信息代替
-			MyApplication.setCurrentCity(MyApplication.mDefaultCity);
+			MyApplication.setDefaultDataCity();
 		}
-		mTV_title_left.setText(MyApplication.getCurrentCity().name);
+		mTV_title_left.setText(MyApplication.mDataCity.name);
 		getInitData();
 	}
 	@Override
@@ -384,7 +386,7 @@ private RQHandler<RSGetMyMessage> rqHandler_getMyMessage = new RQHandler<>(
 		//setCityInfo();
 		currentPage = 1;
 		ApiUtil.Request(new RQBaseModel<RQGetNoGoingTaskNew, RSGetNoGoingTask>(
-				context, new RQGetNoGoingTaskNew(strUserId,currentPage,10, MyApplication.getCurrentCity().code,is_selection),
+				context, new RQGetNoGoingTaskNew(strUserId,currentPage,10, MyApplication.mDataCity.code,is_selection),
 				new RSGetNoGoingTask(), ApiNames.获取所有可领取任务.getValue(),
 				RequestType.POST, rqHandler_getNoGoingTask));
 	}
@@ -484,7 +486,7 @@ private RQHandler<RSGetMyMessage> rqHandler_getMyMessage = new RQHandler<>(
 	private void getMoreData() {
 		currentPage = currentPage+1;
 		ApiUtil.Request(new RQBaseModel<RQGetNoGoingTaskNew, RSGetNoGoingTask>(
-				context, new RQGetNoGoingTaskNew(strUserId, currentPage, 10, MyApplication.getCurrentCity().code, is_selection),
+				context, new RQGetNoGoingTaskNew(strUserId, currentPage, 10, MyApplication.mDataCity.code, is_selection),
 				new RSGetNoGoingTask(), ApiNames.获取所有可领取任务.getValue(),
 				RequestType.POST, rqHandler_getNoGoingTask));
 	}
@@ -687,7 +689,9 @@ public class MyLocationListenner implements BDLocationListener {
 //			mCurrentlocalLocation.name = StrName;
 			isLocationStatus = 0;
 			//切换城市判断
-			switchCityInfo(mCurrentlocalLocation);
+			if(MyApplication.isChangeCity){
+				switchCityInfo(mCurrentlocalLocation);
+			}
 			//mGetDataHander.sendEmptyMessageAtTime(TAG_WHATE_CONNECTION,2*1000);
 		}else{
 			//定位失败
@@ -703,7 +707,7 @@ public class MyLocationListenner implements BDLocationListener {
 	 * 切换城市信息
 	 */
 	private void switchCityInfo(CityRegionModel city){
-		CityRegionModel currentCity = MyApplication.getCurrentCity();
+		CityRegionModel currentCity = MyApplication.mDataCity;
 		/**
 		 * 切换城市的条件
 		 * 1: 定位城市和当前城市信息都不空，并且不为同一个城市信息
@@ -718,7 +722,7 @@ public class MyLocationListenner implements BDLocationListener {
 		}else{
 			mCurrentlocalLocation.code = code;
 			isCheckCityCodeByLocad = 0;
-			MyApplication.setCurrentCity(mCurrentlocalLocation);
+//			MyApplication.setCurrentCity(mCurrentlocalLocation);
 		}
 
 		if(city !=null && currentCity!=null && !currentCity.name.equals(city.name) && !currentCity.code.equals(city.code)) {
@@ -742,13 +746,15 @@ public class MyLocationListenner implements BDLocationListener {
 		mSwitchCityDialog.addListener(new SwitchCityDialog.SwitchDialogListener(){
 			@Override
 			public void clickCancel() {
-
+				MyApplication.isChangeCity=false;
 			}
 
 			@Override
 			public void clickCommit() {
 				//切换城市
-				mTV_title_left.setText(MyApplication.getCurrentCity().name);
+				MyApplication.isChangeCity=false;
+				MyApplication.setDataCity(mCurrentlocalLocation);
+				mTV_title_left.setText(MyApplication.mDataCity.name);
 				showProgressDialog();
 				getInitData();
 			}

@@ -273,6 +273,79 @@
 
             <View
                 style="@style/line_height_10"></View>
+            <!-- 招募合伙人-->
+            <RelativeLayout
+                android:id="@+id/rl_share"
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:background="@drawable/textview_button_selector" >
+
+                <ImageView
+                    android:id="@+id/iv_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_23dp"
+                    android:src="@drawable/icon_find_center" />
+
+                <TextView
+                    android:id="@+id/tv_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/iv_share"
+                    android:text="@string/helpShare"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/_14sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="13dp"
+                    android:src="@drawable/go" />
+            </RelativeLayout>
+
+            <View
+                style="@style/line_height_1"></View>
+            <!-- 客服-->
+            <RelativeLayout
+                android:id="@+id/rl_kf"
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:background="@drawable/textview_button_selector" >
+
+                <ImageView
+                    android:id="@+id/iv_kf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_23dp"
+                    android:src="@drawable/kefu" />
+
+                <TextView
+                    android:id="@+id/tv_kf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/iv_kf"
+                    android:text="@string/helpkf"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/_14sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="13dp"
+                    android:src="@drawable/go" />
+            </RelativeLayout>
+            <View
+                style="@style/line_height_1"></View>
 
             <RelativeLayout
                 android:id="@+id/rl_help"
@@ -308,42 +381,7 @@
                     android:src="@drawable/go" />
             </RelativeLayout>
 
-            <View
-                style="@style/line_height_1"></View>
-            <!-- 招募合伙人-->
-            <RelativeLayout
-                android:id="@+id/rl_share"
-                android:layout_width="match_parent"
-                android:layout_height="41dp"
-                android:background="@drawable/textview_button_selector" >
 
-                <ImageView
-                    android:id="@+id/iv_share"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/_23dp"
-                    android:src="@drawable/icon_find_center" />
-
-                <TextView
-                    android:id="@+id/tv_share"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/iv_share"
-                    android:text="@string/helpShare"
-                    android:textColor="#333333"
-                    android:textSize="@dimen/_14sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="13dp"
-                    android:src="@drawable/go" />
-            </RelativeLayout>
 
             <View
                 style="@style/line_height_1"></View>

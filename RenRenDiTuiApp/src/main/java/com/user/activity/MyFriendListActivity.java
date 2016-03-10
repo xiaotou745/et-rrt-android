@@ -157,6 +157,7 @@ public class MyFriendListActivity extends BaseActivity implements PullToRefreshV
     public void getTaskFriendsList() {
         showProgressDialog();
         pageindex = 1;
+        nextId = "0";
         ApiUtil.Request(new RQBaseModel<RQMyFriendsMode, RSMyFriendsMode>(
                 context, new RQMyFriendsMode(userId, nextId),
                 new RSMyFriendsMode(), ApiNames.获取合伙人列表.getValue(),
@@ -248,7 +249,7 @@ public class MyFriendListActivity extends BaseActivity implements PullToRefreshV
 
             final MyFriendsBean bean = (MyFriendsBean) getItem(position);
             if (TextUtils.isEmpty(bean.getClienterName())) {
-                mHolderView.mTV_1.setText("某某手");
+                mHolderView.mTV_1.setText("某推手");
             } else {
                 mHolderView.mTV_1.setText(bean.getClienterName());
             }

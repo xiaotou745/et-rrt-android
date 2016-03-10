@@ -37,6 +37,9 @@ public class RQGetNoGoingTask extends RQBase {
 	//排列顺序
 	public int  orderBy;//排序方式 1是佣金，2是审核周期，3是预计用时，4是参与人数，5是发布时间（int类型）
 
+	//
+	public String platform="android";//平台
+
 	public RQGetNoGoingTask() {
 		super();
 	}

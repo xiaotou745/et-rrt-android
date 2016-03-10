@@ -3,11 +3,11 @@ package com.task.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +18,6 @@ import com.renrentui.db.TaskTempleDBManager;
 import com.renrentui.resultmodel.TaskDatumControlBean;
 import com.renrentui.util.ImageLoadManager;
 import com.renrentui.util.ViewHolderUtil;
-import com.renrentui.view.SquareImageView;
 import com.task.activity.ShowTaskMateriaBitPic;
 import com.task.manager.TaskDatumTemplePIcManager;
 import com.task.upload.Views.LoadingView;
@@ -60,6 +59,11 @@ public class TaskDatumTemplateMultipleImagesTeamAdapter extends BaseAdapter {
         }
     }
     private void getPicData(){
+        if(picData!=null){
+            picData.clear();
+        }else{
+            picData = new ArrayList<String>();
+        }
         if(mData!=null && mData.size()>0){
             int isize = mData.size();
             for (int i=0;i<isize;i++){

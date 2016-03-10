@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+    </LinearLayout>
+    <!-- 小时 -->
+
+    <TextView
+        android:id="@+id/tv_time_selected_ok"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/holo_blue_bright"
+        android:gravity="right|center_vertical"
+        android:orientation="horizontal"
+        android:paddingRight="20dp"
+        android:text="确定"
+        android:textColor="@android:color/white" >
+    </TextView>
+
+    <LinearLayout
+        android:id="@+id/ll_hour_setting"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp" >
+
+        <com.wheelUtils.WheelView
+            android:id="@+id/wv_day_setting"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <!-- 分钟 -->
+
+        <com.wheelUtils.WheelView
+            android:id="@+id/wv_hour_setting"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <com.wheelUtils.WheelView
+            android:id="@+id/wv_minute_setting"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</LinearLayout>

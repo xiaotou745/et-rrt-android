@@ -115,6 +115,15 @@
             android:label="@string/title_activity_my_friend" >
         </activity>
 
+        <activity
+            android:name="com.task.activity.PersonalAddInfoActivity"
+             >
+        </activity>
+        <activity
+            android:name="com.task.activity.ShowTaskMateriaBitPic"
+            >
+        </activity>
+
         <service
             android:name="com.user.model.download.DownLoadService"
             android:enabled="true"

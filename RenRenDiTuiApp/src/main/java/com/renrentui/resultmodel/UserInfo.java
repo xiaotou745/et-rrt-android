@@ -26,6 +26,7 @@ public class UserInfo implements Serializable {
 	public String age;
 	/** 用户学历 */
 	public String education;
+	public String birthDay;//出生日期
 
 	public UserInfo() {
 		super();
@@ -33,7 +34,7 @@ public class UserInfo implements Serializable {
 
 	public UserInfo(String userId, String clienterName, String phoneNo,
 			String headImage, String cityCode, String cityName, String sex,
-			String age, String education) {
+			String age, String education,String birthDay) {
 		super();
 		this.userId = userId;
 		this.clienterName = clienterName;
@@ -44,6 +45,7 @@ public class UserInfo implements Serializable {
 		this.sex = sex;
 		this.age = age;
 		this.education = education;
+		this.birthDay = birthDay;
 	}
 
 	@Override
@@ -51,7 +53,7 @@ public class UserInfo implements Serializable {
 		return "UserInfo[userId=" + userId + ",clienterName=" + clienterName
 				+ ",phoneNo=" + phoneNo + ",headImage=" + headImage
 				+ ",cityCode=" + cityCode + ",cityName=" + cityName + ",sex="
-				+ sex + ",age=" + age + ",education=" + education + "]";
+				+ sex + ",age=" + age + ",education=" + education +",birthDay="+birthDay+ "]";
 	}
 
 }

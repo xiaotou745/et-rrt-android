@@ -150,4 +150,9 @@
     <color name="sobot_color_bottom_btn_voice">#AAAAAA</color>
     <color name="sobot_color_bottom_edittext_text">#FFFFFF</color>
     <color name="sobot_color_bottom_upload_btn_color">#6a7272</color>
+
+
+    <!-- time -->
+    <color name="order_textview_color_select">#F65151</color>
+
 </resources>

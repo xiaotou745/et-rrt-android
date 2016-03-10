@@ -74,11 +74,11 @@ hideProgressDialog();
                         }
 
                         if(!TextUtils.isEmpty(t.data.getRecommendPhone())){
-                            strphone = t.data.getRecommendPhone();
+                            String strRecommendPhone = t.data.getRecommendPhone();
                             StringBuffer sb = new StringBuffer();
-                            sb.append(strphone.substring(0,3))
+                            sb.append(strRecommendPhone.substring(0,3))
                                     .append("****")
-                                    .append(strphone.substring(strphone.length()-4));
+                                    .append(strRecommendPhone.substring(strRecommendPhone.length()-4));
                             mTV_friend_phone.setText(sb.toString());
                         }else{
                             mTV_friend_phone.setText("无");
@@ -104,6 +104,7 @@ hideProgressDialog();
         setContentView(R.layout.activity_my_friends);
         super.init();
         initControl();
+        strphone = this.getIntent().getStringExtra("PhoneNo");
         getMyFriendData();
     }
     private void initControl(){

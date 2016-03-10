@@ -39,6 +39,8 @@ import com.renrentui.util.Utils;
 import com.share.ShareUtils;
 import com.share.activity.ShareContentEditActivity;
 import com.share.bean.ShareBean;
+import com.sobot.chat.SobotApi;
+import com.sobot.chat.api.model.Information;
 import com.task.activity.MyMaterialTaskTeamActivity;
 import com.task.activity.MyTaskFramentNewActivity;
 import com.task.activity.NoGoingTaskActicity;
@@ -89,6 +91,7 @@ public class PersonalCenterActivity extends BaseActivity implements
 	private RelativeLayout rl_help;// 帮助中心
 	private RelativeLayout rl_more;// 更多
 	private RelativeLayout rl_share;//招募合伙人
+	private RelativeLayout rl_kf;//在线客服
 
 	private RelativeLayout rl_customer_service_center;// 客服支持
 	private TextView mTV_customer_service_tel;//客服电话
@@ -270,6 +273,8 @@ public class PersonalCenterActivity extends BaseActivity implements
 		rl_more.setOnClickListener(this);
 		rl_share = (RelativeLayout)findViewById(R.id.rl_share);
 		rl_share.setOnClickListener(this);
+		rl_kf = (RelativeLayout)findViewById(R.id.rl_kf);
+		rl_kf.setOnClickListener(this);
 
 		 rl_customer_service_center = (RelativeLayout) findViewById(R.id.rl_customer_service_center);
 		rl_customer_service_center.setOnClickListener(this);
@@ -298,6 +303,7 @@ public class PersonalCenterActivity extends BaseActivity implements
 				break;
 			case R.id.rl_friend_details:// 我的合伙人
 				intent = new Intent(this, MyFriendsActivity.class);
+				intent.putExtra("PhoneNo",mMyInComeData.phoneNo);
 				break;
 			case R.id.rl_datum_task:
 				//资料审核详情
@@ -337,6 +343,9 @@ public class PersonalCenterActivity extends BaseActivity implements
 			case R.id.rl_share:
 				//招募合伙人
 				showShareDisplay(mMyInComeData.phoneNo);
+				break;
+			case R.id.rl_kf:
+				showKFDialog();
 				break;
 		default:
 			break;
@@ -396,4 +405,23 @@ public class PersonalCenterActivity extends BaseActivity implements
 		mShareUtils.showFindFriendsShareBoard(arrs, ShareContentEditActivity.class);
 	}
 
+	/**
+	 * 客服
+	 */
+	private void showKFDialog() {
+		Information info = new Information();
+		info.setAppKey("5bc5d60ca874445992e8d7619606921a");/* 必填 */
+		info.setColor("");/*
+                           * 选填，默认为"#09aeb0". 可以设置头部背景，提交评价背景，相似问题字体颜色 和富文本类型中“阅读全文”字体颜色
+                           */
+		info.setUid("");/* 选填，设置用户唯一标识 */
+		info.setNickName("");/* 用户昵称，选填 */
+		info.setPhone("");/* 用户电话，选填 */
+		info.setEmail("");/* 用户邮箱，选填 */
+		info.setArtificialIntelligence(false);/*
+                                               * 智能转人工按钮，选填. 默认为false. 机器人客服优先模式时,
+                                               * false:显示转人工按钮；true:机器人有未知问题、引导回答时才显示转人工按钮
+                                               */
+		SobotApi.startSobotChat(PersonalCenterActivity.this, info);
+	}
 }

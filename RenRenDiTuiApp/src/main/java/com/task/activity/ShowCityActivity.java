@@ -147,7 +147,7 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
                     CityRegionModel bean = new CityRegionModel();
                     bean.code=strCode;
                     bean.name = strName;
-                    MyApplication.setCurrentCity(bean);
+                    MyApplication.setDataCity(bean);
                     ShowCityActivity.this.finish();
                 }
             }
@@ -376,7 +376,7 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
                     @Override
                     public void onClick(View view) {
 
-                        MyApplication.setCurrentCity(mCurrentlocalLocation);
+                        MyApplication.setDataCity(mCurrentlocalLocation);
                         ShowCityActivity.this.finish();
                     }
                 });
@@ -408,7 +408,7 @@ public class ShowCityActivity extends BaseActivity implements AbsListView. OnScr
                         CityRegionModel bean = new CityRegionModel();
                         bean.code=strCode;
                         bean.name = strName;
-                        MyApplication.setCurrentCity(bean);
+                        MyApplication.setDataCity(bean);
                         ShowCityActivity.this.finish();
                     }
                 });

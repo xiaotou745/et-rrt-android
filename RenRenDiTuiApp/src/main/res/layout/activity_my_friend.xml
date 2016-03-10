@@ -27,7 +27,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone" >
-        <ListViews
+        <ListView
             android:id="@+id/lv_friends"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -35,7 +35,7 @@
             android:dividerHeight="1dp"
             android:divider="@color/line_bg_color"
             android:cacheColorHint="@null"
-            ></ListViews>
+            ></ListView>
     </com.renrentui.controls.PullToRefreshView>
 
     <!-- no data-->
