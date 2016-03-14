@@ -88,5 +88,6 @@
         android:layout_height="20dip"
         android:gravity="center"
         android:layout_alignParentTop="true"
+        android:textColor="@color/white"
         />
 </RelativeLayout>

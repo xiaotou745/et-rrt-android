@@ -663,6 +663,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
                         mLoadingImage.setLoadingVisibility(View.INVISIBLE);
                         mTV_image_reset.setVisibility(View.INVISIBLE);
                         mTV_image_status.setVisibility(View.VISIBLE);
+                        mLoadingImage.setClickable(true);
                         break;
                     case UploadService.TASK_STATE_WAITING:
                         //等候上传
@@ -687,6 +688,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
                         mLoadingImage.setLoadingVisibility(View.INVISIBLE);
                         mTV_image_reset.setVisibility(View.VISIBLE);
                         mTV_image_status.setVisibility(View.VISIBLE);
+                        mLoadingImage.setClickable(true);
                         break;
                 }
                 if(status==UploadService.TASK_STATE_COMPLETE && mUploadPicBean!=null){

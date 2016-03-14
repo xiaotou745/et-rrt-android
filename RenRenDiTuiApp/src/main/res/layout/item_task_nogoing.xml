@@ -87,5 +87,6 @@
         android:gravity="center"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
+        android:textColor="@color/white"
         />
     </RelativeLayout>
